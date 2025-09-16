@@ -15,21 +15,25 @@ This is `zenmux-benchmark`, an open-source AI model performance evaluation frame
 ## Common Commands
 
 ### Running the Application
+
 ```bash
 uv run python main.py
 ```
 
 ### Activating Virtual Environment (if needed)
+
 ```bash
 source .venv/bin/activate
 ```
 
 ### Installing Dependencies
+
 ```bash
 uv sync
 ```
 
 ### Adding New Dependencies
+
 ```bash
 uv add <package-name>
 ```
@@ -37,6 +41,7 @@ uv add <package-name>
 ## Architecture
 
 The project currently has a minimal structure:
+
 - `main.py`: Entry point with basic "Hello World" functionality
 - `pyproject.toml`: Project configuration with OpenAI dependency
 - Uses uv for modern Python dependency management
@@ -50,3 +55,4 @@ The project currently has a minimal structure:
 - This project uses `uv` instead of traditional pip/virtualenv workflow
 - Always use `uv run` prefix when executing Python scripts to ensure proper environment
 - The project is designed to be an AI model evaluation framework but is currently in early setup phase
+- This is an international project - please use English for documentation, code comments, and commit messages whenever possible
