@@ -1,0 +1,9 @@
+[project]
+name = "zenmux-benchmark"
+version = "0.1.0"
+description = "The open-source AI model performance evaluation framework by ZenMux. Official benchmark suite for evaluating AI model performance across multiple dimensions."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openai>=1.107.3",
+]
