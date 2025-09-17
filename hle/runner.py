@@ -84,7 +84,8 @@ class HLERunner:
         text_only: bool = False,
         max_samples: Optional[int] = None,
         auto_judge: bool = True,
-        model_filter: Optional[str] = None
+        model_filter: Optional[str] = None,
+        exclude_models: Optional[List[str]] = None
     ) -> List[Dict[str, Any]]:
         """Run evaluation for all ZenMux models with dual-layer concurrency."""
         print("🌟 Starting ZenMux Models Evaluation")
@@ -104,6 +105,53 @@ class HLERunner:
                 for model_id, model, endpoint in model_endpoint_pairs
                 if model_filter.lower() in model_id.lower()
             ]
+
+        # Apply model exclusion if specified
+        if exclude_models:
+            excluded_count = 0
+            original_count = len(model_endpoint_pairs)
+
+            # Extract model slugs from exclude list (handle both full names and partial matches)
+            exclude_slugs = set(exclude_models)
+
+            filtered_pairs = []
+            for model_id, model, endpoint in model_endpoint_pairs:
+                # Extract model slug from model_id (format: "vendor/model:provider")
+                model_slug = model_id.split(':')[0]  # Get "vendor/model" part
+
+                # Check if this model should be excluded
+                should_exclude = False
+                for exclude_slug in exclude_slugs:
+                    exclude_lower = exclude_slug.lower()
+                    model_lower = model_slug.lower()
+
+                    # Case 1: Exact match (e.g., "openai/gpt-4o" == "openai/gpt-4o")
+                    if exclude_lower == model_lower:
+                        should_exclude = True
+                        break
+
+                    # Case 2: Vendor-only exclusion (e.g., "anthropic" matches "anthropic/*")
+                    if '/' not in exclude_slug and model_lower.startswith(exclude_lower + '/'):
+                        should_exclude = True
+                        break
+
+                    # Case 3: Model name only (e.g., "gpt-4o" matches "*/gpt-4o" but not "*/gpt-4o-*")
+                    if '/' not in exclude_slug and '/' in model_slug:
+                        model_name = model_slug.split('/')[-1].lower()
+                        if exclude_lower == model_name:
+                            should_exclude = True
+                            break
+
+                if not should_exclude:
+                    filtered_pairs.append((model_id, model, endpoint))
+                else:
+                    excluded_count += 1
+
+            model_endpoint_pairs = filtered_pairs
+
+            if excluded_count > 0:
+                print(f"🚫 Excluded {excluded_count} model endpoints based on exclude patterns")
+                print(f"📉 Remaining models: {len(model_endpoint_pairs)} (was {original_count})")
 
         print(f"🎯 Total model endpoints to evaluate: {len(model_endpoint_pairs)}")
 

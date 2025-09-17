@@ -12,6 +12,8 @@ ZenMux Benchmark is a production-grade evaluation framework that enables compreh
 - 🧠 **HLE Integration**: Built-in support for Humanity's Last Exam, a frontier AI benchmark
 - 🔄 **Automatic Judging**: Intelligent scoring system using advanced judge models
 - 📊 **Text-Only Mode**: Filter multimodal questions for text-only model evaluation
+- 🚫 **Smart Model Exclusion**: Flexible exclusion system supporting exact matches, vendor filtering, and model name patterns
+- ⚡ **Dual-Layer Concurrency**: Advanced parallel processing with model-level and request-level concurrency
 - ⚙️ **Production Ready**: Robust error handling, retry mechanisms, and resumable evaluations
 - 🚀 **CI/CD Support**: GitHub Actions integration for automated benchmarking
 
@@ -48,6 +50,9 @@ uv run python benchmark.py --mode single \
   --model-slug openai/gpt-4o-mini \
   --provider-slug openai \
   --text-only --max-samples 5
+
+# Test all models except expensive ones
+uv run python benchmark.py --text-only --max-samples 5 --exclude openai/gpt-4o
 ```
 
 ## Core Functionality
@@ -89,6 +94,22 @@ uv run python benchmark.py --mode filter --model-filter claude --text-only
 uv run python benchmark.py --mode filter --model-filter openai
 ```
 
+### 4. Model Exclusion
+
+```bash
+# Exclude specific models (all providers)
+uv run python benchmark.py --exclude openai/gpt-4o anthropic/claude-3-haiku
+
+# Exclude entire vendors
+uv run python benchmark.py --exclude anthropic openai
+
+# Exclude by model name only (affects all providers)
+uv run python benchmark.py --exclude gpt-4o
+
+# Combine with other options
+uv run python benchmark.py --mode filter --model-filter gpt --exclude openai/gpt-4o-mini
+```
+
 ## Important Options
 
 ### `--text-only`
@@ -114,18 +135,33 @@ uv run python benchmark.py --mode filter --model-filter openai
 - Default is 10, adjust based on API rate limits and provider capabilities
 - Each model processes questions concurrently with this limit
 
+### `--exclude MODEL1 MODEL2 ...`
+
+- Exclude specific models from evaluation
+- Supports three matching patterns:
+  - **Exact match**: `openai/gpt-4o` (excludes only this specific model)
+  - **Vendor exclusion**: `anthropic` (excludes all Anthropic models)
+  - **Model name**: `gpt-4o` (excludes gpt-4o from all providers)
+- Can combine multiple exclusion patterns
+
 ## Output Files
 
-After evaluation, results are saved in the following structure:
+Results are automatically organized with timestamps for each evaluation run:
 
 ```text
 results/
-├── predictions/     # Model prediction results
-│   ├── hle_openai_gpt-4.1-mini_openai.json
-│   └── hle_anthropic_claude-3.5-sonnet_anthropic.json
-└── judged/         # Judging results and scores
-    ├── judged_hle_openai_gpt-4.1-mini_openai.json
-    └── judged_hle_anthropic_claude-3.5-sonnet_anthropic.json
+├── 20250917_173456/              # Timestamped run directory
+│   ├── predictions/              # Model prediction results
+│   │   ├── hle_openai_gpt-4o_openai_20250917_173456.json
+│   │   └── hle_anthropic_claude-3.5-sonnet_anthropic_20250917_173456.json
+│   ├── judged/                   # Judging results and scores
+│   │   ├── judged_hle_openai_gpt-4o_openai_20250917_173456.json
+│   │   └── judged_hle_anthropic_claude-3.5-sonnet_anthropic_20250917_173456.json
+│   └── metrics_summary_20250917_173456.json  # Aggregated metrics and results
+└── 20250917_180234/              # Another evaluation run
+    ├── predictions/
+    ├── judged/
+    └── metrics_summary_20250917_180234.json
 ```
 
 ## Performance & Concurrency
@@ -204,33 +240,44 @@ uv run python benchmark.py --mode single \
 # Evaluate all text models (recommended)
 uv run python benchmark.py --mode all --text-only
 
-# Evaluate all multimodal models
-uv run python benchmark.py --mode all
+# Evaluate all models except expensive ones
+uv run python benchmark.py --mode all --exclude openai/gpt-4o anthropic/claude-opus-4.1
 
-# Evaluate all models from specific provider
-uv run python benchmark.py --mode filter --model-filter anthropic
+# Evaluate all models from specific provider, excluding problematic models
+uv run python benchmark.py --mode filter --model-filter anthropic --exclude anthropic/claude-3-haiku
+
+# Skip all OpenAI models (cost control)
+uv run python benchmark.py --mode all --exclude openai --text-only
 ```
 
 ### CI/CD Integration
 
 ```bash
-# Commands suitable for CI/CD
+# Commands suitable for CI/CD - focused evaluation
 uv run python benchmark.py --mode filter \
-  --model-filter gpt-4o \
+  --model-filter gpt \
+  --exclude openai/gpt-4o \
   --text-only \
   --max-samples 50 \
   --num-workers 5
+
+# Cost-controlled evaluation for automated testing
+uv run python benchmark.py --mode all \
+  --exclude openai anthropic/claude-opus-4.1 \
+  --text-only \
+  --max-samples 20
 ```
 
 ## Important Notes
 
 1. **Dual-Layer Concurrency**: The system runs multiple models simultaneously (outer layer) with concurrent requests per model (inner layer)
 2. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
-3. **Cost Control**: Use `--max-samples` to control evaluation scope and costs - concurrency multiplies API usage
-4. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
-5. **Storage Space**: Full evaluations generate large amounts of data, concurrent execution creates files faster
-6. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
-7. **Memory Usage**: Monitor system memory with high concurrency settings
+3. **Cost Control**: Use `--max-samples` and `--exclude` to control evaluation scope and costs - exclude expensive models to save budget
+4. **Model Exclusion**: Use `--exclude` strategically to skip problematic, expensive, or irrelevant models for your use case
+5. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
+6. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
+7. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
+8. **Memory Usage**: Monitor system memory with high concurrency settings
 
 ## Troubleshooting
 

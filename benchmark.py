@@ -45,6 +45,14 @@ async def main():
         help="Filter models by substring (case-insensitive)"
     )
 
+    # Model exclusion
+    parser.add_argument(
+        "--exclude",
+        type=str,
+        nargs="*",
+        help="Exclude models by model slug (e.g., 'openai/gpt-4o', 'anthropic/claude-3-haiku'). Excludes all providers for these models."
+    )
+
     # Dataset options
     parser.add_argument(
         "--text-only",
@@ -146,6 +154,8 @@ async def main():
     print(f"📁 Base output directory: {config.output_dir}")
     print(f"📁 Run directory: {config.run_dir}")
     print(f"🕒 Batch timestamp: {batch_timestamp}")
+    if args.exclude:
+        print(f"🚫 Excluded models: {', '.join(args.exclude)}")
 
     # Run evaluation based on mode
     try:
@@ -166,7 +176,8 @@ async def main():
                 text_only=args.text_only,
                 max_samples=args.max_samples,
                 auto_judge=auto_judge,
-                model_filter=args.model_filter
+                model_filter=args.model_filter,
+                exclude_models=args.exclude
             )
 
         else:  # args.mode == "all"
@@ -174,7 +185,8 @@ async def main():
             results = await runner.run_zenmux_models_evaluation(
                 text_only=args.text_only,
                 max_samples=args.max_samples,
-                auto_judge=auto_judge
+                auto_judge=auto_judge,
+                exclude_models=args.exclude
             )
 
         # Save metrics summary
