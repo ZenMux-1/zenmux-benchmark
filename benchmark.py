@@ -81,6 +81,13 @@ async def main():
         help="Number of concurrent workers for evaluation (default: from config file)"
     )
 
+    parser.add_argument(
+        "--max-evaluation-retries",
+        type=int,
+        default=None,
+        help="Maximum retries for incomplete evaluations (default: from config file)"
+    )
+
     # Output options
     parser.add_argument(
         "--output-dir",
@@ -130,6 +137,9 @@ async def main():
     if args.num_workers:
         config.hle.num_workers = args.num_workers
 
+    if args.max_evaluation_retries:
+        config.hle.max_evaluation_retries = args.max_evaluation_retries
+
     # Setup base output directory
     config.output_dir = args.output_dir
 
@@ -151,6 +161,12 @@ async def main():
     print(f"🏛️ Auto judge: {auto_judge}")
     print(f"👥 Workers per model: {config.hle.num_workers}")
     print(f"🔄 Max concurrent models: {config.hle.max_concurrent_models}")
+    print(f"🔄 Max evaluation retries: {config.hle.max_evaluation_retries}")
+    print(f"🎯 Judge model: {config.hle.judge_model}")
+    print(f"🌡️ Temperature: {config.hle.temperature}")
+    print(f"⏰ Timeout: {config.hle.timeout}s")
+    print(f"🔄 Max retries: {config.hle.max_retries}")
+    print(f"🎫 Max completion tokens: {config.hle.max_completion_tokens}")
     print(f"📁 Base output directory: {config.output_dir}")
     print(f"📁 Run directory: {config.run_dir}")
     print(f"🕒 Batch timestamp: {batch_timestamp}")

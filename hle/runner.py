@@ -64,18 +64,25 @@ class HLERunner:
             "metrics": None
         }
 
-        # Run judging if requested
-        if auto_judge:
-            print(f"\n🏛️ JUDGING: {model_identifier}")
-            judged_file = await self.judge.judge_predictions(
-                predictions_file=predictions_file,
-                dataset_name=self.config.hle.dataset_name,
-                output_dir=self.config.get_judged_dir()
-            )
-            results["judged_file"] = judged_file
+        # Validate evaluation completeness before judging
+        evaluation_complete = self.validate_evaluation_completeness(predictions_file)
 
-            # Extract metrics from judged file
-            results["metrics"] = self.extract_metrics_from_judged_file(judged_file)
+        # Run judging if requested and evaluation is complete
+        if auto_judge:
+            if evaluation_complete:
+                print(f"\n🏛️ JUDGING: {model_identifier}")
+                judged_file = await self.judge.judge_predictions(
+                    predictions_file=predictions_file,
+                    dataset_name=self.config.hle.dataset_name,
+                    output_dir=self.config.get_judged_dir()
+                )
+                results["judged_file"] = judged_file
+
+                # Extract metrics from judged file
+                results["metrics"] = self.extract_metrics_from_judged_file(judged_file)
+            else:
+                print(f"\n⚠️ SKIPPING JUDGING: {model_identifier} - evaluation incomplete after retries")
+                results["error"] = "Evaluation incomplete after maximum retries"
 
         return results
 
@@ -216,6 +223,35 @@ class HLERunner:
                 )
 
         raise ValueError(f"Model {target_identifier} not found in available models")
+
+    def validate_evaluation_completeness(self, predictions_file: str) -> bool:
+        """Validate that evaluation is complete by checking total_predictions == total_questions."""
+        try:
+            with open(predictions_file, "r") as f:
+                data = json.load(f)
+
+            # Extract metadata
+            metadata = data.get("evaluation_metadata", {})
+            statistics = metadata.get("statistics", {})
+
+            total_questions = statistics.get("total_questions", 0)
+            total_predictions = statistics.get("total_predictions", 0)
+
+            if total_questions == 0:
+                print(f"⚠️ Warning: No total_questions found in metadata")
+                return False
+
+            if total_predictions == total_questions:
+                print(f"✅ Evaluation complete: {total_predictions}/{total_questions} predictions")
+                return True
+            else:
+                missing_count = total_questions - total_predictions
+                print(f"❌ Evaluation incomplete: {total_predictions}/{total_questions} predictions ({missing_count} missing)")
+                return False
+
+        except Exception as e:
+            print(f"⚠️ Warning: Could not validate evaluation completeness: {e}")
+            return False
 
     def extract_metrics_from_judged_file(self, judged_file: str) -> Optional[Dict[str, Any]]:
         """Extract metrics from a judged file."""

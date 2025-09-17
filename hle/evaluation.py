@@ -78,7 +78,7 @@ class HLEEvaluator:
         text_only: bool = False,
         max_samples: Optional[int] = None
     ) -> str:
-        """Evaluate a model on the HLE dataset."""
+        """Evaluate a model on the HLE dataset with retry logic for incomplete evaluations."""
         print(f"🚀 Starting evaluation for {model_identifier}")
 
         # Get questions
@@ -99,108 +99,124 @@ class HLEEvaluator:
 
         output_filepath = os.path.join(self.output_dir, f"hle_{safe_model_name}_{timestamp}.json")
 
-        # Load existing predictions if file exists
-        existing_predictions = {}
-        if os.path.exists(output_filepath):
-            try:
-                with open(output_filepath, "r") as f:
-                    data = json.load(f)
-                    # Handle both old format (direct predictions) and new format (with metadata)
-                    if "predictions" in data:
-                        existing_predictions = data["predictions"]
-                    else:
-                        existing_predictions = data
-                print(f"📂 Found existing file: {os.path.basename(output_filepath)}")
-                print(f"📂 Loaded {len(existing_predictions)} existing predictions")
-            except Exception as e:
-                print(f"⚠️ Warning: Could not load existing predictions: {e}")
+        # Retry logic for incomplete evaluations
+        for retry_attempt in range(self.hle_config.max_evaluation_retries + 1):
+            if retry_attempt > 0:
+                print(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
 
-        # Filter out questions that already have predictions
-        remaining_questions = [
-            q for q in questions
-            if q["id"] not in existing_predictions
-        ]
+            # Load existing predictions if file exists
+            existing_predictions = {}
+            if os.path.exists(output_filepath):
+                try:
+                    with open(output_filepath, "r") as f:
+                        data = json.load(f)
+                        # Handle both old format (direct predictions) and new format (with metadata)
+                        if "predictions" in data:
+                            existing_predictions = data["predictions"]
+                        else:
+                            existing_predictions = data
+                    print(f"📂 Found existing file: {os.path.basename(output_filepath)}")
+                    print(f"📂 Loaded {len(existing_predictions)} existing predictions")
+                except Exception as e:
+                    print(f"⚠️ Warning: Could not load existing predictions: {e}")
 
-        if not remaining_questions:
-            print(f"✅ All questions already evaluated for {model_identifier}")
-            return output_filepath
+            # Filter out questions that already have predictions
+            remaining_questions = [
+                q for q in questions
+                if q["id"] not in existing_predictions
+            ]
 
-        print(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
+            if not remaining_questions:
+                print(f"✅ All questions already evaluated for {model_identifier}")
+                break
 
-        async def bound_evaluate(question):
-            async with semaphore:
-                return await self.evaluate_single_question(
-                    question, model_identifier, endpoint
-                )
+            print(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
 
-        # Create semaphore for rate limiting
-        semaphore = asyncio.Semaphore(self.hle_config.num_workers)
+            async def bound_evaluate(question):
+                async with semaphore:
+                    return await self.evaluate_single_question(
+                        question, model_identifier, endpoint
+                    )
 
-        # Evaluate remaining questions
-        tasks = [bound_evaluate(q) for q in remaining_questions]
-        results = await tqdm_asyncio.gather(*tasks, desc=f"Evaluating {model_identifier}")
+            # Create semaphore for rate limiting
+            semaphore = asyncio.Semaphore(self.hle_config.num_workers)
 
-        # Process results
-        new_predictions = 0
-        for result in results:
-            if result is None:
-                continue
+            # Evaluate remaining questions
+            tasks = [bound_evaluate(q) for q in remaining_questions]
+            results = await tqdm_asyncio.gather(*tasks, desc=f"Evaluating {model_identifier} (attempt {retry_attempt + 1})")
 
-            unique_id, response, usage = result
-            existing_predictions[unique_id] = {
-                "model": model_identifier,
-                "response": response,
-                "usage": usage
-            }
-            new_predictions += 1
+            # Process results
+            for result in results:
+                if result is None:
+                    continue
 
-        # Add metadata to the predictions file
-        metadata = {
-            "evaluation_metadata": {
-                "timestamp": datetime.now().isoformat(),
-                "model_identifier": model_identifier,
-                "endpoint": {
-                    "provider_slug": endpoint.provider_slug,
-                    "provider": endpoint.provider,
-                    "context_length": endpoint.context_length,
-                    "max_completion_tokens": endpoint.max_completion_tokens,
-                    "supports_streaming": endpoint.supports_streaming,
-                    "suitable_api": endpoint.suitable_api
-                },
-                "dataset_config": {
-                    "dataset_name": self.hle_config.dataset_name,
-                    "dataset_split": self.hle_config.dataset_split,
-                    "text_only": text_only,
-                    "max_samples": max_samples
-                },
-                "evaluation_config": {
-                    "max_completion_tokens": self.hle_config.max_completion_tokens,
-                    "temperature": self.hle_config.temperature,
-                    "num_workers": self.hle_config.num_workers,
-                    "timeout": self.hle_config.timeout,
-                    "max_retries": self.hle_config.max_retries
-                },
-                "statistics": {
-                    "total_questions": len(questions),
-                    "remaining_questions": len(remaining_questions),
-                    "new_predictions": new_predictions,
-                    "total_predictions": len(existing_predictions)
+                unique_id, response, usage = result
+                existing_predictions[unique_id] = {
+                    "model": model_identifier,
+                    "response": response,
+                    "usage": usage
+                }
+
+            # Add metadata to the predictions file
+            metadata = {
+                "evaluation_metadata": {
+                    "timestamp": datetime.now().isoformat(),
+                    "model_identifier": model_identifier,
+                    "endpoint": {
+                        "provider_slug": endpoint.provider_slug,
+                        "provider": endpoint.provider,
+                        "context_length": endpoint.context_length,
+                        "max_completion_tokens": endpoint.max_completion_tokens,
+                        "supports_streaming": endpoint.supports_streaming,
+                        "suitable_api": endpoint.suitable_api
+                    },
+                    "dataset_config": {
+                        "dataset_name": self.hle_config.dataset_name,
+                        "dataset_split": self.hle_config.dataset_split,
+                        "text_only": text_only,
+                        "max_samples": max_samples
+                    },
+                    "evaluation_config": {
+                        "max_completion_tokens": self.hle_config.max_completion_tokens,
+                        "temperature": self.hle_config.temperature,
+                        "num_workers": self.hle_config.num_workers,
+                        "timeout": self.hle_config.timeout,
+                        "max_retries": self.hle_config.max_retries,
+                        "max_evaluation_retries": self.hle_config.max_evaluation_retries
+                    },
+                    "statistics": {
+                        "total_questions": len(questions),
+                        "remaining_questions": len(remaining_questions),
+                        "total_predictions": len(existing_predictions),
+                        "retry_attempt": retry_attempt
+                    }
                 }
             }
-        }
 
-        # Save updated predictions with metadata
-        final_output = {
-            **metadata,
-            "predictions": existing_predictions
-        }
+            # Save updated predictions with metadata
+            final_output = {
+                **metadata,
+                "predictions": existing_predictions
+            }
 
-        with open(output_filepath, "w") as f:
-            json.dump(final_output, f, indent=4)
+            with open(output_filepath, "w") as f:
+                json.dump(final_output, f, indent=4)
+
+            # Check if evaluation is complete
+            if len(existing_predictions) == len(questions):
+                print(f"✅ Evaluation complete: {len(existing_predictions)}/{len(questions)} predictions")
+                break
+            elif retry_attempt < self.hle_config.max_evaluation_retries:
+                missing_count = len(questions) - len(existing_predictions)
+                print(f"⚠️ Incomplete evaluation: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
+                print(f"🔄 Will retry missing questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+            else:
+                missing_count = len(questions) - len(existing_predictions)
+                print(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
+                print(f"❌ Final result: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
 
         print(f"✅ Completed evaluation for {model_identifier}")
-        print(f"📝 New predictions: {new_predictions}")
-        print(f"💾 Total predictions: {len(existing_predictions)}")
+        print(f"📝 Final predictions: {len(existing_predictions)}")
         print(f"📁 Saved to: {output_filepath}")
 
         return output_filepath
