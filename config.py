@@ -34,7 +34,7 @@ class HLEConfig:
     max_completion_tokens: int = 8192
     temperature: float = 0.0
     num_workers: int = 10  # Inner concurrency: requests per model
-    max_concurrent_models: int = 5  # Outer concurrency: simultaneous models
+    max_concurrent_models: int = 100  # Outer concurrency: simultaneous models
     timeout: float = 600.0
     max_retries: int = 10
 

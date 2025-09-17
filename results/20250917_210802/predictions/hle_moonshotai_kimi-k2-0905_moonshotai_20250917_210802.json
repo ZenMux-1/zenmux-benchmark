@@ -1,0 +1,68 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-17T21:08:39.544173",
+        "model_identifier": "moonshotai/kimi-k2-0905:moonshotai",
+        "endpoint": {
+            "provider_slug": "moonshotai",
+            "provider": "Moonshot AI",
+            "context_length": 256000,
+            "max_completion_tokens": 256000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": 8192,
+            "temperature": 0.0,
+            "num_workers": 10,
+            "timeout": 600.0,
+            "max_retries": 10
+        },
+        "statistics": {
+            "total_questions": 3,
+            "remaining_questions": 3,
+            "new_predictions": 3,
+            "total_predictions": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nCritical-level utilitarianism (and other critical-level views) rank populations by the formula: total well-being minus a fixed \u201ccritical level\u201d c for every person.  \nArrhenius\u2019s sixth impossibility theorem contains five conditions.  \nThe one that is violated by any critical-level view is Weak Quality Addition (WQA).  \nWQA says: if you add a single new life whose lifetime welfare is negative but \u201cnot far below\u201d the critical level c, the new population is not worse than the old one.  \nCritical-level views, however, treat any life below c as contributing a negative term (w \u2013 c < 0), so adding such a life always lowers the social score; hence the enlarged population is declared worse. Thus WQA is violated.  \nNone of the other listed conditions (Egalitarian Dominance, General Non-Extreme Priority, Non-Elitism, Weak Non-Sadism) are necessarily violated by critical-level views.\n\nAnswer: E. Weak Quality Addition  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 213,
+                "prompt_tokens": 114,
+                "total_tokens": 327,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            }
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \n1. Logical \u201cdepth\u201d is paired with its inverse, \u201csurface\u201d (Bennett\u2019s term). The 3rd letter of \u201csurface\u201d is r \u2192 c1 = r.  \n2. Gell-Mann\u2019s quip is \u201cthe two options didn\u2019t commute.\u201d The 3rd character of \u201coptions\u201d is t \u2192 c2 = t.  \n3. The GELU paper\u2019s last author is Hendrycks; its last letter is s \u2192 c3 = s.  \n4. Rot13 of s is f \u2192 c4 = f.  \n5. Mars is closer in mass to Earth than to the Moon; the 2nd letter of \u201cEarth\u201d is a \u2192 c5 = a.  \n\nConcatenating c1, c2, c4, c5 gives rtfa.\n\nAnswer: rtfa  \nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 181,
+                "prompt_tokens": 242,
+                "total_tokens": 423,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            }
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nThe reduced Spin-bordism of a pointed space X is the kernel of the map  \n\u03a9^Spin_*(X) \u2192 \u03a9^Spin_*(*)  \ninduced by collapsing X to a point.  For the classifying space BG\u2082 we therefore want the subgroup of 12-dimensional Spin-bordism classes that cannot be detected on a closed 12-manifold with trivial G\u2082-bundle, i.e. the subgroup  \n\u03a9\u0303^Spin\u2081\u2082(BG\u2082) := ker[ \u03a9^Spin\u2081\u2082(BG\u2082) \u2192 \u03a9^Spin\u2081\u2082 ].  \n\nBecause G\u2082 is 1-connected and \u03c0\u2082(G\u2082)=0, the first two homotopy groups of BG\u2082 vanish.  Hence the Atiyah\u2013Hirzebruch spectral sequence for Spin bordism collapses in low degrees and there are no differentials that can kill the 12-dimensional line.  The edge homomorphism  \n\u03a9\u0303^Spin\u2081\u2082(BG\u2082) \u2192 H\u2081\u2082(BG\u2082; \u2124)  \nis therefore an isomorphism (torsion in both groups is identified by the AHSS).  \n\nThe integral homology of BG\u2082 in degree 12 is known to be  \nH\u2081\u2082(BG\u2082; \u2124) \u2245 \u2124 \u2295 \u2124/2.  \n\nConsequently the reduced 12-dimensional Spin bordism group is also \u2124 \u2295 \u2124/2.\n\nAnswer: \u2124 \u2295 \u2124/2  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 293,
+                "prompt_tokens": 106,
+                "total_tokens": 399,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            }
+        }
+    }
+}

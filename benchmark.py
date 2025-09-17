@@ -69,8 +69,8 @@ async def main():
     parser.add_argument(
         "--num-workers",
         type=int,
-        default=10,
-        help="Number of concurrent workers for evaluation"
+        default=None,
+        help="Number of concurrent workers for evaluation (default: from config file)"
     )
 
     # Output options

