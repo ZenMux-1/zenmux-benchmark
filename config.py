@@ -33,8 +33,8 @@ class HLEConfig:
     judge_model: str = "openai/gpt-5:openai"
     max_completion_tokens: int = 8192
     temperature: float = 0.0
-    num_workers: int = 100  # Inner concurrency: requests per model
-    max_concurrent_models: int = 5  # Outer concurrency: simultaneous models
+    num_workers: int = 5  # Inner concurrency: requests per model (reduced to avoid 504 errors)
+    max_concurrent_models: int = 3  # Outer concurrency: simultaneous models (reduced to avoid server overload)
     timeout: float = 600.0
     max_retries: int = 1
     max_evaluation_retries: int = 5  # Maximum retries for incomplete evaluations

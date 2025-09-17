@@ -268,13 +268,36 @@ class HLERunner:
         if run_metadata is None:
             run_metadata = {}
 
+        # Analyze evaluation results
+        successful_evaluations = []
+        failed_evaluations = []
+        failed_models = []
+
+        for result in results:
+            model_identifier = result["model_identifier"]
+
+            # Check if evaluation is truly complete (has metrics and no errors)
+            if result.get("metrics") is not None and result.get("error") is None:
+                # Additional check: validate that the predictions file shows complete evaluation
+                predictions_file = result.get("predictions_file")
+                if predictions_file and self.validate_evaluation_completeness(predictions_file):
+                    successful_evaluations.append(result)
+                else:
+                    failed_evaluations.append(result)
+                    failed_models.append(model_identifier)
+            else:
+                failed_evaluations.append(result)
+                failed_models.append(model_identifier)
+
         # Create summary data structure
         summary = {
             "summary_metadata": {
                 "timestamp": datetime.now().isoformat(),
                 "total_evaluations": len(results),
-                "successful_evaluations": len([r for r in results if r.get("metrics") is not None]),
-                "failed_evaluations": len([r for r in results if r.get("error") is not None]),
+                "successful_evaluations": len(successful_evaluations),
+                "failed_evaluations": len(failed_evaluations),
+                "incomplete_evaluations": len([r for r in results if r.get("predictions_file") is not None and r.get("metrics") is None]),
+                "failed_models": failed_models,
                 "run_metadata": run_metadata
             },
             "model_results": []
@@ -305,30 +328,48 @@ class HLERunner:
         print("📊 EVALUATION SUMMARY")
         print(f"{'='*60}")
 
-        successful = [r for r in results if r.get("predictions_file") is not None]
-        failed = [r for r in results if r.get("error") is not None]
+        # Analyze results with new logic
+        successful_evaluations = []
+        failed_evaluations = []
+        incomplete_evaluations = []
 
-        print(f"✅ Successful evaluations: {len(successful)}")
-        print(f"❌ Failed evaluations: {len(failed)}")
+        for result in results:
+            # Check if evaluation is truly complete
+            if result.get("metrics") is not None and result.get("error") is None:
+                predictions_file = result.get("predictions_file")
+                if predictions_file and self.validate_evaluation_completeness(predictions_file):
+                    successful_evaluations.append(result)
+                else:
+                    incomplete_evaluations.append(result)
+            else:
+                failed_evaluations.append(result)
 
-        if failed:
+        print(f"✅ Successful evaluations (complete): {len(successful_evaluations)}")
+        print(f"⚠️ Incomplete evaluations: {len(incomplete_evaluations)}")
+        print(f"❌ Failed evaluations: {len(failed_evaluations)}")
+
+        if failed_evaluations:
             print("\n❌ Failed models:")
-            for result in failed:
-                print(f"  - {result['model_identifier']}: {result['error']}")
+            for result in failed_evaluations:
+                error_msg = result.get('error', 'Unknown error')
+                print(f"  - {result['model_identifier']}: {error_msg}")
 
-        if successful:
+        if incomplete_evaluations:
+            print("\n⚠️ Incomplete evaluations:")
+            for result in incomplete_evaluations:
+                print(f"  - {result['model_identifier']}: Evaluation incomplete after retries")
+
+        if successful_evaluations:
             print(f"\n📁 Run directory: {self.config.run_dir}")
             print(f"📁 Prediction files saved in: {self.config.get_predictions_dir()}")
             print(f"📁 Judged files saved in: {self.config.get_judged_dir()}")
 
             # Print metrics for each successful model
-            models_with_metrics = [r for r in successful if r.get("metrics") is not None]
-            if models_with_metrics:
-                print(f"\n📊 METRICS SUMMARY")
-                print(f"{'='*60}")
-                for result in models_with_metrics:
-                    metrics = result["metrics"]
-                    print(f"\n🎯 {result['model_identifier']}")
-                    print(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
-                    print(f"📏 Calibration Error: {metrics['calibration_error']}")
-                    print(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")
+            print(f"\n📊 METRICS SUMMARY")
+            print(f"{'='*60}")
+            for result in successful_evaluations:
+                metrics = result["metrics"]
+                print(f"\n🎯 {result['model_identifier']}")
+                print(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
+                print(f"📏 Calibration Error: {metrics['calibration_error']}")
+                print(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")

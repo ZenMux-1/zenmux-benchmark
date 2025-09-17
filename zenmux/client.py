@@ -14,6 +14,7 @@ class ZenMuxOpenAIClient:
 
     def get_client(self, endpoint: ZenMuxEndpoint = None) -> AsyncOpenAI:
         """Get an AsyncOpenAI client configured for ZenMux with connection pooling."""
+        _ = endpoint  # endpoint parameter currently unused but kept for API compatibility
         if not self.config.api_key:
             raise ValueError(
                 "ZENMUX_API_KEY environment variable is required. "
@@ -25,10 +26,8 @@ class ZenMuxOpenAIClient:
             self._client = AsyncOpenAI(
                 base_url=self.config.api_base_url,
                 api_key=self.config.api_key,
-                timeout=600.0,
-                max_retries=1,
-                # Optimize connection pool for high concurrency
-                http_client=None  # Use default with connection pooling
+                timeout=600.0,  # Use config timeout
+                max_retries=2,  # Use OpenAI native retries
             )
 
         return self._client
@@ -45,6 +44,7 @@ class ZenMuxOpenAIClient:
 
     async def __aexit__(self, exc_type=None, exc_val=None, exc_tb=None):
         """Async context manager exit with cleanup."""
+        _ = exc_type, exc_val, exc_tb  # Unused parameters required by async context manager protocol
         await self.close()
 
     @staticmethod
