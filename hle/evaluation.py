@@ -134,9 +134,15 @@ class HLEEvaluator:
 
             async def bound_evaluate(question):
                 async with semaphore:
-                    return await self.evaluate_single_question(
+                    import time
+                    start_time = time.time()
+                    print(f"🔄 Starting question {question['id']}")
+                    result = await self.evaluate_single_question(
                         question, model_identifier, endpoint
                     )
+                    elapsed = time.time() - start_time
+                    print(f"✅ Completed question {question['id']} in {elapsed:.2f}s")
+                    return result
 
             # Create semaphore for rate limiting
             semaphore = asyncio.Semaphore(self.hle_config.num_workers)

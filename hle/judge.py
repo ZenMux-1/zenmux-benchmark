@@ -136,7 +136,13 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         """Judge all responses asynchronously."""
         async def bound_func(question):
             async with semaphore:
-                return await self.judge_single_response(question, predictions)
+                import time
+                start_time = time.time()
+                print(f"🏛️ Starting judging question {question['id']}")
+                result = await self.judge_single_response(question, predictions)
+                elapsed = time.time() - start_time
+                print(f"✅ Completed judging question {question['id']} in {elapsed:.2f}s")
+                return result
 
         semaphore = asyncio.Semaphore(self.hle_config.num_workers)
         tasks = [bound_func(q) for q in questions]
