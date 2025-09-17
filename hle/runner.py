@@ -1,6 +1,9 @@
 """HLE evaluation runner with ZenMux integration."""
 
 import asyncio
+import json
+import os
+from datetime import datetime
 from typing import List, Optional, Dict, Any
 
 from .evaluation import HLEEvaluator
@@ -12,13 +15,15 @@ from config import BenchmarkConfig
 class HLERunner:
     """Main runner for HLE evaluations."""
 
-    def __init__(self, config: BenchmarkConfig):
+    def __init__(self, config: BenchmarkConfig, batch_timestamp: str = None):
         self.config = config
+        self.batch_timestamp = batch_timestamp
         self.zenmux_api = ZenMuxAPI(config.zenmux)
         self.evaluator = HLEEvaluator(
             config.hle,
             config.zenmux,
-            config.predictions_dir
+            config.predictions_dir,
+            batch_timestamp=batch_timestamp
         )
         self.judge = HLEJudge(config.hle, config.zenmux)
 
@@ -59,6 +64,9 @@ class HLERunner:
                 output_dir=self.config.judged_dir
             )
             results["judged_file"] = judged_file
+
+            # Extract metrics from judged file
+            results["metrics"] = self.extract_metrics_from_judged_file(judged_file)
 
         return results
 
@@ -141,6 +149,52 @@ class HLERunner:
 
         raise ValueError(f"Model {target_identifier} not found in available models")
 
+    def extract_metrics_from_judged_file(self, judged_file: str) -> Optional[Dict[str, Any]]:
+        """Extract metrics from a judged file."""
+        try:
+            with open(judged_file, "r") as f:
+                data = json.load(f)
+                return data.get("metrics")
+        except Exception as e:
+            print(f"⚠️ Warning: Could not extract metrics from {judged_file}: {e}")
+            return None
+
+    def save_metrics_summary(self, results: List[Dict[str, Any]], run_metadata: Dict[str, Any] = None) -> str:
+        """Save a unified metrics summary for all evaluations."""
+        if run_metadata is None:
+            run_metadata = {}
+
+        # Create summary data structure
+        summary = {
+            "summary_metadata": {
+                "timestamp": datetime.now().isoformat(),
+                "total_evaluations": len(results),
+                "successful_evaluations": len([r for r in results if r.get("metrics") is not None]),
+                "failed_evaluations": len([r for r in results if r.get("error") is not None]),
+                "run_metadata": run_metadata
+            },
+            "model_results": []
+        }
+
+        # Add results for each model
+        for result in results:
+            model_summary = {
+                "model_identifier": result["model_identifier"],
+                "predictions_file": result.get("predictions_file"),
+                "judged_file": result.get("judged_file"),
+                "metrics": result.get("metrics"),
+                "error": result.get("error")
+            }
+            summary["model_results"].append(model_summary)
+
+        # Save summary file
+        summary_file = os.path.join(self.config.output_dir, f"metrics_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+        with open(summary_file, "w") as f:
+            json.dump(summary, f, indent=4)
+
+        print(f"📊 Metrics summary saved to: {summary_file}")
+        return summary_file
+
     def print_summary(self, results: List[Dict[str, Any]]):
         """Print a summary of evaluation results."""
         print(f"\n{'='*60}")
@@ -161,3 +215,15 @@ class HLERunner:
         if successful:
             print(f"\n📁 Prediction files saved in: {self.config.predictions_dir}")
             print(f"📁 Judged files saved in: {self.config.judged_dir}")
+
+            # Print metrics for each successful model
+            models_with_metrics = [r for r in successful if r.get("metrics") is not None]
+            if models_with_metrics:
+                print(f"\n📊 METRICS SUMMARY")
+                print(f"{'='*60}")
+                for result in models_with_metrics:
+                    metrics = result["metrics"]
+                    print(f"\n🎯 {result['model_identifier']}")
+                    print(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
+                    print(f"📏 Calibration Error: {metrics['calibration_error']}")
+                    print(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")

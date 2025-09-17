@@ -4,6 +4,7 @@ import argparse
 import asyncio
 import os
 import sys
+from datetime import datetime
 from typing import Optional
 
 from config import get_config
@@ -130,8 +131,11 @@ async def main():
     for dir_path in [config.output_dir, config.predictions_dir, config.judged_dir]:
         os.makedirs(dir_path, exist_ok=True)
 
-    # Create runner
-    runner = HLERunner(config)
+    # Generate batch timestamp for this evaluation run
+    batch_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Create runner with batch timestamp
+    runner = HLERunner(config, batch_timestamp=batch_timestamp)
 
     auto_judge = not args.no_judge
 
@@ -142,6 +146,7 @@ async def main():
     print(f"🏛️ Auto judge: {auto_judge}")
     print(f"👥 Workers: {config.hle.num_workers}")
     print(f"📁 Output directory: {config.output_dir}")
+    print(f"🕒 Batch timestamp: {batch_timestamp}")
 
     # Run evaluation based on mode
     try:
@@ -172,6 +177,21 @@ async def main():
                 max_samples=args.max_samples,
                 auto_judge=auto_judge
             )
+
+        # Save metrics summary
+        run_metadata = {
+            "mode": args.mode,
+            "text_only": args.text_only,
+            "max_samples": args.max_samples,
+            "auto_judge": auto_judge,
+            "num_workers": config.hle.num_workers,
+            "model_filter": getattr(args, 'model_filter', None),
+            "model_slug": getattr(args, 'model_slug', None),
+            "provider_slug": getattr(args, 'provider_slug', None)
+        }
+
+        if auto_judge and any(r.get("metrics") for r in results):
+            runner.save_metrics_summary(results, run_metadata)
 
         # Print summary
         runner.print_summary(results)

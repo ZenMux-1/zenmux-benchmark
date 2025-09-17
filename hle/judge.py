@@ -6,6 +6,7 @@ import copy
 import math
 import asyncio
 import numpy as np
+from datetime import datetime
 from typing import Dict, List, Any, Optional, Literal, Tuple
 from pydantic import BaseModel
 from tqdm.asyncio import tqdm_asyncio
@@ -180,7 +181,13 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
                 confidence.append(judge_response["confidence"])
 
         if not correct:
-            return {"accuracy": 0.0, "confidence_interval": 0.0, "calibration_error": 0.0}
+            return {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0,
+                "total_evaluated": 0,
+                "total_questions": total_questions
+            }
 
         correct = np.array(correct)
         confidence = np.array(confidence) / 100
@@ -217,10 +224,23 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
 
         # Load predictions
         with open(predictions_file, "r") as f:
-            predictions = json.load(f)
+            predictions_data = json.load(f)
 
-        # Generate output filename
-        output_filename = f"judged_{os.path.basename(predictions_file)}"
+        # Handle both old format (direct predictions) and new format (with metadata)
+        if "predictions" in predictions_data:
+            predictions = predictions_data["predictions"]
+            evaluation_metadata = predictions_data.get("evaluation_metadata", {})
+        else:
+            predictions = predictions_data
+            evaluation_metadata = {}
+
+        # Generate output filename using the same timestamp as predictions file
+        predictions_basename = os.path.basename(predictions_file)
+        # Replace "hle_" with "judged_hle_" to maintain the same timestamp
+        if predictions_basename.startswith("hle_"):
+            output_filename = predictions_basename.replace("hle_", "judged_hle_", 1)
+        else:
+            output_filename = f"judged_{predictions_basename}"
         output_filepath = os.path.join(output_dir, output_filename)
 
         # Load existing judged results if available
@@ -228,7 +248,12 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         if os.path.exists(output_filepath):
             try:
                 with open(output_filepath, "r") as f:
-                    judged_predictions = json.load(f)
+                    existing_data = json.load(f)
+                    # Handle both old format (direct predictions) and new format (with metadata)
+                    if "judged_predictions" in existing_data:
+                        judged_predictions = existing_data["judged_predictions"]
+                    else:
+                        judged_predictions = existing_data
                 print(f"📂 Loaded {len(judged_predictions)} existing judgments")
             except Exception as e:
                 print(f"⚠️ Warning: Could not load existing judgments: {e}")
@@ -252,12 +277,39 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
                 if unique_id is not None:
                     judged_predictions[unique_id] = prediction
 
-        # Save judged results
-        with open(output_filepath, "w") as f:
-            json.dump(judged_predictions, f, indent=4)
-
-        # Calculate and display metrics
+        # Calculate metrics
         metrics = self.calculate_metrics(judged_predictions, total_questions)
+
+        # Add metadata to the judged file
+        metadata = {
+            "judging_metadata": {
+                "timestamp": datetime.now().isoformat(),
+                "judge_model": self.hle_config.judge_model,
+                "dataset_name": dataset_name,
+                "original_predictions_file": predictions_file,
+                "judge_config": {
+                    "num_workers": self.hle_config.num_workers,
+                    "timeout": self.hle_config.timeout,
+                    "max_retries": self.hle_config.max_retries
+                },
+                "evaluation_metadata": evaluation_metadata,  # Include original evaluation metadata
+                "statistics": {
+                    "total_questions": total_questions,
+                    "questions_to_judge": len(questions_to_judge),
+                    "total_judged": len(judged_predictions)
+                }
+            },
+            "metrics": metrics
+        }
+
+        # Save judged results with metadata
+        final_output = {
+            **metadata,
+            "judged_predictions": judged_predictions
+        }
+
+        with open(output_filepath, "w") as f:
+            json.dump(final_output, f, indent=4)
 
         print("🎯 *** Metrics ***")
         print(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")

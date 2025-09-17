@@ -3,6 +3,7 @@
 import os
 import json
 import asyncio
+from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 from tqdm.asyncio import tqdm_asyncio
 
@@ -18,11 +19,13 @@ class HLEEvaluator:
         self,
         hle_config: HLEConfig,
         zenmux_config: ZenMuxConfig,
-        output_dir: str = "predictions"
+        output_dir: str = "predictions",
+        batch_timestamp: str = None
     ):
         self.hle_config = hle_config
         self.zenmux_config = zenmux_config
         self.output_dir = output_dir
+        self.batch_timestamp = batch_timestamp
         self.dataset = HLEDataset(hle_config.dataset_name, hle_config.dataset_split)
         self.zenmux_client = ZenMuxOpenAIClient(zenmux_config)
 
@@ -85,16 +88,29 @@ class HLEEvaluator:
         # Ensure output directory exists when actually starting evaluation
         os.makedirs(self.output_dir, exist_ok=True)
 
-        # Generate output filename
+        # Generate output filename with batch timestamp
         safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
-        output_filepath = os.path.join(self.output_dir, f"hle_{safe_model_name}.json")
+
+        # Use batch timestamp if provided, otherwise generate one
+        if self.batch_timestamp:
+            timestamp = self.batch_timestamp
+        else:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        output_filepath = os.path.join(self.output_dir, f"hle_{safe_model_name}_{timestamp}.json")
 
         # Load existing predictions if file exists
         existing_predictions = {}
         if os.path.exists(output_filepath):
             try:
                 with open(output_filepath, "r") as f:
-                    existing_predictions = json.load(f)
+                    data = json.load(f)
+                    # Handle both old format (direct predictions) and new format (with metadata)
+                    if "predictions" in data:
+                        existing_predictions = data["predictions"]
+                    else:
+                        existing_predictions = data
+                print(f"📂 Found existing file: {os.path.basename(output_filepath)}")
                 print(f"📂 Loaded {len(existing_predictions)} existing predictions")
             except Exception as e:
                 print(f"⚠️ Warning: Could not load existing predictions: {e}")
@@ -139,9 +155,49 @@ class HLEEvaluator:
             }
             new_predictions += 1
 
-        # Save updated predictions
+        # Add metadata to the predictions file
+        metadata = {
+            "evaluation_metadata": {
+                "timestamp": datetime.now().isoformat(),
+                "model_identifier": model_identifier,
+                "endpoint": {
+                    "provider_slug": endpoint.provider_slug,
+                    "provider": endpoint.provider,
+                    "context_length": endpoint.context_length,
+                    "max_completion_tokens": endpoint.max_completion_tokens,
+                    "supports_streaming": endpoint.supports_streaming,
+                    "suitable_api": endpoint.suitable_api
+                },
+                "dataset_config": {
+                    "dataset_name": self.hle_config.dataset_name,
+                    "dataset_split": self.hle_config.dataset_split,
+                    "text_only": text_only,
+                    "max_samples": max_samples
+                },
+                "evaluation_config": {
+                    "max_completion_tokens": self.hle_config.max_completion_tokens,
+                    "temperature": self.hle_config.temperature,
+                    "num_workers": self.hle_config.num_workers,
+                    "timeout": self.hle_config.timeout,
+                    "max_retries": self.hle_config.max_retries
+                },
+                "statistics": {
+                    "total_questions": len(questions),
+                    "remaining_questions": len(remaining_questions),
+                    "new_predictions": new_predictions,
+                    "total_predictions": len(existing_predictions)
+                }
+            }
+        }
+
+        # Save updated predictions with metadata
+        final_output = {
+            **metadata,
+            "predictions": existing_predictions
+        }
+
         with open(output_filepath, "w") as f:
-            json.dump(existing_predictions, f, indent=4)
+            json.dump(final_output, f, indent=4)
 
         print(f"✅ Completed evaluation for {model_identifier}")
         print(f"📝 New predictions: {new_predictions}")
