@@ -139,9 +139,8 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
                 return await self.judge_single_response(question, predictions)
 
         semaphore = asyncio.Semaphore(self.hle_config.num_workers)
-        async with semaphore:
-            tasks = [bound_func(q) for q in questions]
-            results = await tqdm_asyncio.gather(*tasks, desc="Judging responses")
+        tasks = [bound_func(q) for q in questions]
+        results = await tqdm_asyncio.gather(*tasks, desc="Judging responses")
 
         return results
 

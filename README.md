@@ -110,8 +110,9 @@ uv run python benchmark.py --mode filter --model-filter openai
 
 ### `--num-workers N`
 
-- Controls the number of concurrent evaluations
-- Default is 10, adjust based on API rate limits
+- Controls concurrent requests per model (inner concurrency)
+- Default is 10, adjust based on API rate limits and provider capabilities
+- Each model processes questions concurrently with this limit
 
 ## Output Files
 
@@ -126,6 +127,59 @@ results/
     ├── judged_hle_openai_gpt-4.1-mini_openai.json
     └── judged_hle_anthropic_claude-3.5-sonnet_anthropic.json
 ```
+
+## Performance & Concurrency
+
+ZenMux Benchmark implements a **dual-layer concurrency architecture** for maximum performance:
+
+### Dual-Layer Concurrency
+
+The system operates with two independent levels of concurrency:
+
+1. **Model-level Concurrency (Outer Layer)**
+   - Multiple models evaluated simultaneously
+   - Controlled by `max_concurrent_models` configuration (default: 3)
+   - Example: GPT-4, Claude, and Gemini running in parallel
+
+2. **Request-level Concurrency (Inner Layer)**
+   - Multiple questions per model processed concurrently
+   - Controlled by `num_workers` configuration (default: 10)
+   - Example: Each model processes 10 questions simultaneously
+
+### Performance Benefits
+
+**Example Scenario**: 6 models × 1000 questions each
+- **Serial execution**: ~17 minutes (1 model at a time)
+- **Dual-layer concurrent**: ~6 minutes (3 models in parallel)
+- **Performance gain**: 3x faster ⚡
+
+### Configuration Tuning
+
+Edit `config.py` or create custom configurations:
+
+```python
+class HLEConfig:
+    num_workers: int = 10              # Inner: requests per model
+    max_concurrent_models: int = 3     # Outer: simultaneous models
+```
+
+**Conservative Settings** (avoid rate limits):
+```python
+max_concurrent_models = 2
+num_workers = 5
+```
+
+**Aggressive Settings** (maximum speed):
+```python
+max_concurrent_models = 5
+num_workers = 20
+```
+
+### Rate Limit Considerations
+
+- **ZenMux API**: Adjust `max_concurrent_models` based on your plan
+- **Provider Limits**: Some providers have stricter per-model limits
+- **Network Stability**: Higher concurrency requires stable connections
 
 ## Usage Examples
 
@@ -170,11 +224,13 @@ uv run python benchmark.py --mode filter \
 
 ## Important Notes
 
-1. **API Limits**: Be mindful of ZenMux API rate limits, adjust `--num-workers` accordingly
-2. **Cost Control**: Use `--max-samples` to control evaluation scope and costs
-3. **Network Stability**: Ensure stable network connection for long-running evaluations
-4. **Storage Space**: Full evaluations generate large amounts of data
-5. **Judge Model**: Default uses `openai/gpt-5:openai`, errors won't affect predictions
+1. **Dual-Layer Concurrency**: The system runs multiple models simultaneously (outer layer) with concurrent requests per model (inner layer)
+2. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
+3. **Cost Control**: Use `--max-samples` to control evaluation scope and costs - concurrency multiplies API usage
+4. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
+5. **Storage Space**: Full evaluations generate large amounts of data, concurrent execution creates files faster
+6. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
+7. **Memory Usage**: Monitor system memory with high concurrency settings
 
 ## Troubleshooting
 
@@ -197,9 +253,27 @@ uv run python benchmark.py --mode filter \
 
 ### Performance Optimization
 
-- Use `--text-only` for significant speed improvements
-- Optimal `--num-workers` values are typically 5-20
-- Consider batch evaluation instead of evaluating all models at once
+**Dual-Layer Concurrency**:
+- **Model-level**: Adjust `max_concurrent_models` (1-5) based on API limits
+- **Request-level**: Tune `num_workers` (5-20) per provider capabilities
+- Monitor system resources and network stability
+
+**General Optimizations**:
+- Use `--text-only` for 40-60% speed improvements
+- Start with `--max-samples` for testing before full evaluation
+- Balance concurrency vs. stability based on network conditions
+
+**Recommended Settings by Use Case**:
+```bash
+# Development/Testing
+max_concurrent_models = 2, num_workers = 5
+
+# Production/CI
+max_concurrent_models = 3, num_workers = 10
+
+# High-performance (stable network)
+max_concurrent_models = 5, num_workers = 15
+```
 
 ## GitHub Actions
 

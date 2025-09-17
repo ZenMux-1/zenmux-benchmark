@@ -137,9 +137,8 @@ class HLEEvaluator:
         semaphore = asyncio.Semaphore(self.hle_config.num_workers)
 
         # Evaluate remaining questions
-        async with semaphore:
-            tasks = [bound_evaluate(q) for q in remaining_questions]
-            results = await tqdm_asyncio.gather(*tasks, desc=f"Evaluating {model_identifier}")
+        tasks = [bound_evaluate(q) for q in remaining_questions]
+        results = await tqdm_asyncio.gather(*tasks, desc=f"Evaluating {model_identifier}")
 
         # Process results
         new_predictions = 0

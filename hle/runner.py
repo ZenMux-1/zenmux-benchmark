@@ -77,11 +77,13 @@ class HLERunner:
         auto_judge: bool = True,
         model_filter: Optional[str] = None
     ) -> List[Dict[str, Any]]:
-        """Run evaluation for all ZenMux models."""
+        """Run evaluation for all ZenMux models with dual-layer concurrency."""
         print("🌟 Starting ZenMux Models Evaluation")
         print(f"📝 Text only: {text_only}")
         print(f"📊 Max samples: {max_samples}")
         print(f"🏛️ Auto judge: {auto_judge}")
+        print(f"🔄 Max concurrent models: {self.config.hle.max_concurrent_models}")
+        print(f"🔄 Workers per model: {self.config.hle.num_workers}")
 
         # Get all model-endpoint pairs
         model_endpoint_pairs = self.zenmux_api.get_all_model_endpoint_pairs(text_only=text_only)
@@ -96,29 +98,38 @@ class HLERunner:
 
         print(f"🎯 Total model endpoints to evaluate: {len(model_endpoint_pairs)}")
 
-        results = []
-        for i, (model_identifier, model, endpoint) in enumerate(model_endpoint_pairs, 1):
-            print(f"\n📋 Progress: {i}/{len(model_endpoint_pairs)}")
+        # Outer layer: Model-level concurrency control
+        async def bound_model_evaluation(model_data):
+            model_identifier, model, endpoint = model_data
+            async with models_semaphore:
+                print(f"🚀 Starting evaluation: {model_identifier}")
+                try:
+                    result = await self.run_single_model_evaluation(
+                        model_identifier=model_identifier,
+                        endpoint=endpoint,
+                        text_only=text_only,
+                        max_samples=max_samples,
+                        auto_judge=auto_judge
+                    )
+                    print(f"✅ Completed evaluation: {model_identifier}")
+                    return result
 
-            try:
-                result = await self.run_single_model_evaluation(
-                    model_identifier=model_identifier,
-                    endpoint=endpoint,
-                    text_only=text_only,
-                    max_samples=max_samples,
-                    auto_judge=auto_judge
-                )
-                results.append(result)
+                except Exception as e:
+                    print(f"❌ Error evaluating {model_identifier}: {e}")
+                    return {
+                        "model_identifier": model_identifier,
+                        "error": str(e),
+                        "predictions_file": None,
+                        "judged_file": None,
+                        "metrics": None
+                    }
 
-            except Exception as e:
-                print(f"❌ Error evaluating {model_identifier}: {e}")
-                results.append({
-                    "model_identifier": model_identifier,
-                    "error": str(e),
-                    "predictions_file": None,
-                    "judged_file": None,
-                    "metrics": None
-                })
+        # Create semaphore for outer layer concurrency
+        models_semaphore = asyncio.Semaphore(self.config.hle.max_concurrent_models)
+
+        # Run all models concurrently with outer layer control
+        tasks = [bound_model_evaluation(model_data) for model_data in model_endpoint_pairs]
+        results = await asyncio.gather(*tasks)
 
         print(f"\n✅ Completed evaluation of {len(results)} model endpoints")
         return results
