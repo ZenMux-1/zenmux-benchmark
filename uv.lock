@@ -851,6 +851,9 @@ dependencies = [
     { name = "httpx", extra = ["socks"] },
     { name = "numpy" },
     { name = "openai" },
+    { name = "pydantic" },
+    { name = "requests" },
+    { name = "tqdm" },
 ]
 
 [package.metadata]
@@ -859,4 +862,7 @@ requires-dist = [
     { name = "httpx", extras = ["socks"], specifier = ">=0.28.1" },
     { name = "numpy", specifier = ">=2.3.3" },
     { name = "openai", specifier = ">=1.107.3" },
+    { name = "pydantic", specifier = ">=2.10.0" },
+    { name = "requests", specifier = ">=2.32.0" },
+    { name = "tqdm", specifier = ">=4.66.0" },
 ]

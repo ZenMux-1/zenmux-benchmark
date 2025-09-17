@@ -9,4 +9,7 @@ dependencies = [
     "httpx[socks]>=0.28.1",
     "numpy>=2.3.3",
     "openai>=1.107.3",
+    "requests>=2.32.0",
+    "tqdm>=4.66.0",
+    "pydantic>=2.10.0",
 ]

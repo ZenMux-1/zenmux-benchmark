@@ -209,3 +209,11 @@ __marimo__/
 .DS_Store
 .context/references/hle
 .context/references/AvengersPro
+.context/references/zenmux-doc
+
+# ZenMux Benchmark specific
+results/
+test_results/
+predictions/
+judged/
+*.json

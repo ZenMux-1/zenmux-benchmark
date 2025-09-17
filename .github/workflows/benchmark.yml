@@ -1,0 +1,117 @@
+# ZenMux HLE Benchmark GitHub Actions Workflow
+name: ZenMux HLE Benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_filter:
+        description: 'Filter models by substring (e.g., "gpt", "claude")'
+        required: false
+        default: ''
+      text_only:
+        description: 'Only evaluate text-only questions'
+        type: boolean
+        default: true
+      max_samples:
+        description: 'Maximum number of samples to evaluate'
+        required: false
+        default: '50'
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 480  # 8 hours max
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+
+    - name: Install dependencies
+      run: uv sync
+
+    - name: Create output directories
+      run: |
+        mkdir -p results/predictions
+        mkdir -p results/judged
+        mkdir -p artifacts
+
+    - name: Run benchmark
+      env:
+        ZENMUX_API_KEY: ${{ secrets.ZENMUX_API_KEY }}
+      run: |
+        if [ -n "${{ github.event.inputs.model_filter }}" ]; then
+          MODE="filter"
+          FILTER_ARG="--model-filter ${{ github.event.inputs.model_filter }}"
+        else
+          MODE="all"
+          FILTER_ARG=""
+        fi
+
+        TEXT_ONLY_ARG=""
+        if [ "${{ github.event.inputs.text_only }}" = "true" ]; then
+          TEXT_ONLY_ARG="--text-only"
+        fi
+
+        MAX_SAMPLES="${{ github.event.inputs.max_samples || '50' }}"
+
+        uv run python benchmark.py \
+          --mode $MODE \
+          $FILTER_ARG \
+          $TEXT_ONLY_ARG \
+          --max-samples $MAX_SAMPLES \
+          --num-workers 5 \
+          --output-dir results
+
+    - name: Generate summary report
+      run: |
+        echo "# ZenMux HLE Benchmark Results" > artifacts/summary.md
+        echo "**Date:** $(date)" >> artifacts/summary.md
+        echo "**Commit:** $GITHUB_SHA" >> artifacts/summary.md
+        echo "" >> artifacts/summary.md
+
+        echo "## Files Generated" >> artifacts/summary.md
+        echo "### Predictions" >> artifacts/summary.md
+        ls -la results/predictions/ >> artifacts/summary.md || echo "No prediction files found" >> artifacts/summary.md
+        echo "" >> artifacts/summary.md
+
+        echo "### Judged Results" >> artifacts/summary.md
+        ls -la results/judged/ >> artifacts/summary.md || echo "No judged files found" >> artifacts/summary.md
+        echo "" >> artifacts/summary.md
+
+        echo "## Total Size" >> artifacts/summary.md
+        du -sh results/ >> artifacts/summary.md || echo "No results directory" >> artifacts/summary.md
+
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-results-${{ github.run_number }}
+        path: |
+          results/
+          artifacts/
+        retention-days: 30
+
+    - name: Upload summary
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-summary-${{ github.run_number }}
+        path: artifacts/summary.md
+        retention-days: 90
+
+  # Optional: Send notification on completion
+  notify:
+    needs: benchmark
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+    - name: Notify completion
+      run: |
+        echo "Benchmark completed with status: ${{ needs.benchmark.result }}"
+        # Add your notification logic here (Slack, Discord, etc.)
