@@ -212,8 +212,8 @@ __marimo__/
 .context/references/zenmux-doc
 
 # ZenMux Benchmark specific
-results/
-test_results/
-predictions/
-judged/
-*.json
+# results/
+# test_results/
+# predictions/
+# judged/
+# *.json

@@ -36,7 +36,7 @@ class HLEConfig:
     num_workers: int = 10  # Inner concurrency: requests per model
     max_concurrent_models: int = 5  # Outer concurrency: simultaneous models
     timeout: float = 600.0
-    max_retries: int = 1
+    max_retries: int = 10
 
 
 @dataclass
@@ -48,15 +48,56 @@ class BenchmarkConfig:
 
     # Output directories
     output_dir: str = "results"
-    predictions_dir: str = "predictions"
-    judged_dir: str = "judged"
+    predictions_dir: str = "predictions"  # Will be relative to timestamped folder
+    judged_dir: str = "judged"           # Will be relative to timestamped folder
+
+    # Timestamped run directory (set during initialization)
+    run_dir: str = None
+    batch_timestamp: str = None
 
     def __post_init__(self):
         # Don't create directories automatically to avoid unwanted directory creation
         pass
 
+    def setup_timestamped_directories(self, timestamp: str = None) -> str:
+        """Setup timestamped directory structure and return the run directory path."""
+        if timestamp is None:
+            from datetime import datetime
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        self.batch_timestamp = timestamp
+        self.run_dir = os.path.join(self.output_dir, timestamp)
+
+        # Update paths to be within the timestamped directory
+        timestamped_predictions_dir = os.path.join(self.run_dir, self.predictions_dir)
+        timestamped_judged_dir = os.path.join(self.run_dir, self.judged_dir)
+
+        # Create the directory structure
+        os.makedirs(self.run_dir, exist_ok=True)
+        os.makedirs(timestamped_predictions_dir, exist_ok=True)
+        os.makedirs(timestamped_judged_dir, exist_ok=True)
+
+        print(f"📁 Created timestamped directories:")
+        print(f"   Run directory: {self.run_dir}")
+        print(f"   Predictions: {timestamped_predictions_dir}")
+        print(f"   Judged: {timestamped_judged_dir}")
+
+        return self.run_dir
+
+    def get_predictions_dir(self) -> str:
+        """Get the full path to predictions directory."""
+        if self.run_dir:
+            return os.path.join(self.run_dir, self.predictions_dir)
+        return self.predictions_dir
+
+    def get_judged_dir(self) -> str:
+        """Get the full path to judged directory."""
+        if self.run_dir:
+            return os.path.join(self.run_dir, self.judged_dir)
+        return self.judged_dir
+
     def create_directories(self):
-        """Create the configured directories."""
+        """Create the configured directories (legacy method)."""
         for dir_path in [self.output_dir, self.predictions_dir, self.judged_dir]:
             os.makedirs(dir_path, exist_ok=True)
 

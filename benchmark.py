@@ -122,19 +122,16 @@ async def main():
     if args.num_workers:
         config.hle.num_workers = args.num_workers
 
-    # Setup output directories
+    # Setup base output directory
     config.output_dir = args.output_dir
-    config.predictions_dir = args.predictions_dir or os.path.join(args.output_dir, "predictions")
-    config.judged_dir = args.judged_dir or os.path.join(args.output_dir, "judged")
 
-    # Create directories
-    for dir_path in [config.output_dir, config.predictions_dir, config.judged_dir]:
-        os.makedirs(dir_path, exist_ok=True)
+    # Ensure base output directory exists
+    os.makedirs(config.output_dir, exist_ok=True)
 
     # Generate batch timestamp for this evaluation run
     batch_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    # Create runner with batch timestamp
+    # Create runner with batch timestamp (this will create the timestamped directories)
     runner = HLERunner(config, batch_timestamp=batch_timestamp)
 
     auto_judge = not args.no_judge
@@ -144,8 +141,10 @@ async def main():
     print(f"📝 Text only: {args.text_only}")
     print(f"📊 Max samples: {args.max_samples}")
     print(f"🏛️ Auto judge: {auto_judge}")
-    print(f"👥 Workers: {config.hle.num_workers}")
-    print(f"📁 Output directory: {config.output_dir}")
+    print(f"👥 Workers per model: {config.hle.num_workers}")
+    print(f"🔄 Max concurrent models: {config.hle.max_concurrent_models}")
+    print(f"📁 Base output directory: {config.output_dir}")
+    print(f"📁 Run directory: {config.run_dir}")
     print(f"🕒 Batch timestamp: {batch_timestamp}")
 
     # Run evaluation based on mode

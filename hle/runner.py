@@ -17,13 +17,22 @@ class HLERunner:
 
     def __init__(self, config: BenchmarkConfig, batch_timestamp: str = None):
         self.config = config
-        self.batch_timestamp = batch_timestamp
+
+        # Setup timestamped directories
+        if batch_timestamp:
+            self.config.setup_timestamped_directories(batch_timestamp)
+        else:
+            self.config.setup_timestamped_directories()
+
+        self.batch_timestamp = self.config.batch_timestamp
         self.zenmux_api = ZenMuxAPI(config.zenmux)
+
+        # Initialize evaluator with timestamped predictions directory
         self.evaluator = HLEEvaluator(
             config.hle,
             config.zenmux,
-            config.predictions_dir,
-            batch_timestamp=batch_timestamp
+            config.get_predictions_dir(),
+            batch_timestamp=self.batch_timestamp
         )
         self.judge = HLEJudge(config.hle, config.zenmux)
 
@@ -61,7 +70,7 @@ class HLERunner:
             judged_file = await self.judge.judge_predictions(
                 predictions_file=predictions_file,
                 dataset_name=self.config.hle.dataset_name,
-                output_dir=self.config.judged_dir
+                output_dir=self.config.get_judged_dir()
             )
             results["judged_file"] = judged_file
 
@@ -198,8 +207,8 @@ class HLERunner:
             }
             summary["model_results"].append(model_summary)
 
-        # Save summary file
-        summary_file = os.path.join(self.config.output_dir, f"metrics_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+        # Save summary file in the timestamped run directory
+        summary_file = os.path.join(self.config.run_dir, f"metrics_summary_{self.batch_timestamp}.json")
         with open(summary_file, "w") as f:
             json.dump(summary, f, indent=4)
 
@@ -224,8 +233,9 @@ class HLERunner:
                 print(f"  - {result['model_identifier']}: {result['error']}")
 
         if successful:
-            print(f"\n📁 Prediction files saved in: {self.config.predictions_dir}")
-            print(f"📁 Judged files saved in: {self.config.judged_dir}")
+            print(f"\n📁 Run directory: {self.config.run_dir}")
+            print(f"📁 Prediction files saved in: {self.config.get_predictions_dir()}")
+            print(f"📁 Judged files saved in: {self.config.get_judged_dir()}")
 
             # Print metrics for each successful model
             models_with_metrics = [r for r in successful if r.get("metrics") is not None]
