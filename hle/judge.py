@@ -103,9 +103,10 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
             # Record generation end time
             generation_end_time = time.time() * 1000
 
-            # Get parsed content and usage information
+            # Get parsed content, usage information, and generation ID
             final_parsed_content = response_obj.choices[0].message.parsed
             usage = json.loads(response_obj.usage.json()) if response_obj.usage else {}
+            generation_id = response_obj.id if hasattr(response_obj, 'id') else None
 
             # Calculate performance metrics for non-streaming judge requests
             performance_metrics = {
@@ -128,7 +129,7 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
                 "confidence": final_parsed_content.confidence
             }
 
-            return judge_result, performance_metrics
+            return judge_result, performance_metrics, generation_id
 
         except Exception as e:
             self.logger.error(f"Error in judge: {e}")
@@ -152,9 +153,10 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         result = await self.extract_answer(question_text, correct_answer, response)
 
         if result is not None:
-            judge_result, performance_metrics = result
+            judge_result, performance_metrics, generation_id = result
             prediction["judge_response"] = judge_result
             prediction["judge_performance"] = performance_metrics
+            prediction["judge_generation_id"] = generation_id
             return unique_id, prediction, performance_metrics
         else:
             return None, None, None

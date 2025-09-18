@@ -72,8 +72,13 @@ class HLEEvaluator:
             first_token_time = None
             content_chunks = []
             usage = {}
+            generation_id = None
 
             async for chunk in stream:
+                # Capture generation ID from any chunk (usually available in first chunk)
+                if chunk.id and generation_id is None:
+                    generation_id = chunk.id
+
                 if chunk.choices and chunk.choices[0].delta:
                     delta = chunk.choices[0].delta
                     if delta.content:
@@ -118,7 +123,7 @@ class HLEEvaluator:
                 performance_metrics['generation_time_ms'] = 0.0
                 performance_metrics['throughput_tokens_per_second'] = 0.0
 
-            return question["id"], content, usage, performance_metrics
+            return question["id"], content, usage, performance_metrics, generation_id
 
         except Exception as e:
             self.logger.error(f"Error evaluating question {question.get('id', 'unknown')}: {e}")
@@ -215,12 +220,13 @@ class HLEEvaluator:
                 if result is None:
                     continue
 
-                unique_id, response, usage, performance_metrics = result
+                unique_id, response, usage, performance_metrics, generation_id = result
                 existing_predictions[unique_id] = {
                     "model": model_identifier,
                     "response": response,
                     "usage": usage,
-                    "performance": performance_metrics
+                    "performance": performance_metrics,
+                    "generation_id": generation_id
                 }
 
                 # Collect performance data for averaging

@@ -1,0 +1,10 @@
+2025-09-18 20:28:22 | INFO     | create_model_logger  | 🚀 Model logger created for openai/gpt-4o-mini:openai
+2025-09-18 20:28:22 | INFO     | evaluate_model       | 🚀 Starting evaluation for openai/gpt-4o-mini:openai
+2025-09-18 20:28:28 | INFO     | evaluate_model       | 📊 Total questions: 1 | text_only: True | max_samples: 1
+2025-09-18 20:28:28 | INFO     | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 20:28:28 | DEBUG    | __enter__            | 🔄 Starting question 668825f80a642802bdfeadfa
+2025-09-18 20:28:31 | DEBUG    | __exit__             | ✅ Completed question 668825f80a642802bdfeadfa in 3.66s
+2025-09-18 20:28:31 | INFO     | evaluate_model       | ✅ Evaluation complete: 1/1 predictions
+2025-09-18 20:28:31 | INFO     | evaluate_model       | ✅ Completed evaluation
+2025-09-18 20:28:31 | INFO     | evaluate_model       | 📝 Final predictions: 1
+2025-09-18 20:28:31 | INFO     | evaluate_model       | 📁 Saved to: results/20250918_202821/predictions/hle_openai_gpt-4o-mini_openai_20250918_202821.json
