@@ -34,6 +34,13 @@ uv run python benchmark.py --model-filter gpt --exclude anthropic openai/gpt-4o-
 
 # Test runs with different concurrency settings
 uv run python benchmark.py --num-workers 5 --max-samples 10
+
+# Fix evaluation or judge failures from previous runs
+uv run python benchmark.py --fix-evaluation results/20250919_011623
+uv run python benchmark.py --fix-judge results/20250919_011623
+
+# Calculate metrics only for complete models
+uv run python benchmark.py --metrics-only results/20250919_011623
 ```
 
 ### Running Tests
@@ -97,7 +104,12 @@ results/
 ├── 20250917_173456/          # Timestamped run directory
 │   ├── predictions/          # Model prediction files
 │   ├── judged/              # Scored results
-│   └── metrics_summary_*.json # Aggregated metrics
+│   ├── question_ids_*.json  # Question IDs used in run
+│   ├── available_models_*.json # Available models list
+│   ├── evaluation_failures_*.json # Evaluation failure tracking
+│   ├── judge_failures_*.json # Judge failure tracking
+│   ├── metrics_summary_*.json # Aggregated metrics and results
+│   └── metrics_only_*.json  # Independent metrics calculation
 ```
 
 ### Key Data Flow
@@ -105,7 +117,9 @@ results/
 1. **Model Discovery**: ZenMux API provides available models across providers
 2. **Concurrent Evaluation**: Models evaluated with dual-layer concurrency
 3. **Automatic Judging**: Responses scored using structured judge models
-4. **Result Aggregation**: Metrics compiled with confidence intervals and calibration
+4. **Failure Tracking**: Comprehensive tracking of evaluation and judge failures
+5. **Result Aggregation**: Metrics compiled with confidence intervals and calibration
+6. **Quality Assurance**: Strict validation ensures metrics only include complete data
 
 ## Configuration
 
@@ -146,6 +160,8 @@ export ZENMUX_API_KEY="your_api_key"  # Required for all operations
 - Graceful degradation when models fail
 - Detailed error reporting in results
 - Continuation of evaluation despite individual failures
+- Comprehensive failure tracking with separate fix operations
+- Strict metrics validation excluding incomplete data
 
 ## Test Organization
 

@@ -14,6 +14,7 @@ ZenMux Benchmark is a production-grade evaluation framework that enables compreh
 - 📊 **Text-Only Mode**: Filter multimodal questions for text-only model evaluation
 - 🚫 **Smart Model Exclusion**: Flexible exclusion system supporting exact matches, vendor filtering, and model name patterns
 - ⚡ **Dual-Layer Concurrency**: Advanced parallel processing with model-level and request-level concurrency
+- 🔧 **Failure Recovery**: Intelligent fix system for recovering from evaluation and judge failures
 - ⚙️ **Production Ready**: Robust error handling, retry mechanisms, and resumable evaluations
 - 🚀 **CI/CD Support**: GitHub Actions integration for automated benchmarking
 
@@ -116,6 +117,41 @@ uv run python benchmark.py --exclude gpt-4o
 uv run python benchmark.py --mode filter --model-filter gpt --exclude openai/gpt-4o-mini
 ```
 
+### 5. Failure Recovery
+
+When evaluations encounter failures, you can automatically retry and fix them:
+
+```bash
+# Fix evaluation failures from a previous run
+uv run python benchmark.py --fix-evaluation results/20250919_011623
+
+# Fix judge failures from a previous run
+uv run python benchmark.py --fix-judge results/20250919_011623
+
+# The system will:
+# - Read failure records from evaluation_failures_*.json or judge_failures_*.json
+# - Retry failed questions automatically
+# - Update prediction/judge files with successful results
+# - Remove fixed failures from the failure tracking files
+# - Provide detailed progress and summary statistics
+```
+
+### 6. Metrics-Only Calculation
+
+Calculate accurate metrics for models with complete evaluations:
+
+```bash
+# Run metrics calculation only for complete models
+uv run python benchmark.py --metrics-only results/20250919_011623
+
+# The system will:
+# - Validate models have no evaluation or judge failures
+# - Ensure judge count equals total question count from question_ids_*.json
+# - Calculate metrics only for models meeting strict completeness criteria
+# - Generate detailed exclusion reports for incomplete models
+# - Save results to metrics_only_*.json
+```
+
 ## Important Options
 
 ### `--text-only`
@@ -150,6 +186,27 @@ uv run python benchmark.py --mode filter --model-filter gpt --exclude openai/gpt
   - **Model name**: `gpt-4o` (excludes gpt-4o from all providers)
 - Can combine multiple exclusion patterns
 
+### `--fix-evaluation TIMESTAMP_DIR`
+
+- Fix evaluation failures from a previous run
+- Reads `evaluation_failures_*.json` and retries failed questions
+- Updates prediction files with successful results
+- Removes fixed failures from tracking files
+
+### `--fix-judge TIMESTAMP_DIR`
+
+- Fix judge failures from a previous run
+- Reads `judge_failures_*.json` and retries failed judgments
+- Updates judged files with successful results
+- Removes fixed failures from tracking files
+
+### `--metrics-only TIMESTAMP_DIR`
+
+- Calculate metrics only for models with complete evaluations
+- Validates models have no failures and complete judge coverage
+- Ensures judge count equals total questions in `question_ids_*.json`
+- Generates detailed exclusion reports and accurate metrics
+
 ## Output Files
 
 Results are automatically organized with timestamps for each evaluation run:
@@ -163,11 +220,21 @@ results/
 │   ├── judged/                   # Judging results and scores
 │   │   ├── judged_hle_openai_gpt-4o_openai_20250917_173456.json
 │   │   └── judged_hle_anthropic_claude-3.5-sonnet_anthropic_20250917_173456.json
-│   └── metrics_summary_20250917_173456.json  # Aggregated metrics and results
+│   ├── question_ids_20250917_173456.json           # Question IDs used in this run
+│   ├── available_models_20250917_173456.json       # Available models list
+│   ├── evaluation_failures_20250917_173456.json    # Evaluation failure tracking
+│   ├── judge_failures_20250917_173456.json         # Judge failure tracking
+│   ├── metrics_summary_20250917_173456.json        # Aggregated metrics and results
+│   └── metrics_only_20250917_173456.json           # Independent metrics calculation
 └── 20250917_180234/              # Another evaluation run
     ├── predictions/
     ├── judged/
-    └── metrics_summary_20250917_180234.json
+    ├── question_ids_20250917_180234.json
+    ├── available_models_20250917_180234.json
+    ├── evaluation_failures_20250917_180234.json
+    ├── judge_failures_20250917_180234.json
+    ├── metrics_summary_20250917_180234.json
+    └── metrics_only_20250917_180234.json
 ```
 
 ## Performance & Concurrency
@@ -272,6 +339,13 @@ uv run python benchmark.py --mode all \
   --exclude openai anthropic/claude-opus-4.1 \
   --text-only \
   --max-samples 20
+
+# Fix failures from CI/CD runs
+uv run python benchmark.py --fix-evaluation results/20250917_173456
+uv run python benchmark.py --fix-judge results/20250917_173456
+
+# Calculate metrics for complete models only
+uv run python benchmark.py --metrics-only results/20250917_173456
 ```
 
 ## Important Notes
@@ -280,10 +354,11 @@ uv run python benchmark.py --mode all \
 2. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
 3. **Cost Control**: Use `--max-samples` and `--exclude` to control evaluation scope and costs - exclude expensive models to save budget
 4. **Model Exclusion**: Use `--exclude` strategically to skip problematic, expensive, or irrelevant models for your use case
-5. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
-6. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
-7. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
-8. **Memory Usage**: Monitor system memory with high concurrency settings
+5. **Failure Recovery**: The system automatically tracks failures and provides fix commands for robust production use
+6. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
+7. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
+8. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
+9. **Memory Usage**: Monitor system memory with high concurrency settings
 
 ## Troubleshooting
 
@@ -303,6 +378,16 @@ uv run python benchmark.py --mode all \
 4. **Memory issues**
    - Reduce `--num-workers` value
    - Use `--max-samples` to limit sample size
+
+5. **Evaluation or judge failures**
+   - Use `--fix-evaluation` or `--fix-judge` to retry failed operations
+   - Check failure tracking files for specific error details
+   - Consider reducing concurrency if failures persist
+
+6. **Incomplete metrics or validation errors**
+   - Use `--metrics-only` to validate and recalculate metrics for complete models
+   - Check exclusion reports to identify models with incomplete data
+   - Ensure all required files are present in timestamp directory
 
 ### Performance Optimization
 

@@ -27,6 +27,26 @@ async def main():
         help="Evaluation mode: 'all' for all models, 'single' for specific model, 'filter' for filtered models"
     )
 
+    # Fix modes
+    parser.add_argument(
+        "--fix-evaluation",
+        type=str,
+        help="Fix evaluation failures from a specific timestamp directory (e.g., 'results/20250919_011623')"
+    )
+
+    parser.add_argument(
+        "--fix-judge",
+        type=str,
+        help="Fix judge failures from a specific timestamp directory (e.g., 'results/20250919_011623')"
+    )
+
+    # Metrics-only mode
+    parser.add_argument(
+        "--metrics-only",
+        type=str,
+        help="Run metrics calculation only for complete models from a specific timestamp directory (e.g., 'results/20250919_011623')"
+    )
+
     # Model specification (for single mode)
     parser.add_argument(
         "--model-slug",
@@ -125,6 +145,29 @@ async def main():
             print("❌ Error: --model-filter is required for filter mode")
             sys.exit(1)
 
+    # Check for special modes - they are mutually exclusive with regular evaluation
+    special_mode = None
+    special_modes_count = sum([bool(args.fix_evaluation), bool(args.fix_judge), bool(args.metrics_only)])
+
+    if special_modes_count > 1:
+        print("❌ Error: --fix-evaluation, --fix-judge, and --metrics-only cannot be used together")
+        sys.exit(1)
+    elif args.fix_evaluation:
+        special_mode = "fix-evaluation"
+        if not os.path.exists(args.fix_evaluation):
+            print(f"❌ Error: Timestamp directory not found: {args.fix_evaluation}")
+            sys.exit(1)
+    elif args.fix_judge:
+        special_mode = "fix-judge"
+        if not os.path.exists(args.fix_judge):
+            print(f"❌ Error: Timestamp directory not found: {args.fix_judge}")
+            sys.exit(1)
+    elif args.metrics_only:
+        special_mode = "metrics-only"
+        if not os.path.exists(args.metrics_only):
+            print(f"❌ Error: Timestamp directory not found: {args.metrics_only}")
+            sys.exit(1)
+
     # Check required environment variables
     if not os.getenv("ZENMUX_API_KEY"):
         print("❌ Error: ZENMUX_API_KEY environment variable is required")
@@ -148,11 +191,26 @@ async def main():
     # Ensure base output directory exists
     os.makedirs(config.output_dir, exist_ok=True)
 
-    # Generate batch timestamp for this evaluation run
-    batch_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    # Handle special modes differently than regular evaluation
+    if special_mode:
+        # For special modes, use the existing timestamp from the directory path
+        if special_mode == "fix-evaluation":
+            timestamp_dir = args.fix_evaluation
+        elif special_mode == "fix-judge":
+            timestamp_dir = args.fix_judge
+        else:  # metrics-only
+            timestamp_dir = args.metrics_only
 
-    # Create runner with batch timestamp (this will create the timestamped directories and initialize logging)
-    runner = HLERunner(config, batch_timestamp=batch_timestamp)
+        batch_timestamp = os.path.basename(timestamp_dir)
+
+        # Create runner with existing batch timestamp
+        runner = HLERunner(config, batch_timestamp=batch_timestamp)
+    else:
+        # Generate batch timestamp for this evaluation run
+        batch_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Create runner with batch timestamp (this will create the timestamped directories and initialize logging)
+        runner = HLERunner(config, batch_timestamp=batch_timestamp)
 
     # Now that logging is initialized, get logger
     logger = get_runner_logger()
@@ -160,10 +218,18 @@ async def main():
     auto_judge = not args.no_judge
 
     logger.info("🌟 ZenMux HLE Benchmark")
-    logger.info(f"🔧 Mode: {args.mode}")
-    logger.info(f"📝 Text only: {args.text_only}")
-    logger.info(f"📊 Max samples: {args.max_samples}")
-    logger.info(f"🏛️ Auto judge: {auto_judge}")
+
+    if special_mode:
+        logger.info(f"🔧 Mode: {special_mode}")
+        logger.info(f"📁 Target directory: {timestamp_dir}")
+    else:
+        logger.info(f"🔧 Mode: {args.mode}")
+        logger.info(f"📝 Text only: {args.text_only}")
+        logger.info(f"📊 Max samples: {args.max_samples}")
+        logger.info(f"🏛️ Auto judge: {auto_judge}")
+        if args.exclude:
+            logger.info(f"🚫 Excluded models: {', '.join(args.exclude)}")
+
     logger.info(f"👥 Workers per model: {config.hle.num_workers}")
     logger.info(f"🔄 Max concurrent models: {config.hle.max_concurrent_models}")
     logger.info(f"🔄 Max evaluation retries: {config.hle.max_evaluation_retries}")
@@ -175,63 +241,102 @@ async def main():
     logger.info(f"📁 Base output directory: {config.output_dir}")
     logger.info(f"📁 Run directory: {config.run_dir}")
     logger.info(f"🕒 Batch timestamp: {batch_timestamp}")
-    if args.exclude:
-        logger.info(f"🚫 Excluded models: {', '.join(args.exclude)}")
 
-    # Save question IDs for this run
-    runner.save_question_ids(text_only=args.text_only, max_samples=args.max_samples)
+    # Save question IDs for regular evaluation runs (skip for special modes)
+    if not special_mode:
+        runner.save_question_ids(text_only=args.text_only, max_samples=args.max_samples)
 
-    # Run evaluation based on mode
+    # Run evaluation, fix, or metrics based on mode
     try:
-        if args.mode == "single":
-            logger.info(f"🎯 Evaluating single model: {args.model_slug}:{args.provider_slug}")
-            result = await runner.run_specific_model_evaluation(
-                model_slug=args.model_slug,
-                provider_slug=args.provider_slug,
-                text_only=args.text_only,
-                max_samples=args.max_samples,
-                auto_judge=auto_judge
-            )
-            results = [result]
+        if special_mode == "fix-evaluation":
+            logger.info(f"🔧 Fixing evaluation failures in: {timestamp_dir}")
+            fix_result = await runner.fix_evaluation_failures(timestamp_dir)
 
-        elif args.mode == "filter":
-            logger.info(f"🔍 Evaluating filtered models: {args.model_filter}")
-            results = await runner.run_zenmux_models_evaluation(
-                text_only=args.text_only,
-                max_samples=args.max_samples,
-                auto_judge=auto_judge,
-                model_filter=args.model_filter,
-                exclude_models=args.exclude
-            )
+            if "error" in fix_result:
+                logger.error(f"❌ Fix evaluation failed: {fix_result['error']}")
+                sys.exit(1)
 
-        else:  # args.mode == "all"
-            logger.info("🌍 Evaluating all available models")
-            results = await runner.run_zenmux_models_evaluation(
-                text_only=args.text_only,
-                max_samples=args.max_samples,
-                auto_judge=auto_judge,
-                exclude_models=args.exclude
-            )
+            logger.info(f"\n🎉 Fix evaluation completed!")
+            logger.info(f"✅ Fixed models: {fix_result['fixed_count']}")
+            logger.info(f"❌ Still failed models: {fix_result['remaining_failures']}")
 
-        # Save metrics summary
-        run_metadata = {
-            "mode": args.mode,
-            "text_only": args.text_only,
-            "max_samples": args.max_samples,
-            "auto_judge": auto_judge,
-            "num_workers": config.hle.num_workers,
-            "model_filter": getattr(args, 'model_filter', None),
-            "model_slug": getattr(args, 'model_slug', None),
-            "provider_slug": getattr(args, 'provider_slug', None)
-        }
+        elif special_mode == "fix-judge":
+            logger.info(f"⚖️ Fixing judge failures in: {timestamp_dir}")
+            fix_result = await runner.fix_judge_failures(timestamp_dir)
 
-        # Always save metrics summary, regardless of success/failure
-        runner.save_metrics_summary(results, run_metadata)
+            if "error" in fix_result:
+                logger.error(f"❌ Fix judge failed: {fix_result['error']}")
+                sys.exit(1)
 
-        # Log summary
-        runner.log_summary(results)
+            logger.info(f"\n🎉 Fix judge completed!")
+            logger.info(f"✅ Fixed models: {fix_result['fixed_count']}")
+            logger.info(f"❌ Still failed models: {fix_result['remaining_failures']}")
 
-        logger.info("\n🎉 Benchmark completed successfully!")
+        elif special_mode == "metrics-only":
+            logger.info(f"📊 Running metrics calculation only in: {timestamp_dir}")
+            metrics_result = runner.run_metrics_only(timestamp_dir)
+
+            if "error" in metrics_result:
+                logger.error(f"❌ Metrics calculation failed: {metrics_result['error']}")
+                sys.exit(1)
+
+            logger.info(f"\n🎉 Metrics calculation completed!")
+            logger.info(f"✅ Valid models: {metrics_result['valid_models_count']}")
+            logger.info(f"❌ Excluded models: {metrics_result['excluded_models_count']}")
+            logger.info(f"📊 Expected questions: {metrics_result['expected_questions']}")
+            logger.info(f"📁 Results saved to: {metrics_result['metrics_file']}")
+
+        else:
+            # Regular evaluation modes
+            if args.mode == "single":
+                logger.info(f"🎯 Evaluating single model: {args.model_slug}:{args.provider_slug}")
+                result = await runner.run_specific_model_evaluation(
+                    model_slug=args.model_slug,
+                    provider_slug=args.provider_slug,
+                    text_only=args.text_only,
+                    max_samples=args.max_samples,
+                    auto_judge=auto_judge
+                )
+                results = [result]
+
+            elif args.mode == "filter":
+                logger.info(f"🔍 Evaluating filtered models: {args.model_filter}")
+                results = await runner.run_zenmux_models_evaluation(
+                    text_only=args.text_only,
+                    max_samples=args.max_samples,
+                    auto_judge=auto_judge,
+                    model_filter=args.model_filter,
+                    exclude_models=args.exclude
+                )
+
+            else:  # args.mode == "all"
+                logger.info("🌍 Evaluating all available models")
+                results = await runner.run_zenmux_models_evaluation(
+                    text_only=args.text_only,
+                    max_samples=args.max_samples,
+                    auto_judge=auto_judge,
+                    exclude_models=args.exclude
+                )
+
+            # Save metrics summary for regular evaluation modes
+            run_metadata = {
+                "mode": args.mode,
+                "text_only": args.text_only,
+                "max_samples": args.max_samples,
+                "auto_judge": auto_judge,
+                "num_workers": config.hle.num_workers,
+                "model_filter": getattr(args, 'model_filter', None),
+                "model_slug": getattr(args, 'model_slug', None),
+                "provider_slug": getattr(args, 'provider_slug', None)
+            }
+
+            # Always save metrics summary, regardless of success/failure
+            runner.save_metrics_summary(results, run_metadata)
+
+            # Log summary
+            runner.log_summary(results)
+
+            logger.info("\n🎉 Benchmark completed successfully!")
 
     except KeyboardInterrupt:
         # For keyboard interrupt, we might not have a logger yet, so use print
