@@ -69,6 +69,32 @@ class HLERunner:
         self.logger.info(f"📝 Question IDs saved to: {question_ids_file}")
         return question_ids_file
 
+    def save_available_models(self, model_endpoint_pairs: List, text_only: bool = False, model_filter: Optional[str] = None, exclude_models: Optional[List[str]] = None) -> str:
+        """Save the available models list to a separate file."""
+        # Create models data structure
+        models_data = {
+            "discovery_metadata": {
+                "timestamp": datetime.now().isoformat(),
+                "batch_timestamp": self.batch_timestamp,
+                "text_only": text_only,
+                "model_filter": model_filter,
+                "exclude_models": exclude_models,
+                "total_available_models": len(model_endpoint_pairs)
+            },
+            "available_models": []
+        }
+
+        # Extract model identifiers as a simple list
+        models_data["available_models"] = [model_id for model_id, model, endpoint in model_endpoint_pairs]
+
+        # Save to the timestamped run directory
+        models_file = os.path.join(self.config.run_dir, f"available_models_{self.batch_timestamp}.json")
+        with open(models_file, "w") as f:
+            json.dump(models_data, f, indent=4)
+
+        self.logger.info(f"📋 Available models saved to: {models_file}")
+        return models_file
+
     async def run_single_model_evaluation(
         self,
         model_identifier: str,
@@ -195,6 +221,9 @@ class HLERunner:
 
         self.logger.info(f"🎯 Total model endpoints to evaluate: {len(model_endpoint_pairs)}")
 
+        # Save available models list to file
+        self.save_available_models(model_endpoint_pairs, text_only=text_only, model_filter=model_filter, exclude_models=exclude_models)
+
         # Outer layer: Model-level concurrency control
         async def bound_model_evaluation(model_data):
             model_identifier, model, endpoint = model_data
@@ -245,17 +274,28 @@ class HLERunner:
 
         target_identifier = f"{model_slug}:{provider_slug}"
 
+        # Find the target model and save it to available_models file
+        target_model_pair = None
         for model_identifier, model, endpoint in model_endpoint_pairs:
             if model_identifier == target_identifier:
-                return await self.run_single_model_evaluation(
-                    model_identifier=model_identifier,
-                    endpoint=endpoint,
-                    text_only=text_only,
-                    max_samples=max_samples,
-                    auto_judge=auto_judge
-                )
+                target_model_pair = (model_identifier, model, endpoint)
+                break
 
-        raise ValueError(f"Model {target_identifier} not found in available models")
+        if target_model_pair is None:
+            raise ValueError(f"Model {target_identifier} not found in available models")
+
+        # Save the single model info to available_models file
+        self.save_available_models([target_model_pair], text_only=text_only, model_filter=None, exclude_models=None)
+
+        # Run the evaluation
+        model_identifier, model, endpoint = target_model_pair
+        return await self.run_single_model_evaluation(
+            model_identifier=model_identifier,
+            endpoint=endpoint,
+            text_only=text_only,
+            max_samples=max_samples,
+            auto_judge=auto_judge
+        )
 
     def validate_evaluation_completeness(self, predictions_file: str) -> bool:
         """Validate that evaluation is complete by checking total_predictions == total_questions."""
