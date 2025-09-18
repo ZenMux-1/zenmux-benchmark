@@ -178,6 +178,9 @@ async def main():
     if args.exclude:
         logger.info(f"🚫 Excluded models: {', '.join(args.exclude)}")
 
+    # Save question IDs for this run
+    runner.save_question_ids(text_only=args.text_only, max_samples=args.max_samples)
+
     # Run evaluation based on mode
     try:
         if args.mode == "single":

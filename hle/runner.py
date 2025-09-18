@@ -39,6 +39,36 @@ class HLERunner:
         )
         self.judge = HLEJudge(config.hle, config.zenmux)
 
+    def save_question_ids(self, text_only: bool = False, max_samples: Optional[int] = None) -> str:
+        """Save the question IDs used in this evaluation run to a separate file."""
+        from .dataset import HLEDataset
+
+        # Get the same questions that would be used in evaluation
+        dataset = HLEDataset(self.config.hle.dataset_name, self.config.hle.dataset_split)
+        questions = dataset.get_questions(text_only=text_only, max_samples=max_samples)
+
+        # Create question IDs data structure
+        question_ids_data = {
+            "run_metadata": {
+                "timestamp": datetime.now().isoformat(),
+                "batch_timestamp": self.batch_timestamp,
+                "dataset_name": self.config.hle.dataset_name,
+                "dataset_split": self.config.hle.dataset_split,
+                "text_only": text_only,
+                "max_samples": max_samples,
+                "total_questions": len(questions)
+            },
+            "question_ids": [q["id"] for q in questions]
+        }
+
+        # Save to the timestamped run directory
+        question_ids_file = os.path.join(self.config.run_dir, f"question_ids_{self.batch_timestamp}.json")
+        with open(question_ids_file, "w") as f:
+            json.dump(question_ids_data, f, indent=4)
+
+        self.logger.info(f"📝 Question IDs saved to: {question_ids_file}")
+        return question_ids_file
+
     async def run_single_model_evaluation(
         self,
         model_identifier: str,
