@@ -53,19 +53,34 @@ class HLEEvaluator:
                 "model": model_name,
                 "messages": messages,
                 "max_completion_tokens": self.hle_config.max_completion_tokens,
-                "stream": False,
+                "stream": True,
             }
 
             # Add temperature only for non-o1 models
             if not is_o1_model:
                 request_params["temperature"] = self.hle_config.temperature
 
-            response = await client.chat.completions.create(**request_params)
+            # Create streaming response and collect all content
+            stream = await client.chat.completions.create(**request_params)
 
-            content = response.choices[0].message.content
-            usage = json.loads(response.usage.json()) if response.usage else {}
+            # Collect all streaming content
+            content_chunks = []
+            usage = {}
 
-            if content is None:
+            async for chunk in stream:
+                if chunk.choices and chunk.choices[0].delta:
+                    delta = chunk.choices[0].delta
+                    if delta.content:
+                        content_chunks.append(delta.content)
+
+                # Capture usage information from the final chunk
+                if chunk.usage:
+                    usage = json.loads(chunk.usage.json())
+
+            # Combine all content chunks
+            content = "".join(content_chunks)
+
+            if not content:
                 return None
 
             return question["id"], content, usage
