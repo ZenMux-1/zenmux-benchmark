@@ -38,7 +38,7 @@ class HLEConfig:
     max_concurrent_models: int = 100  # Outer concurrency: simultaneous models (reduced to avoid server overload)
     timeout: float = 600.0
     max_retries: int = 1
-    max_evaluation_retries: int = 5  # Maximum retries for incomplete evaluations
+    max_evaluation_retries: int = 1  # Maximum retries for incomplete evaluations
 
 
 @dataclass

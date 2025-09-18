@@ -222,8 +222,8 @@ async def main():
             "provider_slug": getattr(args, 'provider_slug', None)
         }
 
-        if auto_judge and any(r.get("metrics") for r in results):
-            runner.save_metrics_summary(results, run_metadata)
+        # Always save metrics summary, regardless of success/failure
+        runner.save_metrics_summary(results, run_metadata)
 
         # Log summary
         runner.log_summary(results)

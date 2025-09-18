@@ -267,54 +267,88 @@ class HLERunner:
             return None
 
     def save_metrics_summary(self, results: List[Dict[str, Any]], run_metadata: Dict[str, Any] = None) -> str:
-        """Save a unified metrics summary for all evaluations."""
+        """Save a unified metrics summary for all evaluations with comprehensive statistics."""
         if run_metadata is None:
             run_metadata = {}
 
-        # Analyze evaluation results
-        successful_evaluations = []
-        failed_evaluations = []
-        failed_models = []
-
-        for result in results:
-            model_identifier = result["model_identifier"]
-
-            # Check if evaluation is truly complete (has metrics and no errors)
-            if result.get("metrics") is not None and result.get("error") is None:
-                # Additional check: validate that the predictions file shows complete evaluation
-                predictions_file = result.get("predictions_file")
-                if predictions_file and self.validate_evaluation_completeness(predictions_file):
-                    successful_evaluations.append(result)
-                else:
-                    failed_evaluations.append(result)
-                    failed_models.append(model_identifier)
-            else:
-                failed_evaluations.append(result)
-                failed_models.append(model_identifier)
-
-        # Create summary data structure
+        # Create enhanced summary data structure
         summary = {
             "summary_metadata": {
                 "timestamp": datetime.now().isoformat(),
-                "total_evaluations": len(results),
-                "successful_evaluations": len(successful_evaluations),
-                "failed_evaluations": len(failed_evaluations),
-                "incomplete_evaluations": len([r for r in results if r.get("predictions_file") is not None and r.get("metrics") is None]),
-                "failed_models": failed_models,
+                "total_models": len(results),
                 "run_metadata": run_metadata
+            },
+            "overall_statistics": {
+                "models_with_predictions": 0,
+                "models_with_complete_evaluations": 0,
+                "models_with_judgments": 0,
+                "models_with_complete_judgments": 0,
+                "models_with_errors": 0
+            },
+            "failed_question_ids": {
+                "evaluation_failures": {},  # model_id -> [failed_question_ids]
+                "judge_failures": {}  # model_id -> [failed_question_ids]
             },
             "model_results": []
         }
 
-        # Add results for each model
+        # Process each model result
         for result in results:
+            model_identifier = result["model_identifier"]
             model_summary = {
-                "model_identifier": result["model_identifier"],
+                "model_identifier": model_identifier,
                 "predictions_file": result.get("predictions_file"),
                 "judged_file": result.get("judged_file"),
                 "metrics": result.get("metrics"),
-                "error": result.get("error")
+                "error": result.get("error"),
+                "evaluation_statistics": {
+                    "total_questions": 0,
+                    "successful_predictions": 0,
+                    "failed_predictions": 0,
+                    "evaluation_complete": False,
+                    "failed_question_ids": []
+                },
+                "judge_statistics": {
+                    "total_questions": 0,
+                    "successful_judgments": 0,
+                    "failed_judgments": 0,
+                    "judge_complete": False,
+                    "failed_question_ids": []
+                }
             }
+
+            # Analyze evaluation statistics
+            if result.get("predictions_file"):
+                eval_stats = self._analyze_evaluation_file(result["predictions_file"])
+                model_summary["evaluation_statistics"] = eval_stats
+
+                if eval_stats["successful_predictions"] > 0:
+                    summary["overall_statistics"]["models_with_predictions"] += 1
+
+                if eval_stats["evaluation_complete"]:
+                    summary["overall_statistics"]["models_with_complete_evaluations"] += 1
+
+                if eval_stats["failed_question_ids"]:
+                    summary["failed_question_ids"]["evaluation_failures"][model_identifier] = eval_stats["failed_question_ids"]
+
+            # Analyze judge statistics
+            if result.get("judged_file"):
+                judge_stats = self._analyze_judge_file(result["judged_file"])
+                model_summary["judge_statistics"] = judge_stats
+
+                if judge_stats["successful_judgments"] > 0:
+                    summary["overall_statistics"]["models_with_judgments"] += 1
+
+                if judge_stats["judge_complete"]:
+                    summary["overall_statistics"]["models_with_complete_judgments"] += 1
+
+                if judge_stats["failed_question_ids"]:
+                    summary["failed_question_ids"]["judge_failures"][model_identifier] = judge_stats["failed_question_ids"]
+
+            # Check for general errors
+            if result.get("error"):
+                summary["overall_statistics"]["models_with_errors"] += 1
+
             summary["model_results"].append(model_summary)
 
         # Save summary file in the timestamped run directory
@@ -322,57 +356,204 @@ class HLERunner:
         with open(summary_file, "w") as f:
             json.dump(summary, f, indent=4)
 
-        self.logger.info(f"📊 Metrics summary saved to: {summary_file}")
+        self.logger.info(f"📊 Enhanced metrics summary saved to: {summary_file}")
         return summary_file
 
+    def _analyze_evaluation_file(self, predictions_file: str) -> Dict[str, Any]:
+        """Analyze predictions file to extract evaluation statistics."""
+        eval_stats = {
+            "total_questions": 0,
+            "successful_predictions": 0,
+            "failed_predictions": 0,
+            "evaluation_complete": False,
+            "failed_question_ids": []
+        }
+
+        try:
+            with open(predictions_file, "r") as f:
+                data = json.load(f)
+
+            # Handle both old format (direct predictions) and new format (with metadata)
+            if "predictions" in data:
+                predictions = data["predictions"]
+                evaluation_metadata = data.get("evaluation_metadata", {})
+                statistics = evaluation_metadata.get("statistics", {})
+                eval_stats["total_questions"] = statistics.get("total_questions", 0)
+            else:
+                predictions = data
+                # For old format, we don't have total_questions metadata
+                eval_stats["total_questions"] = len(predictions)
+
+            # Count successful predictions
+            eval_stats["successful_predictions"] = len(predictions)
+            eval_stats["failed_predictions"] = eval_stats["total_questions"] - eval_stats["successful_predictions"]
+
+            # Check if evaluation is complete
+            if eval_stats["total_questions"] > 0:
+                eval_stats["evaluation_complete"] = (eval_stats["successful_predictions"] == eval_stats["total_questions"])
+
+            # For missing question IDs, we need to load the dataset to know which questions should exist
+            if eval_stats["failed_predictions"] > 0:
+                # Load dataset to get all question IDs
+                try:
+                    from .dataset import HLEDataset
+                    dataset = HLEDataset(self.config.hle.dataset_name, self.config.hle.dataset_split)
+
+                    # Get the max_samples from evaluation metadata if available
+                    max_samples = None
+                    text_only = False
+                    if "evaluation_metadata" in data:
+                        dataset_config = data["evaluation_metadata"].get("dataset_config", {})
+                        max_samples = dataset_config.get("max_samples")
+                        text_only = dataset_config.get("text_only", False)
+
+                    all_questions = dataset.get_questions(text_only=text_only, max_samples=max_samples)
+                    all_question_ids = {q["id"] for q in all_questions}
+                    predicted_question_ids = set(predictions.keys())
+
+                    eval_stats["failed_question_ids"] = list(all_question_ids - predicted_question_ids)
+
+                except Exception as e:
+                    self.logger.warning(f"⚠️ Warning: Could not determine failed question IDs for {predictions_file}: {e}")
+
+        except Exception as e:
+            self.logger.warning(f"⚠️ Warning: Could not analyze evaluation file {predictions_file}: {e}")
+
+        return eval_stats
+
+    def _analyze_judge_file(self, judged_file: str) -> Dict[str, Any]:
+        """Analyze judged file to extract judge statistics."""
+        judge_stats = {
+            "total_questions": 0,
+            "successful_judgments": 0,
+            "failed_judgments": 0,
+            "judge_complete": False,
+            "failed_question_ids": []
+        }
+
+        try:
+            with open(judged_file, "r") as f:
+                data = json.load(f)
+
+            # Handle both old format (direct predictions) and new format (with metadata)
+            if "judged_predictions" in data:
+                judged_predictions = data["judged_predictions"]
+                judging_metadata = data.get("judging_metadata", {})
+                statistics = judging_metadata.get("statistics", {})
+                judge_stats["total_questions"] = statistics.get("total_questions", 0)
+            else:
+                judged_predictions = data
+                judge_stats["total_questions"] = len(judged_predictions)
+
+            # Count successful judgments (those with judge_response)
+            successful_count = 0
+            failed_ids = []
+
+            for question_id, prediction in judged_predictions.items():
+                if "judge_response" in prediction:
+                    successful_count += 1
+                else:
+                    failed_ids.append(question_id)
+
+            judge_stats["successful_judgments"] = successful_count
+            judge_stats["failed_judgments"] = len(failed_ids)
+            judge_stats["failed_question_ids"] = failed_ids
+
+            # Check if judging is complete
+            if judge_stats["total_questions"] > 0:
+                judge_stats["judge_complete"] = (judge_stats["failed_judgments"] == 0)
+
+        except Exception as e:
+            self.logger.warning(f"⚠️ Warning: Could not analyze judge file {judged_file}: {e}")
+
+        return judge_stats
+
     def log_summary(self, results: List[Dict[str, Any]]):
-        """Log a summary of evaluation results."""
+        """Log an enhanced summary of evaluation results."""
         self.logger.info(f"\n{'='*60}")
-        self.logger.info("📊 EVALUATION SUMMARY")
+        self.logger.info("📊 ENHANCED EVALUATION SUMMARY")
         self.logger.info(f"{'='*60}")
 
-        # Analyze results with new logic
-        successful_evaluations = []
-        failed_evaluations = []
-        incomplete_evaluations = []
+        # Count overall statistics
+        models_with_predictions = 0
+        models_with_complete_evaluations = 0
+        models_with_judgments = 0
+        models_with_complete_judgments = 0
+        models_with_errors = 0
+        models_with_metrics = 0
 
         for result in results:
-            # Check if evaluation is truly complete
-            if result.get("metrics") is not None and result.get("error") is None:
-                predictions_file = result.get("predictions_file")
-                if predictions_file and self.validate_evaluation_completeness(predictions_file):
-                    successful_evaluations.append(result)
-                else:
-                    incomplete_evaluations.append(result)
-            else:
-                failed_evaluations.append(result)
+            if result.get("predictions_file"):
+                models_with_predictions += 1
+                # Check if evaluation is complete
+                if self.validate_evaluation_completeness(result["predictions_file"]):
+                    models_with_complete_evaluations += 1
 
-        self.logger.info(f"✅ Successful evaluations (complete): {len(successful_evaluations)}")
-        self.logger.info(f"⚠️ Incomplete evaluations: {len(incomplete_evaluations)}")
-        self.logger.info(f"❌ Failed evaluations: {len(failed_evaluations)}")
+            if result.get("judged_file"):
+                models_with_judgments += 1
 
-        if failed_evaluations:
-            self.logger.info("\n❌ Failed models:")
-            for result in failed_evaluations:
-                error_msg = result.get('error', 'Unknown error')
-                self.logger.info(f"  - {result['model_identifier']}: {error_msg}")
+            if result.get("error"):
+                models_with_errors += 1
 
-        if incomplete_evaluations:
-            self.logger.info("\n⚠️ Incomplete evaluations:")
-            for result in incomplete_evaluations:
-                self.logger.info(f"  - {result['model_identifier']}: Evaluation incomplete after retries")
+            if result.get("metrics"):
+                models_with_metrics += 1
 
-        if successful_evaluations:
-            self.logger.info(f"\n📁 Run directory: {self.config.run_dir}")
-            self.logger.info(f"📁 Prediction files saved in: {self.config.get_predictions_dir()}")
-            self.logger.info(f"📁 Judged files saved in: {self.config.get_judged_dir()}")
+        # Display overall statistics
+        self.logger.info(f"📈 Total models: {len(results)}")
+        self.logger.info(f"📄 Models with predictions: {models_with_predictions}")
+        self.logger.info(f"✅ Models with complete evaluations: {models_with_complete_evaluations}")
+        self.logger.info(f"🏛️ Models with judgments: {models_with_judgments}")
+        self.logger.info(f"📊 Models with metrics: {models_with_metrics}")
+        self.logger.info(f"❌ Models with errors: {models_with_errors}")
 
-            # Log metrics for each successful model
-            self.logger.info(f"\n📊 METRICS SUMMARY")
+        # Show detailed breakdown
+        if models_with_errors > 0:
+            self.logger.info(f"\n❌ MODELS WITH ERRORS:")
+            for result in results:
+                if result.get("error"):
+                    error_msg = result.get('error', 'Unknown error')
+                    self.logger.info(f"  - {result['model_identifier']}: {error_msg}")
+
+        if models_with_predictions > 0:
+            self.logger.info(f"\n📊 EVALUATION STATUS:")
+            for result in results:
+                if result.get("predictions_file"):
+                    model_id = result['model_identifier']
+                    eval_complete = self.validate_evaluation_completeness(result["predictions_file"])
+                    judge_complete = result.get("judged_file") is not None
+                    has_metrics = result.get("metrics") is not None
+
+                    status_parts = []
+                    if eval_complete:
+                        status_parts.append("✅ Eval")
+                    else:
+                        status_parts.append("⚠️ Eval")
+
+                    if judge_complete:
+                        status_parts.append("🏛️ Judge")
+                    else:
+                        status_parts.append("❌ Judge")
+
+                    if has_metrics:
+                        status_parts.append("📊 Metrics")
+
+                    status = " | ".join(status_parts)
+                    self.logger.info(f"  {model_id}: {status}")
+
+        # Log metrics for models that have them
+        models_with_complete_metrics = [r for r in results if r.get("metrics") is not None]
+        if models_with_complete_metrics:
+            self.logger.info(f"\n📊 METRICS DETAILS")
             self.logger.info(f"{'='*60}")
-            for result in successful_evaluations:
+            for result in models_with_complete_metrics:
                 metrics = result["metrics"]
                 self.logger.info(f"\n🎯 {result['model_identifier']}")
                 self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
                 self.logger.info(f"📏 Calibration Error: {metrics['calibration_error']}")
                 self.logger.info(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")
+
+        # File locations
+        self.logger.info(f"\n📁 FILES:")
+        self.logger.info(f"📁 Run directory: {self.config.run_dir}")
+        self.logger.info(f"📁 Prediction files: {self.config.get_predictions_dir()}")
+        self.logger.info(f"📁 Judged files: {self.config.get_judged_dir()}")
