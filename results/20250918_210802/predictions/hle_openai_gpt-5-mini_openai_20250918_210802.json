@@ -1,0 +1,117 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-18T21:09:57.966532",
+        "model_identifier": "openai/gpt-5-mini:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": null,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": 8192,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 600.0,
+            "max_retries": 5,
+            "max_evaluation_retries": 5
+        },
+        "statistics": {
+            "total_questions": 3,
+            "remaining_questions": 3,
+            "total_predictions": 3,
+            "retry_attempt": 0
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 65130.61,
+            "avg_generation_time_ms": 12465.88,
+            "avg_throughput_tokens_per_second": 1482.25,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: Critical-level views treat lives below the critical level as having negative contribution, so adding a life with positive welfare (but below the critical level) can make the world worse. That directly contradicts the Weak Quality Addition requirement that adding a life with positive quality should not reduce overall value.\n\nAnswer: E. Weak Quality Addition\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 1037,
+                "prompt_tokens": 109,
+                "total_tokens": 1146,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 960,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 36830.549072265625,
+                "generation_time_ms": 4925.10302734375,
+                "throughput_tokens_per_second": 210.55397100175668
+            },
+            "generation_id": "2538CCSEFVKQ00673458"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: \n- Bennett's inverse/reciprocal to logical \"depth\" is commonly referred to as \"shallow(ness)\" \u2014 the third letter is \"a\" (c1). \n- Gell-Mann's quip uses \"alternatives\" (\"the two alternatives didn't commute\") \u2014 the third character is \"t\" (c2). \n- The GELU paper authors include Kevin Gimpel (last name ends with \"l\"), rot13(\"l\") = \"y\" (c4). \n- Mars is closer in mass to the Moon, and the second letter of \"moon\" is \"o\" (c5). \nConcatenating c1, c2, c4, c5 (lowercase) gives: atyo\n\nAnswer: atyo\nConfidence: 65%",
+            "usage": {
+                "completion_tokens": 2220,
+                "prompt_tokens": 239,
+                "total_tokens": 2459,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2048,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 73289.69799804688,
+                "generation_time_ms": 31705.658935546875,
+                "throughput_tokens_per_second": 70.01904626908863
+            },
+            "generation_id": "2538CCOXBXMX00676304"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: Use the Atiyah\u2013Hirzebruch spectral sequence for MSpin-homology of BG2 together with the standard description of the (integral) cohomology of BG2 and the low-dimensional spin-bordism groups.\n\n(1) Cohomology of BG2. The rational cohomology of BG2 is a polynomial algebra on classes in degrees 4 and 12, so integrally H^*(BG2;Z) has free generators in degrees 4 and 12. In particular, H_4(BG2;Z) \u2245 Z, H_8(BG2;Z) \u2245 Z (the square of the degree-4 generator), and H_12(BG2;Z) \u2245 Z^2 (the cube of the degree-4 generator and the independent degree-12 generator).\n\n(2) Low-dimensional MSpin groups. The spin-bordism groups in low dimensions that enter the AHSS for total degree 12 are\nMSpin_0 \u2245 Z, MSpin_4 \u2245 Z, MSpin_8 \u2245 Z^2, MSpin_12 \u2245 Z^2.\n(These are the standard low-dimensional values used in the AHSS for spin bordism.)\n\n(3) AHSS E2-page and contribution to total degree 12. The E2-terms with p+q=12 are\nH_12 \u2297 MSpin_0 \u2245 Z^2,\nH_8  \u2297 MSpin_4 \u2245 Z,\nH_4  \u2297 MSpin_8 \u2245 Z^2,\nH_0  \u2297 MSpin_12 \u2245 MSpin_12 \u2245 Z^2.\nThe reduced spin-bordism \\tilde{MSpin}_{12}(BG2) is the quotient of the sum of the first three summands (the positive p terms) by any differentials and extensions involving the p=0 term (classes coming from the point). For BG2 no nontrivial differentials hit these classes in this range, and the evident extensions split.\n\n(4) Therefore the reduced group (i.e., the part not coming from MSpin_{12}(pt)) is a free abelian group of rank 2:\n\\tilde{\\Omega}^{Spin}_{12}(BG2) \u2245 Z^2.\n\nAnswer: Z \u2295 Z\n\nConfidence: 40%",
+            "usage": {
+                "completion_tokens": 3195,
+                "prompt_tokens": 102,
+                "total_tokens": 3297,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2688,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 85271.59106445312,
+                "generation_time_ms": 766.89208984375,
+                "throughput_tokens_per_second": 4166.166325500845
+            },
+            "generation_id": "2538CCVZXPCG00674510"
+        }
+    }
+}

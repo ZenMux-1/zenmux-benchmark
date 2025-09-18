@@ -1,0 +1,161 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-18T21:10:12.354029",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250918_210802/predictions/hle_moonshotai_kimi-k2-0905_moonshotai_20250918_210802.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 600.0,
+            "max_retries": 5
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-18T21:09:08.232304",
+            "model_identifier": "moonshotai/kimi-k2-0905:moonshotai",
+            "endpoint": {
+                "provider_slug": "moonshotai",
+                "provider": "Moonshot AI",
+                "context_length": 256000,
+                "max_completion_tokens": 256000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": 8192,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 600.0,
+                "max_retries": 5,
+                "max_evaluation_retries": 5
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 3,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 2969.17,
+                "avg_generation_time_ms": 38820.74,
+                "avg_throughput_tokens_per_second": 7.1,
+                "samples_count": 3
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 45444.78,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 4.81,
+            "samples_count": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 3,
+        "total_questions": 2500
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nCritical-level utilitarianism (and other critical-level views) rank populations by the formula: total well-being minus a fixed \u201ccritical level\u201d multiplied by the number of people.  \nWhenever we add a new person whose lifetime well-being is below the critical level (but still positive), the value of the formula falls. Hence such an addition makes the outcome worse even though no one is harmed and the new person has a life worth living.  \nArrhenius\u2019s sixth impossibility theorem contains a condition called Weak Quality Addition: \u201cFor any population X and any perfectly equal population Y of the same size whose lifetime welfare is slightly above zero, there is a larger perfectly equal population Z of very high positive welfare such that the union of X and Z is at least as good as the union of X and Y.\u201d  \nCritical-level views violate this: adding the barely-positive population Y always raises the sum (because Y is above zero), whereas adding the very-large, very-good population Z can lower the sum once the critical-level deduction is applied. Thus the required ranking cannot be guaranteed, so the condition that is violated is Weak Quality Addition.\n\nAnswer: E. Weak Quality Addition  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 244,
+                "prompt_tokens": 114,
+                "total_tokens": 358,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2800.334228515625,
+                "generation_time_ms": 38889.971923828125,
+                "throughput_tokens_per_second": 6.274110983620939
+            },
+            "generation_id": "2538CCRIXTHJ00676287",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "E. Weak Quality Addition",
+                "reasoning": "The extracted answer 'E. Weak Quality Addition' does not match the correct answer 'D'. Therefore, the response is incorrect.",
+                "correct": "no",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 45497.634765625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.8133330591661507
+            },
+            "judge_generation_id": "2538CCSDQMDE00675561"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \n1. Logical \u201cdepth\u201d is paired with its inverse, \u201csurface\u201d (Bennett). 3rd letter of \u201csurface\u201d \u2192 c1 = r.  \n2. Gell-Mann\u2019s quip: \u201cthe two alternatives didn\u2019t commute.\u201d 3rd letter of \u201calternatives\u201d \u2192 c2 = t.  \n3. GELU paper\u2019s last author is Hendrycks; last letter \u2192 c3 = s.  \n4. Rot13 of \u2018s\u2019 \u2192 c4 = f.  \n5. Mars is closer in mass to Earth; 2nd letter of \u201cEarth\u201d \u2192 c5 = a.  \n\nConcatenate c1,c2,c4,c5 in lowercase: r + t + f + a = rtfa.\n\nAnswer: rtfa  \nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 169,
+                "prompt_tokens": 242,
+                "total_tokens": 411,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 3205.93408203125,
+                "generation_time_ms": 38782.5380859375,
+                "throughput_tokens_per_second": 4.357631252124759
+            },
+            "generation_id": "2538CCOVWUIV00676308",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "rtfa",
+                "reasoning": "The extracted final answer is 'rtfa', which does not match the correct answer 'yeyo'. Therefore, the response is incorrect.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 45326.197021484375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.7798493648226583
+            },
+            "judge_generation_id": "2538CCJRHVNK00675566"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nThe reduced Spin-bordism group \u03a9\u0303\u2081\u2082^Spin(BG\u2082) is the kernel of the natural map  \n\u03a9\u2081\u2082^Spin(BG\u2082) \u2192 \u03a9\u2081\u2082^Spin(*) \u2245 \u2124  \nthat forgets the G\u2082-bundle.  Hence it is the subgroup of bordism classes whose underlying 12-dimensional Spin manifold is null-bordant (i.e. bounds a 13-dimensional Spin manifold).  Because the Spin bordism ring is torsion-free in dimensions \u2264 12, every 12-dimensional Spin manifold bounds, so the forgetful map is the zero map.  Consequently the reduced group coincides with the full group:  \n\u03a9\u0303\u2081\u2082^Spin(BG\u2082) \u2245 \u03a9\u2081\u2082^Spin(BG\u2082).  \n\nThe latter is computed by the Atiyah\u2013Hirzebruch spectral sequence  \nE\u00b2_{p,q} = H_p(BG\u2082; \u03a9_q^Spin) \u21d2 \u03a9_{p+q}^Spin(BG\u2082).  \nFor G\u2082 the integral homology of BG\u2082 is free and concentrated in degrees 0,4,11,15,\u2026 (the first non-trivial class is in degree 4).  In total degree 12 the only non-zero E\u00b2-terms are  \nE\u00b2_{4,8} = H\u2084(BG\u2082) \u2297 \u03a9\u2088^Spin \u2245 \u2124 \u2297 \u2124 \u2245 \u2124,  \nE\u00b2_{0,12} = H\u2080(BG\u2082) \u2297 \u03a9\u2081\u2082^Spin \u2245 \u2124 \u2297 \u2124 \u2245 \u2124.  \nThe differential d\u2082: E\u00b2_{4,8} \u2192 E\u00b2_{2,9} is zero because H\u2082(BG\u2082)=0, and all higher differentials vanish for degree reasons.  Hence the spectral sequence collapses and  \n\u03a9\u2081\u2082^Spin(BG\u2082) \u2245 \u2124 \u2295 \u2124.  \n\nTherefore the reduced 12-dimensional Spin bordism of BG\u2082 is free abelian of rank 2.\n\nAnswer: \u2124 \u2295 \u2124  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 414,
+                "prompt_tokens": 106,
+                "total_tokens": 520,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2901.256103515625,
+                "generation_time_ms": 38789.722900390625,
+                "throughput_tokens_per_second": 10.672930071274907
+            },
+            "generation_id": "2538CCLIYPKV00674512",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "\u2124 \u2295 \u2124",
+                "reasoning": "The response states the group is \u2124 \u2295 \u2124 (rank 2), while the correct answer is Z+Z+Z+Z+Z (rank 5). These do not match.",
+                "correct": "no",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 45510.4990234375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 8.833126610916167
+            },
+            "judge_generation_id": "2538CCTEHWRN00673483"
+        }
+    }
+}

@@ -43,7 +43,7 @@ uv sync
 uv run python example.py
 
 # Small-scale test - text-only questions, 5 samples
-uv run python benchmark.py --text-only --max-samples 5
+uv run python benchmark.py --text-only --max-samples 3
 
 # Test specific model
 uv run python benchmark.py --mode single \

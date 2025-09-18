@@ -1,0 +1,52 @@
+2025-09-18 21:08:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: Connection error.
+2025-09-18 21:08:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: Connection error.
+2025-09-18 21:08:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668825f80a642802bdfeadfa: Connection error.
+2025-09-18 21:08:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: Connection error.
+2025-09-18 21:08:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: Connection error.
+2025-09-18 21:08:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: Connection error.
+2025-09-18 21:08:11 | ERROR    | zenmux.runner   | bound_model_evaluation | ❌ Error evaluating moonshotai/kimi-k2-0711:theta: [Errno 24] Too many open files: 'results/20250918_210802/predictions/hle_moonshotai_kimi-k2-0711_theta_20250918_210802.json'
+2025-09-18 21:09:43 | ERROR    | zenmux.runner   | bound_model_evaluation | ❌ Error evaluating openai/gpt-4o:azure: [Errno 24] Too many open files: '/Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc'
+2025-09-18 21:09:45 | ERROR    | zenmux.runner   | bound_model_evaluation | ❌ Error evaluating openai/gpt-5-mini:azure: [Errno 24] Too many open files: '/Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc'
+2025-09-18 21:09:59 | ERROR    | zenmux.runner   | bound_model_evaluation | ❌ Error evaluating openai/gpt-5-mini:openai: [Errno 24] Too many open files: '/Users/thinkthinking/.cache/huggingface/datasets/cais___hle/default/0.0.0/f22d109f258100c8e23dceae8aa41008e3d826cc'
+2025-09-18 21:12:03 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:12:03 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Final result: 1/3 predictions (2 missing)
+2025-09-18 21:12:03 | ERROR    | zenmux.model.inclusionai_ring-mini-2.0_theta | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:12:03 | ERROR    | zenmux.model.inclusionai_ring-mini-2.0_theta | evaluate_model       | ❌ Final result: 1/3 predictions (2 missing)
+2025-09-18 21:16:09 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:16:09 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 21:16:09 | ERROR    | zenmux.model.qwen_qwen3-235b-a22b-thinking-2507_theta | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:16:09 | ERROR    | zenmux.model.qwen_qwen3-235b-a22b-thinking-2507_theta | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 21:18:10 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:18:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:18:11 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:28:12 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:28:12 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:28:12 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:30:39 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:30:39 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 21:30:39 | ERROR    | zenmux.model.deepseek_deepseek-r1-0528_volcengine | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:30:39 | ERROR    | zenmux.model.deepseek_deepseek-r1-0528_volcengine | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 21:38:13 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:38:13 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:38:13 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:46:34 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:46:34 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 21:46:34 | ERROR    | zenmux.model.openai_gpt-5_azure | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 21:46:34 | ERROR    | zenmux.model.openai_gpt-5_azure | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 21:48:14 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:48:14 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:48:14 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:58:15 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:58:15 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 21:58:15 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 22:08:16 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 669402b41dcb3d5a1ef9e951: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 22:08:16 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 22:08:16 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 22:08:16 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 22:08:16 | ERROR    | zenmux.model.z-ai_glm-4.5-air_z-ai | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 22:08:16 | ERROR    | zenmux.model.z-ai_glm-4.5-air_z-ai | evaluate_model       | ❌ Final result: 2/3 predictions (1 missing)
+2025-09-18 22:08:16 | ERROR    | zenmux.evaluation | evaluate_single_question | Error evaluating question 668828540a642802bdfeadfc: peer closed connection without sending complete message body (incomplete chunked read)
+2025-09-18 22:08:16 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 22:08:16 | ERROR    | zenmux.evaluation | evaluate_model       | ❌ Final result: 1/3 predictions (2 missing)
+2025-09-18 22:08:16 | ERROR    | zenmux.model.z-ai_glm-4.5_z-ai | evaluate_model       | ❌ Evaluation incomplete after 5 retries
+2025-09-18 22:08:16 | ERROR    | zenmux.model.z-ai_glm-4.5_z-ai | evaluate_model       | ❌ Final result: 1/3 predictions (2 missing)

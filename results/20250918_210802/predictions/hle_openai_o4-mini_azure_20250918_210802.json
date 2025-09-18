@@ -1,0 +1,117 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-18T21:10:48.350305",
+        "model_identifier": "openai/o4-mini:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 200000,
+            "max_completion_tokens": 100000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": 8192,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 600.0,
+            "max_retries": 5,
+            "max_evaluation_retries": 5
+        },
+        "statistics": {
+            "total_questions": 3,
+            "remaining_questions": 3,
+            "total_predictions": 3,
+            "retry_attempt": 0
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 78800.61,
+            "avg_generation_time_ms": 26976.98,
+            "avg_throughput_tokens_per_second": 303.67,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/o4-mini:azure",
+            "response": "Explanation: Critical\u2010level views assign a positive \u201ccritical level\u201d L so that any individual whose utility u is below L contributes negatively (u\u2013L<0). Hence adding a person with positive utility but still below L makes overall welfare go down. This directly violates the \u201cweak non\u2010sadism\u201d requirement that adding someone with positive welfare should not reduce social welfare.  \nAnswer: D  \nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 2535,
+                "prompt_tokens": 109,
+                "total_tokens": 2644,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2432,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 42511.918701171875,
+                "generation_time_ms": 30733.236083984375,
+                "throughput_tokens_per_second": 82.48399202324914
+            },
+            "generation_id": "2538CCQNXPEL00674496"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/o4-mini:azure",
+            "response": "Explanation: \n1. Bennett\u2019s inverse of logical \u201cdepth\u201d is \u201cshallowness,\u201d whose third letter is a (c1).  \n2. Gell-Mann\u2019s quip was \u201cthe two options didn\u2019t commute,\u201d and \u201coptions\u201d\u2019 third letter is t (c2).  \n3. The GELU paper is by Hendrycks and Gimpel; Gimpel\u2019s name ends with l (c3).  \n4. Rot13 of l is y (c4).  \n5. Mars is closer in mass to the Moon, and \u201cmoon\u201d\u2019s second letter is o (c5).  \nConcatenating c1\u2013c2\u2013c4\u2013c5 gives \u201catyo.\u201d  \n\nAnswer: atyo  \nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 2553,
+                "prompt_tokens": 239,
+                "total_tokens": 2792,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2368,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 42125.827880859375,
+                "generation_time_ms": 43397.66015625,
+                "throughput_tokens_per_second": 58.82805641613203
+            },
+            "generation_id": "2538CCWTFWXV00676279"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/o4-mini:azure",
+            "response": "Explanation:  \nWe compute \\(\\widetilde\\Omega^{\\!Spin}_{12}(BG_2)\\) by the Atiyah\u2013Hirzebruch spectral sequence\n\\[\nE^2_{p,q} \\;=\\; H_p\\bigl(BG_2;\\;\\Omega^{Spin}_q(pt)\\bigr)\n\\;\\Longrightarrow\\;\\Omega^{Spin}_{p+q}(BG_2).\n\\]\nBecause \\(BG_2\\) has only even\u2010dimensional homology, all the possible 2\u2010torsion entries in \\(\\Omega^{Spin}_1(pt)\\) and \\(\\Omega^{Spin}_2(pt)\\) land on zero rows.  One finds nonzero \\(E^2\\)\u2013terms with\n\\[\np+q=12,\\quad\n(p,q)\\;=\\;(12,0),(8,4),(4,8),(0,12),\n\\]\ngiving ranks\n\\[\n\\begin{aligned}\nE^2_{12,0}&\\cong H_{12}(BG_2)\\otimes\\Omega^{Spin}_0(pt)\\;\\cong\\;\\Z^2,\\\\\nE^2_{8,4} &\\cong H_{8}(BG_2)\\otimes\\Omega^{Spin}_4(pt)\\;\\cong\\;\\Z^1,\\\\\nE^2_{4,8} &\\cong H_{4}(BG_2)\\otimes\\Omega^{Spin}_8(pt)\\;\\cong\\;\\Z^2,\\\\\nE^2_{0,12}&\\cong H_{0}(BG_2)\\otimes\\Omega^{Spin}_{12}(pt)\\;\\cong\\;\\Omega^{Spin}_{12}(pt).\n\\end{aligned}\n\\]\nThere are no nontrivial differentials hitting these groups, so the spectral sequence collapses at \\(E^2\\).  Passing to the reduced group means quotienting out the image of \n\\(\\Omega^{Spin}_{12}(pt)\\cong E^2_{0,12}\\); the remaining free summands come from the first three lines above, giving \n\\[\n\\widetilde\\Omega^{Spin}_{12}(BG_2)\\;\\cong\\;\\Z^{2+1+2}\\;=\\;\\Z^5.\n\\]\nAnswer: \\(\\Z^5\\) (no torsion in the reduced group).  \n\nAnswer: \\(\\displaystyle \\widetilde\\Omega^{Spin}_{12}(BG_2)\\;\\cong\\;\\Z^5\\).  \nConfidence: 77%",
+            "usage": {
+                "completion_tokens": 5234,
+                "prompt_tokens": 102,
+                "total_tokens": 5336,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 4672,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 151764.07080078125,
+                "generation_time_ms": 6800.0302734375,
+                "throughput_tokens_per_second": 769.7024556560023
+            },
+            "generation_id": "2538CCHQKBOS00675543"
+        }
+    }
+}
