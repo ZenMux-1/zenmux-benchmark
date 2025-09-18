@@ -4,6 +4,7 @@ import os
 import json
 import asyncio
 import logging
+import time
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 from tqdm.asyncio import tqdm_asyncio
@@ -39,7 +40,7 @@ class HLEEvaluator:
         question: Dict[str, Any],
         model_name: str,
         endpoint: ZenMuxEndpoint
-    ) -> Optional[Tuple[str, str, Dict[str, Any]]]:
+    ) -> Optional[Tuple[str, str, Dict[str, Any], Dict[str, float]]]:
         """Evaluate a single question with a model."""
         try:
             # Check if model is o1-based (for system prompt handling)
@@ -54,16 +55,21 @@ class HLEEvaluator:
                 "messages": messages,
                 "max_completion_tokens": self.hle_config.max_completion_tokens,
                 "stream": True,
+                "stream_options": {"include_usage": True},
             }
 
             # Add temperature only for non-o1 models
             if not is_o1_model:
                 request_params["temperature"] = self.hle_config.temperature
 
+            # Record request start time
+            request_start_time = time.time() * 1000  # Convert to milliseconds
+
             # Create streaming response and collect all content
             stream = await client.chat.completions.create(**request_params)
 
-            # Collect all streaming content
+            # Performance tracking variables
+            first_token_time = None
             content_chunks = []
             usage = {}
 
@@ -71,11 +77,17 @@ class HLEEvaluator:
                 if chunk.choices and chunk.choices[0].delta:
                     delta = chunk.choices[0].delta
                     if delta.content:
+                        # Record first token time if this is the first content
+                        if first_token_time is None:
+                            first_token_time = time.time() * 1000
                         content_chunks.append(delta.content)
 
                 # Capture usage information from the final chunk
                 if chunk.usage:
                     usage = json.loads(chunk.usage.json())
+
+            # Record generation end time
+            generation_end_time = time.time() * 1000
 
             # Combine all content chunks
             content = "".join(content_chunks)
@@ -83,7 +95,30 @@ class HLEEvaluator:
             if not content:
                 return None
 
-            return question["id"], content, usage
+            # Calculate performance metrics
+            performance_metrics = {}
+
+            if first_token_time is not None:
+                # First token latency: time from request start to first token
+                performance_metrics['first_token_latency_ms'] = first_token_time - request_start_time
+
+                # Generation time: time from first token to end
+                performance_metrics['generation_time_ms'] = generation_end_time - first_token_time
+
+                # Calculate throughput (tokens per second)
+                completion_tokens = usage.get('completion_tokens', 0) or 0
+                if completion_tokens > 0 and performance_metrics['generation_time_ms'] > 0:
+                    generation_time_seconds = performance_metrics['generation_time_ms'] / 1000
+                    performance_metrics['throughput_tokens_per_second'] = completion_tokens / generation_time_seconds
+                else:
+                    performance_metrics['throughput_tokens_per_second'] = 0.0
+            else:
+                # No content received, set default values
+                performance_metrics['first_token_latency_ms'] = 0.0
+                performance_metrics['generation_time_ms'] = 0.0
+                performance_metrics['throughput_tokens_per_second'] = 0.0
+
+            return question["id"], content, usage, performance_metrics
 
         except Exception as e:
             self.logger.error(f"Error evaluating question {question.get('id', 'unknown')}: {e}")
@@ -174,17 +209,22 @@ class HLEEvaluator:
             tasks = [bound_evaluate(q) for q in remaining_questions]
             results = await tqdm_asyncio.gather(*tasks, desc=f"Evaluating {model_identifier} (attempt {retry_attempt + 1})")
 
-            # Process results
+            # Process results and collect performance metrics
+            performance_data = []
             for result in results:
                 if result is None:
                     continue
 
-                unique_id, response, usage = result
+                unique_id, response, usage, performance_metrics = result
                 existing_predictions[unique_id] = {
                     "model": model_identifier,
                     "response": response,
-                    "usage": usage
+                    "usage": usage,
+                    "performance": performance_metrics
                 }
+
+                # Collect performance data for averaging
+                performance_data.append(performance_metrics)
 
             # Add metadata to the predictions file
             metadata = {
@@ -221,6 +261,19 @@ class HLEEvaluator:
                     }
                 }
             }
+
+            # Calculate and add average performance metrics
+            if performance_data:
+                avg_first_token_latency = sum(p.get('first_token_latency_ms', 0) for p in performance_data) / len(performance_data)
+                avg_generation_time = sum(p.get('generation_time_ms', 0) for p in performance_data) / len(performance_data)
+                avg_throughput = sum(p.get('throughput_tokens_per_second', 0) for p in performance_data) / len(performance_data)
+
+                metadata["evaluation_metadata"]["performance_averages"] = {
+                    "avg_first_token_latency_ms": round(avg_first_token_latency, 2),
+                    "avg_generation_time_ms": round(avg_generation_time, 2),
+                    "avg_throughput_tokens_per_second": round(avg_throughput, 2),
+                    "samples_count": len(performance_data)
+                }
 
             # Save updated predictions with metadata
             final_output = {

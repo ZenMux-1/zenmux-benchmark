@@ -47,9 +47,15 @@ uv run python benchmark.py --text-only --max-samples 5
 
 # Test specific model
 uv run python benchmark.py --mode single \
-  --model-slug deepseek/deepseek-chat \
-   --provider-slug deepseek \
+  --model-slug google/gemini-2.5-flash-lite \
+   --provider-slug google-vertex \
   --text-only --max-samples 10 \
+
+uv run python benchmark.py --mode single \
+  --model-slug openai/gpt-4o-mini \
+   --provider-slug openai \
+  --text-only --max-samples 10 \
+
 
 # Test all models except expensive ones
 uv run python benchmark.py --text-only --max-samples 5 --exclude openai/gpt-4o
