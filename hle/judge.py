@@ -6,6 +6,7 @@ import copy
 import math
 import asyncio
 import logging
+import time
 import numpy as np
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Literal, Tuple
@@ -59,7 +60,7 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         question: str,
         correct_answer: str,
         response: str
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[Tuple[Dict[str, Any], Dict[str, float]]]:
         """Extract and judge a single answer."""
         prompt = self.JUDGE_PROMPT.format(
             question=question,
@@ -88,6 +89,10 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
 
             client = self.zenmux_client.get_client(dummy_endpoint)
 
+            # Record request start time
+            request_start_time = time.time() * 1000  # Convert to milliseconds
+
+            # Note: Structured output does not support streaming, fall back to non-streaming
             response_obj = await client.beta.chat.completions.parse(
                 model=self.hle_config.judge_model,
                 max_completion_tokens=4096,
@@ -95,14 +100,35 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
                 response_format=ExtractedAnswer,
             )
 
-            content = response_obj.choices[0].message.parsed
-            return {
-                "correct_answer": correct_answer,
-                "model_answer": content.extracted_final_answer,
-                "reasoning": content.reasoning,
-                "correct": content.correct,
-                "confidence": content.confidence
+            # Record generation end time
+            generation_end_time = time.time() * 1000
+
+            # Get parsed content and usage information
+            final_parsed_content = response_obj.choices[0].message.parsed
+            usage = json.loads(response_obj.usage.json()) if response_obj.usage else {}
+
+            # Calculate performance metrics for non-streaming judge requests
+            performance_metrics = {
+                'first_token_latency_ms': generation_end_time - request_start_time,  # Total time for non-streaming
+                'generation_time_ms': 0.0,  # Not applicable for non-streaming
+                'throughput_tokens_per_second': 0.0  # Will calculate based on total time
             }
+
+            # Calculate throughput based on total time
+            completion_tokens = usage.get('completion_tokens', 0) or 0
+            if completion_tokens > 0 and performance_metrics['first_token_latency_ms'] > 0:
+                total_time_seconds = performance_metrics['first_token_latency_ms'] / 1000
+                performance_metrics['throughput_tokens_per_second'] = completion_tokens / total_time_seconds
+
+            judge_result = {
+                "correct_answer": correct_answer,
+                "model_answer": final_parsed_content.extracted_final_answer,
+                "reasoning": final_parsed_content.reasoning,
+                "correct": final_parsed_content.correct,
+                "confidence": final_parsed_content.confidence
+            }
+
+            return judge_result, performance_metrics
 
         except Exception as e:
             self.logger.error(f"Error in judge: {e}")
@@ -112,7 +138,7 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         self,
         question: Dict[str, Any],
         predictions: Dict[str, Any]
-    ) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
+    ) -> Tuple[Optional[str], Optional[Dict[str, Any]], Optional[Dict[str, float]]]:
         """Judge a single prediction."""
         unique_id = question["id"]
         prediction = copy.deepcopy(predictions[unique_id])
@@ -120,22 +146,24 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         correct_answer = question["answer"]
 
         if "judge_response" in prediction:
-            return unique_id, prediction
+            return unique_id, prediction, None
 
         response = prediction["response"]
-        content = await self.extract_answer(question_text, correct_answer, response)
+        result = await self.extract_answer(question_text, correct_answer, response)
 
-        if content is not None:
-            prediction["judge_response"] = content
-            return unique_id, prediction
+        if result is not None:
+            judge_result, performance_metrics = result
+            prediction["judge_response"] = judge_result
+            prediction["judge_performance"] = performance_metrics
+            return unique_id, prediction, performance_metrics
         else:
-            return None, None
+            return None, None, None
 
     async def judge_all_responses(
         self,
         questions: List[Dict[str, Any]],
         predictions: Dict[str, Any]
-    ) -> List[Tuple[Optional[str], Optional[Dict[str, Any]]]]:
+    ) -> List[Tuple[Optional[str], Optional[Dict[str, Any]], Optional[Dict[str, float]]]]:
         """Judge all responses asynchronously."""
         async def bound_func(question):
             async with semaphore:
@@ -267,6 +295,9 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
             if q["id"] in predictions and q["id"] not in judged_predictions
         ]
 
+        # Initialize performance data list
+        judge_performance_data = []
+
         if not questions_to_judge:
             self.logger.info(f"✅ All predictions already judged")
         else:
@@ -275,10 +306,12 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
             # Judge remaining questions
             results = await self.judge_all_responses(questions_to_judge, predictions)
 
-            # Process results
-            for unique_id, prediction in results:
+            # Process results and collect performance metrics
+            for unique_id, prediction, performance_metrics in results:
                 if unique_id is not None:
                     judged_predictions[unique_id] = prediction
+                    if performance_metrics is not None:
+                        judge_performance_data.append(performance_metrics)
 
         # Calculate metrics
         metrics = self.calculate_metrics(judged_predictions, total_questions)
@@ -304,6 +337,19 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
             },
             "metrics": metrics
         }
+
+        # Calculate and add judge performance averages if we have performance data
+        if judge_performance_data:
+            avg_first_token_latency = sum(p.get('first_token_latency_ms', 0) for p in judge_performance_data) / len(judge_performance_data)
+            avg_generation_time = sum(p.get('generation_time_ms', 0) for p in judge_performance_data) / len(judge_performance_data)
+            avg_throughput = sum(p.get('throughput_tokens_per_second', 0) for p in judge_performance_data) / len(judge_performance_data)
+
+            metadata["judging_metadata"]["judge_performance_averages"] = {
+                "avg_first_token_latency_ms": round(avg_first_token_latency, 2),
+                "avg_generation_time_ms": round(avg_generation_time, 2),
+                "avg_throughput_tokens_per_second": round(avg_throughput, 2),
+                "samples_count": len(judge_performance_data)
+            }
 
         # Save judged results with metadata
         final_output = {
