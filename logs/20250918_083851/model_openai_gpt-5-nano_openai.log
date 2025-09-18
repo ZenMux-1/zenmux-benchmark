@@ -1,0 +1,144 @@
+2025-09-18 08:38:52 | INFO     | create_model_logger  | 🚀 Model logger created for openai/gpt-5-nano:openai
+2025-09-18 08:38:52 | INFO     | evaluate_model       | 🚀 Starting evaluation for openai/gpt-5-nano:openai
+2025-09-18 08:38:57 | INFO     | evaluate_model       | 📊 Total questions: 20 | text_only: True | max_samples: 20
+2025-09-18 08:38:57 | INFO     | evaluate_model       | 🔄 Evaluating 20 remaining questions
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66b2c7c9795022550abb176b
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66e884515ab37f0a7da089bf
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66b727d367968fa27f2dddda
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66e88728ba7d8bc0d5806f3a
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66b827b9b64deaedfbb997a2
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66e8967ae99ca52dd4b94441
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66b91693d86bff9a12fc1f99
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66e89811ca68059533a83566
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66ba5510db07a3a9151be0d2
+2025-09-18 08:38:57 | DEBUG    | __enter__            | 🔄 Starting question 66e89ebe7361982cbfbc5952
+2025-09-18 08:39:20 | DEBUG    | __exit__             | ✅ Completed question 66e884515ab37f0a7da089bf in 22.38s
+2025-09-18 08:39:20 | DEBUG    | __enter__            | 🔄 Starting question 66c5c3eae30bdd4f1da62cfc
+2025-09-18 08:39:53 | DEBUG    | __exit__             | ✅ Completed question 66e88728ba7d8bc0d5806f3a in 55.40s
+2025-09-18 08:39:53 | DEBUG    | __enter__            | 🔄 Starting question 66e8a1833aa94517d4573b0d
+2025-09-18 08:39:57 | DEBUG    | __exit__             | ✅ Completed question 66ba5510db07a3a9151be0d2 in 59.60s
+2025-09-18 08:39:57 | DEBUG    | __enter__            | 🔄 Starting question 668825f80a642802bdfeadfa
+2025-09-18 08:39:58 | DEBUG    | __exit__             | ✅ Completed question 66e8967ae99ca52dd4b94441 in 60.86s
+2025-09-18 08:39:58 | DEBUG    | __enter__            | 🔄 Starting question 66e4cdec11c64a7e4051b2d9
+2025-09-18 08:40:09 | DEBUG    | __exit__             | ✅ Completed question 66e8a1833aa94517d4573b0d in 16.35s
+2025-09-18 08:40:09 | DEBUG    | __enter__            | 🔄 Starting question 668828540a642802bdfeadfc
+2025-09-18 08:40:20 | DEBUG    | __exit__             | ✅ Completed question 668825f80a642802bdfeadfa in 23.15s
+2025-09-18 08:40:20 | DEBUG    | __enter__            | 🔄 Starting question 66e70c75bbb9b1754c0869ce
+2025-09-18 08:40:30 | DEBUG    | __exit__             | ✅ Completed question 66b727d367968fa27f2dddda in 92.40s
+2025-09-18 08:40:30 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 08:40:30 | DEBUG    | __exit__             | ✅ Completed question 66b91693d86bff9a12fc1f99 in 92.56s
+2025-09-18 08:40:30 | DEBUG    | __enter__            | 🔄 Starting question 66e8784d70625d8c7700315a
+2025-09-18 08:40:30 | DEBUG    | __exit__             | ✅ Completed question 66b2c7c9795022550abb176b in 92.78s
+2025-09-18 08:40:30 | DEBUG    | __exit__             | ✅ Completed question 66b827b9b64deaedfbb997a2 in 92.58s
+2025-09-18 08:40:30 | DEBUG    | __enter__            | 🔄 Starting question 6696c3734c196f1af6a16fcb
+2025-09-18 08:40:30 | DEBUG    | __enter__            | 🔄 Starting question 66e883265ab37f0a7da089be
+2025-09-18 08:40:30 | DEBUG    | __exit__             | ✅ Completed question 66e89811ca68059533a83566 in 92.59s
+2025-09-18 08:40:30 | DEBUG    | __exit__             | ✅ Completed question 66e89ebe7361982cbfbc5952 in 92.61s
+2025-09-18 08:40:41 | DEBUG    | __exit__             | ✅ Completed question 66e70c75bbb9b1754c0869ce in 20.97s
+2025-09-18 08:40:52 | DEBUG    | __exit__             | ✅ Completed question 66c5c3eae30bdd4f1da62cfc in 91.99s
+2025-09-18 08:40:59 | DEBUG    | __exit__             | ✅ Completed question 66e8784d70625d8c7700315a in 28.73s
+2025-09-18 08:41:09 | DEBUG    | __exit__             | ✅ Completed question 668828540a642802bdfeadfc in 59.57s
+2025-09-18 08:41:30 | DEBUG    | __exit__             | ✅ Completed question 66e4cdec11c64a7e4051b2d9 in 92.09s
+2025-09-18 08:42:02 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 92.24s
+2025-09-18 08:42:02 | DEBUG    | __exit__             | ✅ Completed question 6696c3734c196f1af6a16fcb in 92.06s
+2025-09-18 08:42:02 | DEBUG    | __exit__             | ✅ Completed question 66e883265ab37f0a7da089be in 92.08s
+2025-09-18 08:42:02 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 9/20 predictions (11 missing)
+2025-09-18 08:42:02 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 2/6)
+2025-09-18 08:42:02 | WARNING  | evaluate_model       | 🔄 Retry attempt 1/5
+2025-09-18 08:42:02 | INFO     | evaluate_model       | 📂 Loaded 9 existing predictions from hle_openai_gpt-5-nano_openai_20250918_083851.json
+2025-09-18 08:42:02 | INFO     | evaluate_model       | 🔄 Evaluating 11 remaining questions
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 6696c3734c196f1af6a16fcb
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66c5c3eae30bdd4f1da62cfc
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66b827b9b64deaedfbb997a2
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66e89811ca68059533a83566
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66b2c7c9795022550abb176b
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66e4cdec11c64a7e4051b2d9
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66b91693d86bff9a12fc1f99
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66e89ebe7361982cbfbc5952
+2025-09-18 08:42:02 | DEBUG    | __enter__            | 🔄 Starting question 66b727d367968fa27f2dddda
+2025-09-18 08:43:34 | DEBUG    | __exit__             | ✅ Completed question 6696c3734c196f1af6a16fcb in 91.96s
+2025-09-18 08:43:34 | DEBUG    | __enter__            | 🔄 Starting question 66e883265ab37f0a7da089be
+2025-09-18 08:43:34 | DEBUG    | __exit__             | ✅ Completed question 66c5c3eae30bdd4f1da62cfc in 92.00s
+2025-09-18 08:43:34 | DEBUG    | __exit__             | ✅ Completed question 66b2c7c9795022550abb176b in 92.11s
+2025-09-18 08:43:35 | DEBUG    | __exit__             | ✅ Completed question 66e4cdec11c64a7e4051b2d9 in 92.34s
+2025-09-18 08:43:35 | DEBUG    | __exit__             | ✅ Completed question 66e89811ca68059533a83566 in 92.47s
+2025-09-18 08:43:35 | DEBUG    | __exit__             | ✅ Completed question 66b727d367968fa27f2dddda in 92.47s
+2025-09-18 08:43:35 | DEBUG    | __exit__             | ✅ Completed question 66e89ebe7361982cbfbc5952 in 92.49s
+2025-09-18 08:43:35 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 92.53s
+2025-09-18 08:43:35 | DEBUG    | __exit__             | ✅ Completed question 66b827b9b64deaedfbb997a2 in 92.55s
+2025-09-18 08:43:35 | DEBUG    | __exit__             | ✅ Completed question 66b91693d86bff9a12fc1f99 in 92.96s
+2025-09-18 08:45:06 | DEBUG    | __exit__             | ✅ Completed question 66e883265ab37f0a7da089be in 92.07s
+2025-09-18 08:45:06 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 9/20 predictions (11 missing)
+2025-09-18 08:45:06 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 3/6)
+2025-09-18 08:45:06 | WARNING  | evaluate_model       | 🔄 Retry attempt 2/5
+2025-09-18 08:45:06 | INFO     | evaluate_model       | 📂 Loaded 9 existing predictions from hle_openai_gpt-5-nano_openai_20250918_083851.json
+2025-09-18 08:45:06 | INFO     | evaluate_model       | 🔄 Evaluating 11 remaining questions
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 6696c3734c196f1af6a16fcb
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66b91693d86bff9a12fc1f99
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66b727d367968fa27f2dddda
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66e883265ab37f0a7da089be
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66b2c7c9795022550abb176b
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66c5c3eae30bdd4f1da62cfc
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66e89ebe7361982cbfbc5952
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66b827b9b64deaedfbb997a2
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 66e89811ca68059533a83566
+2025-09-18 08:45:06 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 08:45:32 | DEBUG    | __exit__             | ✅ Completed question 66e89ebe7361982cbfbc5952 in 25.49s
+2025-09-18 08:45:32 | DEBUG    | __enter__            | 🔄 Starting question 66e4cdec11c64a7e4051b2d9
+2025-09-18 08:46:02 | DEBUG    | __exit__             | ✅ Completed question 6696c3734c196f1af6a16fcb in 56.29s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 92.48s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 66e883265ab37f0a7da089be in 92.55s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 66c5c3eae30bdd4f1da62cfc in 92.54s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 66b827b9b64deaedfbb997a2 in 92.56s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 66b91693d86bff9a12fc1f99 in 92.61s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 66e89811ca68059533a83566 in 92.91s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 66b727d367968fa27f2dddda in 92.92s
+2025-09-18 08:46:39 | DEBUG    | __exit__             | ✅ Completed question 66b2c7c9795022550abb176b in 92.92s
+2025-09-18 08:47:04 | DEBUG    | __exit__             | ✅ Completed question 66e4cdec11c64a7e4051b2d9 in 91.89s
+2025-09-18 08:47:04 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 11/20 predictions (9 missing)
+2025-09-18 08:47:04 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 4/6)
+2025-09-18 08:47:04 | WARNING  | evaluate_model       | 🔄 Retry attempt 3/5
+2025-09-18 08:47:04 | INFO     | evaluate_model       | 📂 Loaded 11 existing predictions from hle_openai_gpt-5-nano_openai_20250918_083851.json
+2025-09-18 08:47:04 | INFO     | evaluate_model       | 🔄 Evaluating 9 remaining questions
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66b827b9b64deaedfbb997a2
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66e883265ab37f0a7da089be
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66b2c7c9795022550abb176b
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66c5c3eae30bdd4f1da62cfc
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66b91693d86bff9a12fc1f99
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66e89811ca68059533a83566
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66e4cdec11c64a7e4051b2d9
+2025-09-18 08:47:04 | DEBUG    | __enter__            | 🔄 Starting question 66b727d367968fa27f2dddda
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 66b827b9b64deaedfbb997a2 in 92.25s
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 66e89811ca68059533a83566 in 92.53s
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 66c5c3eae30bdd4f1da62cfc in 92.55s
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 66b91693d86bff9a12fc1f99 in 92.58s
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 66b2c7c9795022550abb176b in 92.65s
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 66b727d367968fa27f2dddda in 92.64s
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 66e4cdec11c64a7e4051b2d9 in 92.71s
+2025-09-18 08:48:36 | DEBUG    | __exit__             | ✅ Completed question 669402b41dcb3d5a1ef9e951 in 92.79s
+2025-09-18 08:48:37 | DEBUG    | __exit__             | ✅ Completed question 66e883265ab37f0a7da089be in 92.93s
+2025-09-18 08:48:37 | WARNING  | evaluate_model       | ⚠️ Incomplete evaluation: 11/20 predictions (9 missing)
+2025-09-18 08:48:37 | INFO     | evaluate_model       | 🔄 Will retry missing questions (attempt 5/6)
+2025-09-18 08:48:37 | WARNING  | evaluate_model       | 🔄 Retry attempt 4/5
+2025-09-18 08:48:37 | INFO     | evaluate_model       | 📂 Loaded 11 existing predictions from hle_openai_gpt-5-nano_openai_20250918_083851.json
+2025-09-18 08:48:37 | INFO     | evaluate_model       | 🔄 Evaluating 9 remaining questions
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66e89811ca68059533a83566
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66b727d367968fa27f2dddda
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66e4cdec11c64a7e4051b2d9
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66b91693d86bff9a12fc1f99
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66b827b9b64deaedfbb997a2
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66b2c7c9795022550abb176b
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66e883265ab37f0a7da089be
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 669402b41dcb3d5a1ef9e951
+2025-09-18 08:48:37 | DEBUG    | __enter__            | 🔄 Starting question 66c5c3eae30bdd4f1da62cfc
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66c5c3eae30bdd4f1da62cfc after 86.22s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66b91693d86bff9a12fc1f99 after 86.24s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 669402b41dcb3d5a1ef9e951 after 86.23s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66e4cdec11c64a7e4051b2d9 after 86.24s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66e89811ca68059533a83566 after 86.25s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66e883265ab37f0a7da089be after 86.23s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66b727d367968fa27f2dddda after 86.24s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66b827b9b64deaedfbb997a2 after 86.24s: 
+2025-09-18 08:50:03 | ERROR    | __exit__             | ❌ Failed question 66b2c7c9795022550abb176b after 86.23s: 

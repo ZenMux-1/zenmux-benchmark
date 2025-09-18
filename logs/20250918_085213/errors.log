@@ -1,0 +1,10 @@
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 66ea70cd3d800a43340dd4d0 after 7.61s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 6720f01e936e8e4575f4f3f4 after 7.46s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 672dde1a9a1f996a161fbd05 after 7.46s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 67526499b42d785cf1cb1025 after 7.44s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 66ea7d2cc321286a5288ef06 after 7.44s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 6720fcd2198910fd26b01218 after 7.43s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 672ddfdf10ab34a448a5e299 after 7.42s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 67527ef6de72021d846a7a75 after 7.42s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 66ea814c5544860edb5aa9fa after 7.42s: 
+2025-09-18 08:52:27 | ERROR    | zenmux.model.deepseek_deepseek-chat_deepseek | __exit__             | ❌ Failed question 6720fda3febecf1a8b9b083d after 7.42s: 
