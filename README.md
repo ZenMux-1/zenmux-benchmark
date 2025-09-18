@@ -47,9 +47,9 @@ uv run python benchmark.py --text-only --max-samples 5
 
 # Test specific model
 uv run python benchmark.py --mode single \
-  --model-slug openai/gpt-5-nano \
-   --provider-slug openai \
-  --text-only --max-samples 20
+  --model-slug deepseek/deepseek-chat \
+   --provider-slug deepseek \
+  --text-only --max-samples 10 \
 
 # Test all models except expensive ones
 uv run python benchmark.py --text-only --max-samples 5 --exclude openai/gpt-4o
@@ -75,8 +75,8 @@ uv run python benchmark.py --mode all --text-only --max-samples 10
 ```bash
 # Evaluate specific model with specific provider
 uv run python benchmark.py --mode single \
-  --model-slug openai/gpt-4.1-mini \
-  --provider-slug openai
+  --model-slug deepseek/deepseek-chat \
+  --provider-slug deepseek
 
 # The system automatically evaluates all available endpoints for the model
 ```

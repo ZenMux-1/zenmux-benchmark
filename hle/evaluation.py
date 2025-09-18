@@ -3,6 +3,7 @@
 import os
 import json
 import asyncio
+import logging
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 from tqdm.asyncio import tqdm_asyncio
@@ -10,6 +11,7 @@ from tqdm.asyncio import tqdm_asyncio
 from .dataset import HLEDataset
 from zenmux import ZenMuxOpenAIClient, ZenMuxEndpoint
 from config import HLEConfig, ZenMuxConfig
+from utils.logging import get_evaluation_logger, get_model_logger, PerformanceTimer
 
 
 class HLEEvaluator:
@@ -28,6 +30,7 @@ class HLEEvaluator:
         self.batch_timestamp = batch_timestamp
         self.dataset = HLEDataset(hle_config.dataset_name, hle_config.dataset_split)
         self.zenmux_client = ZenMuxOpenAIClient(zenmux_config)
+        self.logger = get_evaluation_logger()
 
         # Note: Output directory will be created when evaluation starts
 
@@ -68,7 +71,7 @@ class HLEEvaluator:
             return question["id"], content, usage
 
         except Exception as e:
-            print(f"Error evaluating question {question.get('id', 'unknown')}: {e}")
+            self.logger.error(f"Error evaluating question {question.get('id', 'unknown')}: {e}")
             return None
 
     async def evaluate_model(
@@ -79,11 +82,16 @@ class HLEEvaluator:
         max_samples: Optional[int] = None
     ) -> str:
         """Evaluate a model on the HLE dataset with retry logic for incomplete evaluations."""
-        print(f"🚀 Starting evaluation for {model_identifier}")
+        # Get model-specific logger
+        model_logger = get_model_logger(model_identifier)
+
+        self.logger.info(f"🚀 Starting evaluation for {model_identifier}")
+        model_logger.info(f"🚀 Starting evaluation for {model_identifier}")
 
         # Get questions
         questions = self.dataset.get_questions(text_only=text_only, max_samples=max_samples)
-        print(f"📊 Total questions: {len(questions)}")
+        self.logger.info(f"📊 Total questions: {len(questions)}")
+        model_logger.info(f"📊 Total questions: {len(questions)} | text_only: {text_only} | max_samples: {max_samples}")
 
         # Ensure output directory exists when actually starting evaluation
         os.makedirs(self.output_dir, exist_ok=True)
@@ -102,7 +110,8 @@ class HLEEvaluator:
         # Retry logic for incomplete evaluations
         for retry_attempt in range(self.hle_config.max_evaluation_retries + 1):
             if retry_attempt > 0:
-                print(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
+                self.logger.warning(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
+                model_logger.warning(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
 
             # Load existing predictions if file exists
             existing_predictions = {}
@@ -115,10 +124,12 @@ class HLEEvaluator:
                             existing_predictions = data["predictions"]
                         else:
                             existing_predictions = data
-                    print(f"📂 Found existing file: {os.path.basename(output_filepath)}")
-                    print(f"📂 Loaded {len(existing_predictions)} existing predictions")
+                    self.logger.info(f"📂 Found existing file: {os.path.basename(output_filepath)}")
+                    self.logger.info(f"📂 Loaded {len(existing_predictions)} existing predictions")
+                    model_logger.info(f"📂 Loaded {len(existing_predictions)} existing predictions from {os.path.basename(output_filepath)}")
                 except Exception as e:
-                    print(f"⚠️ Warning: Could not load existing predictions: {e}")
+                    self.logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
+                    model_logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
 
             # Filter out questions that already have predictions
             remaining_questions = [
@@ -127,22 +138,19 @@ class HLEEvaluator:
             ]
 
             if not remaining_questions:
-                print(f"✅ All questions already evaluated for {model_identifier}")
+                self.logger.info(f"✅ All questions already evaluated for {model_identifier}")
+                model_logger.info(f"✅ All questions already evaluated")
                 break
 
-            print(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
+            self.logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
+            model_logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
 
             async def bound_evaluate(question):
                 async with semaphore:
-                    import time
-                    start_time = time.time()
-                    print(f"🔄 Starting question {question['id']}")
-                    result = await self.evaluate_single_question(
-                        question, model_identifier, endpoint
-                    )
-                    elapsed = time.time() - start_time
-                    print(f"✅ Completed question {question['id']} in {elapsed:.2f}s")
-                    return result
+                    with PerformanceTimer(model_logger, f"question {question['id']}", level=logging.DEBUG):
+                        return await self.evaluate_single_question(
+                            question, model_identifier, endpoint
+                        )
 
             # Create semaphore for rate limiting
             semaphore = asyncio.Semaphore(self.hle_config.num_workers)
@@ -210,19 +218,27 @@ class HLEEvaluator:
 
             # Check if evaluation is complete
             if len(existing_predictions) == len(questions):
-                print(f"✅ Evaluation complete: {len(existing_predictions)}/{len(questions)} predictions")
+                self.logger.info(f"✅ Evaluation complete: {len(existing_predictions)}/{len(questions)} predictions")
+                model_logger.info(f"✅ Evaluation complete: {len(existing_predictions)}/{len(questions)} predictions")
                 break
             elif retry_attempt < self.hle_config.max_evaluation_retries:
                 missing_count = len(questions) - len(existing_predictions)
-                print(f"⚠️ Incomplete evaluation: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
-                print(f"🔄 Will retry missing questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+                self.logger.warning(f"⚠️ Incomplete evaluation: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
+                self.logger.info(f"🔄 Will retry missing questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+                model_logger.warning(f"⚠️ Incomplete evaluation: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
+                model_logger.info(f"🔄 Will retry missing questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
             else:
                 missing_count = len(questions) - len(existing_predictions)
-                print(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
-                print(f"❌ Final result: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
+                self.logger.error(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
+                self.logger.error(f"❌ Final result: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
+                model_logger.error(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
+                model_logger.error(f"❌ Final result: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
 
-        print(f"✅ Completed evaluation for {model_identifier}")
-        print(f"📝 Final predictions: {len(existing_predictions)}")
-        print(f"📁 Saved to: {output_filepath}")
+        self.logger.info(f"✅ Completed evaluation for {model_identifier}")
+        self.logger.info(f"📝 Final predictions: {len(existing_predictions)}")
+        self.logger.info(f"📁 Saved to: {output_filepath}")
+        model_logger.info(f"✅ Completed evaluation")
+        model_logger.info(f"📝 Final predictions: {len(existing_predictions)}")
+        model_logger.info(f"📁 Saved to: {output_filepath}")
 
         return output_filepath

@@ -1,0 +1,245 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-18T08:48:37.047987",
+        "model_identifier": "openai/gpt-5-nano:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": null,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 20
+        },
+        "evaluation_config": {
+            "max_completion_tokens": 8192,
+            "temperature": 0.0,
+            "num_workers": 10,
+            "timeout": 600.0,
+            "max_retries": 1,
+            "max_evaluation_retries": 5
+        },
+        "statistics": {
+            "total_questions": 20,
+            "remaining_questions": 9,
+            "total_predictions": 11,
+            "retry_attempt": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Critical-level views tend to assign disproportionately high priority to those at the critical threshold, leading to extreme (non-general) prioritization rather than a balanced, non-extreme approach. This violates the General Non-Extreme Priority condition.\n\nAnswer: B\n\nConfidence: 55%",
+            "usage": {
+                "completion_tokens": 1470,
+                "prompt_tokens": 109,
+                "total_tokens": 1579,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1408,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: \n- The reciprocal concept of logical depth is breadth; the third letter of \"breadth\" is 'e' (c1).\n- The missing word in \"the two _ didn't commute\" is \"options\"; the third character is 't' (c2).\n- The GELU activation paper\u2019s last author is Kevin Gimpel; his last name ends with 'l'; ROT13 of 'l' is 'y' (c4).\n- Mars is closer in mass to Earth than to the Moon; answer \"Earth\"; second letter is 'a' (c5).\n- Concatenate c1, c2, c4, c5: e + t + y + a = etya.\n\nAnswer: etya\nConfidence: 0.72",
+            "usage": {
+                "completion_tokens": 2275,
+                "prompt_tokens": 239,
+                "total_tokens": 2514,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2112,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66ba5510db07a3a9151be0d2": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: In the scattering/conormal framework on the radial compactification X, the resolvent R(\u03c3) = (\u25a1_g - \u03c3^2)^{-1} is an elliptic operator of order 2. Elliptic regularity in the conormal (scattering) calculus gives that such operators increase the conormal order by 2: for s not hitting resonances, R(\u03c3): A^{s}(X) \u2192 A^{s+2}(X). Here f \u2208 A^{2+\u03b1}(X), so applying R(\u03c3) yields R(\u03c3) f \u2208 A^{(2+\u03b1)+2} = A^{4+\u03b1}(X).\n\nAnswer: R(\u03c3) f \u2208 A^{4+\u03b1}(X).\n\nConfidence: 0.53",
+            "usage": {
+                "completion_tokens": 3243,
+                "prompt_tokens": 181,
+                "total_tokens": 3424,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3072,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66e70c75bbb9b1754c0869ce": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: The Contracts (General Part) Law is widely recognized as introducing and codifying the obligation of good faith (tom lev) in Israeli contract law, marking the first explicit statutory incorporation of the concept in the modern State of Israel.\n\nAnswer: Contracts (General Part) Law\n\nConfidence: 52%",
+            "usage": {
+                "completion_tokens": 1859,
+                "prompt_tokens": 91,
+                "total_tokens": 1950,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1792,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66e8784d70625d8c7700315a": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: For a fixed total number of tokens N, increasing the context length from L to 4L reduces the number of training steps to N/(4L) but increases the per-step cost due to self-attention, which scales as roughly L^2. The total cost scales as (N/L) * (L^2) = N * L, so increasing L by a factor of 4 increases total compute by about 4\u00d7 (assuming attention dominates FFN). Therefore the best estimate is a 4\u00d7 increase.\n\nAnswer: A\nConfidence: 0.71",
+            "usage": {
+                "completion_tokens": 2556,
+                "prompt_tokens": 432,
+                "total_tokens": 2988,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2432,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66e884515ab37f0a7da089bf": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: I\u2019m not sure which game or BAR you\u2019re referring to. \u201cBAR\u201d could refer to multiple games, and \u201c1 tier building\u201d with a flying unit that can shoot and stun isn\u2019t enough to identify the exact unit without more context.\n\nAnswer: Please specify the game or provide a screenshot or the full name of the BAR you mean (and the building\u2019s exact name). Once I know the exact game, I can identify the flying unit that shoots and stuns.\n\nConfidence: 22%",
+            "usage": {
+                "completion_tokens": 1324,
+                "prompt_tokens": 72,
+                "total_tokens": 1396,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1216,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66e88728ba7d8bc0d5806f3a": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Watterson\u2019s theta (theta_W) is proportional to the number of segregating sites S across sequences. Pi (nucleotide diversity) is the average pairwise differences between sequences. In this scenario, many SNVs are filtered out, and for missing sites, genotypes are imputed as the reference allele. This introduces artificial homogeneity: sites that are truly variable may appear monomorphic because missing data are replaced with the reference, and pairwise differences are underestimated. Therefore both S and the average pairwise differences are biased downward, causing both theta_W and pi to be biased downward.\n\nAnswer: C\n\nConfidence: 0.85",
+            "usage": {
+                "completion_tokens": 2183,
+                "prompt_tokens": 364,
+                "total_tokens": 2547,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2048,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66e8967ae99ca52dd4b94441": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: To guarantee correct classification of all C class centroids with a distance-weighted soft-label kNN, you need at least one prototype that is \u201canchored\u201d to each class centroid. If you place one prototype at each centroid and label it with a vector that places all mass on the corresponding class (or, with soft proximity, a near-one weight to that centroid\u2019s class and negligible weights to others), the centroid of each class will be classified as its own class: the prototype at that centroid is at distance zero, dominating the decision for that query, ensuring correct labeling. With fewer than C prototypes, there will be at least one class centroid without a dedicated prototype, and in the worst case the combined influence of the remaining prototypes cannot be guaranteed to assign that centroid to its correct class for all possible configurations of centroids and prototypes. Hence, the worst-case minimum is C.\n\nAnswer: C\n\nConfidence: 65%",
+            "usage": {
+                "completion_tokens": 3329,
+                "prompt_tokens": 159,
+                "total_tokens": 3488,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3136,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66e8a1833aa94517d4573b0d": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Kant\u2019s account describes how aesthetic judgments arise (descriptive) but he also treats them as having a claim to universal validity and norms about how one ought to judge (normative). He argues that judgments of taste are subjective in feeling, yet they claim a universal agreement because they express a purposiveness of the object for our cognitive faculties. The requirement of disinterested judgment and the idea that others ought to concur based on shared faculties introduce normative elements. This normative claim is central to the critique of the nature and authority of aesthetic judgments, and is a feature Kant extends to political judgment as well (in later elaborations and in interpretations like Arendt).\n\nAnswer: The account is both descriptive and normative.\n\nConfidence: 78%",
+            "usage": {
+                "completion_tokens": 921,
+                "prompt_tokens": 202,
+                "total_tokens": 1123,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 768,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "6696c3734c196f1af6a16fcb": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Over any quadratic field, the possible non-cyclic torsion subgroups of elliptic curves are exactly Z/2Z \u00d7 Z/2mZ for m = 1, 2, 3, 4, 5, 6 (Kenku\u2013Momose, Kamienny). These have orders 4, 8, 12, 16, 20, 24, respectively. Since Q(\u221a-3) is a quadratic field, the largest possible non-cyclic torsion order is 24, realized by Z/2Z \u00d7 Z/12Z.\n\nAnswer: 24\n\nConfidence: 0.72",
+            "usage": {
+                "completion_tokens": 2508,
+                "prompt_tokens": 86,
+                "total_tokens": 2594,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2368,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        },
+        "66e89ebe7361982cbfbc5952": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: The BIQH state with \u03bd=2 for bosons is described by a two-component K-matrix K = \u03c3_x. If the bosons are Cooper pairs of composite fermions and each fermion has two flux quanta attached, then a pair carries 4 flux quanta total. A single-component bosonic Laughlin state with four attached flux has K = [4] (corresponding to \u03bd = 1/4 with t = 1). Since pairing collapses the two components into a single bosonic degree of freedom, the resulting fractional state is described by a 1\u00d71 K-matrix with entry 4.\n\nAnswer: [4]\n\nConfidence: 0.58",
+            "usage": {
+                "completion_tokens": 4373,
+                "prompt_tokens": 133,
+                "total_tokens": 4506,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 4224,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 """Configuration management for ZenMux Benchmark."""
 
 import os
+import logging
 from dataclasses import dataclass
 from typing import Optional
 
@@ -34,7 +35,7 @@ class HLEConfig:
     max_completion_tokens: int = 8192
     temperature: float = 0.0
     num_workers: int = 10  # Inner concurrency: requests per model (increased for better throughput)
-    max_concurrent_models: int = 3  # Outer concurrency: simultaneous models (reduced to avoid server overload)
+    max_concurrent_models: int = 100  # Outer concurrency: simultaneous models (reduced to avoid server overload)
     timeout: float = 600.0
     max_retries: int = 1
     max_evaluation_retries: int = 5  # Maximum retries for incomplete evaluations
@@ -51,6 +52,12 @@ class BenchmarkConfig:
     output_dir: str = "results"
     predictions_dir: str = "predictions"  # Will be relative to timestamped folder
     judged_dir: str = "judged"           # Will be relative to timestamped folder
+    logs_dir: str = "logs"               # Logs directory
+
+    # Logging configuration
+    console_log_level: int = logging.INFO
+    file_log_level: int = logging.DEBUG
+    enable_model_specific_logs: bool = True
 
     # Timestamped run directory (set during initialization)
     run_dir: str = None
@@ -61,7 +68,7 @@ class BenchmarkConfig:
         pass
 
     def setup_timestamped_directories(self, timestamp: str = None) -> str:
-        """Setup timestamped directory structure and return the run directory path."""
+        """Setup timestamped directory structure and initialize logging system."""
         if timestamp is None:
             from datetime import datetime
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -78,10 +85,22 @@ class BenchmarkConfig:
         os.makedirs(timestamped_predictions_dir, exist_ok=True)
         os.makedirs(timestamped_judged_dir, exist_ok=True)
 
-        print(f"📁 Created timestamped directories:")
-        print(f"   Run directory: {self.run_dir}")
-        print(f"   Predictions: {timestamped_predictions_dir}")
-        print(f"   Judged: {timestamped_judged_dir}")
+        # Initialize logging system
+        from utils.logging import BenchmarkLogger
+        BenchmarkLogger.setup_logging(
+            log_dir=self.logs_dir,
+            batch_timestamp=timestamp,
+            console_level=self.console_log_level,
+            file_level=self.file_log_level
+        )
+
+        # Use logger instead of print
+        from utils.logging import get_runner_logger
+        logger = get_runner_logger()
+        logger.info(f"📁 Created timestamped directories:")
+        logger.info(f"   Run directory: {self.run_dir}")
+        logger.info(f"   Predictions: {timestamped_predictions_dir}")
+        logger.info(f"   Judged: {timestamped_judged_dir}")
 
         return self.run_dir
 

@@ -3,6 +3,7 @@
 import asyncio
 import json
 import os
+import logging
 from datetime import datetime
 from typing import List, Optional, Dict, Any
 
@@ -10,6 +11,7 @@ from .evaluation import HLEEvaluator
 from .judge import HLEJudge
 from zenmux import ZenMuxAPI
 from config import BenchmarkConfig
+from utils.logging import get_runner_logger
 
 
 class HLERunner:
@@ -18,13 +20,14 @@ class HLERunner:
     def __init__(self, config: BenchmarkConfig, batch_timestamp: str = None):
         self.config = config
 
-        # Setup timestamped directories
+        # Setup timestamped directories (this also initializes logging)
         if batch_timestamp:
             self.config.setup_timestamped_directories(batch_timestamp)
         else:
             self.config.setup_timestamped_directories()
 
         self.batch_timestamp = self.config.batch_timestamp
+        self.logger = get_runner_logger()
         self.zenmux_api = ZenMuxAPI(config.zenmux)
 
         # Initialize evaluator with timestamped predictions directory
@@ -45,9 +48,9 @@ class HLERunner:
         auto_judge: bool = True
     ) -> Dict[str, Any]:
         """Run evaluation for a single model endpoint."""
-        print(f"\n{'='*60}")
-        print(f"🚀 EVALUATING: {model_identifier}")
-        print(f"{'='*60}")
+        self.logger.info(f"\n{'='*60}")
+        self.logger.info(f"🚀 EVALUATING: {model_identifier}")
+        self.logger.info(f"{'='*60}")
 
         # Run prediction
         predictions_file = await self.evaluator.evaluate_model(
@@ -70,7 +73,7 @@ class HLERunner:
         # Run judging if requested and evaluation is complete
         if auto_judge:
             if evaluation_complete:
-                print(f"\n🏛️ JUDGING: {model_identifier}")
+                self.logger.info(f"\n🏛️ JUDGING: {model_identifier}")
                 judged_file = await self.judge.judge_predictions(
                     predictions_file=predictions_file,
                     dataset_name=self.config.hle.dataset_name,
@@ -81,7 +84,7 @@ class HLERunner:
                 # Extract metrics from judged file
                 results["metrics"] = self.extract_metrics_from_judged_file(judged_file)
             else:
-                print(f"\n⚠️ SKIPPING JUDGING: {model_identifier} - evaluation incomplete after retries")
+                self.logger.warning(f"\n⚠️ SKIPPING JUDGING: {model_identifier} - evaluation incomplete after retries")
                 results["error"] = "Evaluation incomplete after maximum retries"
 
         return results
@@ -95,12 +98,12 @@ class HLERunner:
         exclude_models: Optional[List[str]] = None
     ) -> List[Dict[str, Any]]:
         """Run evaluation for all ZenMux models with dual-layer concurrency."""
-        print("🌟 Starting ZenMux Models Evaluation")
-        print(f"📝 Text only: {text_only}")
-        print(f"📊 Max samples: {max_samples}")
-        print(f"🏛️ Auto judge: {auto_judge}")
-        print(f"🔄 Max concurrent models: {self.config.hle.max_concurrent_models}")
-        print(f"🔄 Workers per model: {self.config.hle.num_workers}")
+        self.logger.info("🌟 Starting ZenMux Models Evaluation")
+        self.logger.info(f"📝 Text only: {text_only}")
+        self.logger.info(f"📊 Max samples: {max_samples}")
+        self.logger.info(f"🏛️ Auto judge: {auto_judge}")
+        self.logger.info(f"🔄 Max concurrent models: {self.config.hle.max_concurrent_models}")
+        self.logger.info(f"🔄 Workers per model: {self.config.hle.num_workers}")
 
         # Get all model-endpoint pairs
         model_endpoint_pairs = self.zenmux_api.get_all_model_endpoint_pairs(text_only=text_only)
@@ -157,16 +160,16 @@ class HLERunner:
             model_endpoint_pairs = filtered_pairs
 
             if excluded_count > 0:
-                print(f"🚫 Excluded {excluded_count} model endpoints based on exclude patterns")
-                print(f"📉 Remaining models: {len(model_endpoint_pairs)} (was {original_count})")
+                self.logger.info(f"🚫 Excluded {excluded_count} model endpoints based on exclude patterns")
+                self.logger.info(f"📉 Remaining models: {len(model_endpoint_pairs)} (was {original_count})")
 
-        print(f"🎯 Total model endpoints to evaluate: {len(model_endpoint_pairs)}")
+        self.logger.info(f"🎯 Total model endpoints to evaluate: {len(model_endpoint_pairs)}")
 
         # Outer layer: Model-level concurrency control
         async def bound_model_evaluation(model_data):
             model_identifier, model, endpoint = model_data
             async with models_semaphore:
-                print(f"🚀 Starting evaluation: {model_identifier}")
+                self.logger.info(f"🚀 Starting evaluation: {model_identifier}")
                 try:
                     result = await self.run_single_model_evaluation(
                         model_identifier=model_identifier,
@@ -175,11 +178,11 @@ class HLERunner:
                         max_samples=max_samples,
                         auto_judge=auto_judge
                     )
-                    print(f"✅ Completed evaluation: {model_identifier}")
+                    self.logger.info(f"✅ Completed evaluation: {model_identifier}")
                     return result
 
                 except Exception as e:
-                    print(f"❌ Error evaluating {model_identifier}: {e}")
+                    self.logger.error(f"❌ Error evaluating {model_identifier}: {e}")
                     return {
                         "model_identifier": model_identifier,
                         "error": str(e),
@@ -195,7 +198,7 @@ class HLERunner:
         tasks = [bound_model_evaluation(model_data) for model_data in model_endpoint_pairs]
         results = await asyncio.gather(*tasks)
 
-        print(f"\n✅ Completed evaluation of {len(results)} model endpoints")
+        self.logger.info(f"\n✅ Completed evaluation of {len(results)} model endpoints")
         return results
 
     async def run_specific_model_evaluation(
@@ -238,19 +241,19 @@ class HLERunner:
             total_predictions = statistics.get("total_predictions", 0)
 
             if total_questions == 0:
-                print(f"⚠️ Warning: No total_questions found in metadata")
+                self.logger.warning(f"⚠️ Warning: No total_questions found in metadata")
                 return False
 
             if total_predictions == total_questions:
-                print(f"✅ Evaluation complete: {total_predictions}/{total_questions} predictions")
+                self.logger.info(f"✅ Evaluation complete: {total_predictions}/{total_questions} predictions")
                 return True
             else:
                 missing_count = total_questions - total_predictions
-                print(f"❌ Evaluation incomplete: {total_predictions}/{total_questions} predictions ({missing_count} missing)")
+                self.logger.warning(f"❌ Evaluation incomplete: {total_predictions}/{total_questions} predictions ({missing_count} missing)")
                 return False
 
         except Exception as e:
-            print(f"⚠️ Warning: Could not validate evaluation completeness: {e}")
+            self.logger.warning(f"⚠️ Warning: Could not validate evaluation completeness: {e}")
             return False
 
     def extract_metrics_from_judged_file(self, judged_file: str) -> Optional[Dict[str, Any]]:
@@ -260,7 +263,7 @@ class HLERunner:
                 data = json.load(f)
                 return data.get("metrics")
         except Exception as e:
-            print(f"⚠️ Warning: Could not extract metrics from {judged_file}: {e}")
+            self.logger.warning(f"⚠️ Warning: Could not extract metrics from {judged_file}: {e}")
             return None
 
     def save_metrics_summary(self, results: List[Dict[str, Any]], run_metadata: Dict[str, Any] = None) -> str:
@@ -319,14 +322,14 @@ class HLERunner:
         with open(summary_file, "w") as f:
             json.dump(summary, f, indent=4)
 
-        print(f"📊 Metrics summary saved to: {summary_file}")
+        self.logger.info(f"📊 Metrics summary saved to: {summary_file}")
         return summary_file
 
-    def print_summary(self, results: List[Dict[str, Any]]):
-        """Print a summary of evaluation results."""
-        print(f"\n{'='*60}")
-        print("📊 EVALUATION SUMMARY")
-        print(f"{'='*60}")
+    def log_summary(self, results: List[Dict[str, Any]]):
+        """Log a summary of evaluation results."""
+        self.logger.info(f"\n{'='*60}")
+        self.logger.info("📊 EVALUATION SUMMARY")
+        self.logger.info(f"{'='*60}")
 
         # Analyze results with new logic
         successful_evaluations = []
@@ -344,32 +347,32 @@ class HLERunner:
             else:
                 failed_evaluations.append(result)
 
-        print(f"✅ Successful evaluations (complete): {len(successful_evaluations)}")
-        print(f"⚠️ Incomplete evaluations: {len(incomplete_evaluations)}")
-        print(f"❌ Failed evaluations: {len(failed_evaluations)}")
+        self.logger.info(f"✅ Successful evaluations (complete): {len(successful_evaluations)}")
+        self.logger.info(f"⚠️ Incomplete evaluations: {len(incomplete_evaluations)}")
+        self.logger.info(f"❌ Failed evaluations: {len(failed_evaluations)}")
 
         if failed_evaluations:
-            print("\n❌ Failed models:")
+            self.logger.info("\n❌ Failed models:")
             for result in failed_evaluations:
                 error_msg = result.get('error', 'Unknown error')
-                print(f"  - {result['model_identifier']}: {error_msg}")
+                self.logger.info(f"  - {result['model_identifier']}: {error_msg}")
 
         if incomplete_evaluations:
-            print("\n⚠️ Incomplete evaluations:")
+            self.logger.info("\n⚠️ Incomplete evaluations:")
             for result in incomplete_evaluations:
-                print(f"  - {result['model_identifier']}: Evaluation incomplete after retries")
+                self.logger.info(f"  - {result['model_identifier']}: Evaluation incomplete after retries")
 
         if successful_evaluations:
-            print(f"\n📁 Run directory: {self.config.run_dir}")
-            print(f"📁 Prediction files saved in: {self.config.get_predictions_dir()}")
-            print(f"📁 Judged files saved in: {self.config.get_judged_dir()}")
+            self.logger.info(f"\n📁 Run directory: {self.config.run_dir}")
+            self.logger.info(f"📁 Prediction files saved in: {self.config.get_predictions_dir()}")
+            self.logger.info(f"📁 Judged files saved in: {self.config.get_judged_dir()}")
 
-            # Print metrics for each successful model
-            print(f"\n📊 METRICS SUMMARY")
-            print(f"{'='*60}")
+            # Log metrics for each successful model
+            self.logger.info(f"\n📊 METRICS SUMMARY")
+            self.logger.info(f"{'='*60}")
             for result in successful_evaluations:
                 metrics = result["metrics"]
-                print(f"\n🎯 {result['model_identifier']}")
-                print(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
-                print(f"📏 Calibration Error: {metrics['calibration_error']}")
-                print(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")
+                self.logger.info(f"\n🎯 {result['model_identifier']}")
+                self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
+                self.logger.info(f"📏 Calibration Error: {metrics['calibration_error']}")
+                self.logger.info(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")

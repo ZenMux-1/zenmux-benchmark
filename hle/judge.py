@@ -5,6 +5,7 @@ import json
 import copy
 import math
 import asyncio
+import logging
 import numpy as np
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Literal, Tuple
@@ -14,6 +15,7 @@ from datasets import load_dataset
 
 from config import HLEConfig, ZenMuxConfig
 from zenmux import ZenMuxOpenAIClient
+from utils.logging import get_judge_logger, PerformanceTimer
 
 
 class ExtractedAnswer(BaseModel):
@@ -50,6 +52,7 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         self.hle_config = hle_config
         self.zenmux_config = zenmux_config
         self.zenmux_client = ZenMuxOpenAIClient(zenmux_config)
+        self.logger = get_judge_logger()
 
     async def extract_answer(
         self,
@@ -102,7 +105,7 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
             }
 
         except Exception as e:
-            print(f"Error in judge: {e}")
+            self.logger.error(f"Error in judge: {e}")
             return None
 
     async def judge_single_response(
@@ -136,13 +139,8 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         """Judge all responses asynchronously."""
         async def bound_func(question):
             async with semaphore:
-                import time
-                start_time = time.time()
-                print(f"🏛️ Starting judging question {question['id']}")
-                result = await self.judge_single_response(question, predictions)
-                elapsed = time.time() - start_time
-                print(f"✅ Completed judging question {question['id']} in {elapsed:.2f}s")
-                return result
+                with PerformanceTimer(self.logger, f"judging question {question['id']}", level=logging.DEBUG):
+                    return await self.judge_single_response(question, predictions)
 
         semaphore = asyncio.Semaphore(self.hle_config.num_workers)
         tasks = [bound_func(q) for q in questions]
@@ -217,7 +215,7 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         output_dir: str = "judged"
     ) -> str:
         """Judge predictions from a file."""
-        print(f"🏛️ Starting judging for {predictions_file}")
+        self.logger.info(f"🏛️ Starting judging for {predictions_file}")
 
         # Ensure output directory exists
         os.makedirs(output_dir, exist_ok=True)
@@ -259,9 +257,9 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
                         judged_predictions = existing_data["judged_predictions"]
                     else:
                         judged_predictions = existing_data
-                print(f"📂 Loaded {len(judged_predictions)} existing judgments")
+                self.logger.info(f"📂 Loaded {len(judged_predictions)} existing judgments")
             except Exception as e:
-                print(f"⚠️ Warning: Could not load existing judgments: {e}")
+                self.logger.warning(f"⚠️ Warning: Could not load existing judgments: {e}")
 
         # Filter questions that need judging
         questions_to_judge = [
@@ -270,9 +268,9 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         ]
 
         if not questions_to_judge:
-            print(f"✅ All predictions already judged")
+            self.logger.info(f"✅ All predictions already judged")
         else:
-            print(f"🔄 Judging {len(questions_to_judge)} predictions")
+            self.logger.info(f"🔄 Judging {len(questions_to_judge)} predictions")
 
             # Judge remaining questions
             results = await self.judge_all_responses(questions_to_judge, predictions)
@@ -316,10 +314,10 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
         with open(output_filepath, "w") as f:
             json.dump(final_output, f, indent=4)
 
-        print("🎯 *** Metrics ***")
-        print(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
-        print(f"📏 Calibration Error: {metrics['calibration_error']}")
-        print(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")
-        print(f"💾 Saved to: {output_filepath}")
+        self.logger.info("🎯 *** Metrics ***")
+        self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
+        self.logger.info(f"📏 Calibration Error: {metrics['calibration_error']}")
+        self.logger.info(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")
+        self.logger.info(f"💾 Saved to: {output_filepath}")
 
         return output_filepath

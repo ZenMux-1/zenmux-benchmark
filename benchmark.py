@@ -4,11 +4,13 @@ import argparse
 import asyncio
 import os
 import sys
+import logging
 from datetime import datetime
 from typing import Optional
 
 from config import get_config
 from hle import HLERunner
+from utils.logging import get_runner_logger
 
 
 async def main():
@@ -149,34 +151,37 @@ async def main():
     # Generate batch timestamp for this evaluation run
     batch_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    # Create runner with batch timestamp (this will create the timestamped directories)
+    # Create runner with batch timestamp (this will create the timestamped directories and initialize logging)
     runner = HLERunner(config, batch_timestamp=batch_timestamp)
+
+    # Now that logging is initialized, get logger
+    logger = get_runner_logger()
 
     auto_judge = not args.no_judge
 
-    print("🌟 ZenMux HLE Benchmark")
-    print(f"🔧 Mode: {args.mode}")
-    print(f"📝 Text only: {args.text_only}")
-    print(f"📊 Max samples: {args.max_samples}")
-    print(f"🏛️ Auto judge: {auto_judge}")
-    print(f"👥 Workers per model: {config.hle.num_workers}")
-    print(f"🔄 Max concurrent models: {config.hle.max_concurrent_models}")
-    print(f"🔄 Max evaluation retries: {config.hle.max_evaluation_retries}")
-    print(f"🎯 Judge model: {config.hle.judge_model}")
-    print(f"🌡️ Temperature: {config.hle.temperature}")
-    print(f"⏰ Timeout: {config.hle.timeout}s")
-    print(f"🔄 Max retries: {config.hle.max_retries}")
-    print(f"🎫 Max completion tokens: {config.hle.max_completion_tokens}")
-    print(f"📁 Base output directory: {config.output_dir}")
-    print(f"📁 Run directory: {config.run_dir}")
-    print(f"🕒 Batch timestamp: {batch_timestamp}")
+    logger.info("🌟 ZenMux HLE Benchmark")
+    logger.info(f"🔧 Mode: {args.mode}")
+    logger.info(f"📝 Text only: {args.text_only}")
+    logger.info(f"📊 Max samples: {args.max_samples}")
+    logger.info(f"🏛️ Auto judge: {auto_judge}")
+    logger.info(f"👥 Workers per model: {config.hle.num_workers}")
+    logger.info(f"🔄 Max concurrent models: {config.hle.max_concurrent_models}")
+    logger.info(f"🔄 Max evaluation retries: {config.hle.max_evaluation_retries}")
+    logger.info(f"🎯 Judge model: {config.hle.judge_model}")
+    logger.info(f"🌡️ Temperature: {config.hle.temperature}")
+    logger.info(f"⏰ Timeout: {config.hle.timeout}s")
+    logger.info(f"🔄 Max retries: {config.hle.max_retries}")
+    logger.info(f"🎫 Max completion tokens: {config.hle.max_completion_tokens}")
+    logger.info(f"📁 Base output directory: {config.output_dir}")
+    logger.info(f"📁 Run directory: {config.run_dir}")
+    logger.info(f"🕒 Batch timestamp: {batch_timestamp}")
     if args.exclude:
-        print(f"🚫 Excluded models: {', '.join(args.exclude)}")
+        logger.info(f"🚫 Excluded models: {', '.join(args.exclude)}")
 
     # Run evaluation based on mode
     try:
         if args.mode == "single":
-            print(f"🎯 Evaluating single model: {args.model_slug}:{args.provider_slug}")
+            logger.info(f"🎯 Evaluating single model: {args.model_slug}:{args.provider_slug}")
             result = await runner.run_specific_model_evaluation(
                 model_slug=args.model_slug,
                 provider_slug=args.provider_slug,
@@ -187,7 +192,7 @@ async def main():
             results = [result]
 
         elif args.mode == "filter":
-            print(f"🔍 Evaluating filtered models: {args.model_filter}")
+            logger.info(f"🔍 Evaluating filtered models: {args.model_filter}")
             results = await runner.run_zenmux_models_evaluation(
                 text_only=args.text_only,
                 max_samples=args.max_samples,
@@ -197,7 +202,7 @@ async def main():
             )
 
         else:  # args.mode == "all"
-            print("🌍 Evaluating all available models")
+            logger.info("🌍 Evaluating all available models")
             results = await runner.run_zenmux_models_evaluation(
                 text_only=args.text_only,
                 max_samples=args.max_samples,
@@ -220,18 +225,28 @@ async def main():
         if auto_judge and any(r.get("metrics") for r in results):
             runner.save_metrics_summary(results, run_metadata)
 
-        # Print summary
-        runner.print_summary(results)
+        # Log summary
+        runner.log_summary(results)
 
-        print("\n🎉 Benchmark completed successfully!")
+        logger.info("\n🎉 Benchmark completed successfully!")
 
     except KeyboardInterrupt:
-        print("\n⚠️ Benchmark interrupted by user")
+        # For keyboard interrupt, we might not have a logger yet, so use print
+        if 'logger' in locals():
+            logger.warning("\n⚠️ Benchmark interrupted by user")
+        else:
+            print("\n⚠️ Benchmark interrupted by user")
         sys.exit(1)
     except Exception as e:
-        print(f"\n❌ Benchmark failed: {e}")
-        import traceback
-        traceback.print_exc()
+        # For exceptions, try to use logger if available, otherwise use print
+        if 'logger' in locals():
+            logger.error(f"\n❌ Benchmark failed: {e}")
+            import traceback
+            logger.error(f"Traceback: {traceback.format_exc()}")
+        else:
+            print(f"\n❌ Benchmark failed: {e}")
+            import traceback
+            traceback.print_exc()
         sys.exit(1)
 
 
