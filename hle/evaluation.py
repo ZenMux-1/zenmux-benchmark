@@ -261,7 +261,7 @@ class HLEEvaluator:
                     },
                     "statistics": {
                         "total_questions": len(questions),
-                        "remaining_questions": len(remaining_questions),
+                        "remaining_questions": len(questions) - len(existing_predictions),
                         "total_predictions": len(existing_predictions),
                         "retry_attempt": retry_attempt
                     }
