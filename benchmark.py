@@ -27,24 +27,11 @@ async def main():
         help="Evaluation mode: 'all' for all models, 'single' for specific model, 'filter' for filtered models"
     )
 
-    # Fix modes
+    # Fix mode
     parser.add_argument(
-        "--fix-evaluation",
+        "--fix",
         type=str,
-        help="Fix evaluation failures from a specific timestamp directory (e.g., 'results/20250919_011623')"
-    )
-
-    parser.add_argument(
-        "--fix-judge",
-        type=str,
-        help="Fix judge failures from a specific timestamp directory (e.g., 'results/20250919_011623')"
-    )
-
-    # Metrics-only mode
-    parser.add_argument(
-        "--metrics-only",
-        type=str,
-        help="Run metrics calculation only for complete models from a specific timestamp directory (e.g., 'results/20250919_011623')"
+        help="Fix evaluation and judge failures from a specific timestamp directory (e.g., 'results/20250919_011623')"
     )
 
     # Model specification (for single mode)
@@ -145,27 +132,11 @@ async def main():
             print("❌ Error: --model-filter is required for filter mode")
             sys.exit(1)
 
-    # Check for special modes - they are mutually exclusive with regular evaluation
-    special_mode = None
-    special_modes_count = sum([bool(args.fix_evaluation), bool(args.fix_judge), bool(args.metrics_only)])
-
-    if special_modes_count > 1:
-        print("❌ Error: --fix-evaluation, --fix-judge, and --metrics-only cannot be used together")
-        sys.exit(1)
-    elif args.fix_evaluation:
-        special_mode = "fix-evaluation"
-        if not os.path.exists(args.fix_evaluation):
-            print(f"❌ Error: Timestamp directory not found: {args.fix_evaluation}")
-            sys.exit(1)
-    elif args.fix_judge:
-        special_mode = "fix-judge"
-        if not os.path.exists(args.fix_judge):
-            print(f"❌ Error: Timestamp directory not found: {args.fix_judge}")
-            sys.exit(1)
-    elif args.metrics_only:
-        special_mode = "metrics-only"
-        if not os.path.exists(args.metrics_only):
-            print(f"❌ Error: Timestamp directory not found: {args.metrics_only}")
+    # Check for fix mode
+    fix_mode = bool(args.fix)
+    if fix_mode:
+        if not os.path.exists(args.fix):
+            print(f"❌ Error: Timestamp directory not found: {args.fix}")
             sys.exit(1)
 
     # Check required environment variables
@@ -191,16 +162,10 @@ async def main():
     # Ensure base output directory exists
     os.makedirs(config.output_dir, exist_ok=True)
 
-    # Handle special modes differently than regular evaluation
-    if special_mode:
-        # For special modes, use the existing timestamp from the directory path
-        if special_mode == "fix-evaluation":
-            timestamp_dir = args.fix_evaluation
-        elif special_mode == "fix-judge":
-            timestamp_dir = args.fix_judge
-        else:  # metrics-only
-            timestamp_dir = args.metrics_only
-
+    # Handle fix mode differently than regular evaluation
+    if fix_mode:
+        # For fix mode, use the existing timestamp from the directory path
+        timestamp_dir = args.fix
         batch_timestamp = os.path.basename(timestamp_dir)
 
         # Create runner with existing batch timestamp
@@ -219,8 +184,8 @@ async def main():
 
     logger.info("🌟 ZenMux HLE Benchmark")
 
-    if special_mode:
-        logger.info(f"🔧 Mode: {special_mode}")
+    if fix_mode:
+        logger.info(f"🔧 Mode: fix")
         logger.info(f"📁 Target directory: {timestamp_dir}")
     else:
         logger.info(f"🔧 Mode: {args.mode}")
@@ -242,49 +207,24 @@ async def main():
     logger.info(f"📁 Run directory: {config.run_dir}")
     logger.info(f"🕒 Batch timestamp: {batch_timestamp}")
 
-    # Save question IDs for regular evaluation runs (skip for special modes)
-    if not special_mode:
+    # Save question IDs for regular evaluation runs (skip for fix mode)
+    if not fix_mode:
         runner.save_question_ids(text_only=args.text_only, max_samples=args.max_samples)
 
-    # Run evaluation, fix, or metrics based on mode
+    # Run evaluation or fix based on mode
     try:
-        if special_mode == "fix-evaluation":
-            logger.info(f"🔧 Fixing evaluation failures in: {timestamp_dir}")
-            fix_result = await runner.fix_evaluation_failures(timestamp_dir)
+        if fix_mode:
+            logger.info(f"🔧 Fixing evaluation and judge failures in: {timestamp_dir}")
+            fix_result = await runner.fix_models(timestamp_dir)
 
             if "error" in fix_result:
-                logger.error(f"❌ Fix evaluation failed: {fix_result['error']}")
+                logger.error(f"❌ Fix failed: {fix_result['error']}")
                 sys.exit(1)
 
-            logger.info(f"\n🎉 Fix evaluation completed!")
+            logger.info(f"\n🎉 Fix completed!")
             logger.info(f"✅ Fixed models: {fix_result['fixed_count']}")
             logger.info(f"❌ Still failed models: {fix_result['remaining_failures']}")
-
-        elif special_mode == "fix-judge":
-            logger.info(f"⚖️ Fixing judge failures in: {timestamp_dir}")
-            fix_result = await runner.fix_judge_failures(timestamp_dir)
-
-            if "error" in fix_result:
-                logger.error(f"❌ Fix judge failed: {fix_result['error']}")
-                sys.exit(1)
-
-            logger.info(f"\n🎉 Fix judge completed!")
-            logger.info(f"✅ Fixed models: {fix_result['fixed_count']}")
-            logger.info(f"❌ Still failed models: {fix_result['remaining_failures']}")
-
-        elif special_mode == "metrics-only":
-            logger.info(f"📊 Running metrics calculation only in: {timestamp_dir}")
-            metrics_result = runner.run_metrics_only(timestamp_dir)
-
-            if "error" in metrics_result:
-                logger.error(f"❌ Metrics calculation failed: {metrics_result['error']}")
-                sys.exit(1)
-
-            logger.info(f"\n🎉 Metrics calculation completed!")
-            logger.info(f"✅ Valid models: {metrics_result['valid_models_count']}")
-            logger.info(f"❌ Excluded models: {metrics_result['excluded_models_count']}")
-            logger.info(f"📊 Expected questions: {metrics_result['expected_questions']}")
-            logger.info(f"📁 Results saved to: {metrics_result['metrics_file']}")
+            logger.info(f"📁 Results saved to: {fix_result['metrics_file']}")
 
         else:
             # Regular evaluation modes

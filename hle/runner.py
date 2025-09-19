@@ -106,58 +106,6 @@ class HLERunner:
         self.logger.info(f"📋 Available models saved to: {models_file}")
         return models_file
 
-    def save_failures_to_files(self, results: List[Dict[str, Any]]) -> tuple[str, str]:
-        """Save evaluation and judge failures to separate files."""
-        evaluation_failures = {}
-        judge_failures = {}
-
-        for result in results:
-            model_identifier = result["model_identifier"]
-
-            # Analyze evaluation failures
-            if result.get("predictions_file"):
-                eval_stats = self._analyze_evaluation_file(result["predictions_file"])
-                if eval_stats["failed_question_ids"]:
-                    evaluation_failures[model_identifier] = eval_stats["failed_question_ids"]
-
-            # Analyze judge failures
-            if result.get("judged_file"):
-                judge_stats = self._analyze_judge_file(result["judged_file"])
-                if judge_stats["failed_question_ids"]:
-                    judge_failures[model_identifier] = judge_stats["failed_question_ids"]
-
-        # Save evaluation failures
-        eval_failures_data = {
-            "failure_metadata": {
-                "timestamp": datetime.now().isoformat(),
-                "batch_timestamp": self.batch_timestamp,
-                "total_models_with_evaluation_failures": len(evaluation_failures)
-            },
-            "evaluation_failures": evaluation_failures
-        }
-
-        eval_failures_file = os.path.join(self.config.run_dir, f"evaluation_failures_{self.batch_timestamp}.json")
-        with open(eval_failures_file, "w") as f:
-            json.dump(eval_failures_data, f, indent=4)
-
-        # Save judge failures
-        judge_failures_data = {
-            "failure_metadata": {
-                "timestamp": datetime.now().isoformat(),
-                "batch_timestamp": self.batch_timestamp,
-                "total_models_with_judge_failures": len(judge_failures)
-            },
-            "judge_failures": judge_failures
-        }
-
-        judge_failures_file = os.path.join(self.config.run_dir, f"judge_failures_{self.batch_timestamp}.json")
-        with open(judge_failures_file, "w") as f:
-            json.dump(judge_failures_data, f, indent=4)
-
-        self.logger.info(f"❌ Evaluation failures saved to: {eval_failures_file}")
-        self.logger.info(f"⚖️ Judge failures saved to: {judge_failures_file}")
-
-        return eval_failures_file, judge_failures_file
 
     async def run_single_model_evaluation(
         self,
@@ -329,7 +277,10 @@ class HLERunner:
                     # Always try to clean up connections after each model
                     try:
                         await self.evaluator.zenmux_client.close()
-                    except:
+                        # Also clean up judge client connections
+                        await self.judge.zenmux_client.close()
+                    except Exception as cleanup_error:
+                        self.logger.warning(f"⚠️ Warning: Failed to cleanup connections for {model_identifier}: {cleanup_error}")
                         pass
 
         # Create semaphore for outer layer concurrency
@@ -423,8 +374,7 @@ class HLERunner:
         if run_metadata is None:
             run_metadata = {}
 
-        # Save failures to separate files first
-        eval_failures_file, judge_failures_file = self.save_failures_to_files(results)
+        # No longer need separate failure files - has_answer/has_judgment fields track this
 
         # Load question IDs file to get expected question count for validation
         question_ids_file = os.path.join(self.config.run_dir, f"question_ids_{self.batch_timestamp}.json")
@@ -445,16 +395,14 @@ class HLERunner:
         for result in results:
             model_identifier = result["model_identifier"]
 
-            # Check for evaluation failures
+            # Check for evaluation failures using has_answer field
             if result.get("predictions_file"):
-                eval_stats = self._analyze_evaluation_file(result["predictions_file"])
-                if eval_stats["failed_question_ids"] or not eval_stats["evaluation_complete"]:
+                if not self._has_complete_evaluations(result["predictions_file"]):
                     models_with_failures.add(model_identifier)
 
-            # Check for judge failures
+            # Check for judge failures using has_judgment field
             if result.get("judged_file"):
-                judge_stats = self._analyze_judge_file(result["judged_file"])
-                if judge_stats["failed_question_ids"] or not judge_stats["judge_complete"]:
+                if not self._has_complete_judgments(result["judged_file"]):
                     models_with_failures.add(model_identifier)
 
                 # ENHANCED: Validate judge completeness against expected question count
@@ -495,8 +443,6 @@ class HLERunner:
                 "total_models": len(results),
                 "models_with_failures": len(models_with_failures),
                 "models_included_in_metrics": len(clean_results),
-                "evaluation_failures_file": eval_failures_file,
-                "judge_failures_file": judge_failures_file,
                 "run_metadata": run_metadata
             },
             "overall_statistics": {
@@ -593,18 +539,12 @@ class HLERunner:
             reasons.append("general_error")
 
         if result.get("predictions_file"):
-            eval_stats = self._analyze_evaluation_file(result["predictions_file"])
-            if eval_stats["failed_question_ids"]:
-                reasons.append("evaluation_failures")
-            if not eval_stats["evaluation_complete"]:
-                reasons.append("incomplete_evaluation")
+            if not self._has_complete_evaluations(result["predictions_file"]):
+                reasons.append("incomplete_evaluations")
 
         if result.get("judged_file"):
-            judge_stats = self._analyze_judge_file(result["judged_file"])
-            if judge_stats["failed_question_ids"]:
-                reasons.append("judge_failures")
-            if not judge_stats["judge_complete"]:
-                reasons.append("incomplete_judging")
+            if not self._has_complete_judgments(result["judged_file"]):
+                reasons.append("incomplete_judgments")
 
         return ", ".join(reasons) if reasons else "unknown"
 
@@ -717,24 +657,62 @@ class HLERunner:
 
         return judge_stats
 
-    async def fix_evaluation_failures(self, timestamp_dir: str) -> Dict[str, Any]:
-        """Fix evaluation failures by re-evaluating failed questions."""
+    def _has_complete_evaluations(self, predictions_file: str) -> bool:
+        """Check if all predictions have has_answer=True."""
+        try:
+            with open(predictions_file, "r") as f:
+                data = json.load(f)
+
+            predictions = data.get("predictions", data)
+            if not predictions:
+                return False
+
+            # Check if all predictions have has_answer=True
+            for pred in predictions.values():
+                if not pred.get("has_answer", False):
+                    return False
+            return True
+        except Exception:
+            return False
+
+    def _has_complete_judgments(self, judged_file: str) -> bool:
+        """Check if all judgments have has_judgment=True."""
+        try:
+            with open(judged_file, "r") as f:
+                data = json.load(f)
+
+            judged_predictions = data.get("judged_predictions", data)
+            if not judged_predictions:
+                return False
+
+            # Check if all judgments have has_judgment=True and the prediction had an answer
+            for pred in judged_predictions.values():
+                if pred.get("has_answer", False) and not pred.get("has_judgment", False):
+                    return False
+            return True
+        except Exception:
+            return False
+
+    async def fix_models(self, timestamp_dir: str) -> Dict[str, Any]:
+        """Fix evaluation and judge failures by re-processing questions with has_answer=False or has_judgment=False."""
         self.logger.info(f"\n{'='*60}")
-        self.logger.info("🔧 FIXING EVALUATION FAILURES")
+        self.logger.info("🔧 FIXING EVALUATION AND JUDGE FAILURES")
         self.logger.info(f"{'='*60}")
 
-        # Load evaluation failures file
-        eval_failures_file = os.path.join(timestamp_dir, f"evaluation_failures_{os.path.basename(timestamp_dir)}.json")
-        if not os.path.exists(eval_failures_file):
-            self.logger.error(f"❌ Evaluation failures file not found: {eval_failures_file}")
-            return {"error": "Evaluation failures file not found"}
+        batch_timestamp = os.path.basename(timestamp_dir)
 
-        with open(eval_failures_file, "r") as f:
-            failures_data = json.load(f)
+        # Load available models from the timestamp directory
+        models_file = os.path.join(timestamp_dir, f"available_models_{batch_timestamp}.json")
+        if not os.path.exists(models_file):
+            self.logger.error(f"❌ Available models file not found: {models_file}")
+            return {"error": "Available models file not found"}
 
-        evaluation_failures = failures_data.get("evaluation_failures", {})
-        if not evaluation_failures:
-            self.logger.info("✅ No evaluation failures to fix")
+        with open(models_file, "r") as f:
+            models_data = json.load(f)
+
+        available_models = models_data.get("available_models", {})
+        if not available_models:
+            self.logger.info("✅ No models to fix")
             return {
                 "fixed_models": [],
                 "still_failed_models": [],
@@ -742,25 +720,23 @@ class HLERunner:
                 "remaining_failures": 0
             }
 
-        self.logger.info(f"🔍 Found {len(evaluation_failures)} models with evaluation failures")
+        self.logger.info(f"🔍 Found {len(available_models)} models to check for failures")
 
-        # Get all available models to find endpoints
-        model_endpoint_pairs = self.zenmux_api.get_all_model_endpoint_pairs()
-        model_endpoints = {model_id: endpoint for model_id, model, endpoint in model_endpoint_pairs}
+        # Get all model-endpoint pairs for endpoints
+        all_model_endpoint_pairs = self.zenmux_api.get_all_model_endpoint_pairs()
+        model_endpoints = {model_id: endpoint for model_id, model, endpoint in all_model_endpoint_pairs}
 
         # Load dataset questions
         from .dataset import HLEDataset
         dataset = HLEDataset(self.config.hle.dataset_name, self.config.hle.dataset_split)
-
-        # Create a mapping of question_id to question
         all_questions = dataset.get_questions()
         question_map = {q["id"]: q for q in all_questions}
 
         fixed_models = []
         still_failed_models = []
 
-        for model_identifier, failed_question_ids in evaluation_failures.items():
-            self.logger.info(f"\n🔧 Fixing {len(failed_question_ids)} failures for {model_identifier}")
+        for model_identifier in available_models.keys():
+            self.logger.info(f"\n🔧 Checking {model_identifier} for failures")
 
             # Find the endpoint for this model
             if model_identifier not in model_endpoints:
@@ -769,247 +745,109 @@ class HLERunner:
                 continue
 
             endpoint = model_endpoints[model_identifier]
-            model_name = model_identifier.split(':')[0]  # Extract model name from identifier
+            model_name = model_identifier.split(':')[0]
 
-            # Load existing predictions file
+            # Load existing files
             safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
-            batch_timestamp = os.path.basename(timestamp_dir)
             predictions_file = os.path.join(timestamp_dir, "predictions", f"hle_{safe_model_name}_{batch_timestamp}.json")
-
-            if not os.path.exists(predictions_file):
-                self.logger.error(f"❌ Predictions file not found: {predictions_file}")
-                still_failed_models.append(model_identifier)
-                continue
-
-            # Load existing predictions
-            with open(predictions_file, "r") as f:
-                predictions_data = json.load(f)
-
-            if "predictions" in predictions_data:
-                predictions = predictions_data["predictions"]
-                metadata = predictions_data["evaluation_metadata"]
-            else:
-                predictions = predictions_data
-                metadata = {}
-
-            # Try to fix each failed question
-            fixed_questions = []
-            remaining_failed = []
-
-            for question_id in failed_question_ids:
-                if question_id not in question_map:
-                    self.logger.warning(f"⚠️ Question {question_id} not found in dataset")
-                    remaining_failed.append(question_id)
-                    continue
-
-                question = question_map[question_id]
-                self.logger.debug(f"🔄 Re-evaluating question {question_id}")
-
-                try:
-                    result = await self.evaluator.evaluate_single_question(question, model_name, endpoint)
-                    if result:
-                        question_id_result, content, usage, performance_metrics, generation_id = result
-
-                        # Add to predictions
-                        predictions[question_id] = {
-                            "model": model_identifier,
-                            "response": content,
-                            "usage": usage,
-                            "performance": performance_metrics,
-                            "generation_id": generation_id
-                        }
-
-                        fixed_questions.append(question_id)
-                        self.logger.info(f"✅ Fixed question {question_id}")
-                    else:
-                        remaining_failed.append(question_id)
-                        self.logger.warning(f"❌ Still failed question {question_id}")
-
-                except Exception as e:
-                    self.logger.error(f"❌ Error re-evaluating question {question_id}: {e}")
-                    remaining_failed.append(question_id)
-
-            # Update predictions file
-            if fixed_questions:
-                # Update metadata statistics if present
-                if metadata and "statistics" in metadata:
-                    metadata["statistics"]["total_predictions"] = len(predictions)
-                    metadata["statistics"]["remaining_questions"] = metadata["statistics"]["total_questions"] - len(predictions)
-
-                # Save updated predictions
-                if "predictions" in predictions_data:
-                    predictions_data["predictions"] = predictions
-                    predictions_data["evaluation_metadata"] = metadata
-                else:
-                    predictions_data = predictions
-
-                with open(predictions_file, "w") as f:
-                    json.dump(predictions_data, f, indent=4)
-
-                self.logger.info(f"💾 Updated predictions file with {len(fixed_questions)} fixed questions")
-
-            # Update failure tracking
-            if remaining_failed:
-                evaluation_failures[model_identifier] = remaining_failed
-                still_failed_models.append(model_identifier)
-                self.logger.warning(f"⚠️ {len(remaining_failed)} questions still failed for {model_identifier}")
-            else:
-                del evaluation_failures[model_identifier]
-                fixed_models.append(model_identifier)
-                self.logger.info(f"🎉 All failures fixed for {model_identifier}")
-
-        # Update evaluation failures file
-        failures_data["evaluation_failures"] = evaluation_failures
-        failures_data["failure_metadata"]["total_models_with_evaluation_failures"] = len(evaluation_failures)
-
-        with open(eval_failures_file, "w") as f:
-            json.dump(failures_data, f, indent=4)
-
-        self.logger.info(f"\n📊 Fix Summary:")
-        self.logger.info(f"✅ Fixed models: {len(fixed_models)}")
-        self.logger.info(f"❌ Still failed models: {len(still_failed_models)}")
-
-        return {
-            "fixed_models": fixed_models,
-            "still_failed_models": still_failed_models,
-            "fixed_count": len(fixed_models),
-            "remaining_failures": len(still_failed_models)
-        }
-
-    async def fix_judge_failures(self, timestamp_dir: str) -> Dict[str, Any]:
-        """Fix judge failures by re-judging failed questions."""
-        self.logger.info(f"\n{'='*60}")
-        self.logger.info("⚖️ FIXING JUDGE FAILURES")
-        self.logger.info(f"{'='*60}")
-
-        # Load judge failures file
-        judge_failures_file = os.path.join(timestamp_dir, f"judge_failures_{os.path.basename(timestamp_dir)}.json")
-        if not os.path.exists(judge_failures_file):
-            self.logger.error(f"❌ Judge failures file not found: {judge_failures_file}")
-            return {"error": "Judge failures file not found"}
-
-        with open(judge_failures_file, "r") as f:
-            failures_data = json.load(f)
-
-        judge_failures = failures_data.get("judge_failures", {})
-        if not judge_failures:
-            self.logger.info("✅ No judge failures to fix")
-            return {
-                "fixed_models": [],
-                "still_failed_models": [],
-                "fixed_count": 0,
-                "remaining_failures": 0
-            }
-
-        self.logger.info(f"🔍 Found {len(judge_failures)} models with judge failures")
-
-        # Load dataset questions
-        from .dataset import HLEDataset
-        dataset = HLEDataset(self.config.hle.dataset_name, self.config.hle.dataset_split)
-
-        # Create a mapping of question_id to question
-        all_questions = dataset.get_questions()
-        question_map = {q["id"]: q for q in all_questions}
-
-        fixed_models = []
-        still_failed_models = []
-
-        for model_identifier, failed_question_ids in judge_failures.items():
-            self.logger.info(f"\n⚖️ Fixing {len(failed_question_ids)} judge failures for {model_identifier}")
-
-            # Load existing judged file
-            safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
-            batch_timestamp = os.path.basename(timestamp_dir)
             judged_file = os.path.join(timestamp_dir, "judged", f"judged_hle_{safe_model_name}_{batch_timestamp}.json")
 
-            if not os.path.exists(judged_file):
-                self.logger.error(f"❌ Judged file not found: {judged_file}")
-                still_failed_models.append(model_identifier)
-                continue
+            model_fixed = False
 
-            # Load existing judged data
-            with open(judged_file, "r") as f:
-                judged_data = json.load(f)
+            # Fix evaluation failures (has_answer=False)
+            if os.path.exists(predictions_file):
+                with open(predictions_file, "r") as f:
+                    predictions_data = json.load(f)
 
-            if "judged_predictions" in judged_data:
-                judged_predictions = judged_data["judged_predictions"]
-                metadata = judged_data["judging_metadata"]
-            else:
-                judged_predictions = judged_data
-                metadata = {}
+                predictions = predictions_data.get("predictions", predictions_data)
+                evaluation_metadata = predictions_data.get("evaluation_metadata", {})
 
-            # Try to fix each failed question
-            fixed_questions = []
-            remaining_failed = []
+                # Find questions with has_answer=False
+                failed_eval_questions = [
+                    qid for qid, pred in predictions.items()
+                    if not pred.get("has_answer", False)
+                ]
 
-            for question_id in failed_question_ids:
-                if question_id not in question_map:
-                    self.logger.warning(f"⚠️ Question {question_id} not found in dataset")
-                    remaining_failed.append(question_id)
-                    continue
+                if failed_eval_questions:
+                    self.logger.info(f"🔄 Re-evaluating {len(failed_eval_questions)} failed questions")
 
-                if question_id not in judged_predictions:
-                    self.logger.warning(f"⚠️ Question {question_id} not found in predictions")
-                    remaining_failed.append(question_id)
-                    continue
+                    for question_id in failed_eval_questions:
+                        if question_id in question_map:
+                            question = question_map[question_id]
+                            try:
+                                question_id_result, result = await self.evaluator.evaluate_single_question(
+                                    question, model_name, endpoint
+                                )
+                                predictions[question_id] = result
+                                if result.get("has_answer"):
+                                    model_fixed = True
+                                    self.logger.debug(f"✅ Fixed evaluation for question {question_id}")
+                                else:
+                                    self.logger.debug(f"❌ Still failed evaluation for question {question_id}")
+                            except Exception as e:
+                                self.logger.error(f"❌ Error re-evaluating question {question_id}: {e}")
 
-                question = question_map[question_id]
-                self.logger.debug(f"🔄 Re-judging question {question_id}")
+                    # Save updated predictions
+                    final_predictions_data = {
+                        "evaluation_metadata": evaluation_metadata,
+                        "predictions": predictions
+                    } if evaluation_metadata else predictions
 
-                try:
-                    result = await self.judge.judge_single_response(question, {question_id: judged_predictions[question_id]})
-                    if result and result[0]:  # Check if we got a valid result
-                        unique_id, updated_prediction, performance_metrics = result
+                    with open(predictions_file, "w") as f:
+                        json.dump(final_predictions_data, f, indent=4)
 
-                        # Update the judged predictions
-                        judged_predictions[question_id] = updated_prediction
+            # Fix judge failures (has_judgment=False)
+            if os.path.exists(judged_file) and os.path.exists(predictions_file):
+                with open(judged_file, "r") as f:
+                    judged_data = json.load(f)
 
-                        fixed_questions.append(question_id)
-                        self.logger.info(f"✅ Fixed judge for question {question_id}")
-                    else:
-                        remaining_failed.append(question_id)
-                        self.logger.warning(f"❌ Still failed to judge question {question_id}")
+                judged_predictions = judged_data.get("judged_predictions", judged_data)
+                judging_metadata = judged_data.get("judging_metadata", {})
 
-                except Exception as e:
-                    self.logger.error(f"❌ Error re-judging question {question_id}: {e}")
-                    remaining_failed.append(question_id)
+                # Find questions with has_judgment=False
+                failed_judge_questions = [
+                    qid for qid, pred in judged_predictions.items()
+                    if not pred.get("has_judgment", False) and pred.get("has_answer", False)
+                ]
 
-            # Update judged file
-            if fixed_questions:
-                # Update metadata statistics if present
-                if metadata and "statistics" in metadata:
-                    # Count successful judgments
-                    successful_judgments = sum(1 for pred in judged_predictions.values() if "judge_response" in pred)
-                    metadata["statistics"]["total_judged"] = successful_judgments
+                if failed_judge_questions:
+                    self.logger.info(f"⚖️ Re-judging {len(failed_judge_questions)} failed judgments")
 
-                # Save updated judged data
-                if "judged_predictions" in judged_data:
-                    judged_data["judged_predictions"] = judged_predictions
-                    judged_data["judging_metadata"] = metadata
-                else:
-                    judged_data = judged_predictions
+                    for question_id in failed_judge_questions:
+                        if question_id in question_map:
+                            question = question_map[question_id]
+                            try:
+                                unique_id, updated_prediction, performance_metrics = await self.judge.judge_single_response(
+                                    question, {question_id: judged_predictions[question_id]}
+                                )
+                                judged_predictions[question_id] = updated_prediction
+                                if updated_prediction.get("has_judgment"):
+                                    model_fixed = True
+                                    self.logger.debug(f"✅ Fixed judgment for question {question_id}")
+                                else:
+                                    self.logger.debug(f"❌ Still failed judgment for question {question_id}")
+                            except Exception as e:
+                                self.logger.error(f"❌ Error re-judging question {question_id}: {e}")
 
-                with open(judged_file, "w") as f:
-                    json.dump(judged_data, f, indent=4)
+                    # Save updated judged data
+                    final_judged_data = {
+                        "judging_metadata": judging_metadata,
+                        "judged_predictions": judged_predictions
+                    } if judging_metadata else judged_predictions
 
-                self.logger.info(f"💾 Updated judged file with {len(fixed_questions)} fixed judgments")
+                    with open(judged_file, "w") as f:
+                        json.dump(final_judged_data, f, indent=4)
 
-            # Update failure tracking
-            if remaining_failed:
-                judge_failures[model_identifier] = remaining_failed
-                still_failed_models.append(model_identifier)
-                self.logger.warning(f"⚠️ {len(remaining_failed)} judge failures still remain for {model_identifier}")
-            else:
-                del judge_failures[model_identifier]
+            if model_fixed:
                 fixed_models.append(model_identifier)
-                self.logger.info(f"🎉 All judge failures fixed for {model_identifier}")
+                self.logger.info(f"🎉 Fixed some failures for {model_identifier}")
+            else:
+                still_failed_models.append(model_identifier)
+                self.logger.info(f"⚠️ No fixes needed or all fixes failed for {model_identifier}")
 
-        # Update judge failures file
-        failures_data["judge_failures"] = judge_failures
-        failures_data["failure_metadata"]["total_models_with_judge_failures"] = len(judge_failures)
-
-        with open(judge_failures_file, "w") as f:
-            json.dump(failures_data, f, indent=4)
+        # Run metrics calculation for all models
+        self.logger.info(f"\n📊 Running metrics calculation")
+        metrics_result = self.run_metrics_only(timestamp_dir)
 
         self.logger.info(f"\n📊 Fix Summary:")
         self.logger.info(f"✅ Fixed models: {len(fixed_models)}")
@@ -1019,8 +857,10 @@ class HLERunner:
             "fixed_models": fixed_models,
             "still_failed_models": still_failed_models,
             "fixed_count": len(fixed_models),
-            "remaining_failures": len(still_failed_models)
+            "remaining_failures": len(still_failed_models),
+            "metrics_file": metrics_result.get("metrics_file", "")
         }
+
 
     def run_metrics_only(self, timestamp_dir: str) -> Dict[str, Any]:
         """Run metrics calculation only for models that have complete and successful evaluations."""
@@ -1042,25 +882,7 @@ class HLERunner:
         expected_question_count = len(question_ids_data.get("question_ids", []))
         self.logger.info(f"📊 Expected questions count: {expected_question_count}")
 
-        # Load failure files to identify models with failures
-        eval_failures_file = os.path.join(timestamp_dir, f"evaluation_failures_{batch_timestamp}.json")
-        judge_failures_file = os.path.join(timestamp_dir, f"judge_failures_{batch_timestamp}.json")
-
-        models_with_eval_failures = set()
-        models_with_judge_failures = set()
-
-        if os.path.exists(eval_failures_file):
-            with open(eval_failures_file, "r") as f:
-                eval_failures_data = json.load(f)
-                models_with_eval_failures = set(eval_failures_data.get("evaluation_failures", {}).keys())
-
-        if os.path.exists(judge_failures_file):
-            with open(judge_failures_file, "r") as f:
-                judge_failures_data = json.load(f)
-                models_with_judge_failures = set(judge_failures_data.get("judge_failures", {}).keys())
-
-        self.logger.info(f"🚫 Models with evaluation failures: {len(models_with_eval_failures)}")
-        self.logger.info(f"⚖️ Models with judge failures: {len(models_with_judge_failures)}")
+        # No longer need to load separate failure files - we'll check has_answer/has_judgment fields directly
 
         # Find all judged files in the timestamp directory
         judged_dir = os.path.join(timestamp_dir, "judged")
@@ -1087,25 +909,29 @@ class HLERunner:
                 self.logger.warning(f"⚠️ Could not parse model identifier from {judged_file}")
                 continue
 
-            # Check if model has failures
-            if model_identifier in models_with_eval_failures:
-                excluded_models.append({
-                    "model_identifier": model_identifier,
-                    "reason": "evaluation_failures",
-                    "file": judged_file
-                })
-                continue
-
-            if model_identifier in models_with_judge_failures:
-                excluded_models.append({
-                    "model_identifier": model_identifier,
-                    "reason": "judge_failures",
-                    "file": judged_file
-                })
-                continue
-
             # Load and analyze judged file
             judged_file_path = os.path.join(judged_dir, judged_file)
+
+            # Check if model has complete evaluations and judgments using the new fields
+            predictions_file = os.path.join(timestamp_dir, "predictions", f"hle_{filename_parts}_{batch_timestamp}.json")
+
+            # Check evaluation completeness
+            if os.path.exists(predictions_file) and not self._has_complete_evaluations(predictions_file):
+                excluded_models.append({
+                    "model_identifier": model_identifier,
+                    "reason": "incomplete_evaluations",
+                    "file": judged_file
+                })
+                continue
+
+            # Check judgment completeness
+            if not self._has_complete_judgments(judged_file_path):
+                excluded_models.append({
+                    "model_identifier": model_identifier,
+                    "reason": "incomplete_judgments",
+                    "file": judged_file
+                })
+                continue
             try:
                 with open(judged_file_path, "r") as f:
                     judged_data = json.load(f)
@@ -1167,8 +993,7 @@ class HLERunner:
             "valid_models": valid_models,
             "excluded_models": excluded_models,
             "exclusion_summary": {
-                "evaluation_failures": len([m for m in excluded_models if m["reason"] == "evaluation_failures"]),
-                "judge_failures": len([m for m in excluded_models if m["reason"] == "judge_failures"]),
+                "incomplete_evaluations": len([m for m in excluded_models if m["reason"] == "incomplete_evaluations"]),
                 "incomplete_judgments": len([m for m in excluded_models if m["reason"] == "incomplete_judgments"]),
                 "processing_errors": len([m for m in excluded_models if m["reason"] == "processing_error"])
             }
@@ -1200,35 +1025,21 @@ class HLERunner:
         }
 
     def _validate_model_completeness(self, model_identifier: str, timestamp_dir: str, expected_question_count: int) -> Dict[str, Any]:
-        """Validate that a model has complete evaluations and judgments without failures."""
+        """Validate that a model has complete evaluations and judgments using has_answer/has_judgment fields."""
         batch_timestamp = os.path.basename(timestamp_dir)
 
-        # Check evaluation failures
-        eval_failures_file = os.path.join(timestamp_dir, f"evaluation_failures_{batch_timestamp}.json")
-        if os.path.exists(eval_failures_file):
-            with open(eval_failures_file, "r") as f:
-                eval_failures_data = json.load(f)
-                if model_identifier in eval_failures_data.get("evaluation_failures", {}):
-                    return {
-                        "valid": False,
-                        "reason": "evaluation_failures",
-                        "details": "Model has evaluation failures"
-                    }
-
-        # Check judge failures
-        judge_failures_file = os.path.join(timestamp_dir, f"judge_failures_{batch_timestamp}.json")
-        if os.path.exists(judge_failures_file):
-            with open(judge_failures_file, "r") as f:
-                judge_failures_data = json.load(f)
-                if model_identifier in judge_failures_data.get("judge_failures", {}):
-                    return {
-                        "valid": False,
-                        "reason": "judge_failures",
-                        "details": "Model has judge failures"
-                    }
-
-        # Check judge completeness
+        # Check evaluation completeness using has_answer field
         safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
+        predictions_file = os.path.join(timestamp_dir, "predictions", f"hle_{safe_model_name}_{batch_timestamp}.json")
+
+        if os.path.exists(predictions_file) and not self._has_complete_evaluations(predictions_file):
+            return {
+                "valid": False,
+                "reason": "incomplete_evaluations",
+                "details": "Model has incomplete evaluations"
+            }
+
+        # Check judge completeness using has_judgment field
         judged_file = os.path.join(timestamp_dir, "judged", f"judged_hle_{safe_model_name}_{batch_timestamp}.json")
 
         if not os.path.exists(judged_file):
@@ -1236,6 +1047,13 @@ class HLERunner:
                 "valid": False,
                 "reason": "no_judged_file",
                 "details": f"Judged file not found: {judged_file}"
+            }
+
+        if not self._has_complete_judgments(judged_file):
+            return {
+                "valid": False,
+                "reason": "incomplete_judgments",
+                "details": "Model has incomplete judgments"
             }
 
         try:
@@ -1247,8 +1065,8 @@ class HLERunner:
             else:
                 judged_predictions = judged_data
 
-            # Count successful judgments
-            successful_judgments = sum(1 for pred in judged_predictions.values() if "judge_response" in pred)
+            # Count successful judgments using has_judgment field
+            successful_judgments = sum(1 for pred in judged_predictions.values() if pred.get("has_judgment", False))
 
             if successful_judgments == expected_question_count:
                 return {

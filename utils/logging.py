@@ -15,6 +15,7 @@ class BenchmarkLogger:
     _handlers_setup: bool = False
     _log_dir: Optional[str] = None
     _batch_timestamp: Optional[str] = None
+    _enable_model_specific_logs: bool = True
 
     @classmethod
     def setup_logging(
@@ -22,7 +23,8 @@ class BenchmarkLogger:
         log_dir: str = "logs",
         batch_timestamp: Optional[str] = None,
         console_level: int = logging.INFO,
-        file_level: int = logging.DEBUG
+        file_level: int = logging.DEBUG,
+        enable_model_specific_logs: bool = True
     ) -> None:
         """Setup logging configuration for the entire application.
 
@@ -31,6 +33,7 @@ class BenchmarkLogger:
             batch_timestamp: Timestamp for this batch run (creates subdirectory)
             console_level: Logging level for console output
             file_level: Logging level for file output
+            enable_model_specific_logs: Whether to create model-specific log files
         """
         if cls._handlers_setup:
             return
@@ -41,6 +44,7 @@ class BenchmarkLogger:
 
         cls._batch_timestamp = batch_timestamp
         cls._log_dir = os.path.join(log_dir, batch_timestamp)
+        cls._enable_model_specific_logs = enable_model_specific_logs
 
         # Create logs directory
         Path(cls._log_dir).mkdir(parents=True, exist_ok=True)
@@ -137,10 +141,14 @@ class BenchmarkLogger:
             model_identifier: Model identifier (e.g., 'openai/gpt-4o:openai')
 
         Returns:
-            Dedicated logger with model-specific file handler
+            Dedicated logger with model-specific file handler (if enabled), or main logger
         """
         if not cls._handlers_setup:
             cls.setup_logging()
+
+        # If model-specific logs are disabled, return the main evaluation logger
+        if not cls._enable_model_specific_logs:
+            return cls.get_logger("evaluation")
 
         # Sanitize model identifier for filename
         safe_name = model_identifier.replace("/", "_").replace(":", "_")

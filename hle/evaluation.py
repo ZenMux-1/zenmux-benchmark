@@ -40,8 +40,10 @@ class HLEEvaluator:
         question: Dict[str, Any],
         model_name: str,
         endpoint: ZenMuxEndpoint
-    ) -> Optional[Tuple[str, str, Dict[str, Any], Dict[str, float]]]:
-        """Evaluate a single question with a model."""
+    ) -> Tuple[str, Dict[str, Any]]:
+        """Evaluate a single question with a model. Always returns a result with has_answer field."""
+        question_id = question.get('id', 'unknown')
+
         try:
             # Check if model is o1-based (for system prompt handling)
             is_o1_model = "o1" in model_name.lower()
@@ -102,9 +104,6 @@ class HLEEvaluator:
             # Combine all content chunks
             content = "".join(content_chunks)
 
-            if not content:
-                return None
-
             # Calculate performance metrics
             performance_metrics = {}
 
@@ -128,11 +127,20 @@ class HLEEvaluator:
                 performance_metrics['generation_time_ms'] = 0.0
                 performance_metrics['throughput_tokens_per_second'] = 0.0
 
-            return question["id"], content, usage, performance_metrics, generation_id
+            # Return success result with has_answer=True
+            result = {
+                "model": model_name,
+                "response": content,
+                "usage": usage,
+                "performance": performance_metrics,
+                "generation_id": generation_id,
+                "has_answer": bool(content)  # True if we got content, False if empty
+            }
+
+            return question_id, result
 
         except Exception as e:
             error_msg = str(e)
-            question_id = question.get('id', 'unknown')
 
             # Log different error types with model information for better debugging
             if "Connection error" in error_msg or "peer closed connection" in error_msg:
@@ -143,7 +151,23 @@ class HLEEvaluator:
                 self.logger.error(f"File handle limit reached for question {question_id} [{model_name}]: {error_msg}")
             else:
                 self.logger.error(f"Error evaluating question {question_id} [{model_name}]: {e}")
-            return None
+
+            # Return failure result with has_answer=False
+            result = {
+                "model": model_name,
+                "response": "",
+                "usage": {},
+                "performance": {
+                    'first_token_latency_ms': 0.0,
+                    'generation_time_ms': 0.0,
+                    'throughput_tokens_per_second': 0.0
+                },
+                "generation_id": None,
+                "has_answer": False,
+                "error": error_msg
+            }
+
+            return question_id, result
 
     async def evaluate_model(
         self,
@@ -208,11 +232,15 @@ class HLEEvaluator:
                     self.logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
                     model_logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
 
-            # Filter out questions that already have predictions
-            remaining_questions = [
-                q for q in questions
-                if q["id"] not in existing_predictions
-            ]
+            # Filter out questions that already have predictions (or need retry for failed ones)
+            remaining_questions = []
+            for q in questions:
+                question_id = q["id"]
+                if question_id not in existing_predictions:
+                    remaining_questions.append(q)
+                elif existing_predictions[question_id].get("has_answer") is False:
+                    # Re-evaluate questions that previously failed
+                    remaining_questions.append(q)
 
             if not remaining_questions:
                 self.logger.info(f"✅ All questions already evaluated for {model_identifier}")
@@ -240,22 +268,14 @@ class HLEEvaluator:
             # Process results and collect performance metrics
             performance_data = []
             successful_count = 0
-            for result in results:
-                if result is None:
-                    continue
+            for question_id, result in results:
+                # Always record the result, regardless of success or failure
+                existing_predictions[question_id] = result
 
-                unique_id, response, usage, performance_metrics, generation_id = result
-                existing_predictions[unique_id] = {
-                    "model": model_identifier,
-                    "response": response,
-                    "usage": usage,
-                    "performance": performance_metrics,
-                    "generation_id": generation_id
-                }
-
-                # Collect performance data for averaging
-                performance_data.append(performance_metrics)
-                successful_count += 1
+                # Collect performance data only for successful evaluations
+                if result.get("has_answer"):
+                    performance_data.append(result["performance"])
+                    successful_count += 1
 
             # Early exit check: if success rate is too low, don't retry to avoid wasting time
             if len(remaining_questions) > 0:
@@ -320,26 +340,34 @@ class HLEEvaluator:
                 "predictions": existing_predictions
             }
 
-            with open(output_filepath, "w") as f:
-                json.dump(final_output, f, indent=4)
+            try:
+                with open(output_filepath, "w") as f:
+                    json.dump(final_output, f, indent=4)
+            except OSError as e:
+                self.logger.error(f"❌ Failed to write predictions file {output_filepath}: {e}")
+                if "Too many open files" in str(e):
+                    self.logger.error("💡 Try reducing num_workers or max_concurrent_models in config.py")
+                raise
 
-            # Check if evaluation is complete
-            if len(existing_predictions) == len(questions):
-                self.logger.info(f"✅ Evaluation complete: {len(existing_predictions)}/{len(questions)} predictions")
-                model_logger.info(f"✅ Evaluation complete: {len(existing_predictions)}/{len(questions)} predictions")
+            # Check if evaluation is complete based on has_answer field
+            total_predictions = len(existing_predictions)
+            successful_predictions = sum(1 for pred in existing_predictions.values() if pred.get("has_answer", False))
+            failed_predictions = total_predictions - successful_predictions
+
+            if total_predictions == len(questions) and failed_predictions == 0:
+                self.logger.info(f"✅ Evaluation complete: {successful_predictions}/{len(questions)} successful predictions")
+                model_logger.info(f"✅ Evaluation complete: {successful_predictions}/{len(questions)} successful predictions")
                 break
             elif retry_attempt < self.hle_config.max_evaluation_retries:
-                missing_count = len(questions) - len(existing_predictions)
-                self.logger.warning(f"⚠️ Incomplete evaluation: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
-                self.logger.info(f"🔄 Will retry missing questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
-                model_logger.warning(f"⚠️ Incomplete evaluation: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
-                model_logger.info(f"🔄 Will retry missing questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+                self.logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
+                self.logger.info(f"🔄 Will retry failed questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+                model_logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
+                model_logger.info(f"🔄 Will retry failed questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
             else:
-                missing_count = len(questions) - len(existing_predictions)
                 self.logger.error(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
-                self.logger.error(f"❌ Final result: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
+                self.logger.error(f"❌ Final result: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
                 model_logger.error(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
-                model_logger.error(f"❌ Final result: {len(existing_predictions)}/{len(questions)} predictions ({missing_count} missing)")
+                model_logger.error(f"❌ Final result: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
 
         self.logger.info(f"✅ Completed evaluation for {model_identifier}")
         self.logger.info(f"📝 Final predictions: {len(existing_predictions)}")

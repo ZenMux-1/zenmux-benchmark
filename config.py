@@ -13,8 +13,8 @@ class ZenMuxConfig:
     api_base_url: str = "https://zenmux.ai/api/v1"
     api_key: Optional[str] = None
     model_list_endpoint: str = "https://zenmux.ai/api/frontend/model/available/list"
-    timeout: float = 300.0  # API request timeout - reduced to 60s to prevent long hangs
-    max_retries: int = 1
+    timeout: float = 30.0  # API request timeout - reduced to 30s to prevent long hangs
+    max_retries: int = 0
 
     def __post_init__(self):
         # Load from environment variables if not provided
@@ -36,9 +36,9 @@ class HLEConfig:
     judge_model: str = "openai/gpt-5:openai"
     max_completion_tokens: Optional[int] = None
     temperature: float = 0.0
-    num_workers: int = 3  # Inner concurrency: requests per model (reduced to prevent file handle leaks)
-    max_concurrent_models: int = 8  # Outer concurrency: simultaneous models (reduced to prevent too many open files)
-    max_evaluation_retries: int = 1 # Maximum retries for incomplete evaluations
+    num_workers: int = 2  # Inner concurrency: requests per model (reduced to prevent file handle leaks)
+    max_concurrent_models: int = 3  # Outer concurrency: simultaneous models (reduced to prevent too many open files)
+    max_evaluation_retries: int = 0 # Maximum retries for incomplete evaluations
 
 
 @dataclass
@@ -56,8 +56,8 @@ class BenchmarkConfig:
 
     # Logging configuration
     console_log_level: int = logging.INFO
-    file_log_level: int = logging.DEBUG
-    enable_model_specific_logs: bool = True
+    file_log_level: int = logging.INFO
+    enable_model_specific_logs: bool = False  # If True, creates separate log file for each model
 
     # Timestamped run directory (set during initialization)
     run_dir: str = None
@@ -91,7 +91,8 @@ class BenchmarkConfig:
             log_dir=self.logs_dir,
             batch_timestamp=timestamp,
             console_level=self.console_log_level,
-            file_level=self.file_log_level
+            file_level=self.file_log_level,
+            enable_model_specific_logs=self.enable_model_specific_logs
         )
 
         # Use logger instead of print

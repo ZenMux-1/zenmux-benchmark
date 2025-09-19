@@ -60,8 +60,8 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         question: str,
         correct_answer: str,
         response: str
-    ) -> Optional[Tuple[Dict[str, Any], Dict[str, float]]]:
-        """Extract and judge a single answer."""
+    ) -> Tuple[Dict[str, Any], Dict[str, float], Optional[str], bool]:
+        """Extract and judge a single answer. Always returns a result with success flag."""
         prompt = self.JUDGE_PROMPT.format(
             question=question,
             correct_answer=correct_answer,
@@ -129,43 +129,66 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
                 "confidence": final_parsed_content.confidence
             }
 
-            return judge_result, performance_metrics, generation_id
+            return judge_result, performance_metrics, generation_id, True
 
         except Exception as e:
             self.logger.error(f"Error in judge: {e}")
-            return None
+            # Return error result with empty data but success=False
+            error_judge_result = {
+                "correct_answer": correct_answer,
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": str(e)
+            }
+            error_performance = {
+                'first_token_latency_ms': 0.0,
+                'generation_time_ms': 0.0,
+                'throughput_tokens_per_second': 0.0
+            }
+            return error_judge_result, error_performance, None, False
 
     async def judge_single_response(
         self,
         question: Dict[str, Any],
         predictions: Dict[str, Any]
-    ) -> Tuple[Optional[str], Optional[Dict[str, Any]], Optional[Dict[str, float]]]:
-        """Judge a single prediction."""
+    ) -> Tuple[str, Dict[str, Any], Optional[Dict[str, float]]]:
+        """Judge a single prediction. Always returns a result with has_judgment field."""
         unique_id = question["id"]
         prediction = copy.deepcopy(predictions[unique_id])
         question_text = question["question"]
         correct_answer = question["answer"]
 
-        if "judge_response" in prediction:
+        # If already judged and successful, skip unless it needs retry
+        if "judge_response" in prediction and prediction.get("has_judgment", False):
+            return unique_id, prediction, None
+
+        # Only judge if the prediction has an answer
+        if not prediction.get("has_answer", False):
+            # Add has_judgment=False for predictions without answers
+            prediction["has_judgment"] = False
             return unique_id, prediction, None
 
         response = prediction["response"]
-        result = await self.extract_answer(question_text, correct_answer, response)
+        judge_result, performance_metrics, generation_id, success = await self.extract_answer(
+            question_text, correct_answer, response
+        )
 
-        if result is not None:
-            judge_result, performance_metrics, generation_id = result
-            prediction["judge_response"] = judge_result
-            prediction["judge_performance"] = performance_metrics
-            prediction["judge_generation_id"] = generation_id
-            return unique_id, prediction, performance_metrics
-        else:
-            return None, None, None
+        # Always add judge information, regardless of success
+        prediction["judge_response"] = judge_result
+        prediction["judge_performance"] = performance_metrics
+        prediction["judge_generation_id"] = generation_id
+        prediction["has_judgment"] = success
+
+        # Return performance metrics only if judging was successful
+        return unique_id, prediction, performance_metrics if success else None
 
     async def judge_all_responses(
         self,
         questions: List[Dict[str, Any]],
         predictions: Dict[str, Any]
-    ) -> List[Tuple[Optional[str], Optional[Dict[str, Any]], Optional[Dict[str, float]]]]:
+    ) -> List[Tuple[str, Dict[str, Any], Optional[Dict[str, float]]]]:
         """Judge all responses asynchronously."""
         async def bound_func(question):
             async with semaphore:
@@ -204,12 +227,13 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         return np.sqrt(cerr)
 
     def calculate_metrics(self, predictions: Dict[str, Any], total_questions: int) -> Dict[str, float]:
-        """Calculate accuracy and calibration metrics."""
+        """Calculate accuracy and calibration metrics based on successful judgments only."""
         correct = []
         confidence = []
 
+        # Only consider predictions with successful judgments
         for v in predictions.values():
-            if "judge_response" in v:
+            if v.get("has_judgment", False) and "judge_response" in v:
                 judge_response = v["judge_response"]
                 correct.append("yes" in judge_response["correct"])
                 confidence.append(judge_response["confidence"])
@@ -220,23 +244,31 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
                 "confidence_interval": 0.0,
                 "calibration_error": 0.0,
                 "total_evaluated": 0,
-                "total_questions": total_questions
+                "total_questions": total_questions,
+                "successful_judgments": 0,
+                "failed_judgments": len(predictions) - 0
             }
 
         correct = np.array(correct)
         confidence = np.array(confidence) / 100
 
-        accuracy = 100 * sum(correct) / total_questions
+        accuracy = 100 * sum(correct) / len(correct)  # Use successful judgments as denominator
         # Wald estimator, 95% confidence interval
-        confidence_half_width = 1.96 * math.sqrt(accuracy * (100 - accuracy) / total_questions)
+        confidence_half_width = 1.96 * math.sqrt(accuracy * (100 - accuracy) / len(correct))
         calibration_error = 100 * self.calculate_calibration_error(confidence, correct, beta=100)
+
+        # Count successful and failed judgments
+        successful_judgments = len(correct)
+        failed_judgments = len(predictions) - successful_judgments
 
         return {
             "accuracy": round(accuracy, 2),
             "confidence_interval": round(confidence_half_width, 2),
             "calibration_error": round(calibration_error, 2),
             "total_evaluated": len(correct),
-            "total_questions": total_questions
+            "total_questions": total_questions,
+            "successful_judgments": successful_judgments,
+            "failed_judgments": failed_judgments
         }
 
     async def judge_predictions(
@@ -292,11 +324,16 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
             except Exception as e:
                 self.logger.warning(f"⚠️ Warning: Could not load existing judgments: {e}")
 
-        # Filter questions that need judging
-        questions_to_judge = [
-            q for q in questions
-            if q["id"] in predictions and q["id"] not in judged_predictions
-        ]
+        # Filter questions that need judging (including retries for failed judgments)
+        questions_to_judge = []
+        for q in questions:
+            question_id = q["id"]
+            if question_id in predictions:
+                if question_id not in judged_predictions:
+                    questions_to_judge.append(q)
+                elif judged_predictions[question_id].get("has_judgment") is False:
+                    # Re-judge questions that previously failed
+                    questions_to_judge.append(q)
 
         # Initialize performance data list
         judge_performance_data = []
@@ -311,10 +348,10 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
 
             # Process results and collect performance metrics
             for unique_id, prediction, performance_metrics in results:
-                if unique_id is not None:
-                    judged_predictions[unique_id] = prediction
-                    if performance_metrics is not None:
-                        judge_performance_data.append(performance_metrics)
+                # Always record the result, regardless of success or failure
+                judged_predictions[unique_id] = prediction
+                if performance_metrics is not None:
+                    judge_performance_data.append(performance_metrics)
 
         # Calculate metrics
         metrics = self.calculate_metrics(judged_predictions, total_questions)
