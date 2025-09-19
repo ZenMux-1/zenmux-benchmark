@@ -1,0 +1,103 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:01:43.259076",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_anthropic_claude-opus-4_amazon-bedrock_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:01:12.467422",
+            "model_identifier": "anthropic/claude-opus-4:amazon-bedrock",
+            "endpoint": {
+                "provider_slug": "amazon-bedrock",
+                "provider": "Amazon Bedrock",
+                "context_length": 200000,
+                "max_completion_tokens": 32000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions,messages"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 0,
+        "total_questions": 2500,
+        "successful_judgments": 0,
+        "failed_judgments": 3
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "anthropic/claude-opus-4:amazon-bedrock",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "",
+            "has_judgment": false
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "anthropic/claude-opus-4:amazon-bedrock",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "",
+            "has_judgment": false
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "anthropic/claude-opus-4:amazon-bedrock",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "",
+            "has_judgment": false
+        }
+    }
+}

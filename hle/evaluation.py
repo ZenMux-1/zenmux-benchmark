@@ -286,6 +286,9 @@ class HLEEvaluator:
                     break
 
             # Add metadata to the predictions file
+            # Calculate has_answer statistics
+            has_answer_questions = sum(1 for pred in existing_predictions.values() if pred.get("has_answer", False))
+
             metadata = {
                 "evaluation_metadata": {
                     "timestamp": datetime.now().isoformat(),
@@ -314,9 +317,8 @@ class HLEEvaluator:
                     },
                     "statistics": {
                         "total_questions": len(questions),
-                        "remaining_questions": len(questions) - len(existing_predictions),
-                        "total_predictions": len(existing_predictions),
-                        "retry_attempt": retry_attempt
+                        "has_answer_questions": has_answer_questions,
+                        "has_no_answer_questions": len(existing_predictions) - has_answer_questions
                     }
                 }
             }

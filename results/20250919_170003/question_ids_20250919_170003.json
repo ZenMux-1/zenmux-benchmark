@@ -1,0 +1,16 @@
+{
+    "run_metadata": {
+        "timestamp": "2025-09-19T17:00:10.176697",
+        "batch_timestamp": "20250919_170003",
+        "dataset_name": "cais/hle",
+        "dataset_split": "test",
+        "text_only": true,
+        "max_samples": 3,
+        "total_questions": 3
+    },
+    "question_ids": [
+        "668825f80a642802bdfeadfa",
+        "668828540a642802bdfeadfc",
+        "669402b41dcb3d5a1ef9e951"
+    ]
+}

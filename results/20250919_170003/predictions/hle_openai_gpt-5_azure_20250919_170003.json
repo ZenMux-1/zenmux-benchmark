@@ -1,0 +1,94 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-19T17:02:10.188587",
+        "model_identifier": "openai/gpt-5:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0,
+            "max_evaluation_retries": 0
+        },
+        "statistics": {
+            "total_questions": 3,
+            "remaining_questions": 0,
+            "total_predictions": 3,
+            "retry_attempt": 0
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 110759.53,
+            "avg_generation_time_ms": 2677.01,
+            "avg_throughput_tokens_per_second": 1266.71,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "Request timed out."
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5:azure",
+            "response": "Explanation: \n- c1: The inverse/opposite of \u201cdepth\u201d in Bennett\u2019s \u201clogical depth\u201d context is \u201cshallow.\u201d The third letter of \u201cshallow\u201d is a.\n- c2: Gell-Mann\u2019s joke is \u201cthe two operations didn\u2019t commute.\u201d The third character of \u201coperations\u201d is e.\n- c3: The last author of the GELU paper is Kevin Gimpel; his last name ends with l. Rot13 of l is y, so c4 = y.\n- c5: Mars (0.107 Earth masses) is closer in mass to the Moon (0.0123 Earth masses) than to Earth, so the answer is \u201cmoon.\u201d The second letter is o.\n\nConcatenate c1, c2, c4, c5 \u2192 a + e + y + o = aeyo.\n\nAnswer: aeyo\nConfidence: 78%",
+            "usage": {
+                "completion_tokens": 3391,
+                "prompt_tokens": 239,
+                "total_tokens": 3630,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3200,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 110759.53491210938,
+                "generation_time_ms": 2677.011962890625,
+                "throughput_tokens_per_second": 1266.7108130284237
+            },
+            "generation_id": "2538CCSYQWFY00688579",
+            "has_answer": true
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "Request timed out."
+        }
+    }
+}

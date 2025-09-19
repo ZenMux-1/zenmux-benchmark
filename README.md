@@ -123,34 +123,16 @@ uv run python benchmark.py --mode filter --model-filter gpt --exclude openai/gpt
 When evaluations encounter failures, you can automatically retry and fix them:
 
 ```bash
-# Fix evaluation failures from a previous run
-uv run python benchmark.py --fix-evaluation results/20250919_011623
-
-# Fix judge failures from a previous run
-uv run python benchmark.py --fix-judge results/20250919_011623
+# Fix both evaluation and judge failures from a previous run
+uv run python benchmark.py --fix results/20250919_011623
 
 # The system will:
-# - Read failure records from evaluation_failures_*.json or judge_failures_*.json
-# - Retry failed questions automatically
-# - Update prediction/judge files with successful results
-# - Remove fixed failures from the failure tracking files
-# - Provide detailed progress and summary statistics
-```
-
-### 6. Metrics-Only Calculation
-
-Calculate accurate metrics for models with complete evaluations:
-
-```bash
-# Run metrics calculation only for complete models
-uv run python benchmark.py --metrics-only results/20250919_011623
-
-# The system will:
-# - Validate models have no evaluation or judge failures
-# - Ensure judge count equals total question count from question_ids_*.json
-# - Calculate metrics only for models meeting strict completeness criteria
-# - Generate detailed exclusion reports for incomplete models
-# - Save results to metrics_only_*.json
+# - Read models from available_models_*.json
+# - Check prediction files for questions with has_answer=false
+# - Check judge files for questions with has_judgment=false
+# - Retry failed questions and judgments automatically
+# - Update files with successful results
+# - Recalculate metrics for all models
 ```
 
 ## Important Options
@@ -175,7 +157,7 @@ uv run python benchmark.py --metrics-only results/20250919_011623
 ### `--num-workers N`
 
 - Controls concurrent requests per model (inner concurrency)
-- Default is 10, adjust based on API rate limits and provider capabilities
+- Default is 2, adjust based on API rate limits and provider capabilities
 - Each model processes questions concurrently with this limit
 
 ### `--exclude MODEL1 MODEL2 ...`
@@ -187,26 +169,13 @@ uv run python benchmark.py --metrics-only results/20250919_011623
   - **Model name**: `gpt-4o` (excludes gpt-4o from all providers)
 - Can combine multiple exclusion patterns
 
-### `--fix-evaluation TIMESTAMP_DIR`
+### `--fix TIMESTAMP_DIR`
 
-- Fix evaluation failures from a previous run
-- Reads `evaluation_failures_*.json` and retries failed questions
-- Updates prediction files with successful results
-- Removes fixed failures from tracking files
-
-### `--fix-judge TIMESTAMP_DIR`
-
-- Fix judge failures from a previous run
-- Reads `judge_failures_*.json` and retries failed judgments
-- Updates judged files with successful results
-- Removes fixed failures from tracking files
-
-### `--metrics-only TIMESTAMP_DIR`
-
-- Calculate metrics only for models with complete evaluations
-- Validates models have no failures and complete judge coverage
-- Ensures judge count equals total questions in `question_ids_*.json`
-- Generates detailed exclusion reports and accurate metrics
+- Fix both evaluation and judge failures from a previous run
+- Reads model list from `available_models_*.json`
+- Retries questions with `has_answer=false` in prediction files
+- Retries judgments with `has_judgment=false` in judge files
+- Updates files with successful results and recalculates metrics
 
 ## Output Files
 
@@ -215,27 +184,21 @@ Results are automatically organized with timestamps for each evaluation run:
 ```text
 results/
 ├── 20250917_173456/              # Timestamped run directory
-│   ├── predictions/              # Model prediction results
+│   ├── predictions/              # Model prediction results (with has_answer field)
 │   │   ├── hle_openai_gpt-4o_openai_20250917_173456.json
 │   │   └── hle_anthropic_claude-3.5-sonnet_anthropic_20250917_173456.json
-│   ├── judged/                   # Judging results and scores
+│   ├── judged/                   # Judging results and scores (with has_judgment field)
 │   │   ├── judged_hle_openai_gpt-4o_openai_20250917_173456.json
 │   │   └── judged_hle_anthropic_claude-3.5-sonnet_anthropic_20250917_173456.json
 │   ├── question_ids_20250917_173456.json           # Question IDs used in this run
 │   ├── available_models_20250917_173456.json       # Available models list
-│   ├── evaluation_failures_20250917_173456.json    # Evaluation failure tracking
-│   ├── judge_failures_20250917_173456.json         # Judge failure tracking
-│   ├── metrics_summary_20250917_173456.json        # Aggregated metrics and results
-│   └── metrics_only_20250917_173456.json           # Independent metrics calculation
+│   └── metrics_summary_20250917_173456.json        # Aggregated metrics and results
 └── 20250917_180234/              # Another evaluation run
     ├── predictions/
     ├── judged/
     ├── question_ids_20250917_180234.json
     ├── available_models_20250917_180234.json
-    ├── evaluation_failures_20250917_180234.json
-    ├── judge_failures_20250917_180234.json
-    ├── metrics_summary_20250917_180234.json
-    └── metrics_only_20250917_180234.json
+    └── metrics_summary_20250917_180234.json
 ```
 
 ## Performance & Concurrency
@@ -247,18 +210,20 @@ ZenMux Benchmark implements a **dual-layer concurrency architecture** for maximu
 The system operates with two independent levels of concurrency:
 
 1. **Model-level Concurrency (Outer Layer)**
+
    - Multiple models evaluated simultaneously
    - Controlled by `max_concurrent_models` configuration (default: 3)
    - Example: GPT-4, Claude, and Gemini running in parallel
 
 2. **Request-level Concurrency (Inner Layer)**
    - Multiple questions per model processed concurrently
-   - Controlled by `num_workers` configuration (default: 10)
-   - Example: Each model processes 10 questions simultaneously
+   - Controlled by `num_workers` configuration (default: 2)
+   - Example: Each model processes 2 questions simultaneously
 
 ### Performance Benefits
 
 **Example Scenario**: 6 models × 1000 questions each
+
 - **Serial execution**: ~17 minutes (1 model at a time)
 - **Dual-layer concurrent**: ~6 minutes (3 models in parallel)
 - **Performance gain**: 3x faster ⚡
@@ -269,20 +234,22 @@ Edit `config.py` or create custom configurations:
 
 ```python
 class HLEConfig:
-    num_workers: int = 10              # Inner: requests per model
+    num_workers: int = 2               # Inner: requests per model
     max_concurrent_models: int = 3     # Outer: simultaneous models
 ```
 
 **Conservative Settings** (avoid rate limits):
+
 ```python
-max_concurrent_models = 2
-num_workers = 5
+max_concurrent_models = 1
+num_workers = 1
 ```
 
-**Aggressive Settings** (maximum speed):
+**Aggressive Settings** (maximum speed, stable network):
+
 ```python
 max_concurrent_models = 5
-num_workers = 20
+num_workers = 5
 ```
 
 ### Rate Limit Considerations
@@ -342,11 +309,7 @@ uv run python benchmark.py --mode all \
   --max-samples 20
 
 # Fix failures from CI/CD runs
-uv run python benchmark.py --fix-evaluation results/20250917_173456
-uv run python benchmark.py --fix-judge results/20250917_173456
-
-# Calculate metrics for complete models only
-uv run python benchmark.py --metrics-only results/20250917_173456
+uv run python benchmark.py --fix results/20250917_173456
 ```
 
 ## Important Notes
@@ -355,7 +318,7 @@ uv run python benchmark.py --metrics-only results/20250917_173456
 2. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
 3. **Cost Control**: Use `--max-samples` and `--exclude` to control evaluation scope and costs - exclude expensive models to save budget
 4. **Model Exclusion**: Use `--exclude` strategically to skip problematic, expensive, or irrelevant models for your use case
-5. **Failure Recovery**: The system automatically tracks failures and provides fix commands for robust production use
+5. **Failure Recovery**: The system tracks failures using `has_answer` and `has_judgment` fields, use `--fix` to retry failed operations
 6. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
 7. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
 8. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
@@ -366,52 +329,59 @@ uv run python benchmark.py --metrics-only results/20250917_173456
 ### Common Errors
 
 1. **`ZENMUX_API_KEY not set`**
+
    - Ensure environment variable is set: `export ZENMUX_API_KEY="your_key"`
 
 2. **`504 Gateway Time-out`**
+
    - Network timeout, system will automatically retry
    - Consider reducing `--num-workers` value
 
 3. **Judge model 404 error**
+
    - ZenMux API key issue or judge model unavailable
    - Use `--no-judge` to skip judging
 
 4. **Memory issues**
+
    - Reduce `--num-workers` value
    - Use `--max-samples` to limit sample size
 
 5. **Evaluation or judge failures**
-   - Use `--fix-evaluation` or `--fix-judge` to retry failed operations
-   - Check failure tracking files for specific error details
+
+   - Use `--fix` to retry failed operations (both evaluation and judge)
+   - Check prediction/judge files for questions with `has_answer=false` or `has_judgment=false`
    - Consider reducing concurrency if failures persist
 
-6. **Incomplete metrics or validation errors**
-   - Use `--metrics-only` to validate and recalculate metrics for complete models
-   - Check exclusion reports to identify models with incomplete data
-   - Ensure all required files are present in timestamp directory
+6. **Too many open files error**
+   - Reduce `max_concurrent_models` and `num_workers` values
+   - This error occurs when file handle limits are exceeded during high concurrency operations
 
 ### Performance Optimization
 
 **Dual-Layer Concurrency**:
+
 - **Model-level**: Adjust `max_concurrent_models` (1-5) based on API limits
-- **Request-level**: Tune `num_workers` (5-20) per provider capabilities
-- Monitor system resources and network stability
+- **Request-level**: Tune `num_workers` (1-5) per provider capabilities
+- Monitor system resources and network stability to avoid "too many open files" errors
 
 **General Optimizations**:
+
 - Use `--text-only` for 40-60% speed improvements
 - Start with `--max-samples` for testing before full evaluation
 - Balance concurrency vs. stability based on network conditions
 
 **Recommended Settings by Use Case**:
+
 ```bash
-# Development/Testing
-max_concurrent_models = 2, num_workers = 5
+# Development/Testing (safe)
+max_concurrent_models = 1, num_workers = 1
 
-# Production/CI
-max_concurrent_models = 3, num_workers = 10
+# Production/CI (balanced)
+max_concurrent_models = 3, num_workers = 2
 
-# High-performance (stable network)
-max_concurrent_models = 5, num_workers = 15
+# High-performance (stable network, careful monitoring)
+max_concurrent_models = 5, num_workers = 3
 ```
 
 ## GitHub Actions

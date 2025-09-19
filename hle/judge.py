@@ -357,6 +357,9 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         metrics = self.calculate_metrics(judged_predictions, total_questions)
 
         # Add metadata to the judged file
+        # Calculate has_judgment statistics
+        has_judgment_questions = sum(1 for pred in judged_predictions.values() if pred.get("has_judgment", False))
+
         metadata = {
             "judging_metadata": {
                 "timestamp": datetime.now().isoformat(),
@@ -371,8 +374,8 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
                 "evaluation_metadata": evaluation_metadata,  # Include original evaluation metadata
                 "statistics": {
                     "total_questions": total_questions,
-                    "questions_to_judge": len(questions_to_judge),
-                    "total_judged": len(judged_predictions)
+                    "has_judgment_questions": has_judgment_questions,
+                    "has_no_judgment_questions": len(judged_predictions) - has_judgment_questions
                 }
             },
             "metrics": metrics

