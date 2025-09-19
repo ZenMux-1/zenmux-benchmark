@@ -84,8 +84,19 @@ class HLERunner:
             "available_models": []
         }
 
-        # Extract model identifiers as a simple list
-        models_data["available_models"] = [model_id for model_id, model, endpoint in model_endpoint_pairs]
+        # Extract model information with detailed metadata
+        available_models = {}
+        for model_id, model, endpoint in model_endpoint_pairs:
+            # Only include models and endpoints with visible=1
+            if model.visible == 1 and endpoint.visible == 1:
+                available_models[model_id] = {
+                    "max_completion_tokens": endpoint.max_completion_tokens,
+                    "context_length": endpoint.context_length,
+                    "supports_reasoning": endpoint.supports_reasoning
+                }
+
+        models_data["available_models"] = available_models
+        models_data["discovery_metadata"]["total_available_models"] = len(available_models)
 
         # Save to the timestamped run directory
         models_file = os.path.join(self.config.run_dir, f"available_models_{self.batch_timestamp}.json")

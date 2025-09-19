@@ -34,7 +34,7 @@ class HLEConfig:
     dataset_name: str = "cais/hle"
     dataset_split: str = "test"
     judge_model: str = "openai/gpt-5:openai"
-    max_completion_tokens: int = 16384
+    max_completion_tokens: Optional[int] = None
     temperature: float = 0.0
     num_workers: int = 3  # Inner concurrency: requests per model (increased for better throughput)
     max_concurrent_models: int = 100  # Outer concurrency: simultaneous models (reduced to avoid server overload)

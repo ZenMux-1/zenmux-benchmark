@@ -49,11 +49,16 @@ class HLEEvaluator:
 
             client = self.zenmux_client.get_client(endpoint)
 
+            # Determine max_completion_tokens: use model's own value unless config overrides
+            max_completion_tokens = endpoint.max_completion_tokens
+            if self.hle_config.max_completion_tokens is not None:
+                max_completion_tokens = self.hle_config.max_completion_tokens
+
             # Prepare request parameters
             request_params = {
                 "model": model_name,
                 "messages": messages,
-                "max_completion_tokens": self.hle_config.max_completion_tokens,
+                "max_completion_tokens": max_completion_tokens,
                 "stream": True,
                 "stream_options": {"include_usage": True},
             }

@@ -60,7 +60,11 @@ class ZenMuxAPI:
 
         pairs = []
         for model in filtered_models:
-            for model_id, endpoint in model.get_model_endpoint_pairs():
-                pairs.append((model_id, model, endpoint))
+            # Only include models with visible=1
+            if model.visible == 1:
+                for model_id, endpoint in model.get_model_endpoint_pairs():
+                    # Only include endpoints with visible=1
+                    if endpoint.visible == 1:
+                        pairs.append((model_id, model, endpoint))
 
         return pairs

@@ -56,6 +56,7 @@ uv run python benchmark.py --mode single \
   --model-slug openai/gpt-4o-mini \
    --provider-slug openai \
   --text-only --max-samples 10 \
+  --no-judge
 
 
 # Test all models except expensive ones
