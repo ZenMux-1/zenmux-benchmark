@@ -14,21 +14,24 @@ class HLEDataset:
         "Confidence: {your confidence score between 0% and 100% for your answer}"
     )
 
+    # Class-level cache to share dataset across instances
+    _dataset_cache = {}
+
     def __init__(self, dataset_name: str = "cais/hle", split: str = "test"):
         self.dataset_name = dataset_name
         self.split = split
-        self._dataset = None
+        self._cache_key = f"{dataset_name}:{split}"
 
     def load_dataset(self) -> List[Dict[str, Any]]:
-        """Load and return the HLE dataset."""
-        if self._dataset is None:
+        """Load and return the HLE dataset using shared cache."""
+        if self._cache_key not in self._dataset_cache:
             dataset = load_dataset(self.dataset_name, split=self.split).to_dict()
             # Convert to list of dictionaries for easier handling
-            self._dataset = [
+            self._dataset_cache[self._cache_key] = [
                 dict(zip(dataset.keys(), values))
                 for values in zip(*dataset.values())
             ]
-        return self._dataset
+        return self._dataset_cache[self._cache_key]
 
     def filter_text_only(self, questions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Filter questions to only include text-only (no images)."""

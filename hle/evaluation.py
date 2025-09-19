@@ -7,7 +7,7 @@ import logging
 import time
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
-from tqdm.asyncio import tqdm_asyncio
+# from tqdm.asyncio import tqdm_asyncio  # Removed for cleaner static output
 
 from .dataset import HLEDataset
 from zenmux import ZenMuxOpenAIClient, ZenMuxEndpoint
@@ -131,7 +131,18 @@ class HLEEvaluator:
             return question["id"], content, usage, performance_metrics, generation_id
 
         except Exception as e:
-            self.logger.error(f"Error evaluating question {question.get('id', 'unknown')}: {e}")
+            error_msg = str(e)
+            question_id = question.get('id', 'unknown')
+
+            # Log different error types with model information for better debugging
+            if "Connection error" in error_msg or "peer closed connection" in error_msg:
+                self.logger.warning(f"Connection issue for question {question_id} [{model_name}]: {error_msg}")
+            elif "timeout" in error_msg.lower():
+                self.logger.warning(f"Timeout for question {question_id} [{model_name}]: {error_msg}")
+            elif "Too many open files" in error_msg:
+                self.logger.error(f"File handle limit reached for question {question_id} [{model_name}]: {error_msg}")
+            else:
+                self.logger.error(f"Error evaluating question {question_id} [{model_name}]: {e}")
             return None
 
     async def evaluate_model(
@@ -172,6 +183,12 @@ class HLEEvaluator:
             if retry_attempt > 0:
                 self.logger.warning(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
                 model_logger.warning(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
+
+                # Clear client connection on retry to prevent connection issues
+                try:
+                    await self.zenmux_client.close()
+                except:
+                    pass  # Ignore errors during cleanup
 
             # Load existing predictions if file exists
             existing_predictions = {}
@@ -217,10 +234,12 @@ class HLEEvaluator:
 
             # Evaluate remaining questions
             tasks = [bound_evaluate(q) for q in remaining_questions]
-            results = await tqdm_asyncio.gather(*tasks, desc=f"Evaluating {model_identifier} (attempt {retry_attempt + 1})")
+            model_logger.info(f"🔄 Starting evaluation of {len(remaining_questions)} questions for {model_identifier} (attempt {retry_attempt + 1})")
+            results = await asyncio.gather(*tasks)
 
             # Process results and collect performance metrics
             performance_data = []
+            successful_count = 0
             for result in results:
                 if result is None:
                     continue
@@ -236,6 +255,15 @@ class HLEEvaluator:
 
                 # Collect performance data for averaging
                 performance_data.append(performance_metrics)
+                successful_count += 1
+
+            # Early exit check: if success rate is too low, don't retry to avoid wasting time
+            if len(remaining_questions) > 0:
+                success_rate = successful_count / len(remaining_questions)
+                if success_rate < 0.2 and retry_attempt > 0:  # Less than 20% success rate after first retry
+                    model_logger.warning(f"⚠️ Low success rate ({success_rate:.1%}), skipping further retries to prevent timeout")
+                    self.logger.warning(f"⚠️ Skipping retries for {model_identifier} due to low success rate ({success_rate:.1%})")
+                    break
 
             # Add metadata to the predictions file
             metadata = {

@@ -305,7 +305,18 @@ class HLERunner:
                     return result
 
                 except Exception as e:
-                    self.logger.error(f"❌ Error evaluating {model_identifier}: {e}")
+                    error_msg = str(e)
+                    if "Too many open files" in error_msg:
+                        self.logger.error(f"❌ File handle limit reached for {model_identifier}: {error_msg}")
+                    else:
+                        self.logger.error(f"❌ Error evaluating {model_identifier}: {e}")
+
+                    # Clean up any connections for this model to free resources
+                    try:
+                        await self.evaluator.zenmux_client.close()
+                    except:
+                        pass
+
                     return {
                         "model_identifier": model_identifier,
                         "error": str(e),
@@ -313,6 +324,13 @@ class HLERunner:
                         "judged_file": None,
                         "metrics": None
                     }
+
+                finally:
+                    # Always try to clean up connections after each model
+                    try:
+                        await self.evaluator.zenmux_client.close()
+                    except:
+                        pass
 
         # Create semaphore for outer layer concurrency
         models_semaphore = asyncio.Semaphore(self.config.hle.max_concurrent_models)

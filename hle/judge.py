@@ -11,7 +11,7 @@ import numpy as np
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Literal, Tuple
 from pydantic import BaseModel
-from tqdm.asyncio import tqdm_asyncio
+# from tqdm.asyncio import tqdm_asyncio  # Removed for cleaner static output
 from datasets import load_dataset
 
 from config import HLEConfig, ZenMuxConfig
@@ -47,7 +47,7 @@ reasoning: Explain why the extracted_final_answer is correct or incorrect based 
 
 correct: Answer 'yes' if extracted_final_answer matches the [correct_answer] given above, or is within a small margin of error for numerical problems. Answer 'no' otherwise, i.e. if there if there is any inconsistency, ambiguity, non-equivalency, or if the extracted answer is incorrect.
 
-confidence: The extracted confidence score between 0|\%| and 100|\%| from [response]. Put 100 if there is no confidence score available."""
+confidence: The extracted confidence score between 0|%| and 100|%| from [response]. Put 100 if there is no confidence score available."""
 
     def __init__(self, hle_config: HLEConfig, zenmux_config: ZenMuxConfig):
         self.hle_config = hle_config
@@ -174,7 +174,8 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
 
         semaphore = asyncio.Semaphore(self.hle_config.num_workers)
         tasks = [bound_func(q) for q in questions]
-        results = await tqdm_asyncio.gather(*tasks, desc="Judging responses")
+        self.logger.info(f"⚖️ Starting judgment of {len(questions)} responses")
+        results = await asyncio.gather(*tasks)
 
         return results
 

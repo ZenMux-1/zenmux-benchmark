@@ -87,6 +87,18 @@ class BenchmarkLogger:
         root_logger.addHandler(error_handler)
         root_logger.addHandler(console_handler)
 
+        # Suppress noisy HTTP debug logs
+        logging.getLogger("httpcore").setLevel(logging.WARNING)
+        logging.getLogger("httpx").setLevel(logging.WARNING)
+        logging.getLogger("urllib3").setLevel(logging.WARNING)
+        logging.getLogger("requests").setLevel(logging.WARNING)
+
+        # Suppress noisy HuggingFace datasets debug logs
+        logging.getLogger("filelock").setLevel(logging.WARNING)
+        logging.getLogger("fsspec").setLevel(logging.WARNING)
+        logging.getLogger("fsspec.local").setLevel(logging.WARNING)
+        logging.getLogger("datasets").setLevel(logging.WARNING)
+
         cls._handlers_setup = True
 
         # Log the setup
