@@ -154,20 +154,19 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         question: Dict[str, Any],
         predictions: Dict[str, Any]
     ) -> Tuple[str, Dict[str, Any], Optional[Dict[str, float]]]:
-        """Judge a single prediction. Always returns a result with has_judgment field."""
+        """Judge a single prediction. Always returns a result."""
         unique_id = question["id"]
         prediction = copy.deepcopy(predictions[unique_id])
         question_text = question["question"]
         correct_answer = question["answer"]
 
-        # If already judged and successful, skip unless it needs retry
-        if "judge_response" in prediction and prediction.get("has_judgment", False):
+        # If already judged successfully (has judge_response with content), skip
+        if "judge_response" in prediction and prediction["judge_response"].get("reasoning", "").strip():
             return unique_id, prediction, None
 
-        # Only judge if the prediction has an answer
-        if not prediction.get("has_answer", False):
-            # Add has_judgment=False for predictions without answers
-            prediction["has_judgment"] = False
+        # Only judge if the prediction has an answer (non-empty response)
+        if not prediction.get("response", "").strip():
+            # No need to judge empty responses
             return unique_id, prediction, None
 
         response = prediction["response"]
@@ -179,7 +178,6 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         prediction["judge_response"] = judge_result
         prediction["judge_performance"] = performance_metrics
         prediction["judge_generation_id"] = generation_id
-        prediction["has_judgment"] = success
 
         # Return performance metrics only if judging was successful
         return unique_id, prediction, performance_metrics if success else None
@@ -231,9 +229,9 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         correct = []
         confidence = []
 
-        # Only consider predictions with successful judgments
+        # Only consider predictions with successful judgments (non-empty judge response)
         for v in predictions.values():
-            if v.get("has_judgment", False) and "judge_response" in v:
+            if "judge_response" in v and v["judge_response"].get("reasoning", "").strip():
                 judge_response = v["judge_response"]
                 correct.append("yes" in judge_response["correct"])
                 confidence.append(judge_response["confidence"])
@@ -242,33 +240,22 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
             return {
                 "accuracy": 0.0,
                 "confidence_interval": 0.0,
-                "calibration_error": 0.0,
-                "total_evaluated": 0,
-                "total_questions": total_questions,
-                "successful_judgments": 0,
-                "failed_judgments": len(predictions) - 0
+                "calibration_error": 0.0
             }
 
         correct = np.array(correct)
         confidence = np.array(confidence) / 100
 
-        accuracy = 100 * sum(correct) / len(correct)  # Use successful judgments as denominator
-        # Wald estimator, 95% confidence interval
-        confidence_half_width = 1.96 * math.sqrt(accuracy * (100 - accuracy) / len(correct))
+        # Follow official HLE calculation: use total_questions as denominator (failed judgments count as incorrect)
+        accuracy = 100 * sum(correct) / total_questions
+        # Wald estimator, 95% confidence interval - use total_questions for variance calculation
+        confidence_half_width = 1.96 * math.sqrt(accuracy * (100 - accuracy) / total_questions)
         calibration_error = 100 * self.calculate_calibration_error(confidence, correct, beta=100)
-
-        # Count successful and failed judgments
-        successful_judgments = len(correct)
-        failed_judgments = len(predictions) - successful_judgments
 
         return {
             "accuracy": round(accuracy, 2),
             "confidence_interval": round(confidence_half_width, 2),
-            "calibration_error": round(calibration_error, 2),
-            "total_evaluated": len(correct),
-            "total_questions": total_questions,
-            "successful_judgments": successful_judgments,
-            "failed_judgments": failed_judgments
+            "calibration_error": round(calibration_error, 2)
         }
 
     async def judge_predictions(
@@ -331,8 +318,8 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
             if question_id in predictions:
                 if question_id not in judged_predictions:
                     questions_to_judge.append(q)
-                elif judged_predictions[question_id].get("has_judgment") is False:
-                    # Re-judge questions that previously failed
+                elif not judged_predictions[question_id].get("judge_response", {}).get("reasoning", "").strip():
+                    # Re-judge questions that previously failed (empty judge response)
                     questions_to_judge.append(q)
 
         # Initialize performance data list
@@ -357,8 +344,15 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         metrics = self.calculate_metrics(judged_predictions, total_questions)
 
         # Add metadata to the judged file
-        # Calculate has_judgment statistics
-        has_judgment_questions = sum(1 for pred in judged_predictions.values() if pred.get("has_judgment", False))
+        # Create endpoint info for the judge model (dummy endpoint used in extract_answer)
+        judge_endpoint_info = {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 200000,
+            "max_completion_tokens": 4096,
+            "supports_streaming": True,
+            "suitable_api": "chat.completions"
+        }
 
         metadata = {
             "judging_metadata": {
@@ -366,17 +360,13 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
                 "judge_model": self.hle_config.judge_model,
                 "dataset_name": dataset_name,
                 "original_predictions_file": predictions_file,
+                "endpoint": judge_endpoint_info,  # Judge model's endpoint information
                 "judge_config": {
                     "num_workers": self.hle_config.num_workers,
                     "timeout": self.zenmux_config.timeout,
                     "max_retries": self.zenmux_config.max_retries
                 },
-                "evaluation_metadata": evaluation_metadata,  # Include original evaluation metadata
-                "statistics": {
-                    "total_questions": total_questions,
-                    "has_judgment_questions": has_judgment_questions,
-                    "has_no_judgment_questions": len(judged_predictions) - has_judgment_questions
-                }
+                "evaluation_metadata": evaluation_metadata  # Include original evaluation metadata for the evaluated model
             },
             "metrics": metrics
         }
@@ -404,9 +394,8 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
             json.dump(final_output, f, indent=4)
 
         self.logger.info("🎯 *** Metrics ***")
-        self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
+        self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}%")
         self.logger.info(f"📏 Calibration Error: {metrics['calibration_error']}")
-        self.logger.info(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")
         self.logger.info(f"💾 Saved to: {output_filepath}")
 
         return output_filepath

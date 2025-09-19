@@ -3,6 +3,7 @@
 import asyncio
 import json
 import os
+import glob
 import logging
 from datetime import datetime
 from typing import List, Optional, Dict, Any
@@ -331,28 +332,26 @@ class HLERunner:
         )
 
     def validate_evaluation_completeness(self, predictions_file: str) -> bool:
-        """Validate that evaluation is complete by checking total_predictions == total_questions."""
+        """Validate that evaluation is complete by checking if all responses are non-empty."""
         try:
             with open(predictions_file, "r") as f:
                 data = json.load(f)
 
-            # Extract metadata
-            metadata = data.get("evaluation_metadata", {})
-            statistics = metadata.get("statistics", {})
-
-            total_questions = statistics.get("total_questions", 0)
-            total_predictions = statistics.get("total_predictions", 0)
-
-            if total_questions == 0:
-                self.logger.warning(f"⚠️ Warning: No total_questions found in metadata")
+            # Get predictions and calculate completeness directly
+            predictions = data.get("predictions", data)
+            if not predictions:
+                self.logger.warning(f"⚠️ Warning: No predictions found in file")
                 return False
 
-            if total_predictions == total_questions:
-                self.logger.info(f"✅ Evaluation complete: {total_predictions}/{total_questions} predictions")
+            total_questions = len(predictions)
+            successful_predictions = sum(1 for pred in predictions.values() if pred.get("response", "").strip())
+
+            if successful_predictions == total_questions:
+                self.logger.info(f"✅ Evaluation complete: {successful_predictions}/{total_questions} predictions")
                 return True
             else:
-                missing_count = total_questions - total_predictions
-                self.logger.warning(f"❌ Evaluation incomplete: {total_predictions}/{total_questions} predictions ({missing_count} missing)")
+                missing_count = total_questions - successful_predictions
+                self.logger.warning(f"❌ Evaluation incomplete: {successful_predictions}/{total_questions} predictions ({missing_count} missing)")
                 return False
 
         except Exception as e:
@@ -374,7 +373,7 @@ class HLERunner:
         if run_metadata is None:
             run_metadata = {}
 
-        # No longer need separate failure files - has_answer/has_judgment fields track this
+        # No longer need separate failure files - response content indicates success/failure
 
         # Load question IDs file to get expected question count for validation
         question_ids_file = os.path.join(self.config.run_dir, f"question_ids_{self.batch_timestamp}.json")
@@ -395,12 +394,12 @@ class HLERunner:
         for result in results:
             model_identifier = result["model_identifier"]
 
-            # Check for evaluation failures using has_answer field
+            # Check for evaluation failures (empty responses)
             if result.get("predictions_file"):
                 if not self._has_complete_evaluations(result["predictions_file"]):
                     models_with_failures.add(model_identifier)
 
-            # Check for judge failures using has_judgment field
+            # Check for judge failures (empty judge responses)
             if result.get("judged_file"):
                 if not self._has_complete_judgments(result["judged_file"]):
                     models_with_failures.add(model_identifier)
@@ -416,8 +415,9 @@ class HLERunner:
                         else:
                             judged_predictions = judged_data
 
-                        # Count successful judgments
-                        successful_judgments = sum(1 for pred in judged_predictions.values() if "judge_response" in pred)
+                        # Count successful judgments (non-empty judge responses)
+                        successful_judgments = sum(1 for pred in judged_predictions.values()
+                                                 if pred.get("judge_response", {}).get("reasoning", "").strip())
 
                         if successful_judgments != expected_question_count:
                             models_with_failures.add(model_identifier)
@@ -436,22 +436,11 @@ class HLERunner:
         # Filter results to only include models without failures for metrics calculation
         clean_results = [r for r in results if r["model_identifier"] not in models_with_failures]
 
-        # Create enhanced summary data structure
+        # Create simplified summary data structure
         summary = {
             "summary_metadata": {
                 "timestamp": datetime.now().isoformat(),
-                "total_models": len(results),
-                "models_with_failures": len(models_with_failures),
-                "models_included_in_metrics": len(clean_results),
                 "run_metadata": run_metadata
-            },
-            "overall_statistics": {
-                "models_with_predictions": 0,
-                "models_with_complete_evaluations": 0,
-                "models_with_judgments": 0,
-                "models_with_complete_judgments": 0,
-                "models_with_errors": 0,
-                "models_excluded_from_metrics": len(models_with_failures)
             },
             "model_results": []
         }
@@ -468,56 +457,10 @@ class HLERunner:
                 "metrics": result.get("metrics") if not is_excluded else None,  # Exclude metrics for failed models
                 "error": result.get("error"),
                 "excluded_from_metrics": is_excluded,
-                "exclusion_reason": self._get_exclusion_reason(result) if is_excluded else None,
-                "evaluation_statistics": {
-                    "total_questions": 0,
-                    "successful_predictions": 0,
-                    "failed_predictions": 0,
-                    "evaluation_complete": False
-                },
-                "judge_statistics": {
-                    "total_questions": 0,
-                    "successful_judgments": 0,
-                    "failed_judgments": 0,
-                    "judge_complete": False
-                }
+                "exclusion_reason": self._get_exclusion_reason(result) if is_excluded else None
             }
 
-            # Analyze evaluation statistics
-            if result.get("predictions_file"):
-                eval_stats = self._analyze_evaluation_file(result["predictions_file"])
-                model_summary["evaluation_statistics"] = {
-                    "total_questions": eval_stats["total_questions"],
-                    "successful_predictions": eval_stats["successful_predictions"],
-                    "failed_predictions": eval_stats["failed_predictions"],
-                    "evaluation_complete": eval_stats["evaluation_complete"]
-                }
-
-                if eval_stats["successful_predictions"] > 0:
-                    summary["overall_statistics"]["models_with_predictions"] += 1
-
-                if eval_stats["evaluation_complete"]:
-                    summary["overall_statistics"]["models_with_complete_evaluations"] += 1
-
-            # Analyze judge statistics
-            if result.get("judged_file"):
-                judge_stats = self._analyze_judge_file(result["judged_file"])
-                model_summary["judge_statistics"] = {
-                    "total_questions": judge_stats["total_questions"],
-                    "successful_judgments": judge_stats["successful_judgments"],
-                    "failed_judgments": judge_stats["failed_judgments"],
-                    "judge_complete": judge_stats["judge_complete"]
-                }
-
-                if judge_stats["successful_judgments"] > 0:
-                    summary["overall_statistics"]["models_with_judgments"] += 1
-
-                if judge_stats["judge_complete"]:
-                    summary["overall_statistics"]["models_with_complete_judgments"] += 1
-
-            # Check for general errors
-            if result.get("error"):
-                summary["overall_statistics"]["models_with_errors"] += 1
+            # No longer collect per-model statistics in summary - use dedicated statistics files instead
 
             summary["model_results"].append(model_summary)
 
@@ -528,6 +471,25 @@ class HLERunner:
 
         self.logger.info(f"📊 Enhanced metrics summary saved to: {summary_file}")
         self.logger.info(f"🔍 Models excluded from metrics: {len(models_with_failures)}/{len(results)}")
+
+        # Generate comprehensive statistics files
+        try:
+            from .statistics import generate_evaluation_statistics, generate_judge_statistics, generate_metrics_statistics
+
+            # Generate evaluation statistics
+            eval_stats_file = generate_evaluation_statistics(self.config.run_dir)
+            self.logger.info(f"📈 Evaluation statistics saved to: {eval_stats_file}")
+
+            # Generate judge statistics
+            judge_stats_file = generate_judge_statistics(self.config.run_dir)
+            self.logger.info(f"⚖️ Judge statistics saved to: {judge_stats_file}")
+
+            # Generate metrics statistics
+            metrics_stats_file = generate_metrics_statistics(self.config.run_dir)
+            self.logger.info(f"📋 Metrics statistics saved to: {metrics_stats_file}")
+
+        except Exception as e:
+            self.logger.warning(f"⚠️ Failed to generate statistics files: {e}")
 
         return summary_file
 
@@ -658,7 +620,7 @@ class HLERunner:
         return judge_stats
 
     def _has_complete_evaluations(self, predictions_file: str) -> bool:
-        """Check if all predictions have has_answer=True."""
+        """Check if all predictions have non-empty responses."""
         try:
             with open(predictions_file, "r") as f:
                 data = json.load(f)
@@ -667,16 +629,16 @@ class HLERunner:
             if not predictions:
                 return False
 
-            # Check if all predictions have has_answer=True
+            # Check if all predictions have non-empty responses
             for pred in predictions.values():
-                if not pred.get("has_answer", False):
+                if not pred.get("response", "").strip():
                     return False
             return True
         except Exception:
             return False
 
     def _has_complete_judgments(self, judged_file: str) -> bool:
-        """Check if all judgments have has_judgment=True."""
+        """Check if all judge results have non-empty responses."""
         try:
             with open(judged_file, "r") as f:
                 data = json.load(f)
@@ -685,34 +647,33 @@ class HLERunner:
             if not judged_predictions:
                 return False
 
-            # Check if all judgments have has_judgment=True and the prediction had an answer
+            # Check if all predictions that have responses also have valid judge responses
             for pred in judged_predictions.values():
-                if pred.get("has_answer", False) and not pred.get("has_judgment", False):
-                    return False
+                # Only check judge completeness for predictions that have responses
+                if pred.get("response", "").strip():
+                    if not pred.get("judge_response", {}).get("reasoning", "").strip():
+                        return False
             return True
         except Exception:
             return False
 
     async def fix_models(self, timestamp_dir: str) -> Dict[str, Any]:
-        """Fix evaluation and judge failures by re-processing questions with has_answer=False or has_judgment=False."""
+        """Fix evaluation and judge failures by re-processing questions with empty responses."""
         self.logger.info(f"\n{'='*60}")
         self.logger.info("🔧 FIXING EVALUATION AND JUDGE FAILURES")
         self.logger.info(f"{'='*60}")
 
         batch_timestamp = os.path.basename(timestamp_dir)
 
-        # Load available models from the timestamp directory
-        models_file = os.path.join(timestamp_dir, f"available_models_{batch_timestamp}.json")
-        if not os.path.exists(models_file):
-            self.logger.error(f"❌ Available models file not found: {models_file}")
-            return {"error": "Available models file not found"}
+        # Find all prediction files in the timestamp directory
+        predictions_dir = os.path.join(timestamp_dir, "predictions")
+        if not os.path.exists(predictions_dir):
+            self.logger.error(f"❌ Predictions directory not found: {predictions_dir}")
+            return {"error": "Predictions directory not found"}
 
-        with open(models_file, "r") as f:
-            models_data = json.load(f)
-
-        available_models = models_data.get("available_models", {})
-        if not available_models:
-            self.logger.info("✅ No models to fix")
+        prediction_files = glob.glob(os.path.join(predictions_dir, "hle_*.json"))
+        if not prediction_files:
+            self.logger.info("✅ No prediction files found to fix")
             return {
                 "fixed_models": [],
                 "still_failed_models": [],
@@ -720,11 +681,7 @@ class HLERunner:
                 "remaining_failures": 0
             }
 
-        self.logger.info(f"🔍 Found {len(available_models)} models to check for failures")
-
-        # Get all model-endpoint pairs for endpoints
-        all_model_endpoint_pairs = self.zenmux_api.get_all_model_endpoint_pairs()
-        model_endpoints = {model_id: endpoint for model_id, model, endpoint in all_model_endpoint_pairs}
+        self.logger.info(f"🔍 Found {len(prediction_files)} prediction files to check for failures")
 
         # Load dataset questions
         from .dataset import HLEDataset
@@ -735,26 +692,57 @@ class HLERunner:
         fixed_models = []
         still_failed_models = []
 
-        for model_identifier in available_models.keys():
-            self.logger.info(f"\n🔧 Checking {model_identifier} for failures")
+        for predictions_file in prediction_files:
+            try:
+                # Load evaluation file to get model info and endpoint from metadata
+                with open(predictions_file, "r") as f:
+                    predictions_data = json.load(f)
 
-            # Find the endpoint for this model
-            if model_identifier not in model_endpoints:
-                self.logger.error(f"❌ Endpoint not found for {model_identifier}")
-                still_failed_models.append(model_identifier)
+                # Get model info from evaluation metadata
+                evaluation_metadata = predictions_data.get("evaluation_metadata", {})
+                model_identifier = evaluation_metadata.get("model_identifier")
+                endpoint_data = evaluation_metadata.get("endpoint", {})
+
+                if not model_identifier:
+                    self.logger.warning(f"⚠️ No model identifier found in {os.path.basename(predictions_file)}")
+                    continue
+
+                if not endpoint_data:
+                    self.logger.warning(f"⚠️ No endpoint data found in {os.path.basename(predictions_file)}")
+                    continue
+
+                self.logger.info(f"\n🔧 Checking {model_identifier} for failures")
+
+                # Reconstruct endpoint object from metadata
+                from zenmux.models import ZenMuxEndpoint
+                endpoint = ZenMuxEndpoint(
+                    pricing_completion="0",
+                    pricing_prompt="0",
+                    context_length=endpoint_data.get("context_length", 200000),
+                    provider=endpoint_data.get("provider", "unknown"),
+                    provider_slug=endpoint_data.get("provider_slug", "unknown"),
+                    max_completion_tokens=endpoint_data.get("max_completion_tokens", 4096),
+                    supports_streaming=endpoint_data.get("supports_streaming", True),
+                    supports_reasoning=False,
+                    supports_tool_parameters=True,
+                    supported_parameters=[],
+                    can_abort=True,
+                    visible=1,
+                    suitable_api=endpoint_data.get("suitable_api", "chat.completions")
+                )
+
+                model_name = model_identifier.split(':')[0]
+                safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
+                judged_file = os.path.join(timestamp_dir, "judged", f"judged_hle_{safe_model_name}_{batch_timestamp}.json")
+
+            except Exception as e:
+                self.logger.error(f"❌ Error processing {os.path.basename(predictions_file)}: {e}")
+                still_failed_models.append(f"ERROR_{os.path.basename(predictions_file)}")
                 continue
-
-            endpoint = model_endpoints[model_identifier]
-            model_name = model_identifier.split(':')[0]
-
-            # Load existing files
-            safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
-            predictions_file = os.path.join(timestamp_dir, "predictions", f"hle_{safe_model_name}_{batch_timestamp}.json")
-            judged_file = os.path.join(timestamp_dir, "judged", f"judged_hle_{safe_model_name}_{batch_timestamp}.json")
 
             model_fixed = False
 
-            # Fix evaluation failures (has_answer=False)
+            # Fix evaluation failures (empty responses)
             if os.path.exists(predictions_file):
                 with open(predictions_file, "r") as f:
                     predictions_data = json.load(f)
@@ -762,10 +750,10 @@ class HLERunner:
                 predictions = predictions_data.get("predictions", predictions_data)
                 evaluation_metadata = predictions_data.get("evaluation_metadata", {})
 
-                # Find questions with has_answer=False
+                # Find questions with empty responses
                 failed_eval_questions = [
                     qid for qid, pred in predictions.items()
-                    if not pred.get("has_answer", False)
+                    if not pred.get("response", "").strip()
                 ]
 
                 if failed_eval_questions:
@@ -779,7 +767,7 @@ class HLERunner:
                                     question, model_name, endpoint
                                 )
                                 predictions[question_id] = result
-                                if result.get("has_answer"):
+                                if result.get("response", "").strip():
                                     model_fixed = True
                                     self.logger.debug(f"✅ Fixed evaluation for question {question_id}")
                                 else:
@@ -796,7 +784,7 @@ class HLERunner:
                     with open(predictions_file, "w") as f:
                         json.dump(final_predictions_data, f, indent=4)
 
-            # Fix judge failures (has_judgment=False)
+            # Fix judge failures (empty judge responses)
             if os.path.exists(judged_file) and os.path.exists(predictions_file):
                 with open(judged_file, "r") as f:
                     judged_data = json.load(f)
@@ -804,10 +792,10 @@ class HLERunner:
                 judged_predictions = judged_data.get("judged_predictions", judged_data)
                 judging_metadata = judged_data.get("judging_metadata", {})
 
-                # Find questions with has_judgment=False
+                # Find questions that need judging (have responses but empty judge responses)
                 failed_judge_questions = [
                     qid for qid, pred in judged_predictions.items()
-                    if not pred.get("has_judgment", False) and pred.get("has_answer", False)
+                    if pred.get("response", "").strip() and not pred.get("judge_response", {}).get("reasoning", "").strip()
                 ]
 
                 if failed_judge_questions:
@@ -821,7 +809,7 @@ class HLERunner:
                                     question, {question_id: judged_predictions[question_id]}
                                 )
                                 judged_predictions[question_id] = updated_prediction
-                                if updated_prediction.get("has_judgment"):
+                                if updated_prediction.get("judge_response", {}).get("reasoning", "").strip():
                                     model_fixed = True
                                     self.logger.debug(f"✅ Fixed judgment for question {question_id}")
                                 else:
@@ -882,7 +870,7 @@ class HLERunner:
         expected_question_count = len(question_ids_data.get("question_ids", []))
         self.logger.info(f"📊 Expected questions count: {expected_question_count}")
 
-        # No longer need to load separate failure files - we'll check has_answer/has_judgment fields directly
+        # No longer need to load separate failure files - we check response content directly
 
         # Find all judged files in the timestamp directory
         judged_dir = os.path.join(timestamp_dir, "judged")
@@ -1025,10 +1013,10 @@ class HLERunner:
         }
 
     def _validate_model_completeness(self, model_identifier: str, timestamp_dir: str, expected_question_count: int) -> Dict[str, Any]:
-        """Validate that a model has complete evaluations and judgments using has_answer/has_judgment fields."""
+        """Validate that a model has complete evaluations and judgments using response content."""
         batch_timestamp = os.path.basename(timestamp_dir)
 
-        # Check evaluation completeness using has_answer field
+        # Check evaluation completeness using response content
         safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
         predictions_file = os.path.join(timestamp_dir, "predictions", f"hle_{safe_model_name}_{batch_timestamp}.json")
 
@@ -1039,7 +1027,7 @@ class HLERunner:
                 "details": "Model has incomplete evaluations"
             }
 
-        # Check judge completeness using has_judgment field
+        # Check judge completeness using judge response content
         judged_file = os.path.join(timestamp_dir, "judged", f"judged_hle_{safe_model_name}_{batch_timestamp}.json")
 
         if not os.path.exists(judged_file):
@@ -1065,8 +1053,9 @@ class HLERunner:
             else:
                 judged_predictions = judged_data
 
-            # Count successful judgments using has_judgment field
-            successful_judgments = sum(1 for pred in judged_predictions.values() if pred.get("has_judgment", False))
+            # Count successful judgments using judge response content
+            successful_judgments = sum(1 for pred in judged_predictions.values()
+                                     if pred.get("judge_response", {}).get("reasoning", "").strip())
 
             if successful_judgments == expected_question_count:
                 return {
@@ -1168,9 +1157,8 @@ class HLERunner:
             for result in models_with_complete_metrics:
                 metrics = result["metrics"]
                 self.logger.info(f"\n🎯 {result['model_identifier']}")
-                self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}% | n = {metrics['total_questions']}")
+                self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}%")
                 self.logger.info(f"📏 Calibration Error: {metrics['calibration_error']}")
-                self.logger.info(f"✅ Evaluated: {metrics['total_evaluated']} / {metrics['total_questions']}")
 
         # File locations
         self.logger.info(f"\n📁 FILES:")

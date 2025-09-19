@@ -41,7 +41,7 @@ class HLEEvaluator:
         model_name: str,
         endpoint: ZenMuxEndpoint
     ) -> Tuple[str, Dict[str, Any]]:
-        """Evaluate a single question with a model. Always returns a result with has_answer field."""
+        """Evaluate a single question with a model. Always returns a result."""
         question_id = question.get('id', 'unknown')
 
         try:
@@ -127,14 +127,13 @@ class HLEEvaluator:
                 performance_metrics['generation_time_ms'] = 0.0
                 performance_metrics['throughput_tokens_per_second'] = 0.0
 
-            # Return success result with has_answer=True
+            # Return success result
             result = {
                 "model": model_name,
                 "response": content,
                 "usage": usage,
                 "performance": performance_metrics,
-                "generation_id": generation_id,
-                "has_answer": bool(content)  # True if we got content, False if empty
+                "generation_id": generation_id
             }
 
             return question_id, result
@@ -152,7 +151,7 @@ class HLEEvaluator:
             else:
                 self.logger.error(f"Error evaluating question {question_id} [{model_name}]: {e}")
 
-            # Return failure result with has_answer=False
+            # Return failure result
             result = {
                 "model": model_name,
                 "response": "",
@@ -163,7 +162,6 @@ class HLEEvaluator:
                     'throughput_tokens_per_second': 0.0
                 },
                 "generation_id": None,
-                "has_answer": False,
                 "error": error_msg
             }
 
@@ -238,8 +236,8 @@ class HLEEvaluator:
                 question_id = q["id"]
                 if question_id not in existing_predictions:
                     remaining_questions.append(q)
-                elif existing_predictions[question_id].get("has_answer") is False:
-                    # Re-evaluate questions that previously failed
+                elif not existing_predictions[question_id].get("response", "").strip():
+                    # Re-evaluate questions that previously failed (empty response)
                     remaining_questions.append(q)
 
             if not remaining_questions:
@@ -272,8 +270,8 @@ class HLEEvaluator:
                 # Always record the result, regardless of success or failure
                 existing_predictions[question_id] = result
 
-                # Collect performance data only for successful evaluations
-                if result.get("has_answer"):
+                # Collect performance data only for successful evaluations (non-empty response)
+                if result.get("response", "").strip():
                     performance_data.append(result["performance"])
                     successful_count += 1
 
@@ -286,8 +284,6 @@ class HLEEvaluator:
                     break
 
             # Add metadata to the predictions file
-            # Calculate has_answer statistics
-            has_answer_questions = sum(1 for pred in existing_predictions.values() if pred.get("has_answer", False))
 
             metadata = {
                 "evaluation_metadata": {
@@ -314,11 +310,6 @@ class HLEEvaluator:
                         "timeout": self.zenmux_config.timeout,
                         "max_retries": self.zenmux_config.max_retries,
                         "max_evaluation_retries": self.hle_config.max_evaluation_retries
-                    },
-                    "statistics": {
-                        "total_questions": len(questions),
-                        "has_answer_questions": has_answer_questions,
-                        "has_no_answer_questions": len(existing_predictions) - has_answer_questions
                     }
                 }
             }
@@ -351,9 +342,9 @@ class HLEEvaluator:
                     self.logger.error("💡 Try reducing num_workers or max_concurrent_models in config.py")
                 raise
 
-            # Check if evaluation is complete based on has_answer field
+            # Check if evaluation is complete based on response content
             total_predictions = len(existing_predictions)
-            successful_predictions = sum(1 for pred in existing_predictions.values() if pred.get("has_answer", False))
+            successful_predictions = sum(1 for pred in existing_predictions.values() if pred.get("response", "").strip())
             failed_predictions = total_predictions - successful_predictions
 
             if total_predictions == len(questions) and failed_predictions == 0:
