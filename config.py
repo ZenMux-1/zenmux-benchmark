@@ -13,6 +13,8 @@ class ZenMuxConfig:
     api_base_url: str = "https://zenmux.ai/api/v1"
     api_key: Optional[str] = None
     model_list_endpoint: str = "https://zenmux.ai/api/frontend/model/available/list"
+    timeout: float = 600.0
+    max_retries: int = 1
 
     def __post_init__(self):
         # Load from environment variables if not provided
@@ -32,12 +34,10 @@ class HLEConfig:
     dataset_name: str = "cais/hle"
     dataset_split: str = "test"
     judge_model: str = "openai/gpt-5:openai"
-    max_completion_tokens: int = 8192
+    max_completion_tokens: int = 16384
     temperature: float = 0.0
     num_workers: int = 3  # Inner concurrency: requests per model (increased for better throughput)
     max_concurrent_models: int = 100  # Outer concurrency: simultaneous models (reduced to avoid server overload)
-    timeout: float = 600.0
-    max_retries: int = 5
     max_evaluation_retries: int = 5  # Maximum retries for incomplete evaluations
 
 

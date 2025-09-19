@@ -92,7 +92,7 @@ uv run python benchmark.py --mode single \
 
 ```bash
 # Evaluate all GPT models
-uv run python benchmark.py --mode filter --model-filter gpt
+uv run python benchmark.py --mode filter --model-filter deepseek --text-only
 
 # Evaluate all Claude models, text-only questions
 uv run python benchmark.py --mode filter --model-filter claude --text-only

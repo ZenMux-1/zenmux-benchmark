@@ -255,8 +255,8 @@ class HLEEvaluator:
                         "max_completion_tokens": self.hle_config.max_completion_tokens,
                         "temperature": self.hle_config.temperature,
                         "num_workers": self.hle_config.num_workers,
-                        "timeout": self.hle_config.timeout,
-                        "max_retries": self.hle_config.max_retries,
+                        "timeout": self.zenmux_config.timeout,
+                        "max_retries": self.zenmux_config.max_retries,
                         "max_evaluation_retries": self.hle_config.max_evaluation_retries
                     },
                     "statistics": {

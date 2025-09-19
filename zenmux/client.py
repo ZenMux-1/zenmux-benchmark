@@ -26,8 +26,8 @@ class ZenMuxOpenAIClient:
             self._client = AsyncOpenAI(
                 base_url=self.config.api_base_url,
                 api_key=self.config.api_key,
-                timeout=600.0,  # Use config timeout
-                max_retries=2,  # Use OpenAI native retries
+                timeout=self.config.timeout,
+                max_retries=self.config.max_retries,  # Use OpenAI native retries
             )
 
         return self._client

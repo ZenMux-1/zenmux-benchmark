@@ -327,8 +327,8 @@ confidence: The extracted confidence score between 0|\%| and 100|\%| from [respo
                 "original_predictions_file": predictions_file,
                 "judge_config": {
                     "num_workers": self.hle_config.num_workers,
-                    "timeout": self.hle_config.timeout,
-                    "max_retries": self.hle_config.max_retries
+                    "timeout": self.zenmux_config.timeout,
+                    "max_retries": self.zenmux_config.max_retries
                 },
                 "evaluation_metadata": evaluation_metadata,  # Include original evaluation metadata
                 "statistics": {
