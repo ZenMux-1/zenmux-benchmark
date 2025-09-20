@@ -1042,21 +1042,77 @@ class HLERunner:
             self.logger.info(f"📄 No prediction file found for {model_identifier}, skipping evaluation fixes")
 
         # Fix judge failures (empty judge responses) with concurrent processing
-        if os.path.exists(judged_file) and os.path.exists(predictions_file):
+        if os.path.exists(judged_file):
             with open(judged_file, "r") as f:
                 judged_data = json.load(f)
 
             judged_predictions = judged_data.get("judged_predictions", judged_data)
             judging_metadata = judged_data.get("judging_metadata", {})
 
-            # Find questions that need judging (ANY questions with empty judge responses, regardless of response content)
-            failed_judge_questions = [
-                qid for qid, pred in judged_predictions.items()
-                if not pred.get("judge_response", {}).get("reasoning", "").strip()
-            ]
+            # Get original predictions file from judged metadata
+            original_predictions_file = judging_metadata.get("original_predictions_file")
+            if not original_predictions_file or not os.path.exists(original_predictions_file):
+                self.logger.warning(f"⚠️ Original predictions file not found in judged metadata or doesn't exist: {original_predictions_file}")
+                failed_judge_questions = []
+            else:
+                # Load original predictions to check which need judging
+                with open(original_predictions_file, "r") as f:
+                    original_data = json.load(f)
+                original_predictions = original_data.get("predictions", original_data)
+
+                # Find questions that need judging:
+                # 1. Has non-empty response in original predictions
+                # 2. Has empty judge_response in judged file
+                failed_judge_questions = []
+                for qid, original_pred in original_predictions.items():
+                    if original_pred.get("response", "").strip():  # Has non-empty response
+                        judged_pred = judged_predictions.get(qid, {})
+                        if not judged_pred.get("judge_response", {}).get("reasoning", "").strip():  # Empty judge response
+                            failed_judge_questions.append(qid)
 
             if failed_judge_questions:
                 self.logger.info(f"⚖️ Re-judging {len(failed_judge_questions)} failed judgments concurrently (workers: {self.config.hle.num_workers})")
+
+                # Get judge model and dataset info from judged file metadata
+                original_judge_model = judging_metadata.get("judge_model", self.config.hle.judge_model)
+                dataset_name = judging_metadata.get("dataset_name", "cais/hle")
+                original_endpoint_info = judging_metadata.get("endpoint", {})
+
+                # Create a judge instance with the original judge model settings
+                from config import HLEConfig
+                judge_config = HLEConfig(
+                    dataset_name=dataset_name,
+                    dataset_split=self.config.hle.dataset_split,
+                    judge_model=original_judge_model,
+                    max_completion_tokens=self.config.hle.max_completion_tokens,
+                    judge_max_completion_tokens=self.config.hle.judge_max_completion_tokens,
+                    temperature=self.config.hle.temperature,
+                    num_workers=self.config.hle.num_workers,
+                    max_concurrent_models=self.config.hle.max_concurrent_models,
+                    print_streaming_output=self.config.hle.print_streaming_output
+                )
+
+                from hle.judge import HLEJudge
+                fix_judge = HLEJudge(judge_config, self.config.zenmux)
+
+                # Set the judge endpoint directly from metadata to avoid API calls
+                if original_endpoint_info:
+                    from zenmux.models import ZenMuxEndpoint
+                    fix_judge.judge_endpoint = ZenMuxEndpoint(
+                        pricing_completion="0",  # Not needed for fix mode
+                        pricing_prompt="0",      # Not needed for fix mode
+                        context_length=original_endpoint_info.get("context_length", 200000),
+                        provider=original_endpoint_info.get("provider", "OpenAI"),
+                        provider_slug=original_endpoint_info.get("provider_slug", "openai"),
+                        max_completion_tokens=original_endpoint_info.get("max_completion_tokens", 4096),
+                        supports_streaming=original_endpoint_info.get("supports_streaming", True),
+                        supports_reasoning=original_endpoint_info.get("supports_reasoning", False),
+                        supports_tool_parameters=original_endpoint_info.get("supports_tool_parameters", True),
+                        supported_parameters=original_endpoint_info.get("supported_parameters", []),
+                        can_abort=original_endpoint_info.get("can_abort", True),
+                        visible=original_endpoint_info.get("visible", 1),
+                        suitable_api=original_endpoint_info.get("suitable_api", "chat.completions")
+                    )
 
                 # Progress tracking for judge fixes
                 judge_completed_count = 0
@@ -1070,11 +1126,19 @@ class HLERunner:
                     """Fix a single judge question."""
                     nonlocal judge_completed_count
                     async with judge_semaphore:
-                        if question_id in question_map:
+                        if question_id in question_map and question_id in original_predictions:
                             question = question_map[question_id]
                             try:
-                                unique_id, updated_prediction, performance_metrics = await self.judge.judge_single_response(
-                                    question, {question_id: judged_predictions[question_id]}
+                                # Use original prediction data, but ensure it has the current judged structure
+                                prediction_for_judging = original_predictions[question_id].copy()
+                                # Preserve any existing judge information from judged file
+                                if question_id in judged_predictions:
+                                    existing_judge_info = judged_predictions[question_id]
+                                    prediction_for_judging.update({k: v for k, v in existing_judge_info.items()
+                                                                  if k in ['judge_response', 'judge_performance', 'judge_generation_id']})
+
+                                unique_id, updated_prediction, performance_metrics = await fix_judge.judge_single_response(
+                                    question, {question_id: prediction_for_judging}
                                 )
                                 # Update progress
                                 judge_completed_count += 1

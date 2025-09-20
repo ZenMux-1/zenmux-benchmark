@@ -55,11 +55,6 @@
             "samples_count": 1
         }
     },
-    "metrics": {
-        "accuracy": 0.04,
-        "confidence_interval": 0.08,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "z-ai/glm-4.5:z-ai",
@@ -96,7 +91,7 @@
         },
         "668828540a642802bdfeadfc": {
             "model": "z-ai/glm-4.5:z-ai",
-            "response": "",
+            "response": "FAKE ANSWER",
             "usage": {},
             "performance": {
                 "first_token_latency_ms": 0.0,
@@ -104,11 +99,24 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "FAKE ANSWER",
+                "reasoning": "The extracted answer \"FAKE ANSWER\" does not match the correct answer \"yeyo\". They are completely different strings.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 6161.3701171875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 30.999598525528338
+            },
+            "judge_generation_id": "2538CCINBRDK00702392"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "z-ai/glm-4.5:z-ai",
-            "response": "",
+            "response": "FAKE ANSWER",
             "usage": {},
             "performance": {
                 "first_token_latency_ms": 0.0,
@@ -116,7 +124,20 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "FAKE ANSWER",
+                "reasoning": "The extracted answer 'FAKE ANSWER' does not match the correct answer 'Z+Z+Z+Z+Z'. They are not equivalent in any sense.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 11545.7861328125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 22.778873346057242
+            },
+            "judge_generation_id": "2538CCLYDRBF00703572"
         }
     }
 }

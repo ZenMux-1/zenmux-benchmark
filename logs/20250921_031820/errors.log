@@ -186,3 +186,5 @@ Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zen
                                         ~~~~~~~~~~^^^^^^^^^^^^^^^^
 KeyError: 'metrics_file'
 
+2025-09-21 05:21:35 | ERROR    | zenmux.judge    | _get_judge_endpoint  | Failed to get judge endpoint: 'ZenMuxOpenAIClient' object has no attribute 'get_available_models', using fallback
+2025-09-21 05:21:35 | ERROR    | zenmux.judge    | _get_judge_endpoint  | Failed to get judge endpoint: 'ZenMuxOpenAIClient' object has no attribute 'get_available_models', using fallback

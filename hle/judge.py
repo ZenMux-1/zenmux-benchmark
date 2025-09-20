@@ -54,6 +54,81 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         self.zenmux_config = zenmux_config
         self.zenmux_client = ZenMuxOpenAIClient(zenmux_config)
         self.logger = get_judge_logger()
+        self.judge_endpoint = None  # Will be set when needed
+
+    async def _get_judge_endpoint(self):
+        """Get the judge model endpoint information from ZenMux API."""
+        if self.judge_endpoint is None:
+            try:
+                # Parse judge model string (e.g., "openai/gpt-5:openai")
+                if ":" in self.hle_config.judge_model:
+                    model_slug, provider_slug = self.hle_config.judge_model.split(":", 1)
+                else:
+                    # If no provider specified, try to infer from model slug
+                    model_slug = self.hle_config.judge_model
+                    if "/" in model_slug:
+                        provider_slug = model_slug.split("/")[0]
+                    else:
+                        provider_slug = "openai"  # default fallback
+
+                # Get available models from ZenMux API
+                from zenmux.api import ZenMuxAPI
+                api_client = ZenMuxAPI(self.zenmux_config)
+                available_models = api_client.get_available_models()
+
+                # Find the matching endpoint
+                target_identifier = f"{model_slug}:{provider_slug}"
+                for model in available_models:
+                    if model.slug == model_slug:
+                        # Find the endpoint with matching provider
+                        for endpoint in model.endpoints:
+                            endpoint_identifier = f"{model.slug}:{endpoint.provider_slug}"
+                            if endpoint_identifier == target_identifier:
+                                self.judge_endpoint = endpoint
+                                break
+                        if self.judge_endpoint:
+                            break
+
+                # Fallback to dummy endpoint if model not found
+                if self.judge_endpoint is None:
+                    self.logger.warning(f"Judge model {target_identifier} not found in available models, using fallback endpoint")
+                    from zenmux.models import ZenMuxEndpoint
+                    self.judge_endpoint = ZenMuxEndpoint(
+                        pricing_completion="0",
+                        pricing_prompt="0",
+                        context_length=200000,
+                        provider="OpenAI",
+                        provider_slug="openai",
+                        max_completion_tokens=4096,
+                        supports_streaming=True,
+                        supports_reasoning=False,
+                        supports_tool_parameters=True,
+                        supported_parameters=[],
+                        can_abort=True,
+                        visible=1,
+                        suitable_api="chat.completions"
+                    )
+
+            except Exception as e:
+                self.logger.error(f"Failed to get judge endpoint: {e}, using fallback")
+                from zenmux.models import ZenMuxEndpoint
+                self.judge_endpoint = ZenMuxEndpoint(
+                    pricing_completion="0",
+                    pricing_prompt="0",
+                    context_length=200000,
+                    provider="OpenAI",
+                    provider_slug="openai",
+                    max_completion_tokens=4096,
+                    supports_streaming=True,
+                    supports_reasoning=False,
+                    supports_tool_parameters=True,
+                    supported_parameters=[],
+                    can_abort=True,
+                    visible=1,
+                    suitable_api="chat.completions"
+                )
+
+        return self.judge_endpoint
 
     async def extract_answer(
         self,
@@ -69,33 +144,23 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
         )
 
         try:
-            # Create a dummy endpoint for the judge model - we only need it to get the client
-            from zenmux.models import ZenMuxEndpoint
-            dummy_endpoint = ZenMuxEndpoint(
-                pricing_completion="0",
-                pricing_prompt="0",
-                context_length=200000,
-                provider="openai",
-                provider_slug="openai",
-                max_completion_tokens=4096,
-                supports_streaming=True,
-                supports_reasoning=False,
-                supports_tool_parameters=True,
-                supported_parameters=[],
-                can_abort=True,
-                visible=1,
-                suitable_api="chat.completions"
-            )
+            # Get the judge model endpoint dynamically
+            judge_endpoint = await self._get_judge_endpoint()
 
-            client = self.zenmux_client.get_client(dummy_endpoint)
+            client = self.zenmux_client.get_client(judge_endpoint)
 
             # Record request start time
             request_start_time = time.time() * 1000  # Convert to milliseconds
 
+            # Determine max_completion_tokens: use model's own value unless judge config overrides
+            max_completion_tokens = judge_endpoint.max_completion_tokens
+            if self.hle_config.judge_max_completion_tokens is not None:
+                max_completion_tokens = self.hle_config.judge_max_completion_tokens
+
             # Note: Structured output does not support streaming, fall back to non-streaming
             response_obj = await client.beta.chat.completions.parse(
                 model=self.hle_config.judge_model,
-                max_completion_tokens=4096,
+                max_completion_tokens=max_completion_tokens,
                 messages=[{"role": "user", "content": prompt}],
                 response_format=ExtractedAnswer,
             )
@@ -193,12 +258,14 @@ Additional Error Info: {additional_info}
         if "judge_response" in prediction and prediction["judge_response"].get("reasoning", "").strip():
             return unique_id, prediction, None
 
-        # Only judge if the prediction has an answer (non-empty response)
-        if not prediction.get("response", "").strip():
-            # No need to judge empty responses
+        # Only judge non-empty responses
+        response = prediction.get("response", "")
+
+        if not response.strip():
+            # Skip empty responses - don't judge them
             return unique_id, prediction, None
 
-        response = prediction["response"]
+        # Judge non-empty responses using the judge model
         judge_result, performance_metrics, generation_id, success = await self.extract_answer(
             question_text, correct_answer, response
         )
@@ -373,14 +440,15 @@ Additional Error Info: {additional_info}
         metrics = self.calculate_metrics(judged_predictions, total_questions)
 
         # Add metadata to the judged file
-        # Create endpoint info for the judge model (dummy endpoint used in extract_answer)
+        # Get the actual judge endpoint information
+        judge_endpoint = await self._get_judge_endpoint()
         judge_endpoint_info = {
-            "provider_slug": "openai",
-            "provider": "OpenAI",
-            "context_length": 200000,
-            "max_completion_tokens": 4096,
-            "supports_streaming": True,
-            "suitable_api": "chat.completions"
+            "provider_slug": judge_endpoint.provider_slug,
+            "provider": judge_endpoint.provider,
+            "context_length": judge_endpoint.context_length,
+            "max_completion_tokens": judge_endpoint.max_completion_tokens,
+            "supports_streaming": judge_endpoint.supports_streaming,
+            "suitable_api": judge_endpoint.suitable_api
         }
 
         metadata = {

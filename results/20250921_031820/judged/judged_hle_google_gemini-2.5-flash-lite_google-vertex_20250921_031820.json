@@ -51,8 +51,8 @@
     },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
-            "model": "google/gemini-2.5-flash-lite:google-vertex",
-            "response": "",
+            "model": "google/gemini-2.5-flash-lite",
+            "response": "FAKE ANSWER",
             "usage": {},
             "performance": {
                 "first_token_latency_ms": 0.0,
@@ -60,7 +60,20 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "None",
+                "reasoning": "The response does not provide any of the listed options and thus does not match the correct answer D.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7174.182373046875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 25.368744553214444
+            },
+            "judge_generation_id": "2538CCFSNNLR00700935"
         },
         "668828540a642802bdfeadfc": {
             "model": "google/gemini-2.5-flash-lite:google-vertex",
@@ -93,16 +106,34 @@
             "judge_generation_id": "2538CCYSECWJ00698908"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "google/gemini-2.5-flash-lite:google-vertex",
-            "response": "",
-            "usage": {},
+            "model": "google/gemini-2.5-flash-lite",
+            "response": "FAKE ANSWER",
+            "usage": {
+                "completion_tokens": null,
+                "prompt_tokens": 97,
+                "total_tokens": 65631,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
             "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
+                "first_token_latency_ms": 2853.464111328125,
+                "generation_time_ms": 120393.86474609375,
                 "throughput_tokens_per_second": 0.0
             },
-            "generation_id": null,
-            "error": ""
+            "generation_id": "2538CCXAMGJH00702380",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "None",
+                "reasoning": "The response contains no explicit answer, while the correct answer is Z+Z+Z+Z+Z. Therefore, they do not match.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 5007.80810546875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 50.9204815019826
+            },
+            "judge_generation_id": "2538CCOJTYAC00700936"
         }
     }
 }

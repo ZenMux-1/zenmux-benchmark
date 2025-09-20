@@ -95,16 +95,42 @@
             "judge_generation_id": "2538CCJCONQW00702278"
         },
         "668828540a642802bdfeadfc": {
-            "model": "openai/o4-mini:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/o4-mini",
+            "response": "Explanation:  \n1) Bennett\u2019s reciprocal of logical \u201cdepth\u201d is \u201cshallowness,\u201d whose third letter is a \u2192 c1 = a  \n2) Gell-Mann joked \u201cthe two operations didn\u2019t commute,\u201d and the third letter of \u201coperations\u201d is e \u2192 c2 = e  \n3) GELU was by Hendrycks and Gimpel; \u201cGimpel\u201d ends with l, which Rot13\u2019s to y \u2192 c4 = y  \n4) Mars is closer in mass to the Moon, whose second letter is o \u2192 c5 = o  \nConcatenating gives aeyo.\n\nAnswer: aeyo  \nConfidence: 70%",
+            "usage": {
+                "completion_tokens": 3034,
+                "prompt_tokens": 239,
+                "total_tokens": 3273,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2880,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 34621.59814453125,
+                "generation_time_ms": 1926.5888671875,
+                "throughput_tokens_per_second": 1574.8040755727695
+            },
+            "generation_id": "2538CCUYLDGC00700468",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aeyo",
+                "reasoning": "The extracted final answer is 'aeyo', which does not match the correct answer 'yeyo'. The first character differs ('a' vs 'y').",
+                "correct": "no",
+                "confidence": 70
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 4953.9248046875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 39.36272908613534
+            },
+            "judge_generation_id": "2538CCPEBDLE00702408"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/o4-mini:azure",

@@ -36,6 +36,7 @@ class HLEConfig:
     dataset_split: str = "test"
     judge_model: str = "openai/gpt-5:openai"
     max_completion_tokens: Optional[int] = None
+    judge_max_completion_tokens: Optional[int] = None  # Max completion tokens for judge model
     temperature: float = 0.0
     num_workers: int = 3  # Inner concurrency: requests per model (conservative to prevent network issues)
     max_concurrent_models: int = 60  # Outer concurrency: simultaneous models (reduced to prevent connection overload)

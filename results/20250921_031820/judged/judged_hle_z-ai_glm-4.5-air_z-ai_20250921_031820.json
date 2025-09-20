@@ -85,7 +85,7 @@
         },
         "668828540a642802bdfeadfc": {
             "model": "z-ai/glm-4.5-air:z-ai",
-            "response": "",
+            "response": "FAKE ANSWER",
             "usage": {},
             "performance": {
                 "first_token_latency_ms": 0.0,
@@ -93,11 +93,24 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "FAKE ANSWER",
+                "reasoning": "The extracted answer 'FAKE ANSWER' does not match the correct answer 'yeyo'. They are entirely different strings.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 5962.933837890625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 42.59648134715041
+            },
+            "judge_generation_id": "2538CCQECXSG00703570"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "z-ai/glm-4.5-air:z-ai",
-            "response": "",
+            "response": "FAKE ANSWER",
             "usage": {},
             "performance": {
                 "first_token_latency_ms": 0.0,
@@ -105,7 +118,20 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "FAKE ANSWER",
+                "reasoning": "The extracted answer 'FAKE ANSWER' does not match the correct answer 'Z+Z+Z+Z+Z'. It is not equivalent or compatible with the required mathematical structure.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 10755.580322265625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 30.77472252378438
+            },
+            "judge_generation_id": "2538CCMQCNBP00703571"
         }
     }
 }

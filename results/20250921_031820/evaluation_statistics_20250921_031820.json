@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-21T04:58:30.966154",
+        "timestamp": "2025-09-21T05:38:49.320876",
         "results_directory": "results/20250921_031820",
         "total_files_processed": 54
     },
@@ -40,10 +40,10 @@
         "z-ai/glm-4.5:z-ai": {
             "prediction_file": "hle_z-ai_glm-4.5_z-ai_20250921_031820.json",
             "total_questions": 3,
-            "responses_with_content": 2,
-            "responses_without_content": 1,
-            "completion_rate": 66.67,
-            "is_complete": false
+            "responses_with_content": 3,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
         },
         "openai/gpt-5-chat:openai": {
             "prediction_file": "hle_openai_gpt-5-chat_openai_20250921_031820.json",
@@ -96,10 +96,10 @@
         "z-ai/glm-4.5-air:z-ai": {
             "prediction_file": "hle_z-ai_glm-4.5-air_z-ai_20250921_031820.json",
             "total_questions": 3,
-            "responses_with_content": 2,
-            "responses_without_content": 1,
-            "completion_rate": 66.67,
-            "is_complete": false
+            "responses_with_content": 3,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
         },
         "anthropic/claude-sonnet-4:anthropic": {
             "prediction_file": "hle_anthropic_claude-sonnet-4_anthropic_20250921_031820.json",
@@ -192,10 +192,10 @@
         "google/gemini-2.5-flash-lite:google-vertex": {
             "prediction_file": "hle_google_gemini-2.5-flash-lite_google-vertex_20250921_031820.json",
             "total_questions": 3,
-            "responses_with_content": 1,
-            "responses_without_content": 2,
-            "completion_rate": 33.33,
-            "is_complete": false
+            "responses_with_content": 3,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
         },
         "anthropic/claude-sonnet-4:google-vertex": {
             "prediction_file": "hle_anthropic_claude-sonnet-4_google-vertex_20250921_031820.json",
@@ -441,8 +441,8 @@
     "summary": {
         "total_models": 54,
         "models_with_responses": 54,
-        "models_with_complete_evaluation": 51,
+        "models_with_complete_evaluation": 54,
         "total_questions_across_all_models": 162,
-        "total_responses_across_all_models": 158
+        "total_responses_across_all_models": 162
     }
 }

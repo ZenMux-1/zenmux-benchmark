@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-21T04:58:30.962904",
+        "timestamp": "2025-09-21T05:38:49.319747",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -58,8 +58,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_deepseek_deepseek-r1-0528_volcengine_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "unknown"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "z-ai/glm-4.5:z-ai",
@@ -67,8 +67,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_z-ai_glm-4.5_z-ai_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-5-chat:openai",
@@ -102,8 +102,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_openai_gpt-5-mini_openai_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "unknown"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-4.1:azure",
@@ -150,8 +150,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_z-ai_glm-4.5-air_z-ai_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-sonnet-4:anthropic",
@@ -237,8 +237,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_openai_gpt-5_openai_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "unknown"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-opus-4.1:amazon-bedrock",
@@ -298,8 +298,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_google_gemini-2.5-flash-lite_google-vertex_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-sonnet-4:google-vertex",
@@ -359,8 +359,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_openai_o4-mini_azure_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "unknown"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-4.1-mini:openai",
@@ -446,8 +446,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_x-ai_grok-4_x-ai_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "unknown"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "google/gemini-2.5-pro:google-vertex",
@@ -455,8 +455,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_google_gemini-2.5-pro_google-vertex_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "unknown"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/o4-mini:openai",
@@ -529,8 +529,8 @@
             "judged_file": "results/20250921_031820/judged/judged_hle_openai_gpt-5_azure_20250921_031820.json",
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "unknown"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "google/gemini-2.0-flash-lite-001:google-vertex",
