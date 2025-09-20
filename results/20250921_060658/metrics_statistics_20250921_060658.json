@@ -1,21 +1,17 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-21T06:09:45.154908",
+        "timestamp": "2025-09-21T06:21:15.926621",
         "results_directory": "results/20250921_060658",
         "metrics_summary_file": "metrics_summary_20250921_060658.json"
     },
     "metrics_summary_statistics": {
         "total_models": 53,
-        "models_with_valid_metrics": 45,
-        "models_excluded_from_metrics": 8,
-        "models_with_errors": 6
+        "models_with_valid_metrics": 50,
+        "models_excluded_from_metrics": 3,
+        "models_with_errors": 0
     },
     "exclusion_reasons": {
-        "general_error": 6,
-        "incomplete_evaluations": 6,
-        "incomplete_judgments": 6
+        "incomplete_evaluations": 3
     },
-    "error_summary": {
-        "evaluation_failure": 6
-    }
+    "error_summary": {}
 }

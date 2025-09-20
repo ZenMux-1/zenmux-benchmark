@@ -55,11 +55,6 @@
             "samples_count": 2
         }
     },
-    "metrics": {
-        "accuracy": 0.04,
-        "confidence_interval": 0.08,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "openai/o4-mini:azure",
@@ -100,16 +95,42 @@
             "judge_generation_id": "2538CCEEFDKA00702786"
         },
         "668828540a642802bdfeadfc": {
-            "model": "openai/o4-mini:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/o4-mini",
+            "response": "Explanation:\n1. Bennett\u2019s \u201clogical depth\u201d has as its inverse the concept of Kolmogorov complexity.  The third letter of \u201ckolmogorov\u201d is \u2018l\u2019, so c1 = \u2018l\u2019.\n2. Gell-Mann\u2019s quip was \u201cthe two options didn\u2019t commute.\u201d  The third letter of \u201coptions\u201d is \u2018t\u2019, so c2 = \u2018t\u2019.\n3. The last author of the GELU paper is Kevin Gimpel, whose name ends in \u2018l\u2019, so c3 = \u2018l\u2019.  Rot13(\u2018l\u2019) = \u2018y\u2019, so c4 = \u2018y\u2019.\n4. Mars\u2019s mass is much closer to the Moon\u2019s than to Earth\u2019s, so the answer is \u201cmoon,\u201d whose second letter is \u2018o\u2019, so c5 = \u2018o\u2019.\nConcatenating c1, c2, c4, c5 gives \u201cltyo.\u201d\n\nAnswer: ltyo  \nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 4257,
+                "prompt_tokens": 239,
+                "total_tokens": 4496,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 4032,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 39879.423828125,
+                "generation_time_ms": 1946.84716796875,
+                "throughput_tokens_per_second": 2186.6123186452055
+            },
+            "generation_id": "2538CCFMSJSD00701332",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "ltyo",
+                "reasoning": "The extracted final answer is \u201cltyo,\u201d which does not match the correct answer \u201cyeyo.\u201d Therefore, it is incorrect.",
+                "correct": "no",
+                "confidence": 60
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 6255.363037109375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 30.53379937613689
+            },
+            "judge_generation_id": "2538CCCHLUWG00701345"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/o4-mini:azure",
@@ -149,5 +170,10 @@
             },
             "judge_generation_id": "2538CCYFXJNU00705119"
         }
+    },
+    "metrics": {
+        "accuracy": 0.04,
+        "confidence_interval": 0.08,
+        "calibration_error": 0.0
     }
 }

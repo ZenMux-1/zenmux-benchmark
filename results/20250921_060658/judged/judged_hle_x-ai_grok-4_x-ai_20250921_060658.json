@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": null,
-        "confidence_interval": null,
-        "calibration_error": null
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "x-ai/grok-4:x-ai",
@@ -84,30 +79,58 @@
             "generation_id": "2538CCPOVMNA00702740",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
-                "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "model_answer": "D",
+                "reasoning": "The extracted final answer is 'D', which exactly matches the provided correct answer 'D'.",
+                "correct": "yes",
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5503.39013671875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 21.25962308566373
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCAMQRPG00702811"
         },
         "668828540a642802bdfeadfc": {
-            "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "x-ai/grok-4",
+            "response": "Explanation: Based on the analysis: c1 is 'a' from \"shallowness\" (third letter); c2 is 't' from \"alternatives\" (third letter); c4 is 'y' from ROT13 of 'l' (Gimpel ends with 'l'); c5 is 'o' from \"Moon\" (second letter, as Mars is closer in mass to the Moon using absolute difference).\nAnswer: atyo\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 96,
+                "prompt_tokens": 912,
+                "total_tokens": 15904,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 14896,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 911,
+                    "text_tokens": 912,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 269646.6257324219,
+                "generation_time_ms": 1315.31591796875,
+                "throughput_tokens_per_second": 72.98626792888918
+            },
+            "generation_id": "2538CCINYRCB00701335",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "atyo",
+                "reasoning": "The extracted final answer 'atyo' does not match the correct answer 'yeyo'; the first two letters differ ('a' vs 'y' and 't' vs 'e').",
+                "correct": "no",
+                "confidence": 80
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7066.058837890625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 37.64474739066946
+            },
+            "judge_generation_id": "2538CCAISCEG00702810"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "x-ai/grok-4:x-ai",
@@ -121,5 +144,10 @@
             "generation_id": null,
             "error": ""
         }
+    },
+    "metrics": {
+        "accuracy": null,
+        "confidence_interval": null,
+        "calibration_error": null
     }
 }

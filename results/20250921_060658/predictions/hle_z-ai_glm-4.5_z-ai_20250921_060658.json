@@ -52,28 +52,44 @@
             "generation_id": "2538CCLESRCJ00705079"
         },
         "668828540a642802bdfeadfc": {
-            "model": "z-ai/glm-4.5:z-ai",
+            "model": "z-ai/glm-4.5",
             "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "usage": {
+                "completion_tokens": 65536,
+                "prompt_tokens": 242,
+                "total_tokens": 65778,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 1917.05810546875,
+                "generation_time_ms": 575362.4538574219,
+                "throughput_tokens_per_second": 113.90385236406162
+            },
+            "generation_id": "2538CCIMCYMU00702789"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "z-ai/glm-4.5:z-ai",
+            "model": "z-ai/glm-4.5",
             "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "usage": {
+                "completion_tokens": 65536,
+                "prompt_tokens": 103,
+                "total_tokens": 65639,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 1993.952880859375,
+                "generation_time_ms": 567029.6459960938,
+                "throughput_tokens_per_second": 115.57773118700652
+            },
+            "generation_id": "2538CCMFUMLQ00701336"
         }
     }
 }

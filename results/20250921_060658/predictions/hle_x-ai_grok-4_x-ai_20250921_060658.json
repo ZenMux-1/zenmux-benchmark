@@ -60,19 +60,35 @@
             "generation_id": "2538CCPOVMNA00702740"
         },
         "668828540a642802bdfeadfc": {
-            "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "x-ai/grok-4",
+            "response": "Explanation: Based on the analysis: c1 is 'a' from \"shallowness\" (third letter); c2 is 't' from \"alternatives\" (third letter); c4 is 'y' from ROT13 of 'l' (Gimpel ends with 'l'); c5 is 'o' from \"Moon\" (second letter, as Mars is closer in mass to the Moon using absolute difference).\nAnswer: atyo\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 96,
+                "prompt_tokens": 912,
+                "total_tokens": 15904,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 14896,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 911,
+                    "text_tokens": 912,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 269646.6257324219,
+                "generation_time_ms": 1315.31591796875,
+                "throughput_tokens_per_second": 72.98626792888918
+            },
+            "generation_id": "2538CCINYRCB00701335"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "x-ai/grok-4:x-ai",
+            "model": "x-ai/grok-4",
             "response": "",
             "usage": {},
             "performance": {
@@ -81,7 +97,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         }
     }
 }

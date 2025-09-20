@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": null,
-        "confidence_interval": null,
-        "calibration_error": null
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -84,18 +79,17 @@
             "generation_id": "2538CCNLLRGZ00702722",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The correct answer is D, while the extracted final answer is E. These are different options, so the response does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 7442.61181640625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 17.06390218015205
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCOYUJYQ00701337"
         },
         "668828540a642802bdfeadfc": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -126,18 +120,17 @@
             "generation_id": "2538CCBJLZWC00703914",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "asyh",
+                "reasoning": "The extracted final answer 'asyh' does not match the correct answer 'yeyo'. They are different strings with no equivalence.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6090.492919921875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 31.19616137776205
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCPFKSQD00703970"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -168,18 +161,22 @@
             "generation_id": "2538CCVZVGAP00703917",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "0",
+                "reasoning": "The provided answer is 0, while the correct answer is Z+Z+Z+Z+Z (i.e., a free abelian group of rank 5). These do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 80
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6580.307861328125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 40.423640596400965
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCONBQQB00702790"
         }
+    },
+    "metrics": {
+        "accuracy": null,
+        "confidence_interval": null,
+        "calibration_error": null
     }
 }
