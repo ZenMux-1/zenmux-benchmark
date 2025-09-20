@@ -222,8 +222,11 @@ async def main():
                 sys.exit(1)
 
             logger.info(f"\n🎉 Fix completed!")
-            logger.info(f"✅ Fixed models: {fix_result['fixed_count']}")
-            logger.info(f"❌ Still failed models: {fix_result['remaining_failures']}")
+            logger.info(f"✅ Models with fixes applied: {fix_result['fixed_count']}")
+            logger.info(f"✅ Models with no failures: {fix_result['no_failures_count']}")
+            logger.info(f"❌ Models still with evaluation failures: {fix_result['still_eval_failures_count']}")
+            logger.info(f"❌ Models still with judge failures: {fix_result['still_judge_failures_count']}")
+            logger.info(f"❌ Models with processing errors: {fix_result['processing_errors_count']}")
             logger.info(f"📁 Results saved to: {fix_result['metrics_summary_file']}")
 
         else:

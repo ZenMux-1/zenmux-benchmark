@@ -729,22 +729,48 @@ class HLERunner:
         fix_tasks = [fix_single_model(pf) for pf in prediction_files]
         fix_results = await asyncio.gather(*fix_tasks, return_exceptions=True)
 
-        # Process results
+        # Process results and categorize models more precisely
         fixed_models = []
-        still_failed_models = []
+        models_with_no_failures = []
+        still_failed_evaluation_models = []
+        still_failed_judge_models = []
+        processing_error_models = []
 
         for i, result in enumerate(fix_results):
             if isinstance(result, Exception):
-                still_failed_models.append(f"ERROR_{os.path.basename(prediction_files[i])}")
-                self.logger.error(f"❌ Error processing {os.path.basename(prediction_files[i])}: {result}")
+                model_file = os.path.basename(prediction_files[i])
+                processing_error_models.append(f"ERROR_{model_file}")
+                self.logger.error(f"❌ Error processing {model_file}: {result}")
             else:
-                model_identifier, was_fixed = result
-                if was_fixed:
-                    fixed_models.append(model_identifier)
-                    self.logger.info(f"🎉 Fixed some failures for {model_identifier}")
+                model_identifier, fix_info = result
+
+                # fix_info should now be a dict with details about what was fixed
+                if isinstance(fix_info, dict):
+                    if fix_info.get("had_failures", False):
+                        if fix_info.get("was_fixed", False):
+                            fixed_models.append(model_identifier)
+                            self.logger.info(f"🎉 Fixed some failures for {model_identifier}")
+                        else:
+                            # Still has failures - categorize by type
+                            if fix_info.get("still_has_eval_failures", False):
+                                still_failed_evaluation_models.append(model_identifier)
+                            if fix_info.get("still_has_judge_failures", False):
+                                still_failed_judge_models.append(model_identifier)
+
+                            if not fix_info.get("still_has_eval_failures", False) and not fix_info.get("still_has_judge_failures", False):
+                                # This shouldn't happen, but log for debugging
+                                self.logger.warning(f"⚠️ {model_identifier}: Had failures but unclear what type")
+                    else:
+                        models_with_no_failures.append(model_identifier)
+                        self.logger.info(f"✅ No failures found for {model_identifier}")
                 else:
-                    still_failed_models.append(model_identifier)
-                    self.logger.info(f"⚠️ No fixes needed or all fixes failed for {model_identifier}")
+                    # Backward compatibility - treat as boolean
+                    if fix_info:  # was_fixed
+                        fixed_models.append(model_identifier)
+                        self.logger.info(f"🎉 Fixed some failures for {model_identifier}")
+                    else:
+                        # Need to check what type of failures still exist
+                        self.logger.warning(f"⚠️ {model_identifier}: No fixes applied (unclear failure type)")
 
         # Run metrics calculation for all models (consistent with normal benchmark flow)
         self.logger.info(f"\n📊 Running metrics calculation and statistics generation...")
@@ -781,15 +807,32 @@ class HLERunner:
             self.config.run_dir = original_run_dir
             self.batch_timestamp = original_batch_timestamp
 
+        # Calculate totals
+        total_still_failed = len(still_failed_evaluation_models) + len(still_failed_judge_models) + len(processing_error_models)
+        # Note: A model can have both eval and judge failures, so we need to count unique models
+        unique_still_failed_models = set(still_failed_evaluation_models + still_failed_judge_models + processing_error_models)
+
         self.logger.info(f"\n📊 Fix Summary:")
-        self.logger.info(f"✅ Fixed models: {len(fixed_models)}")
-        self.logger.info(f"❌ Still failed models: {len(still_failed_models)}")
+        self.logger.info(f"✅ Models with fixes applied: {len(fixed_models)}")
+        self.logger.info(f"✅ Models with no failures: {len(models_with_no_failures)}")
+        self.logger.info(f"❌ Models still with evaluation failures: {len(still_failed_evaluation_models)}")
+        self.logger.info(f"❌ Models still with judge failures: {len(still_failed_judge_models)}")
+        self.logger.info(f"❌ Models with processing errors: {len(processing_error_models)}")
+        self.logger.info(f"📊 Total models processed: {len(prediction_files)}")
+        self.logger.info(f"📊 Total unique models still with issues: {len(unique_still_failed_models)}")
 
         return {
             "fixed_models": fixed_models,
-            "still_failed_models": still_failed_models,
+            "models_with_no_failures": models_with_no_failures,
+            "still_failed_evaluation_models": still_failed_evaluation_models,
+            "still_failed_judge_models": still_failed_judge_models,
+            "processing_error_models": processing_error_models,
             "fixed_count": len(fixed_models),
-            "remaining_failures": len(still_failed_models),
+            "no_failures_count": len(models_with_no_failures),
+            "still_eval_failures_count": len(still_failed_evaluation_models),
+            "still_judge_failures_count": len(still_failed_judge_models),
+            "processing_errors_count": len(processing_error_models),
+            "remaining_failures": len(unique_still_failed_models),
             "metrics_summary_file": metrics_summary_file
         }
 
@@ -1077,15 +1120,54 @@ class HLERunner:
         else:
             self.logger.info(f"📄 No judged file found for {model_identifier}, skipping judge fixes")
 
+        # Check final status after fix attempts
+        final_failed_eval_questions = []
+        final_failed_judge_questions = []
+
+        # Re-check evaluation completeness after fixes
+        if os.path.exists(predictions_file):
+            with open(predictions_file, "r") as f:
+                final_predictions_data = json.load(f)
+            final_predictions = final_predictions_data.get("predictions", final_predictions_data)
+            final_failed_eval_questions = [
+                qid for qid, pred in final_predictions.items()
+                if not pred.get("response", "").strip()
+            ]
+
+        # Re-check judge completeness after fixes
+        if os.path.exists(judged_file):
+            with open(judged_file, "r") as f:
+                final_judged_data = json.load(f)
+            final_judged_predictions = final_judged_data.get("judged_predictions", final_judged_data)
+            final_failed_judge_questions = [
+                qid for qid, pred in final_judged_predictions.items()
+                if pred.get("response", "").strip() and not pred.get("judge_response", {}).get("reasoning", "").strip()
+            ]
+
+        # Create detailed fix info
+        had_failures = bool(failed_eval_questions or failed_judge_questions)
+        fix_info = {
+            "had_failures": had_failures,
+            "was_fixed": model_fixed,
+            "initial_eval_failures": len(failed_eval_questions),
+            "initial_judge_failures": len(failed_judge_questions),
+            "final_eval_failures": len(final_failed_eval_questions),
+            "final_judge_failures": len(final_failed_judge_questions),
+            "still_has_eval_failures": len(final_failed_eval_questions) > 0,
+            "still_has_judge_failures": len(final_failed_judge_questions) > 0
+        }
+
         # Log final status for this model
-        if not failed_eval_questions and not failed_judge_questions:
+        if not had_failures:
             self.logger.info(f"✅ {model_identifier}: No failures found")
         elif model_fixed:
-            self.logger.info(f"🎉 {model_identifier}: Successfully fixed some failures")
+            eval_fixed = len(failed_eval_questions) - len(final_failed_eval_questions)
+            judge_fixed = len(failed_judge_questions) - len(final_failed_judge_questions)
+            self.logger.info(f"🎉 {model_identifier}: Fixed {eval_fixed} eval + {judge_fixed} judge failures")
         else:
-            self.logger.warning(f"⚠️ {model_identifier}: Could not fix any failures")
+            self.logger.warning(f"⚠️ {model_identifier}: Could not fix any failures ({len(final_failed_eval_questions)} eval + {len(final_failed_judge_questions)} judge still failing)")
 
-        return model_identifier, model_fixed
+        return model_identifier, fix_info
 
 
 
