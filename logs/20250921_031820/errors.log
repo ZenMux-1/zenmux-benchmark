@@ -178,3 +178,11 @@ Correct Answer: yeyo...
 Response being judged: Explanation: c1: Reciprocal of “logical depth” is commonly referred to as “shallowness” (Bennett’s d...
 Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
 
+2025-09-21 03:58:06 | ERROR    | zenmux.runner   | main                 | 
+❌ Benchmark failed: 'metrics_file'
+2025-09-21 03:58:06 | ERROR    | zenmux.runner   | main                 | Traceback: Traceback (most recent call last):
+  File "/Users/thinkthinking/src_code/dev/zenmux-benchmark/benchmark.py", line 227, in main
+    logger.info(f"📁 Results saved to: {fix_result['metrics_file']}")
+                                        ~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'metrics_file'
+

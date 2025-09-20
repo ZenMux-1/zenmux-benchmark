@@ -224,7 +224,7 @@ async def main():
             logger.info(f"\n🎉 Fix completed!")
             logger.info(f"✅ Fixed models: {fix_result['fixed_count']}")
             logger.info(f"❌ Still failed models: {fix_result['remaining_failures']}")
-            logger.info(f"📁 Results saved to: {fix_result['metrics_file']}")
+            logger.info(f"📁 Results saved to: {fix_result['metrics_summary_file']}")
 
         else:
             # Regular evaluation modes
