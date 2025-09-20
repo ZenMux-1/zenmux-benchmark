@@ -1,8 +1,8 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-21T05:38:49.323473",
+        "timestamp": "2025-09-21T05:44:43.578440",
         "results_directory": "results/20250921_031820",
-        "total_files_processed": 54
+        "total_files_processed": 53
     },
     "model_statistics": {
         "openai/gpt-4.1-mini:azure": {
@@ -405,14 +405,6 @@
             "completion_rate": 100.0,
             "is_complete": true
         },
-        "deepseek/deepseek-r1-0528:volcengine": {
-            "judged_file": "judged_hle_deepseek_deepseek-r1-0528_volcengine_20250921_031820.json",
-            "total_questions": 3,
-            "judgments_with_content": 3,
-            "judgments_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
         "moonshotai/kimi-k2:volcengine": {
             "judged_file": "judged_hle_moonshotai_kimi-k2_volcengine_20250921_031820.json",
             "total_questions": 3,
@@ -439,10 +431,10 @@
         }
     },
     "summary": {
-        "total_models": 54,
-        "models_with_judgments": 54,
-        "models_with_complete_judging": 54,
-        "total_questions_across_all_models": 162,
-        "total_judgments_across_all_models": 162
+        "total_models": 53,
+        "models_with_judgments": 53,
+        "models_with_complete_judging": 53,
+        "total_questions_across_all_models": 159,
+        "total_judgments_across_all_models": 159
     }
 }

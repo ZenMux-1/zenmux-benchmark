@@ -484,6 +484,7 @@ Additional Error Info: {additional_info}
         # Save judged results with metadata
         final_output = {
             **metadata,
+            "metrics": metrics,
             "judged_predictions": judged_predictions
         }
 
