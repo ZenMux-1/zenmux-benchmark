@@ -14,7 +14,7 @@ ZenMux Benchmark is a production-grade evaluation framework that enables compreh
 - 📊 **Text-Only Mode**: Filter multimodal questions for text-only model evaluation
 - 🚫 **Smart Model Exclusion**: Dual exclusion system with `--exclude-model` (vendor/model filtering) and `--exclude-provider` (provider-based filtering)
 - ⚡ **Dual-Layer Concurrency**: Advanced parallel processing with model-level and request-level concurrency
-- 🔧 **Concurrent Failure Recovery**: Intelligent fix system with dual-layer concurrency for fast recovery from evaluation and judge failures
+- 🔧 **Failure Recovery**: Intelligent fix system for recovering from evaluation and judge failures
 - ⚙️ **Production Ready**: Robust error handling, retry mechanisms, and resumable evaluations
 - 🚀 **CI/CD Support**: GitHub Actions integration for automated benchmarking
 
@@ -112,7 +112,7 @@ uv run python benchmark.py --exclude-model openai/gpt-4o anthropic/claude-3-haik
 uv run python benchmark.py --exclude-model anthropic openai
 
 # Exclude specific provider (all models using this provider)
-uv run python benchmark.py --exclude-provider theta --text-only --max-samples 3
+uv run python benchmark.py --exclude-provider theta --exclude-model google/gemini-2.5-flash-lite:google-vertex --text-only --max-samples 3
 
 # Exclude specific model from specific provider only
 uv run python benchmark.py --exclude-model openai/gpt-4o:openai
@@ -350,16 +350,15 @@ uv run python benchmark.py --fix results/20250917_173456
 
 ## Important Notes
 
-1. **Unified Dual-Layer Concurrency**: Both evaluation and fix operations use the same concurrent architecture with model-level and request-level parallelism
-2. **No Runtime Retries**: Initial evaluations focus on speed without retries; use fix mode for handling failures efficiently
-3. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
-4. **Cost Control**: Use `--max-samples`, `--exclude-model`, and `--exclude-provider` to control evaluation scope and costs
-5. **Model Exclusion**: Use `--exclude-model` and `--exclude-provider` strategically to skip problematic, expensive, or irrelevant models
-6. **Concurrent Failure Recovery**: Fix mode processes multiple models and questions simultaneously, following the same evaluation → judge → metrics workflow
-7. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
-8. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
-9. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
-10. **Memory Usage**: Monitor system memory with high concurrency settings, especially during fix operations
+1. **Dual-Layer Concurrency**: The system runs multiple models simultaneously (outer layer) with concurrent requests per model (inner layer)
+2. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
+3. **Cost Control**: Use `--max-samples`, `--exclude-model`, and `--exclude-provider` to control evaluation scope and costs - exclude expensive models to save budget
+4. **Model Exclusion**: Use `--exclude-model` and `--exclude-provider` strategically to skip problematic, expensive, or irrelevant models for your use case
+5. **Failure Recovery**: The system tracks failures using `has_answer` and `has_judgment` fields, use `--fix` to retry failed operations
+6. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
+7. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
+8. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
+9. **Memory Usage**: Monitor system memory with high concurrency settings
 
 ## Troubleshooting
 

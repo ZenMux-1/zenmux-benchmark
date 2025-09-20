@@ -1,0 +1,116 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-21T06:07:16.557862",
+        "model_identifier": "anthropic/claude-3.5-sonnet:anthropic",
+        "endpoint": {
+            "provider_slug": "anthropic",
+            "provider": "Anthropic",
+            "context_length": 200000,
+            "max_completion_tokens": 8192,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions,messages"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 2184.26,
+            "avg_generation_time_ms": 5952.47,
+            "avg_throughput_tokens_per_second": 40.4,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "anthropic/claude-3.5-sonnet:anthropic",
+            "response": "Explanation: Critical-level views violate the Weak Quality Addition condition of Arrhenius's impossibility theorem. This condition states that adding lives with positive welfare above a certain threshold should make a population better. Critical-level views posit that there is a critical level of welfare above zero, below which adding lives makes things worse, even if those lives have positive welfare. This directly conflicts with Weak Quality Addition, which holds that adding lives with positive welfare (even if relatively low) should be an improvement.\n\nAnswer: E\n\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 119,
+                "prompt_tokens": 125,
+                "total_tokens": 244,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2273.573974609375,
+                "generation_time_ms": 2079.09033203125,
+                "throughput_tokens_per_second": 57.23657032435826
+            },
+            "generation_id": "2538CCMQZHKT00703919"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "anthropic/claude-3.5-sonnet:anthropic",
+            "response": "Let me solve this step by step:\n\n1. The reciprocal concept to logical \"depth\" is logical \"height\". c1 = 'i'\n\n2. Gell-Mann's quote was about \"options\" - the two options didn't commute. c2 = 't'\n\n3. GELU paper's last author is Hendrycks. c3 = 's'\n\n4. ROT13 of 's' is 'f'. c4 = 'f'\n\n5. Mars mass = 6.39 \u00d7 10^23 kg\nEarth mass = 5.97 \u00d7 10^24 kg\nMoon mass = 7.34 \u00d7 10^22 kg\n\nMars is closer to Earth in mass. c5 = 'a'\n\nConcatenating c1, c2, c4, c5 = 'itfa'\n\nExplanation: I worked through each clue systematically, finding the required letters and applying the specified transformations. For the mass comparison, I used order of magnitude comparison to determine that Mars is closer to Earth's mass than the Moon's.\n\nAnswer: itfa\n\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 266,
+                "prompt_tokens": 263,
+                "total_tokens": 529,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1874.73583984375,
+                "generation_time_ms": 8154.120849609375,
+                "throughput_tokens_per_second": 32.62154251892683
+            },
+            "generation_id": "2538CCJUHXNB00702731"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "anthropic/claude-3.5-sonnet:anthropic",
+            "response": "Let me approach this step by step:\n\nExplanation: \n1) The reduced Spin bordism groups of BG2 in dimension 12 are quite complex to compute directly.\n\n2) However, we know that G2 is simply connected and its first non-zero homotopy group appears in dimension 3.\n\n3) For the 12-dimensional case, the key fact is that the reduced Spin bordism of BG2 in dimension 12 is isomorphic to Z/3.\n\n4) This result comes from analyzing the Adams spectral sequence and using the fact that G2 has specific characteristic classes.\n\n5) However, I should note that this is a highly specialized result and my confidence in the exact computation is not absolute, as there are several technical details involved in the computation.\n\nAnswer: The reduced 12-dimensional Spin bordism group of BG2 is Z/3\n\nConfidence: 85%\n\nThe relatively high confidence comes from this being a well-established result in algebraic topology, though the computation itself involves complex machinery that could introduce subtle issues.",
+            "usage": {
+                "completion_tokens": 239,
+                "prompt_tokens": 111,
+                "total_tokens": 350,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2404.47802734375,
+                "generation_time_ms": 7624.213134765625,
+                "throughput_tokens_per_second": 31.34749721386784
+            },
+            "generation_id": "2538CCQIGCKB00703898"
+        }
+    }
+}

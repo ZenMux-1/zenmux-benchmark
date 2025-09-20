@@ -1,0 +1,110 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-21T06:08:48.861155",
+        "model_identifier": "openai/gpt-5-nano:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 15474.78,
+            "avg_generation_time_ms": 72676.92,
+            "avg_throughput_tokens_per_second": 82.15,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: A critical-level view weights individuals by max(0, w_i \u2212 L), where L is the critical level. If a new person has welfare w \u2264 L, their contribution is zero, so adding them does not increase the overall value. This violates the Weak Quality Addition, which requires that adding a person with positive quality should increase value.\n\nAnswer: E\n\nConfidence: 72%",
+            "usage": {
+                "completion_tokens": 2965,
+                "prompt_tokens": 109,
+                "total_tokens": 3074,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2880,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4537.2119140625,
+                "generation_time_ms": 78024.97680664062,
+                "throughput_tokens_per_second": 38.000652116152274
+            },
+            "generation_id": "2538CCZXAYIM00705046"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: \n- The reciprocal concept to logical depth, associated with Charles Bennett, is \"breadth\" (logical breadth). The third letter of \"breadth\" is e, so c1 = 'e'.\n- The quote about Murray Gell-Mann joking about MIT and suicide uses the missing word \"options.\" The third character of \"options\" is t, so c2 = 't'.\n- The GELU book is The Quark and the Jaguar by Murray Gell-Mann and James Gleick. The last author is Gleick; his last name ends with 'k', so c3 = 'k'. Rot13 of 'k' is 'x', so c4 = 'x'.\n- Mars is closer in mass to Earth than to the Moon; the answer is \"Earth.\" The second letter of \"Earth\" is a, so c5 = 'a'.\n\nConcatenate c1, c2, c4, c5 in lowercase: e t x a -> etxa\n\nAnswer: etxa\nConfidence: 0.65",
+            "usage": {
+                "completion_tokens": 5916,
+                "prompt_tokens": 239,
+                "total_tokens": 6155,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 5696,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 3651.735107421875,
+                "generation_time_ms": 78666.46875,
+                "throughput_tokens_per_second": 75.20357903442817
+            },
+            "generation_id": "2538CCNASNJB00701241"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: We use the Atiyah\u2013Hirzebruch spectral sequence (AHSS) for Spin bordism of BG2:\nE2_{p,q} = H_p(BG2; \u03a9^{Spin}_q(pt)) \u21d2 \u03a9^{Spin}_{p+q}(BG2).\n\n- For a simply connected compact simple Lie group G, H^*(BG; Z) is a polynomial algebra on generators in even degrees; for G2 the generators occur in degrees 4 and 12. Hence, up to total degree 12, the homology H_p(BG2; Z) is nonzero for p = 0, 4, 8, 12 (and is zero in odd degrees; higher even degrees beyond 12 are irrelevant here).\n- Thus the relevant E2 terms for total degree n = 12 are:\n  - (p,q) = (0,12): H_0(BG2) \u2297 \u03a9^{Spin}_{12}(pt) \u2245 \u03a9^{Spin}_{12}(pt)\n  - (p,q) = (4,8): H_4(BG2) \u2297 \u03a9^{Spin}_{8}(pt) \u2245 \u03a9^{Spin}_{8}(pt)\n  - (p,q) = (8,4): H_8(BG2) \u2297 \u03a9^{Spin}_{4}(pt) \u2245 \u03a9^{Spin}_{4}(pt)\n  - (p,q) = (12,0): H_{12}(BG2) \u2297 \u03a9^{Spin}_{0}(pt) \u2245 \u03a9^{Spin}_{0}(pt)\n\nThe reduced Spin bordism tilde \u03a9^{Spin}_{12}(BG2) is the part that ignores contributions from maps BG2 \u2192 pt (i.e., trivial G2-bundles). In terms of the AHSS this means we discard the pieces coming from the (0,12) and (12,0) terms. What remains are the (4,8) and (8,4) contributions, yielding:\n\n tilde \u03a9^{Spin}_{12}(BG2) \u2245 \u03a9^{Spin}_{8}(pt) \u2295 \u03a9^{Spin}_{4}(pt).\n\nNow use the known Spin bordism groups of a point:\n- \u03a9^{Spin}_{4}(pt) \u2245 Z\n- \u03a9^{Spin}_{8}(pt) \u2245 Z \u2295 Z_2\n\nTherefore:\n tilde \u03a9^{Spin}_{12}(BG2) \u2245 (Z \u2295 Z_2) \u2295 Z \u2245 Z^2 \u2295 Z_2.\n\nAnswer: Z^2 \u2295 Z_2\n\nConfidence: 0.46",
+            "usage": {
+                "completion_tokens": 8174,
+                "prompt_tokens": 102,
+                "total_tokens": 8276,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 7616,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 38235.391845703125,
+                "generation_time_ms": 61339.308349609375,
+                "throughput_tokens_per_second": 133.25875722972762
+            },
+            "generation_id": "2538CCLVAGPW00705050"
+        }
+    }
+}

