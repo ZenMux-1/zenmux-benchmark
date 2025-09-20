@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": 0.0,
-        "confidence_interval": 0.0,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "google/gemini-2.5-pro:google-vertex",
@@ -73,18 +68,17 @@
             "generation_id": "2538CCSULBOD00700985",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C",
+                "reasoning": "The response\u2019s final answer is C (Non-Elitism), while the correct answer is D (Weak Non-Sadism). These are different options, so the response does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4883.618896484375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 28.462499418221082
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCMMZGYH00701035"
         },
         "668828540a642802bdfeadfc": {
             "model": "google/gemini-2.5-pro:google-vertex",
@@ -104,18 +98,17 @@
             "generation_id": "2538CCZVXSGG00703616",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "mtyo",
+                "reasoning": "The extracted answer 'mtyo' does not match the correct answer 'yeyo'. They differ in the first two characters and thus are not equivalent.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4227.797119140625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 30.98540358214447
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCKTAJPX00703682"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "google/gemini-2.5-pro:google-vertex",
@@ -135,18 +128,22 @@
             "generation_id": "2538CCPROFBR00700984",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z^4",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (i.e., Z^5), while the extracted final answer is Z^4. These do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6990.1259765625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 46.92333172531734
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCIQTVEN00702509"
         }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0
     }
 }

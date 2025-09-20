@@ -334,9 +334,9 @@ Additional Error Info: {additional_info}
 
         if not correct:
             return {
-                "accuracy": 0.0,
-                "confidence_interval": 0.0,
-                "calibration_error": 0.0
+                "accuracy": None,
+                "confidence_interval": None,
+                "calibration_error": None
             }
 
         correct = np.array(correct)

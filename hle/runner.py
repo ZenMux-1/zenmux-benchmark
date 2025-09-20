@@ -1185,11 +1185,20 @@ class HLERunner:
 
                 self.logger.info(f"✅ Fixed {judge_fixed_count}/{len(failed_judge_questions)} judge failures")
 
-                # Save updated judged data
+                # Save updated judged data, preserving original metrics
                 final_judged_data = {
                     "judging_metadata": judging_metadata,
                     "judged_predictions": judged_predictions
-                } if judging_metadata else judged_predictions
+                }
+
+                # Preserve original metrics if they exist
+                original_metrics = judged_data.get("metrics")
+                if original_metrics is not None:
+                    final_judged_data["metrics"] = original_metrics
+
+                # Handle old format fallback
+                if not judging_metadata:
+                    final_judged_data = judged_predictions
 
                 with open(judged_file, "w") as f:
                     json.dump(final_judged_data, f, indent=4)

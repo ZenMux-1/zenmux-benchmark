@@ -2495,3 +2495,482 @@ Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zen
 2025-09-21 05:50:40 | INFO     | zenmux.runner   | log_summary          | 📁 Judged files: results/20250921_054800/judged
 2025-09-21 05:50:40 | INFO     | zenmux.runner   | main                 | 
 🎉 Benchmark completed successfully!
+2025-09-21 05:52:18 | INFO     | zenmux.logging  | setup_logging        | 🔧 Logging system initialized
+2025-09-21 05:52:18 | INFO     | zenmux.logging  | setup_logging        | 📁 Log directory: logs/20250921_054800
+2025-09-21 05:52:18 | INFO     | zenmux.logging  | setup_logging        | 🕐 Batch timestamp: 20250921_054800
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | setup_timestamped_directories | 📁 Created timestamped directories:
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | setup_timestamped_directories |    Run directory: results/20250921_054800
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | setup_timestamped_directories |    Predictions: results/20250921_054800/predictions
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | setup_timestamped_directories |    Judged: results/20250921_054800/judged
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🌟 ZenMux HLE Benchmark
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🔧 Mode: fix
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 📁 Target directory: results/20250921_054800
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 👥 Workers per model: 3
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🔄 Max concurrent models: 60
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🎯 Judge model: openai/gpt-5:openai
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🌡️ Temperature: 0.0
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | ⏰ Timeout: 300.0s
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🔄 Max retries: 2
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🎫 Max completion tokens: None
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 📁 Base output directory: results
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 📁 Run directory: results/20250921_054800
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🕒 Batch timestamp: 20250921_054800
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | main                 | 🔧 Fixing evaluation and judge failures in: results/20250921_054800
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | fix_models           | 
+============================================================
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | fix_models           | 🔧 FIXING EVALUATION AND JUDGE FAILURES (CONCURRENT)
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | fix_models           | ============================================================
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | fix_models           | 🔍 Found 54 prediction files to check for failures
+2025-09-21 05:52:18 | INFO     | zenmux.runner   | fix_models           | 🔄 Using concurrent processing: max_concurrent_models=60, num_workers=3
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | fix_models           | 🚀 Starting concurrent fix processing for 54 models
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | fix_models           | 📊 Progress will be reported for individual model fixes...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4:amazon-bedrock for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4:amazon-bedrock: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-mini:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-mini:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-nano:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-nano:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking deepseek/deepseek-chat-v3.1:volcengine for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ deepseek/deepseek-chat-v3.1:volcengine: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.5-flash:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ google/gemini-2.5-flash:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking x-ai/grok-code-fast-1:x-ai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 1 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/o4-mini:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.5-pro:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking x-ai/grok-4:x-ai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking moonshotai/kimi-k2-0711:volcengine for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ moonshotai/kimi-k2-0711:volcengine: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-mini:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-mini:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 1 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.0-flash-lite-001:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ google/gemini-2.0-flash-lite-001:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-nano:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-nano:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-sonnet:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-sonnet:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o-mini:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o-mini:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o-mini:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o-mini:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-haiku:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-haiku:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-sonnet:anthropic for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-sonnet:anthropic: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking moonshotai/kimi-k2:volcengine for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ moonshotai/kimi-k2:volcengine: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-sonnet-4:amazon-bedrock for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-sonnet-4:amazon-bedrock: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.7-sonnet:anthropic for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.7-sonnet:anthropic: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4.1:anthropic for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4.1:anthropic: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking z-ai/glm-4.5:z-ai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-haiku:amazon-bedrock for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-haiku:amazon-bedrock: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking deepseek/deepseek-r1-0528:volcengine for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 1 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4:anthropic for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4:anthropic: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking deepseek/deepseek-chat:deepseek for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ deepseek/deepseek-chat:deepseek: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-mini:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-mini:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-chat:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-chat:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.7-sonnet:amazon-bedrock for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.7-sonnet:amazon-bedrock: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-nano:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-nano:openai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-sonnet-4:anthropic for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-sonnet-4:anthropic: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking z-ai/glm-4.5-air:z-ai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-mini:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-mini:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-sonnet:amazon-bedrock for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-sonnet:amazon-bedrock: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.0-flash:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ google/gemini-2.0-flash:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-haiku:anthropic for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-haiku:anthropic: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4.1:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4.1:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5:openai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 1 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4.1:amazon-bedrock for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4.1:amazon-bedrock: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking moonshotai/kimi-k2-0905:moonshotai for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ moonshotai/kimi-k2-0905:moonshotai: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.7-sonnet:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.7-sonnet:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking qwen/qwen3-coder-plus:alibaba for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ qwen/qwen3-coder-plus:alibaba: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.5-flash-lite:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-sonnet-4:google-vertex for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-sonnet-4:google-vertex: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-chat:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-chat:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/o4-mini:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/o4-mini:azure: No failures found
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-nano:azure for failures...
+2025-09-21 05:52:24 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-nano:azure: No failures found
+2025-09-21 05:52:28 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 05:52:30 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 05:52:30 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 05:52:31 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 05:52:34 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 05:52:34 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 05:52:34 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 google/gemini-2.5-pro:google-vertex: Fixed 0 eval + 3 judge failures
+2025-09-21 05:52:46 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 05:52:46 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 05:52:46 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 openai/o4-mini:openai: Fixed 0 eval + 3 judge failures
+2025-09-21 05:52:59 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 1/1 (100%) completed
+2025-09-21 05:52:59 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 1/1 evaluation failures
+2025-09-21 05:52:59 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 05:53:06 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 05:53:07 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 05:53:09 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 05:53:09 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 05:53:09 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 x-ai/grok-code-fast-1:x-ai: Fixed 1 eval + 3 judge failures
+2025-09-21 05:53:53 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 1/1 (100%) completed
+2025-09-21 05:53:53 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 1/1 evaluation failures
+2025-09-21 05:53:53 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 2 failed judgments concurrently (workers: 3)
+2025-09-21 05:53:59 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/2 (50%) completed
+2025-09-21 05:54:00 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/2 (100%) completed
+2025-09-21 05:54:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 2/2 judge failures
+2025-09-21 05:54:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 openai/gpt-5:azure: Fixed 1 eval + 2 judge failures
+2025-09-21 05:54:45 | WARNING  | zenmux.evaluation | evaluate_single_question | Network connection issue for question 668825f80a642802bdfeadfa [google/gemini-2.5-flash-lite] - this will be retried:
+Exception Type: RemoteProtocolError
+Error Message: peer closed connection without sending complete message body (incomplete chunked read)
+Model: google/gemini-2.5-flash-lite
+Question ID: 668825f80a642802bdfeadfa
+Endpoint Provider: Google Vertex
+Endpoint Provider Slug: google-vertex
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-21 05:54:45 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 1/2 (50%) completed
+2025-09-21 05:54:45 | WARNING  | zenmux.evaluation | evaluate_single_question | Network connection issue for question 669402b41dcb3d5a1ef9e951 [google/gemini-2.5-flash-lite] - this will be retried:
+Exception Type: RemoteProtocolError
+Error Message: peer closed connection without sending complete message body (incomplete chunked read)
+Model: google/gemini-2.5-flash-lite
+Question ID: 669402b41dcb3d5a1ef9e951
+Endpoint Provider: Google Vertex
+Endpoint Provider Slug: google-vertex
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-21 05:54:45 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 2/2 (100%) completed
+2025-09-21 05:54:45 | WARNING  | zenmux.runner   | _fix_single_model_internal | ⚠️ Could not fix any evaluation failures (0/2)
+2025-09-21 05:54:45 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 1 failed judgments concurrently (workers: 3)
+2025-09-21 05:54:52 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/1 (100%) completed
+2025-09-21 05:54:52 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 1/1 judge failures
+2025-09-21 05:54:52 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 google/gemini-2.5-flash-lite:google-vertex: Fixed 0 eval + 1 judge failures
+2025-09-21 05:55:27 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 1/1 (100%) completed
+2025-09-21 05:55:27 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 1/1 evaluation failures
+2025-09-21 05:55:27 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 05:55:32 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 1/1 (100%) completed
+2025-09-21 05:55:32 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 1/1 evaluation failures
+2025-09-21 05:55:32 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 05:55:34 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 05:55:35 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 05:55:36 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 05:55:36 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 05:55:36 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 openai/gpt-5:openai: Fixed 1 eval + 3 judge failures
+2025-09-21 05:55:39 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 05:55:42 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 05:55:46 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 05:55:46 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 05:55:46 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 deepseek/deepseek-r1-0528:volcengine: Fixed 1 eval + 3 judge failures
+2025-09-21 05:57:06 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 1/2 (50%) completed
+2025-09-21 05:58:48 | INFO     | zenmux.runner   | fix_single_eval_question | 🔄 Evaluation progress: 1/2 (50%) completed
+2025-09-21 06:00:54 | INFO     | zenmux.logging  | setup_logging        | 🔧 Logging system initialized
+2025-09-21 06:00:54 | INFO     | zenmux.logging  | setup_logging        | 📁 Log directory: logs/20250921_054800
+2025-09-21 06:00:54 | INFO     | zenmux.logging  | setup_logging        | 🕐 Batch timestamp: 20250921_054800
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | setup_timestamped_directories | 📁 Created timestamped directories:
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | setup_timestamped_directories |    Run directory: results/20250921_054800
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | setup_timestamped_directories |    Predictions: results/20250921_054800/predictions
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | setup_timestamped_directories |    Judged: results/20250921_054800/judged
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🌟 ZenMux HLE Benchmark
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🔧 Mode: fix
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 📁 Target directory: results/20250921_054800
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 👥 Workers per model: 3
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🔄 Max concurrent models: 60
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🎯 Judge model: openai/gpt-5:openai
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🌡️ Temperature: 0.0
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | ⏰ Timeout: 300.0s
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🔄 Max retries: 2
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🎫 Max completion tokens: None
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 📁 Base output directory: results
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 📁 Run directory: results/20250921_054800
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🕒 Batch timestamp: 20250921_054800
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | main                 | 🔧 Fixing evaluation and judge failures in: results/20250921_054800
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | fix_models           | 
+============================================================
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | fix_models           | 🔧 FIXING EVALUATION AND JUDGE FAILURES (CONCURRENT)
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | fix_models           | ============================================================
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | fix_models           | 🔍 Found 54 prediction files to check for failures
+2025-09-21 06:00:54 | INFO     | zenmux.runner   | fix_models           | 🔄 Using concurrent processing: max_concurrent_models=60, num_workers=3
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | fix_models           | 🚀 Starting concurrent fix processing for 54 models
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | fix_models           | 📊 Progress will be reported for individual model fixes...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4:amazon-bedrock for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4:amazon-bedrock: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-mini:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-mini:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-nano:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-nano:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking deepseek/deepseek-chat-v3.1:volcengine for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ deepseek/deepseek-chat-v3.1:volcengine: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.5-flash:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ google/gemini-2.5-flash:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking x-ai/grok-code-fast-1:x-ai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/o4-mini:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.5-pro:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking x-ai/grok-4:x-ai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking moonshotai/kimi-k2-0711:volcengine for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ moonshotai/kimi-k2-0711:volcengine: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-mini:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-mini:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 2 failed judgments concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.0-flash-lite-001:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ google/gemini-2.0-flash-lite-001:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-nano:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-nano:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-sonnet:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-sonnet:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o-mini:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o-mini:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o-mini:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o-mini:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4o:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4o:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-haiku:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-haiku:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-sonnet:anthropic for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-sonnet:anthropic: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking moonshotai/kimi-k2:volcengine for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ moonshotai/kimi-k2:volcengine: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-sonnet-4:amazon-bedrock for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-sonnet-4:amazon-bedrock: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.7-sonnet:anthropic for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.7-sonnet:anthropic: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4.1:anthropic for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4.1:anthropic: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking z-ai/glm-4.5:z-ai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-haiku:amazon-bedrock for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-haiku:amazon-bedrock: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking deepseek/deepseek-r1-0528:volcengine for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4:anthropic for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4:anthropic: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking deepseek/deepseek-chat:deepseek for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ deepseek/deepseek-chat:deepseek: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-mini:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-mini:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-chat:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-chat:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.7-sonnet:amazon-bedrock for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.7-sonnet:amazon-bedrock: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-nano:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-nano:openai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-sonnet-4:anthropic for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-sonnet-4:anthropic: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking z-ai/glm-4.5-air:z-ai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1-mini:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1-mini:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-4.1:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-4.1:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-sonnet:amazon-bedrock for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-sonnet:amazon-bedrock: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.0-flash:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ google/gemini-2.0-flash:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.5-haiku:anthropic for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.5-haiku:anthropic: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4.1:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4.1:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5:openai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ⚖️ Re-judging 3 failed judgments concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4.1:amazon-bedrock for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4.1:amazon-bedrock: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking moonshotai/kimi-k2-0905:moonshotai for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ moonshotai/kimi-k2-0905:moonshotai: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-3.7-sonnet:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-3.7-sonnet:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking qwen/qwen3-coder-plus:alibaba for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ qwen/qwen3-coder-plus:alibaba: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking google/gemini-2.5-flash-lite:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 🔄 Re-evaluating 2 failed questions concurrently (workers: 3)
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-opus-4:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-opus-4:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking anthropic/claude-sonnet-4:google-vertex for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ anthropic/claude-sonnet-4:google-vertex: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-chat:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-chat:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/o4-mini:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/o4-mini:azure: No failures found
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | 
+🔧 Checking openai/gpt-5-nano:azure for failures...
+2025-09-21 06:01:00 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ openai/gpt-5-nano:azure: No failures found
+2025-09-21 06:01:05 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 06:01:05 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 06:01:05 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 06:01:06 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 06:01:06 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 06:01:06 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 06:01:06 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 06:01:06 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/3 (33%) completed
+2025-09-21 06:01:07 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 06:01:07 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 1/2 (50%) completed
+2025-09-21 06:01:07 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/2 (100%) completed
+2025-09-21 06:01:07 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 2/2 judge failures
+2025-09-21 06:01:07 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 openai/gpt-5:azure: Fixed 0 eval + 2 judge failures
+2025-09-21 06:01:07 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 2/3 (67%) completed
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 google/gemini-2.5-pro:google-vertex: Fixed 0 eval + 3 judge failures
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 x-ai/grok-code-fast-1:x-ai: Fixed 0 eval + 3 judge failures
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 06:01:08 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 openai/gpt-5:openai: Fixed 0 eval + 3 judge failures
+2025-09-21 06:01:09 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 06:01:09 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 06:01:09 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 openai/o4-mini:openai: Fixed 0 eval + 3 judge failures
+2025-09-21 06:01:10 | INFO     | zenmux.runner   | fix_single_judge_question | ⚖️ Judge progress: 3/3 (100%) completed
+2025-09-21 06:01:10 | INFO     | zenmux.runner   | _fix_single_model_internal | ✅ Fixed 3/3 judge failures
+2025-09-21 06:01:10 | INFO     | zenmux.runner   | _fix_single_model_internal | 🎉 deepseek/deepseek-r1-0528:volcengine: Fixed 0 eval + 3 judge failures

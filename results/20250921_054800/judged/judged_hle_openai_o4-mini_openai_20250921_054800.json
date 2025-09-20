@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": 0.0,
-        "confidence_interval": 0.0,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "openai/o4-mini:openai",
@@ -81,18 +76,17 @@
             "generation_id": "2538CCSAYKWD00703604",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The extracted answer is E, while the correct answer is D. These are different options, so the response does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6578.9580078125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 28.879953295700528
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCGLUXDR00701032"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/o4-mini:openai",
@@ -120,18 +114,17 @@
             "generation_id": "2538CCTKACMM00704763",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "neyo",
+                "reasoning": "The extracted answer is 'neyo' while the correct answer is 'yeyo'. They differ in the first letter, so they do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 60
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5741.3798828125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 33.615612263833704
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCQPCZGX00704852"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/o4-mini:openai",
@@ -159,18 +152,22 @@
             "generation_id": "2538CCLNPRFI00702418",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z^2",
+                "reasoning": "The response gives the reduced Spin bordism group as Z^2, while the correct answer specifies Z+Z+Z+Z+Z (i.e., Z^5). These are not equivalent; the response has rank 2 instead of the required rank 5.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8141.524169921875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 34.76007613482472
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCTSTYBP00701033"
         }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0
     }
 }
