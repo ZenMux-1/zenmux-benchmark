@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": 0.0,
-        "confidence_interval": 0.0,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "openai/gpt-5:azure",
@@ -81,18 +76,17 @@
             "generation_id": "2538CCVCFWTO00702201",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "A. Egalitarian Dominance",
+                "reasoning": "The extracted answer is A, while the correct answer is D. These are different options, so the response does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 62
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4570.369873046875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 28.662888046010107
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCOZHPDI00700814"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/gpt-5:azure",
@@ -120,18 +114,17 @@
             "generation_id": "2538CCYZIUNW00702212",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "aeyo",
+                "reasoning": "The extracted answer is 'aeyo' while the correct answer is 'yeyo'. They differ in the first letter ('a' vs 'y'), so the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 84
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8717.752685546875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 22.82698387738405
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCZTQKXJ00702286"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/gpt-5:azure",

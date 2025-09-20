@@ -32,7 +32,7 @@
     },
     "predictions": {
         "668825f80a642802bdfeadfa": {
-            "model": "google/gemini-2.5-flash-lite:google-vertex",
+            "model": "google/gemini-2.5-flash-lite",
             "response": "",
             "usage": {},
             "performance": {
@@ -41,7 +41,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "668828540a642802bdfeadfc": {
             "model": "google/gemini-2.5-flash-lite:google-vertex",
@@ -61,7 +61,7 @@
             "generation_id": "2538CCNISWFC00700408"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "google/gemini-2.5-flash-lite:google-vertex",
+            "model": "google/gemini-2.5-flash-lite",
             "response": "",
             "usage": {},
             "performance": {
@@ -70,7 +70,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         }
     }
 }

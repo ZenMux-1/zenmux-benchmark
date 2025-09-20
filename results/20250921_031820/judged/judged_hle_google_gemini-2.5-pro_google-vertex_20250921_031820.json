@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": 0.0,
-        "confidence_interval": 0.0,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "google/gemini-2.5-pro:google-vertex",
@@ -73,18 +68,17 @@
             "generation_id": "2538CCGUPNCW00702226",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C",
+                "reasoning": "The provided response concludes with answer C, while the correct answer is D. Since C and D are different options, the extracted answer does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 11382.593994140625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 22.754040083773912
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCJQKEXY00702284"
         },
         "668828540a642802bdfeadfc": {
             "model": "google/gemini-2.5-pro:google-vertex",
@@ -104,18 +98,17 @@
             "generation_id": "2538CCACPDMZ00700744",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "mtyo",
+                "reasoning": "The extracted final answer \"mtyo\" does not match the correct answer \"yeyo\"; the characters differ, so the answers are not equivalent.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6076.894287109375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 42.62045508170256
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCMWJSZA00700813"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "google/gemini-2.5-pro:google-vertex",

@@ -52,7 +52,7 @@
             "generation_id": "2538CCPYLDCY00700755"
         },
         "668828540a642802bdfeadfc": {
-            "model": "z-ai/glm-4.5:z-ai",
+            "model": "z-ai/glm-4.5",
             "response": "",
             "usage": {},
             "performance": {
@@ -61,19 +61,27 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "z-ai/glm-4.5:z-ai",
+            "model": "z-ai/glm-4.5",
             "response": "",
-            "usage": {},
+            "usage": {
+                "completion_tokens": 65536,
+                "prompt_tokens": 103,
+                "total_tokens": 65639,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
             "performance": {
                 "first_token_latency_ms": 0.0,
                 "generation_time_ms": 0.0,
                 "throughput_tokens_per_second": 0.0
             },
-            "generation_id": null,
-            "error": ""
+            "generation_id": "2538CCFJOCSU00702283"
         }
     }
 }

@@ -49,11 +49,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": 0.0,
-        "confidence_interval": 0.0,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "google/gemini-2.5-flash-lite:google-vertex",
@@ -85,18 +80,17 @@
             "generation_id": "2538CCNISWFC00700408",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "eeno",
+                "reasoning": "The extracted answer \"eeno\" does not match the correct answer \"yeyo\"; they are different strings.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5018.75390625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 37.06099232488144
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2538CCYSECWJ00698908"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "google/gemini-2.5-flash-lite:google-vertex",
