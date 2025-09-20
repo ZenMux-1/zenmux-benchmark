@@ -1,0 +1,110 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-21T05:49:41.693082",
+        "model_identifier": "openai/gpt-5-nano:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 21323.04,
+            "avg_generation_time_ms": 42457.35,
+            "avg_throughput_tokens_per_second": 90.08,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Critical-level views weight or count welfare only above a certain threshold, effectively privileging those above the threshold and ignoring those below. This creates an elitist bias, thus violating the non-elitism condition.\n\nAnswer: C. Non-Elitism\n\nConfidence: 35%",
+            "usage": {
+                "completion_tokens": 1535,
+                "prompt_tokens": 109,
+                "total_tokens": 1644,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1472,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9004.757080078125,
+                "generation_time_ms": 19574.754150390625,
+                "throughput_tokens_per_second": 78.41733225392096
+            },
+            "generation_id": "2538CCEBBWFW00703622"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: \n- The reciprocal concept of logical depth (per Bennett) is often thought of as shallowness; the third letter of \"shallowness\" is 'a'. \n- The missing word in the quote is likely \"MITs\" (the two MITs didn't commute), whose third letter is 'T' (lowercase 't').\n- The last author of The Quark and the Jaguar is James Gleick; his last name ends with 'k', whose Rot13 is 'x'.\n- Mars is closer in mass to Earth than to the Moon; the second letter of \"Earth\" is 'a'.\n\nConcatenating in order: a, t, x, a -> \"atxa\".\n\nAnswer: atxa\nConfidence: 0.65",
+            "usage": {
+                "completion_tokens": 2913,
+                "prompt_tokens": 239,
+                "total_tokens": 3152,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2752,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 27475.57421875,
+                "generation_time_ms": 42125.8876953125,
+                "throughput_tokens_per_second": 69.1498781240909
+            },
+            "generation_id": "2538CCWWVPXP00704771"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: The reduced Spin bordism Omega^{Spin}_12(BG2) can be computed via the Atiyah\u2013Hirzebruch spectral sequence (AHSS) for spin bordism:\nE^2_{p,q} = H_p(BG2; Omega^{Spin}_q(pt)) \u21d2 Omega^{Spin}_{p+q}(BG2).\n\nFor a simply connected compact Lie group G, H^*(BG;Z) is a polynomial algebra on even-degree generators. For G2 one has H^*(BG2;Z) \u2245 Z[c4, c12] with deg(c4)=4 and deg(c12)=12, so H^*(BG2;Z) has nonzero groups in degrees 0, 4, 8, 12, ... and, by universal coefficient, H_p(BG2;Z) is nonzero in p = 0, 4, 8, 12 (in low degrees) with H_4 \u2245 Z, H_8 \u2245 Z, H_12 \u2245 Z.\n\nIn degree 12, the relevant p,q pairs with p>0 are:\n- (p,q) = (12,0): E^2_{12,0} \u2245 H_12(BG2; Z) \u2245 Z\n- (p,q) = (8,4): E^2_{8,4} \u2245 H_8(BG2; Z) \u2297 Omega^{Spin}_4(pt) \u2245 Z \u2297 Z \u2245 Z (Omega^{Spin}_4(pt)=Z)\n- (p,q) = (4,8): E^2_{4,8} \u2245 H_4(BG2; Z) \u2297 Omega^{Spin}_8(pt) \u2245 Z \u2297 (Z \u2295 Z) \u2245 Z \u2295 Z\n\nThe differential structure in the AHSS (and the torsion in Omega^{Spin}_q(pt)) forces nontrivial differentials to hit these entries, and in particular the potential Z summand coming from (12,0) is killed by a d_2 differential involving H_{10}(BG2; Z_2) (the Z_2-torsion piece in Omega^{Spin}_1(pt) and the mod 2 reduction interactively cancel this class). The remaining classes in (8,4) and (4,8) are killed by higher differentials or are mapped to torsion in a way that does not survive to E^\u221e. Therefore, the reduced group tilde{Omega}^{Spin}_{12}(BG2) vanishes:\ntilde{Omega}^{Spin}_{12}(BG2) = 0.\n\nAs a corollary, the unreduced group decomposes as Omega^{Spin}_{12}(BG2) \u2245 Omega^{Spin}_{12}(pt) \u2245 Z \u2295 Z_2 \u2295 Z_2, via the standard reduced/unreduced splitting.\n\nAnswer: 0\n\nConfidence: 28%",
+            "usage": {
+                "completion_tokens": 8057,
+                "prompt_tokens": 102,
+                "total_tokens": 8159,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 7424,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 27488.802734375,
+                "generation_time_ms": 65671.41821289062,
+                "throughput_tokens_per_second": 122.68655404823423
+            },
+            "generation_id": "2538CCRUDOBK00702419"
+        }
+    }
+}

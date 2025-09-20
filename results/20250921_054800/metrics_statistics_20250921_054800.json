@@ -1,0 +1,21 @@
+{
+    "generation_metadata": {
+        "timestamp": "2025-09-21T05:50:40.485993",
+        "results_directory": "results/20250921_054800",
+        "metrics_summary_file": "metrics_summary_20250921_054800.json"
+    },
+    "metrics_summary_statistics": {
+        "total_models": 54,
+        "models_with_valid_metrics": 44,
+        "models_excluded_from_metrics": 10,
+        "models_with_errors": 8
+    },
+    "exclusion_reasons": {
+        "incomplete_judgments": 10,
+        "general_error": 8,
+        "incomplete_evaluations": 8
+    },
+    "error_summary": {
+        "evaluation_failure": 8
+    }
+}

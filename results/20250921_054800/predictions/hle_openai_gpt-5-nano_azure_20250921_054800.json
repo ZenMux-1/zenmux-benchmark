@@ -1,0 +1,110 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-21T05:49:38.739210",
+        "model_identifier": "openai/gpt-5-nano:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 7295.55,
+            "avg_generation_time_ms": 58165.65,
+            "avg_throughput_tokens_per_second": 117.25,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: Critical-level views weight individuals with welfare above a fixed threshold and give zero weight to anyone below that threshold, which is an extreme form of prioritization. This violates General Non-Extreme Priority.\n\nAnswer: B\n\nConfidence: 0.58",
+            "usage": {
+                "completion_tokens": 2936,
+                "prompt_tokens": 109,
+                "total_tokens": 3045,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2880,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9080.60205078125,
+                "generation_time_ms": 19728.123046875,
+                "throughput_tokens_per_second": 148.82307825351242
+            },
+            "generation_id": "2538CCUBGENA00704773"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: \n- c1: The reciprocal concept to logical depth (as discussed by Bennett) is often termed \u201clogical simplicity.\u201d The third letter of \u201csimplicity\u201d is m.\n- c2: The missing word in Murray Gell-Mann\u2019s quip is plausibly \u201cchoices\u201d (the two choices didn\u2019t commute). The third character of \u201cchoices\u201d is o.\n- c3/c4: The GELU last author is Gleick; his last name ends with k. Rot13(k) is x, so c4 = x.\n- c5: Mars is about 0.107 Earth masses, far closer to Earth than to the Moon; the second letter of \u201cEarth\u201d is a, so c5 = a.\n\nConcatenating: c1 (m) + c2 (o) + c4 (x) + c5 (a) = moxa.\n\nAnswer: moxa\nConfidence: 63%",
+            "usage": {
+                "completion_tokens": 8262,
+                "prompt_tokens": 239,
+                "total_tokens": 8501,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 8064,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 3694.839111328125,
+                "generation_time_ms": 76532.51098632812,
+                "throughput_tokens_per_second": 107.95412163434617
+            },
+            "generation_id": "2538CCCIWFDW00702417"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: To compute the reduced 12-dimensional Spin bordism of the classifying space BG2, one uses the Atiyah\u2013Hirzebruch spectral sequence (AHSS) for Spin bordism:\nE2_{p,q} = H_p(BG2; \u03a9_q^{Spin}(pt)) \u21d2 \u03a9_{p+q}^{Spin}(BG2),\nand then takes the reduced group by modding out the part coming from maps to a point (the p = 0 column). Here \u03a9_q^{Spin}(pt) are the Spin bordism groups of a point, and H_p(BG2; -) are the homology of BG2 with coefficients in those groups.\n\nFacts that are relevant here:\n- BG2 has integral cohomology generated in degrees 4 and 12 (H^*(BG2; Z) \u2245 Z[x4, x12], so H_p(BG2; Z) is nonzero in p = 0, 4, 8, 12, with ranks 1, 1, 1, 2 respectively in the untwisted case).\n- The low-degree Spin bordism groups of a point are known (\u03a9_0^{Spin}(pt) \u2245 Z, \u03a9_4^{Spin}(pt) \u2245 Z, \u03a9_8^{Spin}(pt) \u2245 Z \u2295 Z, \u03a9_{12}^{Spin}(pt) is a finitely generated abelian group with a Z summand and some torsion).\n\nThe reduced group \\tilde{\u03a9}_{12}^{Spin}(BG2) is controlled by the p > 0 columns that contribute to total degree 12, namely the p = 4, 8, 12 rows:\n- (p,q) = (4,8): H_4(BG2; \u03a9_8^{Spin}(pt)) \u2245 Z \u2295 Z\n- (p,q) = (8,4): H_8(BG2; \u03a9_4^{Spin}(pt)) \u2245 (Z \u2295 Z)\n- (p,q) = (12,0): H_12(BG2; \u03a9_0^{Spin}(pt)) \u2245 (Z \u2295 Z)\n\nContributions from these three rows form the raw E2-term for the reduced group in total degree 12. One then analyzes the differentials coming from these positions. In this particular low-degree region for BG2, the differentials that could potentially kill all of these generators are constrained by the known structure of \u03a9_*^{Spin}(pt) and the cohomology of BG2 (which has only even-degree generators in degrees 4 and 12). A standard analysis of these differentials in degree 12 for BG2 shows that all potential generators are killed or become boundaries when passing to E\u221e, after taking account of the reduced condition (modding out the p = 0 piece).\n\nTherefore the reduced 12-dimensional Spin bordism group of BG2 vanishes:\n\\tilde{\u03a9}_{12}^{Spin}(BG2) = 0.\n\nAnswer: 0\n\nConfidence: 28%",
+            "usage": {
+                "completion_tokens": 7431,
+                "prompt_tokens": 102,
+                "total_tokens": 7533,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 6784,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9111.211181640625,
+                "generation_time_ms": 78236.31372070312,
+                "throughput_tokens_per_second": 94.98146891899876
+            },
+            "generation_id": "2538CCMZGWEA00704759"
+        }
+    }
+}

