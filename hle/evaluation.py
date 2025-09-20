@@ -86,6 +86,10 @@ class HLEEvaluator:
                 stream = await client.chat.completions.create(**request_params)
                 content_chunks = []
 
+                # Print streaming header if enabled
+                if self.hle_config.print_streaming_output:
+                    print(f"\n🤖 [{model_name}] Question {question_id}: ", end='', flush=True)
+
                 async for chunk in stream:
                     # Capture generation ID from any chunk (usually available in first chunk)
                     if chunk.id and generation_id is None:
@@ -93,11 +97,27 @@ class HLEEvaluator:
 
                     if chunk.choices and chunk.choices[0].delta:
                         delta = chunk.choices[0].delta
+
+                        # Handle reasoning tokens (thinking process) if available
+                        if hasattr(delta, 'reasoning') and delta.reasoning:
+                            # Record first token time if this is the first reasoning content
+                            if first_token_time is None:
+                                first_token_time = time.time() * 1000
+
+                            # Print reasoning (thinking) content if enabled
+                            if self.hle_config.print_streaming_output:
+                                print(f"{delta.reasoning}", end='', flush=True)
+
+                        # Handle regular content
                         if delta.content:
                             # Record first token time if this is the first content
                             if first_token_time is None:
                                 first_token_time = time.time() * 1000
                             content_chunks.append(delta.content)
+
+                            # Print streaming output if enabled
+                            if self.hle_config.print_streaming_output:
+                                print(delta.content, end='', flush=True)
 
                     # Capture usage information from the final chunk
                     if chunk.usage:
@@ -105,6 +125,10 @@ class HLEEvaluator:
 
                 # Combine all content chunks
                 content = "".join(content_chunks)
+
+                # Print streaming end marker if enabled
+                if self.hle_config.print_streaming_output and content_chunks:
+                    print()  # Add newline after streaming completes
             else:
                 # Non-streaming mode: get complete response
                 response = await client.chat.completions.create(**request_params)

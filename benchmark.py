@@ -97,6 +97,12 @@ async def main():
         help="Number of concurrent workers for evaluation (default: from config file)"
     )
 
+    parser.add_argument(
+        "--print-streaming",
+        action="store_true",
+        help="Print streaming responses to console in real-time (bypasses logging)"
+    )
+
 
     # Output options
     parser.add_argument(
@@ -153,6 +159,9 @@ async def main():
     # Override config with command line arguments
     if args.num_workers:
         config.hle.num_workers = args.num_workers
+
+    if args.print_streaming:
+        config.hle.print_streaming_output = True
 
 
     # Setup base output directory

@@ -54,22 +54,14 @@
         "668828540a642802bdfeadfc": {
             "model": "z-ai/glm-4.5",
             "response": "",
-            "usage": {
-                "completion_tokens": 65536,
-                "prompt_tokens": 242,
-                "total_tokens": 65778,
-                "completion_tokens_details": null,
-                "prompt_tokens_details": {
-                    "audio_tokens": null,
-                    "cached_tokens": 0
-                }
-            },
+            "usage": {},
             "performance": {
                 "first_token_latency_ms": 0.0,
                 "generation_time_ms": 0.0,
                 "throughput_tokens_per_second": 0.0
             },
-            "generation_id": "2538CCDWNJCQ00698942"
+            "generation_id": null,
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "z-ai/glm-4.5",
