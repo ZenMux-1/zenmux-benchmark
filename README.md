@@ -14,7 +14,7 @@ ZenMux Benchmark is a production-grade evaluation framework that enables compreh
 - 📊 **Text-Only Mode**: Filter multimodal questions for text-only model evaluation
 - 🚫 **Smart Model Exclusion**: Dual exclusion system with `--exclude-model` (vendor/model filtering) and `--exclude-provider` (provider-based filtering)
 - ⚡ **Dual-Layer Concurrency**: Advanced parallel processing with model-level and request-level concurrency
-- 🔧 **Failure Recovery**: Intelligent fix system for recovering from evaluation and judge failures
+- 🔧 **Concurrent Failure Recovery**: Intelligent fix system with dual-layer concurrency for fast recovery from evaluation and judge failures
 - ⚙️ **Production Ready**: Robust error handling, retry mechanisms, and resumable evaluations
 - 🚀 **CI/CD Support**: GitHub Actions integration for automated benchmarking
 
@@ -124,9 +124,9 @@ uv run python benchmark.py --exclude-model anthropic --exclude-provider theta
 uv run python benchmark.py --mode filter --model-filter gpt --exclude-model openai/gpt-4o-mini
 ```
 
-### 5. Failure Recovery
+### 5. Concurrent Failure Recovery
 
-When evaluations encounter failures, you can automatically retry and fix them:
+When evaluations encounter failures, you can automatically retry and fix them using advanced concurrent processing:
 
 ```bash
 # Fix both evaluation and judge failures from a previous run
@@ -134,11 +134,18 @@ uv run python benchmark.py --fix results/20250919_011623
 
 # The system will:
 # - Read models from available_models_*.json
-# - Check prediction files for questions with has_answer=false
-# - Check judge files for questions with has_judgment=false
-# - Retry failed questions and judgments automatically
+# - Process multiple models concurrently (up to max_concurrent_models)
+# - For each model, fix failed questions concurrently (up to num_workers)
+# - Retry evaluation failures first, then judge failures
 # - Update files with successful results
 # - Recalculate metrics for all models
+
+# Adjust concurrency for fix operations
+uv run python benchmark.py --fix results/20250919_011623 --num-workers 5
+
+# The fix mode uses the same dual-layer concurrency as normal evaluation:
+# - Outer layer: Multiple models fixed simultaneously
+# - Inner layer: Multiple questions per model fixed concurrently
 ```
 
 ## Important Options
@@ -183,11 +190,14 @@ uv run python benchmark.py --fix results/20250919_011623
 
 ### `--fix TIMESTAMP_DIR`
 
-- Fix both evaluation and judge failures from a previous run
+- Fix both evaluation and judge failures from a previous run using concurrent processing
 - Reads model list from `available_models_*.json`
-- Retries questions with `has_answer=false` in prediction files
-- Retries judgments with `has_judgment=false` in judge files
+- Processes multiple models simultaneously (up to `max_concurrent_models`)
+- For each model, fixes failed questions concurrently (up to `num_workers`)
+- Retries questions with empty responses in prediction files
+- Retries judgments with empty judge responses in judge files
 - Updates files with successful results and recalculates metrics
+- Follows the same evaluation → judge → metrics workflow as normal runs
 
 ## Output Files
 
@@ -215,30 +225,36 @@ results/
 
 ## Performance & Concurrency
 
-ZenMux Benchmark implements a **dual-layer concurrency architecture** for maximum performance:
+ZenMux Benchmark implements a **unified dual-layer concurrency architecture** for maximum performance across both evaluation and fix operations:
 
 ### Dual-Layer Concurrency
 
-The system operates with two independent levels of concurrency:
+The system operates with two independent levels of concurrency for all operations:
 
 1. **Model-level Concurrency (Outer Layer)**
 
-   - Multiple models evaluated simultaneously
-   - Controlled by `max_concurrent_models` configuration (default: 3)
-   - Example: GPT-4, Claude, and Gemini running in parallel
+   - Multiple models processed simultaneously
+   - Controlled by `max_concurrent_models` configuration (default: 60)
+   - Example: 60 models running in parallel during evaluation or fix operations
 
 2. **Request-level Concurrency (Inner Layer)**
    - Multiple questions per model processed concurrently
-   - Controlled by `num_workers` configuration (default: 2)
-   - Example: Each model processes 2 questions simultaneously
+   - Controlled by `num_workers` configuration (default: 3)
+   - Example: Each model processes 3 questions simultaneously
 
 ### Performance Benefits
 
-**Example Scenario**: 6 models × 1000 questions each
+**Example Scenario**: 60 models × 1000 questions each
 
-- **Serial execution**: ~17 minutes (1 model at a time)
-- **Dual-layer concurrent**: ~6 minutes (3 models in parallel)
-- **Performance gain**: 3x faster ⚡
+- **Serial execution**: ~300 minutes (1 model at a time)
+- **Dual-layer concurrent**: ~5 minutes (60 models, 3 questions per model in parallel)
+- **Performance gain**: 60x faster ⚡
+- **Fix operations**: Same speed as evaluation for fixing failures
+
+**Architecture Highlights**:
+- **Unified concurrency**: Both evaluation and fix operations use identical concurrency models
+- **No runtime retries**: Initial evaluation focuses on speed, fix mode handles failures
+- **Seamless workflow**: Evaluation → Fix → Metrics maintains consistent performance patterns
 
 ### Configuration Tuning
 
@@ -246,21 +262,28 @@ Edit `config.py` or create custom configurations:
 
 ```python
 class HLEConfig:
-    num_workers: int = 2               # Inner: requests per model
-    max_concurrent_models: int = 3     # Outer: simultaneous models
+    num_workers: int = 3               # Inner: requests per model
+    max_concurrent_models: int = 60    # Outer: simultaneous models
 ```
 
 **Conservative Settings** (avoid rate limits):
 
 ```python
-max_concurrent_models = 1
+max_concurrent_models = 5
 num_workers = 1
 ```
 
-**Aggressive Settings** (maximum speed, stable network):
+**Balanced Settings** (recommended for most users):
 
 ```python
-max_concurrent_models = 5
+max_concurrent_models = 20
+num_workers = 3
+```
+
+**Aggressive Settings** (maximum speed, stable network, high-tier API plan):
+
+```python
+max_concurrent_models = 100
 num_workers = 5
 ```
 
@@ -327,15 +350,16 @@ uv run python benchmark.py --fix results/20250917_173456
 
 ## Important Notes
 
-1. **Dual-Layer Concurrency**: The system runs multiple models simultaneously (outer layer) with concurrent requests per model (inner layer)
-2. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
-3. **Cost Control**: Use `--max-samples`, `--exclude-model`, and `--exclude-provider` to control evaluation scope and costs - exclude expensive models to save budget
-4. **Model Exclusion**: Use `--exclude-model` and `--exclude-provider` strategically to skip problematic, expensive, or irrelevant models for your use case
-5. **Failure Recovery**: The system tracks failures using `has_answer` and `has_judgment` fields, use `--fix` to retry failed operations
-6. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
-7. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
-8. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
-9. **Memory Usage**: Monitor system memory with high concurrency settings
+1. **Unified Dual-Layer Concurrency**: Both evaluation and fix operations use the same concurrent architecture with model-level and request-level parallelism
+2. **No Runtime Retries**: Initial evaluations focus on speed without retries; use fix mode for handling failures efficiently
+3. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
+4. **Cost Control**: Use `--max-samples`, `--exclude-model`, and `--exclude-provider` to control evaluation scope and costs
+5. **Model Exclusion**: Use `--exclude-model` and `--exclude-provider` strategically to skip problematic, expensive, or irrelevant models
+6. **Concurrent Failure Recovery**: Fix mode processes multiple models and questions simultaneously, following the same evaluation → judge → metrics workflow
+7. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
+8. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
+9. **Judge Model**: Default uses `openai/gpt-5:openai`, judging also benefits from concurrent processing
+10. **Memory Usage**: Monitor system memory with high concurrency settings, especially during fix operations
 
 ## Troubleshooting
 
@@ -362,8 +386,11 @@ uv run python benchmark.py --fix results/20250917_173456
 
 5. **Evaluation or judge failures**
 
-   - Use `--fix` to retry failed operations (both evaluation and judge)
-   - Check prediction/judge files for questions with `has_answer=false` or `has_judgment=false`
+   - Use `--fix` to retry failed operations with concurrent processing
+   - Fix mode processes multiple models and multiple questions per model simultaneously
+   - Check prediction files for questions with empty responses
+   - Check judge files for questions with empty judge responses
+   - Adjust `--num-workers` for fix operations: `uv run python benchmark.py --fix results/TIMESTAMP --num-workers 5`
    - Consider reducing concurrency if failures persist
    - Use `--exclude-model` or `--exclude-provider` to skip consistently failing models
 
@@ -375,27 +402,33 @@ uv run python benchmark.py --fix results/20250917_173456
 
 **Dual-Layer Concurrency**:
 
-- **Model-level**: Adjust `max_concurrent_models` (1-5) based on API limits
+- **Model-level**: Adjust `max_concurrent_models` (5-100) based on API limits and network stability
 - **Request-level**: Tune `num_workers` (1-5) per provider capabilities
 - Monitor system resources and network stability to avoid "too many open files" errors
+- **Fix operations**: Use same concurrency settings as evaluation for consistent performance
 
 **General Optimizations**:
 
 - Use `--text-only` for 40-60% speed improvements
 - Start with `--max-samples` for testing before full evaluation
 - Balance concurrency vs. stability based on network conditions
+- Use fix mode for failures instead of runtime retries for better throughput
+- **No runtime retries**: Initial runs are faster, fix mode handles failures efficiently
 
 **Recommended Settings by Use Case**:
 
 ```bash
 # Development/Testing (safe)
-max_concurrent_models = 1, num_workers = 1
+max_concurrent_models = 5, num_workers = 1
 
 # Production/CI (balanced)
-max_concurrent_models = 3, num_workers = 2
+max_concurrent_models = 20, num_workers = 3
 
-# High-performance (stable network, careful monitoring)
-max_concurrent_models = 5, num_workers = 3
+# High-performance (stable network, high-tier API plan)
+max_concurrent_models = 60, num_workers = 5
+
+# Fix operations (same concurrency as evaluation)
+uv run python benchmark.py --fix results/TIMESTAMP --num-workers 5
 ```
 
 ## GitHub Actions

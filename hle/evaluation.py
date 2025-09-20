@@ -245,91 +245,75 @@ Additional Error Info: {additional_info}
 
         output_filepath = os.path.join(self.output_dir, f"hle_{safe_model_name}_{timestamp}.json")
 
-        # Retry logic for incomplete evaluations
-        for retry_attempt in range(self.hle_config.max_evaluation_retries + 1):
-            if retry_attempt > 0:
-                self.logger.warning(f"🔄 Starting retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries} for {model_identifier}")
-                model_logger.warning(f"🔄 Starting retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
+        # Single evaluation attempt (retries are handled by fix mode)
 
-                # Add delay before retry to prevent overwhelming the server
-                delay = min(10 * retry_attempt, 30)  # Progressive delay: 10s, 20s, 30s
-                self.logger.info(f"⏳ Waiting {delay}s before retry to prevent server overload")
-                await asyncio.sleep(delay)
+        # Load existing predictions if file exists
+        existing_predictions = {}
+        if os.path.exists(output_filepath):
+            try:
+                with open(output_filepath, "r") as f:
+                    data = json.load(f)
+                    # Handle both old format (direct predictions) and new format (with metadata)
+                    if "predictions" in data:
+                        existing_predictions = data["predictions"]
+                    else:
+                        existing_predictions = data
+                self.logger.info(f"📂 Found existing file: {os.path.basename(output_filepath)}")
+                self.logger.info(f"📂 Loaded {len(existing_predictions)} existing predictions")
+                model_logger.info(f"📂 Loaded {len(existing_predictions)} existing predictions from {os.path.basename(output_filepath)}")
+            except Exception as e:
+                self.logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
+                model_logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
 
-            # Load existing predictions if file exists
-            existing_predictions = {}
-            if os.path.exists(output_filepath):
-                try:
-                    with open(output_filepath, "r") as f:
-                        data = json.load(f)
-                        # Handle both old format (direct predictions) and new format (with metadata)
-                        if "predictions" in data:
-                            existing_predictions = data["predictions"]
-                        else:
-                            existing_predictions = data
-                    self.logger.info(f"📂 Found existing file: {os.path.basename(output_filepath)}")
-                    self.logger.info(f"📂 Loaded {len(existing_predictions)} existing predictions")
-                    model_logger.info(f"📂 Loaded {len(existing_predictions)} existing predictions from {os.path.basename(output_filepath)}")
-                except Exception as e:
-                    self.logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
-                    model_logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
+        # Filter out questions that already have predictions (or need retry for failed ones)
+        remaining_questions = []
+        for q in questions:
+            question_id = q["id"]
+            if question_id not in existing_predictions:
+                remaining_questions.append(q)
+            elif not existing_predictions[question_id].get("response", "").strip():
+                # Re-evaluate questions that previously failed (empty response)
+                remaining_questions.append(q)
 
-            # Filter out questions that already have predictions (or need retry for failed ones)
-            remaining_questions = []
-            for q in questions:
-                question_id = q["id"]
-                if question_id not in existing_predictions:
-                    remaining_questions.append(q)
-                elif not existing_predictions[question_id].get("response", "").strip():
-                    # Re-evaluate questions that previously failed (empty response)
-                    remaining_questions.append(q)
+        if not remaining_questions:
+            self.logger.info(f"✅ All questions already evaluated for {model_identifier}")
+            model_logger.info(f"✅ All questions already evaluated")
+            return
 
-            if not remaining_questions:
-                self.logger.info(f"✅ All questions already evaluated for {model_identifier}")
-                model_logger.info(f"✅ All questions already evaluated")
-                break
+        self.logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
+        model_logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
 
-            self.logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
-            model_logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
+        async def bound_evaluate(question):
+            async with semaphore:
+                with PerformanceTimer(model_logger, f"question {question['id']}", level=logging.DEBUG):
+                    return await self.evaluate_single_question(
+                        question, model_identifier, endpoint
+                    )
 
-            async def bound_evaluate(question):
-                async with semaphore:
-                    with PerformanceTimer(model_logger, f"question {question['id']}", level=logging.DEBUG):
-                        return await self.evaluate_single_question(
-                            question, model_identifier, endpoint
-                        )
+        # Create semaphore for rate limiting
+        semaphore = asyncio.Semaphore(self.hle_config.num_workers)
 
-            # Create semaphore for rate limiting
-            semaphore = asyncio.Semaphore(self.hle_config.num_workers)
+        # Evaluate remaining questions
+        tasks = [bound_evaluate(q) for q in remaining_questions]
+        model_logger.info(f"🔄 Starting evaluation of {len(remaining_questions)} questions for {model_identifier}")
+        results = await asyncio.gather(*tasks)
 
-            # Evaluate remaining questions
-            tasks = [bound_evaluate(q) for q in remaining_questions]
-            model_logger.info(f"🔄 Starting evaluation of {len(remaining_questions)} questions for {model_identifier} (attempt {retry_attempt + 1})")
-            results = await asyncio.gather(*tasks)
+        # Process results and collect performance metrics
+        performance_data = []
+        successful_count = 0
+        for question_id, result in results:
+            # Always record the result, regardless of success or failure
+            existing_predictions[question_id] = result
 
-            # Process results and collect performance metrics
-            performance_data = []
-            successful_count = 0
-            for question_id, result in results:
-                # Always record the result, regardless of success or failure
-                existing_predictions[question_id] = result
+            # Collect performance data only for successful evaluations (non-empty response)
+            if result.get("response", "").strip():
+                performance_data.append(result["performance"])
+                successful_count += 1
 
-                # Collect performance data only for successful evaluations (non-empty response)
-                if result.get("response", "").strip():
-                    performance_data.append(result["performance"])
-                    successful_count += 1
 
-            # Early exit check: if success rate is too low, don't retry to avoid wasting time
-            if len(remaining_questions) > 0:
-                success_rate = successful_count / len(remaining_questions)
-                if success_rate < 0.2 and retry_attempt > 0:  # Less than 20% success rate after first retry
-                    model_logger.warning(f"⚠️ Low success rate ({success_rate:.1%}), skipping further retries to prevent timeout")
-                    self.logger.warning(f"⚠️ Skipping retries for {model_identifier} due to low success rate ({success_rate:.1%})")
-                    break
+        # Add metadata to the predictions file
 
-            # Add metadata to the predictions file
-
-            metadata = {
+        metadata = {
                 "evaluation_metadata": {
                     "timestamp": datetime.now().isoformat(),
                     "model_identifier": model_identifier,
@@ -353,64 +337,53 @@ Additional Error Info: {additional_info}
                         "num_workers": self.hle_config.num_workers,
                         "timeout": self.zenmux_config.timeout,
                         "max_retries": self.zenmux_config.max_retries,
-                        "max_evaluation_retries": self.hle_config.max_evaluation_retries
                     }
                 }
             }
 
-            # Calculate and add average performance metrics
-            if performance_data:
-                avg_first_token_latency = sum(p.get('first_token_latency_ms', 0) for p in performance_data) / len(performance_data)
-                avg_generation_time = sum(p.get('generation_time_ms', 0) for p in performance_data) / len(performance_data)
-                avg_throughput = sum(p.get('throughput_tokens_per_second', 0) for p in performance_data) / len(performance_data)
+        # Calculate and add average performance metrics
+        if performance_data:
+            avg_first_token_latency = sum(p.get('first_token_latency_ms', 0) for p in performance_data) / len(performance_data)
+            avg_generation_time = sum(p.get('generation_time_ms', 0) for p in performance_data) / len(performance_data)
+            avg_throughput = sum(p.get('throughput_tokens_per_second', 0) for p in performance_data) / len(performance_data)
 
-                metadata["evaluation_metadata"]["performance_averages"] = {
-                    "avg_first_token_latency_ms": round(avg_first_token_latency, 2),
-                    "avg_generation_time_ms": round(avg_generation_time, 2),
-                    "avg_throughput_tokens_per_second": round(avg_throughput, 2),
-                    "samples_count": len(performance_data)
-                }
-
-            # Save updated predictions with metadata
-            final_output = {
-                **metadata,
-                "predictions": existing_predictions
+            metadata["evaluation_metadata"]["performance_averages"] = {
+                "avg_first_token_latency_ms": round(avg_first_token_latency, 2),
+                "avg_generation_time_ms": round(avg_generation_time, 2),
+                "avg_throughput_tokens_per_second": round(avg_throughput, 2),
+                "samples_count": len(performance_data)
             }
 
-            try:
-                with open(output_filepath, "w") as f:
-                    json.dump(final_output, f, indent=4)
-            except OSError as e:
-                self.logger.error(f"❌ Failed to write predictions file {output_filepath}: {e}")
-                if "Too many open files" in str(e):
-                    self.logger.error("💡 Try reducing num_workers or max_concurrent_models in config.py")
-                raise
+        # Save updated predictions with metadata
+        final_output = {
+            **metadata,
+            "predictions": existing_predictions
+        }
 
-            # Check if evaluation is complete based on response content
-            total_predictions = len(existing_predictions)
-            successful_predictions = sum(1 for pred in existing_predictions.values() if pred.get("response", "").strip())
-            failed_predictions = total_predictions - successful_predictions
+        try:
+            with open(output_filepath, "w") as f:
+                json.dump(final_output, f, indent=4)
+        except OSError as e:
+            self.logger.error(f"❌ Failed to write predictions file {output_filepath}: {e}")
+            if "Too many open files" in str(e):
+                self.logger.error("💡 Try reducing num_workers or max_concurrent_models in config.py")
+            raise
 
-            if total_predictions == len(questions) and failed_predictions == 0:
-                self.logger.info(f"✅ Evaluation complete: {successful_predictions}/{len(questions)} successful predictions")
-                model_logger.info(f"✅ Evaluation complete: {successful_predictions}/{len(questions)} successful predictions")
-                break
-            elif retry_attempt < self.hle_config.max_evaluation_retries:
-                self.logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
-                self.logger.info(f"🔄 Will retry failed questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
-                # Calculate exponential backoff delay
-                delay = min(5 * (2 ** retry_attempt), 30)  # Max 30 seconds
-                self.logger.info(f"⏳ Preparing for next retry in {delay} seconds (exponential backoff)...")
-                model_logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
-                model_logger.info(f"🔄 Will retry failed questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+        # Report final evaluation status
+        total_predictions = len(existing_predictions)
+        successful_predictions = sum(1 for pred in existing_predictions.values() if pred.get("response", "").strip())
+        failed_predictions = total_predictions - successful_predictions
 
-                # Exponential backoff before retry to reduce server load
-                await asyncio.sleep(delay)
-            else:
-                self.logger.error(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
-                self.logger.error(f"❌ Final result: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
-                model_logger.error(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
-                model_logger.error(f"❌ Final result: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
+        if total_predictions == len(questions) and failed_predictions == 0:
+            self.logger.info(f"✅ Evaluation complete: {successful_predictions}/{len(questions)} successful predictions")
+            model_logger.info(f"✅ Evaluation complete: {successful_predictions}/{len(questions)} successful predictions")
+        else:
+            self.logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
+            model_logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
+            if failed_predictions > 0:
+                self.logger.info(f"💡 Use --fix-evaluation to retry failed questions")
+                model_logger.info(f"💡 Use --fix-evaluation to retry failed questions")
+
 
         self.logger.info(f"✅ Completed evaluation for {model_identifier}")
         self.logger.info(f"📝 Final predictions: {len(existing_predictions)}")

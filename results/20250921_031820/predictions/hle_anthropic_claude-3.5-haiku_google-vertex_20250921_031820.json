@@ -1,0 +1,116 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-21T03:18:47.648859",
+        "model_identifier": "anthropic/claude-3.5-haiku:google-vertex",
+        "endpoint": {
+            "provider_slug": "google-vertex",
+            "provider": "Google Vertex",
+            "context_length": 200000,
+            "max_completion_tokens": 8192,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions,messages"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 2961.84,
+            "avg_generation_time_ms": 8011.31,
+            "avg_throughput_tokens_per_second": 27.98,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "anthropic/claude-3.5-haiku:google-vertex",
+            "response": "I apologize, but I cannot confidently answer this question. This appears to be a highly specialized query about a specific theorem in social choice theory or voting systems, likely related to Kenneth Arrow's work (not Arrhenius's). Without additional context or specific knowledge about the precise details of this theorem and critical-level views, I cannot determine which condition is being violated.\n\nExplanation: The question references a specific theorem and theoretical concept that requires specialized knowledge in social choice theory. Without more context or background information, I cannot definitively select an answer.\n\nAnswer: I cannot confidently choose an answer.\n\nConfidence: 0%",
+            "usage": {
+                "completion_tokens": 134,
+                "prompt_tokens": 125,
+                "total_tokens": 259,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2877.54931640625,
+                "generation_time_ms": 6062.5517578125,
+                "throughput_tokens_per_second": 22.10290408280986
+            },
+            "generation_id": "2538CCWKSSHV00698836"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "anthropic/claude-3.5-haiku:google-vertex",
+            "response": "Let's solve this step by step:\n\n1. Logical \"depth\" reciprocal concept:\n\u2022 This is \"logical complexity\" (associated with Charles Bennett)\n\u2022 The third letter is 'g' (c1 = 'g')\n\n2. Murray Gell-Mann quote:\n\u2022 The quote is about \"options\" not commuting\n\u2022 The third letter of \"options\" is 't' (c2 = 't')\n\n3. GELU's last author's last name:\n\u2022 I'll assume this refers to the last author of a specific paper\n\u2022 Without more context, I can't definitively determine this\n\n4. Rot13 of the letter:\n\u2022 Without knowing c3, I can't determine c4\n\n5. Mass comparison:\n\u2022 Mars is much closer in mass to the Earth than to the Moon\n\u2022 \"Earth\" has 'a' as its second letter (c5 = 'a')\n\nGiven the incomplete information, I cannot confidently complete the final concatenation.\n\nExplanation: Partial solution with missing critical information\nAnswer: Incomplete\nConfidence: 30%",
+            "usage": {
+                "completion_tokens": 249,
+                "prompt_tokens": 263,
+                "total_tokens": 512,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2982.656005859375,
+                "generation_time_ms": 5963.1123046875,
+                "throughput_tokens_per_second": 41.756718182930314
+            },
+            "generation_id": "2538CCWZUBOX00700406"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "anthropic/claude-3.5-haiku:google-vertex",
+            "response": "I'll break this down carefully:\n\nExplanation: This is a highly specialized algebraic topology problem involving the reduced Spin bordism of the classifying space of the exceptional Lie group G2. \n\nTo solve this, we need to:\n1. Understand the Spin bordism group \u03a9\u0303Spin*(BG2)\n2. Consider the reduced version, which eliminates trivial principal G2 bundle bordism classes\n\nThe key challenges are:\n- G2 is a 14-dimensional exceptional Lie group\n- Its classifying space BG2 has complex topological properties\n- Reduced bordism groups are notoriously difficult to compute\n\nWithout extensive computational details, the most likely answer is that the reduced 12-dimensional Spin bordism group is likely trivial (zero), but a definitive proof would require advanced spectral sequence techniques.\n\nAnswer: 0 (the trivial group)\n\nConfidence: 65%\n\nThe relatively moderate confidence reflects the extreme technical complexity of this specific bordism computation, which would typically require detailed algebraic topology techniques beyond a simple response.",
+            "usage": {
+                "completion_tokens": 241,
+                "prompt_tokens": 111,
+                "total_tokens": 352,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 3025.31787109375,
+                "generation_time_ms": 12008.27587890625,
+                "throughput_tokens_per_second": 20.06949227601781
+            },
+            "generation_id": "2538CCIPPWCH00700394"
+        }
+    }
+}

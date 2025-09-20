@@ -15,7 +15,7 @@ class ZenMuxConfig:
     model_list_endpoint: str = "https://zenmux.ai/api/frontend/model/available/list"
     timeout: float = 300.0  # API request timeout - increased to handle slow responses
     max_retries: int = 2  # Increased retries for network issues
-    enable_streaming: bool = False  # Enable streaming responses (default: True for faster TTFB)
+    enable_streaming: bool = True  # Enable streaming responses (default: True for faster TTFB)
 
     def __post_init__(self):
         # Load from environment variables if not provided
@@ -39,7 +39,6 @@ class HLEConfig:
     temperature: float = 0.0
     num_workers: int = 3  # Inner concurrency: requests per model (conservative to prevent network issues)
     max_concurrent_models: int = 60  # Outer concurrency: simultaneous models (reduced to prevent connection overload)
-    max_evaluation_retries: int = 2 # Maximum retries for incomplete evaluations (increased for reliability)
 
 
 @dataclass

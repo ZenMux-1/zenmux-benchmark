@@ -1,0 +1,97 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-21T03:20:15.317447",
+        "model_identifier": "openai/gpt-5:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 62006.19,
+            "avg_generation_time_ms": 2401.28,
+            "avg_throughput_tokens_per_second": 7946.96,
+            "samples_count": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5:azure",
+            "response": "Explanation: Critical-level views evaluate outcomes by summing well-being relative to a fixed \u201ccritical level,\u201d and are insensitive to inequality beyond that. Thus, when two outcomes have the same total (relative) welfare, critical-level views are indifferent even if one outcome is more equal. This violates Egalitarian Dominance, which requires preferring the more equal distribution when no one is worse off (or totals are appropriately comparable).\nAnswer: A. Egalitarian Dominance\nConfidence: 62%",
+            "usage": {
+                "completion_tokens": 3047,
+                "prompt_tokens": 109,
+                "total_tokens": 3156,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2944,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 66223.38793945312,
+                "generation_time_ms": 198.9521484375,
+                "throughput_tokens_per_second": 15315.24049340539
+            },
+            "generation_id": "2538CCVCFWTO00702201"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5:azure",
+            "response": "Explanation: c1: Reciprocal of \u201clogical depth\u201d is commonly referred to as \u201cshallowness\u201d (Bennett\u2019s deep vs shallow); third letter = a. c2: Gell-Mann\u2019s joke: \u201cthe two operations didn\u2019t commute\u201d; third character of \u201coperations\u201d = e. c3: Last author of the GELU paper is Kevin Gimpel; last letter = l. c4: Rot13(l) = y. c5: Mars\u2019s mass (~0.107 Earths) is closer to the Moon\u2019s (~0.0123 Earths) than to Earth\u2019s (difference smaller), so \u201cmoon\u201d; second letter = o. Concatenate c1+c2+c4+c5 \u2192 aeyo.\nAnswer: aeyo\nConfidence: 84%",
+            "usage": {
+                "completion_tokens": 2664,
+                "prompt_tokens": 239,
+                "total_tokens": 2903,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2496,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 57788.997802734375,
+                "generation_time_ms": 4603.6162109375,
+                "throughput_tokens_per_second": 578.6755189693564
+            },
+            "generation_id": "2538CCYZIUNW00702212"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

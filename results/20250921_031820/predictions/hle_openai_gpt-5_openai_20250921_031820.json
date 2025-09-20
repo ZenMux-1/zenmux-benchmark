@@ -1,0 +1,97 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-21T03:20:43.043941",
+        "model_identifier": "openai/gpt-5:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 63342.97,
+            "avg_generation_time_ms": 6280.71,
+            "avg_throughput_tokens_per_second": 419.18,
+            "samples_count": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5:openai",
+            "response": "Explanation: Critical-level views (e.g., critical-level utilitarianism) evaluate same-size populations by summing each person\u2019s welfare minus a fixed critical level. For fixed population size, this is equivalent to total utilitarianism up to a constant, so it does not strictly prefer more equal distributions when totals are the same\u2014it is indifferent. This conflicts with Egalitarian Dominance, which requires strictly preferring the more equal distribution at the same total.\nAnswer: A. Egalitarian Dominance\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 2990,
+                "prompt_tokens": 109,
+                "total_tokens": 3099,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2880,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 66384.25708007812,
+                "generation_time_ms": 6441.23974609375,
+                "throughput_tokens_per_second": 464.1963531652842
+            },
+            "generation_id": "2538CCPMKKPG00702205"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5:openai",
+            "response": "Explanation: \n- c1: The inverse/antonym of Bennett\u2019s \u201clogical depth\u201d is \u201cshallowness\u201d (or \u201cshallow\u201d); the 3rd letter is a.\n- c2: Gell-Mann\u2019s quote uses \u201coperations\u201d (\u201cthe two operations didn\u2019t commute\u201d); the 3rd character is e.\n- c3\u2192c4: The last author of the GELU paper is Kevin Gimpel; last name ends with l. Rot13(l) = y, so c4 = y.\n- c5: Mars is closer in mass to the Moon than to the Earth; \u201cmoon\u201d \u2192 2nd letter is o.\n- Concatenate c1 c2 c4 c5 \u2192 a + e + y + o = aeyo.\n\nAnswer: aeyo\nConfidence: 86%",
+            "usage": {
+                "completion_tokens": 2290,
+                "prompt_tokens": 239,
+                "total_tokens": 2529,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2112,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 60301.68603515625,
+                "generation_time_ms": 6120.172607421875,
+                "throughput_tokens_per_second": 374.1724534407639
+            },
+            "generation_id": "2538CCNMAOHS00702208"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5:openai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": "Connection error."
+        }
+    }
+}

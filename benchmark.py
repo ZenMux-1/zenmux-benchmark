@@ -97,12 +97,6 @@ async def main():
         help="Number of concurrent workers for evaluation (default: from config file)"
     )
 
-    parser.add_argument(
-        "--max-evaluation-retries",
-        type=int,
-        default=None,
-        help="Maximum retries for incomplete evaluations (default: from config file)"
-    )
 
     # Output options
     parser.add_argument(
@@ -160,8 +154,6 @@ async def main():
     if args.num_workers:
         config.hle.num_workers = args.num_workers
 
-    if args.max_evaluation_retries:
-        config.hle.max_evaluation_retries = args.max_evaluation_retries
 
     # Setup base output directory
     config.output_dir = args.output_dir
@@ -206,7 +198,6 @@ async def main():
 
     logger.info(f"👥 Workers per model: {config.hle.num_workers}")
     logger.info(f"🔄 Max concurrent models: {config.hle.max_concurrent_models}")
-    logger.info(f"🔄 Max evaluation retries: {config.hle.max_evaluation_retries}")
     logger.info(f"🎯 Judge model: {config.hle.judge_model}")
     logger.info(f"🌡️ Temperature: {config.hle.temperature}")
     logger.info(f"⏰ Timeout: {config.zenmux.timeout}s")

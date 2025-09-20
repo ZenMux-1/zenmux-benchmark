@@ -6,7 +6,7 @@ import os
 import glob
 import logging
 from datetime import datetime
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
 
 from .evaluation import HLEEvaluator
 from .judge import HLEJudge
@@ -682,9 +682,9 @@ class HLERunner:
             return False
 
     async def fix_models(self, timestamp_dir: str) -> Dict[str, Any]:
-        """Fix evaluation and judge failures by re-processing questions with empty responses."""
+        """Fix evaluation and judge failures by re-processing questions with empty responses using concurrent processing."""
         self.logger.info(f"\n{'='*60}")
-        self.logger.info("🔧 FIXING EVALUATION AND JUDGE FAILURES")
+        self.logger.info("🔧 FIXING EVALUATION AND JUDGE FAILURES (CONCURRENT)")
         self.logger.info(f"{'='*60}")
 
         batch_timestamp = os.path.basename(timestamp_dir)
@@ -706,6 +706,7 @@ class HLERunner:
             }
 
         self.logger.info(f"🔍 Found {len(prediction_files)} prediction files to check for failures")
+        self.logger.info(f"🔄 Using concurrent processing: max_concurrent_models={self.config.hle.max_concurrent_models}, num_workers={self.config.hle.num_workers}")
 
         # Load dataset questions
         from .dataset import HLEDataset
@@ -713,151 +714,37 @@ class HLERunner:
         all_questions = dataset.get_questions()
         question_map = {q["id"]: q for q in all_questions}
 
+        # Concurrent processing semaphore for outer level (models)
+        models_semaphore = asyncio.Semaphore(self.config.hle.max_concurrent_models)
+
+        async def fix_single_model(predictions_file: str) -> Tuple[str, bool]:
+            """Fix a single model with concurrent processing of failed questions."""
+            async with models_semaphore:
+                return await self._fix_single_model_internal(predictions_file, timestamp_dir, batch_timestamp, question_map)
+
+        # Process all models concurrently
+        self.logger.info(f"🚀 Starting concurrent fix processing for {len(prediction_files)} models")
+        fix_tasks = [fix_single_model(pf) for pf in prediction_files]
+        fix_results = await asyncio.gather(*fix_tasks, return_exceptions=True)
+
+        # Process results
         fixed_models = []
         still_failed_models = []
 
-        for predictions_file in prediction_files:
-            try:
-                # Load evaluation file to get model info and endpoint from metadata
-                with open(predictions_file, "r") as f:
-                    predictions_data = json.load(f)
-
-                # Get model info from evaluation metadata
-                evaluation_metadata = predictions_data.get("evaluation_metadata", {})
-                model_identifier = evaluation_metadata.get("model_identifier")
-                endpoint_data = evaluation_metadata.get("endpoint", {})
-
-                if not model_identifier:
-                    self.logger.warning(f"⚠️ No model identifier found in {os.path.basename(predictions_file)}")
-                    continue
-
-                if not endpoint_data:
-                    self.logger.warning(f"⚠️ No endpoint data found in {os.path.basename(predictions_file)}")
-                    continue
-
-                self.logger.info(f"\n🔧 Checking {model_identifier} for failures")
-
-                # Reconstruct endpoint object from metadata
-                from zenmux.models import ZenMuxEndpoint
-                endpoint = ZenMuxEndpoint(
-                    pricing_completion="0",
-                    pricing_prompt="0",
-                    context_length=endpoint_data.get("context_length", 200000),
-                    provider=endpoint_data.get("provider", "unknown"),
-                    provider_slug=endpoint_data.get("provider_slug", "unknown"),
-                    max_completion_tokens=endpoint_data.get("max_completion_tokens", 4096),
-                    supports_streaming=endpoint_data.get("supports_streaming", True),
-                    supports_reasoning=False,
-                    supports_tool_parameters=True,
-                    supported_parameters=[],
-                    can_abort=True,
-                    visible=1,
-                    suitable_api=endpoint_data.get("suitable_api", "chat.completions")
-                )
-
-                model_name = model_identifier.split(':')[0]
-                safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
-                judged_file = os.path.join(timestamp_dir, "judged", f"judged_hle_{safe_model_name}_{batch_timestamp}.json")
-
-            except Exception as e:
-                self.logger.error(f"❌ Error processing {os.path.basename(predictions_file)}: {e}")
-                still_failed_models.append(f"ERROR_{os.path.basename(predictions_file)}")
-                continue
-
-            model_fixed = False
-
-            # Fix evaluation failures (empty responses)
-            if os.path.exists(predictions_file):
-                with open(predictions_file, "r") as f:
-                    predictions_data = json.load(f)
-
-                predictions = predictions_data.get("predictions", predictions_data)
-                evaluation_metadata = predictions_data.get("evaluation_metadata", {})
-
-                # Find questions with empty responses
-                failed_eval_questions = [
-                    qid for qid, pred in predictions.items()
-                    if not pred.get("response", "").strip()
-                ]
-
-                if failed_eval_questions:
-                    self.logger.info(f"🔄 Re-evaluating {len(failed_eval_questions)} failed questions")
-
-                    for question_id in failed_eval_questions:
-                        if question_id in question_map:
-                            question = question_map[question_id]
-                            try:
-                                question_id_result, result = await self.evaluator.evaluate_single_question(
-                                    question, model_name, endpoint
-                                )
-                                predictions[question_id] = result
-                                if result.get("response", "").strip():
-                                    model_fixed = True
-                                    self.logger.debug(f"✅ Fixed evaluation for question {question_id}")
-                                else:
-                                    self.logger.debug(f"❌ Still failed evaluation for question {question_id}")
-                            except Exception as e:
-                                self.logger.error(f"❌ Error re-evaluating question {question_id}: {e}")
-
-                    # Save updated predictions
-                    final_predictions_data = {
-                        "evaluation_metadata": evaluation_metadata,
-                        "predictions": predictions
-                    } if evaluation_metadata else predictions
-
-                    with open(predictions_file, "w") as f:
-                        json.dump(final_predictions_data, f, indent=4)
-
-            # Fix judge failures (empty judge responses)
-            if os.path.exists(judged_file) and os.path.exists(predictions_file):
-                with open(judged_file, "r") as f:
-                    judged_data = json.load(f)
-
-                judged_predictions = judged_data.get("judged_predictions", judged_data)
-                judging_metadata = judged_data.get("judging_metadata", {})
-
-                # Find questions that need judging (have responses but empty judge responses)
-                failed_judge_questions = [
-                    qid for qid, pred in judged_predictions.items()
-                    if pred.get("response", "").strip() and not pred.get("judge_response", {}).get("reasoning", "").strip()
-                ]
-
-                if failed_judge_questions:
-                    self.logger.info(f"⚖️ Re-judging {len(failed_judge_questions)} failed judgments")
-
-                    for question_id in failed_judge_questions:
-                        if question_id in question_map:
-                            question = question_map[question_id]
-                            try:
-                                unique_id, updated_prediction, performance_metrics = await self.judge.judge_single_response(
-                                    question, {question_id: judged_predictions[question_id]}
-                                )
-                                judged_predictions[question_id] = updated_prediction
-                                if updated_prediction.get("judge_response", {}).get("reasoning", "").strip():
-                                    model_fixed = True
-                                    self.logger.debug(f"✅ Fixed judgment for question {question_id}")
-                                else:
-                                    self.logger.debug(f"❌ Still failed judgment for question {question_id}")
-                            except Exception as e:
-                                self.logger.error(f"❌ Error re-judging question {question_id}: {e}")
-
-                    # Save updated judged data
-                    final_judged_data = {
-                        "judging_metadata": judging_metadata,
-                        "judged_predictions": judged_predictions
-                    } if judging_metadata else judged_predictions
-
-                    with open(judged_file, "w") as f:
-                        json.dump(final_judged_data, f, indent=4)
-
-            if model_fixed:
-                fixed_models.append(model_identifier)
-                self.logger.info(f"🎉 Fixed some failures for {model_identifier}")
+        for i, result in enumerate(fix_results):
+            if isinstance(result, Exception):
+                still_failed_models.append(f"ERROR_{os.path.basename(prediction_files[i])}")
+                self.logger.error(f"❌ Error processing {os.path.basename(prediction_files[i])}: {result}")
             else:
-                still_failed_models.append(model_identifier)
-                self.logger.info(f"⚠️ No fixes needed or all fixes failed for {model_identifier}")
+                model_identifier, was_fixed = result
+                if was_fixed:
+                    fixed_models.append(model_identifier)
+                    self.logger.info(f"🎉 Fixed some failures for {model_identifier}")
+                else:
+                    still_failed_models.append(model_identifier)
+                    self.logger.info(f"⚠️ No fixes needed or all fixes failed for {model_identifier}")
 
-        # Run metrics calculation for all models
+        # Run metrics calculation for all models (consistent with normal benchmark flow)
         self.logger.info(f"\n📊 Running metrics calculation")
         metrics_result = self.run_metrics_only(timestamp_dir)
 
@@ -872,6 +759,188 @@ class HLERunner:
             "remaining_failures": len(still_failed_models),
             "metrics_file": metrics_result.get("metrics_file", "")
         }
+
+    async def _fix_single_model_internal(self, predictions_file: str, timestamp_dir: str, batch_timestamp: str, question_map: Dict[str, Any]) -> Tuple[str, bool]:
+        """Internal method to fix a single model with concurrent question processing."""
+        # Load evaluation file to get model info and endpoint from metadata
+        with open(predictions_file, "r") as f:
+            predictions_data = json.load(f)
+
+        # Get model info from evaluation metadata
+        evaluation_metadata = predictions_data.get("evaluation_metadata", {})
+        model_identifier = evaluation_metadata.get("model_identifier")
+        endpoint_data = evaluation_metadata.get("endpoint", {})
+
+        if not model_identifier:
+            self.logger.warning(f"⚠️ No model identifier found in {os.path.basename(predictions_file)}")
+            return "UNKNOWN_MODEL", False
+
+        if not endpoint_data:
+            self.logger.warning(f"⚠️ No endpoint data found in {os.path.basename(predictions_file)}")
+            return model_identifier, False
+
+        self.logger.info(f"\n🔧 Checking {model_identifier} for failures")
+
+        # Reconstruct endpoint object from metadata
+        from zenmux.models import ZenMuxEndpoint
+        endpoint = ZenMuxEndpoint(
+            pricing_completion="0",
+            pricing_prompt="0",
+            context_length=endpoint_data.get("context_length", 200000),
+            provider=endpoint_data.get("provider", "unknown"),
+            provider_slug=endpoint_data.get("provider_slug", "unknown"),
+            max_completion_tokens=endpoint_data.get("max_completion_tokens", 4096),
+            supports_streaming=endpoint_data.get("supports_streaming", True),
+            supports_reasoning=False,
+            supports_tool_parameters=True,
+            supported_parameters=[],
+            can_abort=True,
+            visible=1,
+            suitable_api=endpoint_data.get("suitable_api", "chat.completions")
+        )
+
+        model_name = model_identifier.split(':')[0]
+        safe_model_name = model_identifier.replace("/", "_").replace(":", "_")
+        judged_file = os.path.join(timestamp_dir, "judged", f"judged_hle_{safe_model_name}_{batch_timestamp}.json")
+
+        model_fixed = False
+
+        # Fix evaluation failures (empty responses) with concurrent processing
+        if os.path.exists(predictions_file):
+            with open(predictions_file, "r") as f:
+                predictions_data = json.load(f)
+
+            predictions = predictions_data.get("predictions", predictions_data)
+            evaluation_metadata = predictions_data.get("evaluation_metadata", {})
+
+            # Find questions with empty responses
+            failed_eval_questions = [
+                qid for qid, pred in predictions.items()
+                if not pred.get("response", "").strip()
+            ]
+
+            if failed_eval_questions:
+                self.logger.info(f"🔄 Re-evaluating {len(failed_eval_questions)} failed questions concurrently")
+
+                # Concurrent evaluation processing
+                semaphore = asyncio.Semaphore(self.config.hle.num_workers)
+
+                async def fix_single_eval_question(question_id: str):
+                    """Fix a single evaluation question."""
+                    async with semaphore:
+                        if question_id in question_map:
+                            question = question_map[question_id]
+                            try:
+                                question_id_result, result = await self.evaluator.evaluate_single_question(
+                                    question, model_name, endpoint
+                                )
+                                return question_id, result, result.get("response", "").strip() != ""
+                            except Exception as e:
+                                self.logger.error(f"❌ Error re-evaluating question {question_id}: {e}")
+                                return question_id, None, False
+                        return question_id, None, False
+
+                # Process failed questions concurrently
+                eval_fix_tasks = [fix_single_eval_question(qid) for qid in failed_eval_questions]
+                eval_fix_results = await asyncio.gather(*eval_fix_tasks, return_exceptions=True)
+
+                # Process results
+                fixed_count = 0
+                for result in eval_fix_results:
+                    if isinstance(result, Exception):
+                        self.logger.error(f"❌ Exception during evaluation fix: {result}")
+                        continue
+
+                    question_id, new_result, was_fixed = result
+                    if new_result:
+                        predictions[question_id] = new_result
+                        if was_fixed:
+                            fixed_count += 1
+                            model_fixed = True
+                            self.logger.debug(f"✅ Fixed evaluation for question {question_id}")
+                        else:
+                            self.logger.debug(f"❌ Still failed evaluation for question {question_id}")
+
+                self.logger.info(f"✅ Fixed {fixed_count}/{len(failed_eval_questions)} evaluation failures")
+
+                # Save updated predictions
+                final_predictions_data = {
+                    "evaluation_metadata": evaluation_metadata,
+                    "predictions": predictions
+                } if evaluation_metadata else predictions
+
+                with open(predictions_file, "w") as f:
+                    json.dump(final_predictions_data, f, indent=4)
+
+        # Fix judge failures (empty judge responses) with concurrent processing
+        if os.path.exists(judged_file) and os.path.exists(predictions_file):
+            with open(judged_file, "r") as f:
+                judged_data = json.load(f)
+
+            judged_predictions = judged_data.get("judged_predictions", judged_data)
+            judging_metadata = judged_data.get("judging_metadata", {})
+
+            # Find questions that need judging (have responses but empty judge responses)
+            failed_judge_questions = [
+                qid for qid, pred in judged_predictions.items()
+                if pred.get("response", "").strip() and not pred.get("judge_response", {}).get("reasoning", "").strip()
+            ]
+
+            if failed_judge_questions:
+                self.logger.info(f"⚖️ Re-judging {len(failed_judge_questions)} failed judgments concurrently")
+
+                # Concurrent judge processing
+                judge_semaphore = asyncio.Semaphore(self.config.hle.num_workers)
+
+                async def fix_single_judge_question(question_id: str):
+                    """Fix a single judge question."""
+                    async with judge_semaphore:
+                        if question_id in question_map:
+                            question = question_map[question_id]
+                            try:
+                                unique_id, updated_prediction, performance_metrics = await self.judge.judge_single_response(
+                                    question, {question_id: judged_predictions[question_id]}
+                                )
+                                has_reasoning = updated_prediction.get("judge_response", {}).get("reasoning", "").strip() != ""
+                                return question_id, updated_prediction, has_reasoning
+                            except Exception as e:
+                                self.logger.error(f"❌ Error re-judging question {question_id}: {e}")
+                                return question_id, None, False
+                        return question_id, None, False
+
+                # Process failed judge questions concurrently
+                judge_fix_tasks = [fix_single_judge_question(qid) for qid in failed_judge_questions]
+                judge_fix_results = await asyncio.gather(*judge_fix_tasks, return_exceptions=True)
+
+                # Process results
+                judge_fixed_count = 0
+                for result in judge_fix_results:
+                    if isinstance(result, Exception):
+                        self.logger.error(f"❌ Exception during judge fix: {result}")
+                        continue
+
+                    question_id, updated_prediction, was_fixed = result
+                    if updated_prediction:
+                        judged_predictions[question_id] = updated_prediction
+                        if was_fixed:
+                            judge_fixed_count += 1
+                            model_fixed = True
+                            self.logger.debug(f"✅ Fixed judgment for question {question_id}")
+                        else:
+                            self.logger.debug(f"❌ Still failed judgment for question {question_id}")
+
+                self.logger.info(f"✅ Fixed {judge_fixed_count}/{len(failed_judge_questions)} judge failures")
+
+                # Save updated judged data
+                final_judged_data = {
+                    "judging_metadata": judging_metadata,
+                    "judged_predictions": judged_predictions
+                } if judging_metadata else judged_predictions
+
+                with open(judged_file, "w") as f:
+                    json.dump(final_judged_data, f, indent=4)
+
+        return model_identifier, model_fixed
 
 
     def run_metrics_only(self, timestamp_dir: str) -> Dict[str, Any]:

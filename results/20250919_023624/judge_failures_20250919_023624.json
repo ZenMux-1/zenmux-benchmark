@@ -1,8 +1,0 @@
-{
-    "failure_metadata": {
-        "timestamp": "2025-09-19T03:01:40.698058",
-        "batch_timestamp": "20250919_023624",
-        "total_models_with_judge_failures": 0
-    },
-    "judge_failures": {}
-}

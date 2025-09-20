@@ -1,0 +1,117 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-21T03:20:44.937687",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250921_031820/predictions/hle_z-ai_glm-4.5-air_z-ai_20250921_031820.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 200000,
+            "max_completion_tokens": 4096,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-21T03:20:33.593719",
+            "model_identifier": "z-ai/glm-4.5-air:z-ai",
+            "endpoint": {
+                "provider_slug": "z-ai",
+                "provider": "Z.AI",
+                "context_length": 128000,
+                "max_completion_tokens": 96000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 1825.31,
+                "avg_generation_time_ms": 24326.08,
+                "avg_throughput_tokens_per_second": 38.81,
+                "samples_count": 1
+            }
+        }
+    },
+    "metrics": {
+        "accuracy": 0.0,
+        "confidence_interval": 0.0,
+        "calibration_error": 0.0
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "z-ai/glm-4.5-air:z-ai",
+            "response": "\nExplanation: Arrhenius's sixth impossibility theorem demonstrates that critical-level views in population ethics cannot satisfy all of a set of plausible conditions simultaneously. Critical-level views posit that adding a person to a population is good only if their welfare level exceeds a certain critical threshold; otherwise, it is bad or neutral. This directly violates the condition of Weak Quality Addition, which states that adding a person with positive welfare to a population should make the new population at least as good as the original population, all else being equal. Critical-level views reject this principle because they allow for the possibility that adding a person with positive welfare (but below the critical level) could worsen the overall value of the population.\n\nAnswer: E\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 944,
+                "prompt_tokens": 109,
+                "total_tokens": 1053,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 108
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1825.307861328125,
+                "generation_time_ms": 24326.078857421875,
+                "throughput_tokens_per_second": 38.80608977438984
+            },
+            "generation_id": "2538CCFQPDUT00700759",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "z-ai/glm-4.5-air:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "z-ai/glm-4.5-air:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}
