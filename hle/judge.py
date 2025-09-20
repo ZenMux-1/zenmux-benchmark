@@ -132,7 +132,36 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
             return judge_result, performance_metrics, generation_id, True
 
         except Exception as e:
-            self.logger.error(f"Error in judge: {e}")
+            error_type = type(e).__name__
+            error_msg = str(e)
+
+            # Extract additional info for OpenAI API errors
+            additional_info = {}
+            try:
+                if hasattr(e, 'response'):
+                    additional_info['status_code'] = getattr(e.response, 'status_code', None)
+                    additional_info['response_headers'] = dict(getattr(e.response, 'headers', {}))
+                    additional_info['response_text'] = getattr(e.response, 'text', None)
+                if hasattr(e, 'body'):
+                    additional_info['response_body'] = str(e.body)
+                if hasattr(e, 'request'):
+                    additional_info['request_url'] = getattr(e.request, 'url', None)
+                    additional_info['request_method'] = getattr(e.request, 'method', None)
+            except:
+                pass
+
+            # Create detailed error message with all available information
+            detailed_error = f"""
+Exception Type: {error_type}
+Error Message: {error_msg if error_msg else 'No error message provided'}
+Judge Model: {self.hle_config.judge_model}
+Question: {question[:100] if question else 'Unknown'}...
+Correct Answer: {correct_answer[:50] if correct_answer else 'Unknown'}...
+Response being judged: {response[:100] if response else 'Unknown'}...
+Additional Error Info: {additional_info}
+"""
+
+            self.logger.error(f"Error in judge:{detailed_error}")
             # Return error result with empty data but success=False
             error_judge_result = {
                 "correct_answer": correct_answer,

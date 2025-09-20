@@ -61,9 +61,12 @@ class HLEEvaluator:
                 "model": model_name,
                 "messages": messages,
                 "max_completion_tokens": max_completion_tokens,
-                "stream": True,
-                "stream_options": {"include_usage": True},
+                "stream": self.zenmux_config.enable_streaming,
             }
+
+            # Add stream options only for streaming mode
+            if self.zenmux_config.enable_streaming:
+                request_params["stream_options"] = {"include_usage": True}
 
             # Add temperature only for non-o1 models
             if not is_o1_model:
@@ -72,37 +75,50 @@ class HLEEvaluator:
             # Record request start time
             request_start_time = time.time() * 1000  # Convert to milliseconds
 
-            # Create streaming response and collect all content
-            stream = await client.chat.completions.create(**request_params)
-
             # Performance tracking variables
             first_token_time = None
-            content_chunks = []
+            content = ""
             usage = {}
             generation_id = None
 
-            async for chunk in stream:
-                # Capture generation ID from any chunk (usually available in first chunk)
-                if chunk.id and generation_id is None:
-                    generation_id = chunk.id
+            if self.zenmux_config.enable_streaming:
+                # Streaming mode: collect chunks
+                stream = await client.chat.completions.create(**request_params)
+                content_chunks = []
 
-                if chunk.choices and chunk.choices[0].delta:
-                    delta = chunk.choices[0].delta
-                    if delta.content:
-                        # Record first token time if this is the first content
-                        if first_token_time is None:
-                            first_token_time = time.time() * 1000
-                        content_chunks.append(delta.content)
+                async for chunk in stream:
+                    # Capture generation ID from any chunk (usually available in first chunk)
+                    if chunk.id and generation_id is None:
+                        generation_id = chunk.id
 
-                # Capture usage information from the final chunk
-                if chunk.usage:
-                    usage = json.loads(chunk.usage.json())
+                    if chunk.choices and chunk.choices[0].delta:
+                        delta = chunk.choices[0].delta
+                        if delta.content:
+                            # Record first token time if this is the first content
+                            if first_token_time is None:
+                                first_token_time = time.time() * 1000
+                            content_chunks.append(delta.content)
+
+                    # Capture usage information from the final chunk
+                    if chunk.usage:
+                        usage = json.loads(chunk.usage.json())
+
+                # Combine all content chunks
+                content = "".join(content_chunks)
+            else:
+                # Non-streaming mode: get complete response
+                response = await client.chat.completions.create(**request_params)
+                generation_id = response.id
+                first_token_time = time.time() * 1000  # Approximate since we get full response
+
+                if response.choices and response.choices[0].message:
+                    content = response.choices[0].message.content or ""
+
+                if response.usage:
+                    usage = json.loads(response.usage.json())
 
             # Record generation end time
             generation_end_time = time.time() * 1000
-
-            # Combine all content chunks
-            content = "".join(content_chunks)
 
             # Calculate performance metrics
             performance_metrics = {}
@@ -139,17 +155,46 @@ class HLEEvaluator:
             return question_id, result
 
         except Exception as e:
+            error_type = type(e).__name__
             error_msg = str(e)
 
-            # Log different error types with model information for better debugging
-            if "Connection error" in error_msg or "peer closed connection" in error_msg:
-                self.logger.warning(f"Connection issue for question {question_id} [{model_name}]: {error_msg}")
+            # Extract additional info for OpenAI API errors
+            additional_info = {}
+            try:
+                if hasattr(e, 'response'):
+                    additional_info['status_code'] = getattr(e.response, 'status_code', None)
+                    additional_info['response_headers'] = dict(getattr(e.response, 'headers', {}))
+                    additional_info['response_text'] = getattr(e.response, 'text', None)
+                if hasattr(e, 'body'):
+                    additional_info['response_body'] = str(e.body)
+                if hasattr(e, 'request'):
+                    additional_info['request_url'] = getattr(e.request, 'url', None)
+                    additional_info['request_method'] = getattr(e.request, 'method', None)
+            except:
+                pass
+
+            # Create detailed error message with all available information
+            detailed_error = f"""
+Exception Type: {error_type}
+Error Message: {error_msg if error_msg else 'No error message provided'}
+Model: {model_name}
+Question ID: {question_id}
+Endpoint Provider: {getattr(endpoint, 'provider', 'Unknown')}
+Endpoint Provider Slug: {getattr(endpoint, 'provider_slug', 'Unknown')}
+Additional Error Info: {additional_info}
+"""
+
+            # Log different error types with full details and actionable advice
+            if "Connection error" in error_msg or "peer closed connection" in error_msg or "incomplete chunked read" in error_msg:
+                self.logger.warning(f"Network connection issue for question {question_id} [{model_name}] - this will be retried:{detailed_error}")
             elif "timeout" in error_msg.lower():
-                self.logger.warning(f"Timeout for question {question_id} [{model_name}]: {error_msg}")
+                self.logger.warning(f"Request timeout for question {question_id} [{model_name}] - consider reducing concurrency:{detailed_error}")
             elif "Too many open files" in error_msg:
-                self.logger.error(f"File handle limit reached for question {question_id} [{model_name}]: {error_msg}")
+                self.logger.error(f"File handle limit reached for question {question_id} [{model_name}] - reduce max_concurrent_models:{detailed_error}")
+            elif "rate limit" in error_msg.lower() or "429" in error_msg:
+                self.logger.warning(f"Rate limit hit for question {question_id} [{model_name}] - will retry with backoff:{detailed_error}")
             else:
-                self.logger.error(f"Error evaluating question {question_id} [{model_name}]: {e}")
+                self.logger.error(f"Unexpected error evaluating question {question_id} [{model_name}]:{detailed_error}")
 
             # Return failure result
             result = {
@@ -203,14 +248,13 @@ class HLEEvaluator:
         # Retry logic for incomplete evaluations
         for retry_attempt in range(self.hle_config.max_evaluation_retries + 1):
             if retry_attempt > 0:
-                self.logger.warning(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
-                model_logger.warning(f"🔄 Retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
+                self.logger.warning(f"🔄 Starting retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries} for {model_identifier}")
+                model_logger.warning(f"🔄 Starting retry attempt {retry_attempt}/{self.hle_config.max_evaluation_retries}")
 
-                # Clear client connection on retry to prevent connection issues
-                try:
-                    await self.zenmux_client.close()
-                except:
-                    pass  # Ignore errors during cleanup
+                # Add delay before retry to prevent overwhelming the server
+                delay = min(10 * retry_attempt, 30)  # Progressive delay: 10s, 20s, 30s
+                self.logger.info(f"⏳ Waiting {delay}s before retry to prevent server overload")
+                await asyncio.sleep(delay)
 
             # Load existing predictions if file exists
             existing_predictions = {}
@@ -354,8 +398,14 @@ class HLEEvaluator:
             elif retry_attempt < self.hle_config.max_evaluation_retries:
                 self.logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
                 self.logger.info(f"🔄 Will retry failed questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+                # Calculate exponential backoff delay
+                delay = min(5 * (2 ** retry_attempt), 30)  # Max 30 seconds
+                self.logger.info(f"⏳ Preparing for next retry in {delay} seconds (exponential backoff)...")
                 model_logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
                 model_logger.info(f"🔄 Will retry failed questions (attempt {retry_attempt + 2}/{self.hle_config.max_evaluation_retries + 1})")
+
+                # Exponential backoff before retry to reduce server load
+                await asyncio.sleep(delay)
             else:
                 self.logger.error(f"❌ Evaluation incomplete after {self.hle_config.max_evaluation_retries} retries")
                 self.logger.error(f"❌ Final result: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
