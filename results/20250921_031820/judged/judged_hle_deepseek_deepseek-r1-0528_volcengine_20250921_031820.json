@@ -55,11 +55,6 @@
             "samples_count": 1
         }
     },
-    "metrics": {
-        "accuracy": 0.04,
-        "confidence_interval": 0.08,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "deepseek/deepseek-r1-0528:volcengine",

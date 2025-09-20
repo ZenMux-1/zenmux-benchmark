@@ -43,11 +43,6 @@
             }
         }
     },
-    "metrics": {
-        "accuracy": 0.0,
-        "confidence_interval": 0.0,
-        "calibration_error": 0.0
-    },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
             "model": "x-ai/grok-4:x-ai",

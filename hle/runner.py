@@ -816,8 +816,20 @@ class HLERunner:
         self.logger.info(f"✅ Models with fixes applied: {len(fixed_models)}")
         self.logger.info(f"✅ Models with no failures: {len(models_with_no_failures)}")
         self.logger.info(f"❌ Models still with evaluation failures: {len(still_failed_evaluation_models)}")
+        if still_failed_evaluation_models:
+            self.logger.info(f"   📋 Evaluation failure models:")
+            for model in still_failed_evaluation_models:
+                self.logger.info(f"     - {model}")
         self.logger.info(f"❌ Models still with judge failures: {len(still_failed_judge_models)}")
+        if still_failed_judge_models:
+            self.logger.info(f"   📋 Judge failure models:")
+            for model in still_failed_judge_models:
+                self.logger.info(f"     - {model}")
         self.logger.info(f"❌ Models with processing errors: {len(processing_error_models)}")
+        if processing_error_models:
+            self.logger.info(f"   📋 Processing error models:")
+            for model in processing_error_models:
+                self.logger.info(f"     - {model}")
         self.logger.info(f"📊 Total models processed: {len(prediction_files)}")
         self.logger.info(f"📊 Total unique models still with issues: {len(unique_still_failed_models)}")
 
@@ -1037,10 +1049,10 @@ class HLERunner:
             judged_predictions = judged_data.get("judged_predictions", judged_data)
             judging_metadata = judged_data.get("judging_metadata", {})
 
-            # Find questions that need judging (have responses but empty judge responses)
+            # Find questions that need judging (ANY questions with empty judge responses, regardless of response content)
             failed_judge_questions = [
                 qid for qid, pred in judged_predictions.items()
-                if pred.get("response", "").strip() and not pred.get("judge_response", {}).get("reasoning", "").strip()
+                if not pred.get("judge_response", {}).get("reasoning", "").strip()
             ]
 
             if failed_judge_questions:

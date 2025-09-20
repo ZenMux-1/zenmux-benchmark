@@ -63,14 +63,19 @@
         "669402b41dcb3d5a1ef9e951": {
             "model": "google/gemini-2.5-flash-lite",
             "response": "",
-            "usage": {},
+            "usage": {
+                "completion_tokens": null,
+                "prompt_tokens": 97,
+                "total_tokens": 65631,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
             "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
+                "first_token_latency_ms": 2853.464111328125,
+                "generation_time_ms": 120393.86474609375,
                 "throughput_tokens_per_second": 0.0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "generation_id": "2538CCXAMGJH00702380"
         }
     }
 }
