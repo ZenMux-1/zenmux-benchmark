@@ -56,10 +56,17 @@ async def main():
 
     # Model exclusion
     parser.add_argument(
-        "--exclude",
+        "--exclude-model",
         type=str,
         nargs="*",
-        help="Exclude models by model slug (e.g., 'openai/gpt-4o', 'anthropic/claude-3-haiku'). Excludes all providers for these models."
+        help="Exclude specific models. Supports: 'vendor/model' (all providers), 'vendor/model:provider' (specific), 'vendor' (all models from vendor)."
+    )
+
+    parser.add_argument(
+        "--exclude-provider",
+        type=str,
+        nargs="*",
+        help="Exclude all models from specific providers (e.g., 'theta', 'openai', 'anthropic')."
     )
 
     # Dataset options
@@ -192,8 +199,10 @@ async def main():
         logger.info(f"📝 Text only: {args.text_only}")
         logger.info(f"📊 Max samples: {args.max_samples}")
         logger.info(f"🏛️ Auto judge: {auto_judge}")
-        if args.exclude:
-            logger.info(f"🚫 Excluded models: {', '.join(args.exclude)}")
+        if args.exclude_model:
+            logger.info(f"🚫 Excluded models: {', '.join(args.exclude_model)}")
+        if args.exclude_provider:
+            logger.info(f"🚫 Excluded providers: {', '.join(args.exclude_provider)}")
 
     logger.info(f"👥 Workers per model: {config.hle.num_workers}")
     logger.info(f"🔄 Max concurrent models: {config.hle.max_concurrent_models}")
@@ -246,7 +255,8 @@ async def main():
                     max_samples=args.max_samples,
                     auto_judge=auto_judge,
                     model_filter=args.model_filter,
-                    exclude_models=args.exclude
+                    exclude_models=args.exclude_model,
+                    exclude_providers=args.exclude_provider
                 )
 
             else:  # args.mode == "all"
@@ -255,7 +265,8 @@ async def main():
                     text_only=args.text_only,
                     max_samples=args.max_samples,
                     auto_judge=auto_judge,
-                    exclude_models=args.exclude
+                    exclude_models=args.exclude_model,
+                    exclude_providers=args.exclude_provider
                 )
 
             # Save metrics summary for regular evaluation modes

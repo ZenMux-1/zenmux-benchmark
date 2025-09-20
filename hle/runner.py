@@ -70,7 +70,7 @@ class HLERunner:
         self.logger.info(f"📝 Question IDs saved to: {question_ids_file}")
         return question_ids_file
 
-    def save_available_models(self, model_endpoint_pairs: List, text_only: bool = False, model_filter: Optional[str] = None, exclude_models: Optional[List[str]] = None) -> str:
+    def save_available_models(self, model_endpoint_pairs: List, text_only: bool = False, model_filter: Optional[str] = None, exclude_models: Optional[List[str]] = None, exclude_providers: Optional[List[str]] = None) -> str:
         """Save the available models list to a separate file."""
         # Create models data structure
         models_data = {
@@ -80,6 +80,7 @@ class HLERunner:
                 "text_only": text_only,
                 "model_filter": model_filter,
                 "exclude_models": exclude_models,
+                "exclude_providers": exclude_providers,
                 "total_available_models": len(model_endpoint_pairs)
             },
             "available_models": []
@@ -164,7 +165,8 @@ class HLERunner:
         max_samples: Optional[int] = None,
         auto_judge: bool = True,
         model_filter: Optional[str] = None,
-        exclude_models: Optional[List[str]] = None
+        exclude_models: Optional[List[str]] = None,
+        exclude_providers: Optional[List[str]] = None
     ) -> List[Dict[str, Any]]:
         """Run evaluation for all ZenMux models with dual-layer concurrency."""
         self.logger.info("🌟 Starting ZenMux Models Evaluation")
@@ -185,41 +187,39 @@ class HLERunner:
                 if model_filter.lower() in model_id.lower()
             ]
 
-        # Apply model exclusion if specified
+        # Apply model exclusions if specified
         if exclude_models:
             excluded_count = 0
             original_count = len(model_endpoint_pairs)
 
-            # Extract model slugs from exclude list (handle both full names and partial matches)
-            exclude_slugs = set(exclude_models)
-
+            exclude_model_slugs = set(exclude_models)
             filtered_pairs = []
-            for model_id, model, endpoint in model_endpoint_pairs:
-                # Extract model slug from model_id (format: "vendor/model:provider")
-                model_slug = model_id.split(':')[0]  # Get "vendor/model" part
 
-                # Check if this model should be excluded
+            for model_id, model, endpoint in model_endpoint_pairs:
+                # Extract model slug and provider from model_id (format: "vendor/model:provider")
+                parts = model_id.split(':')
+                model_slug = parts[0]  # Get "vendor/model" part
+                provider = parts[1] if len(parts) > 1 else ""  # Get provider part
+
                 should_exclude = False
-                for exclude_slug in exclude_slugs:
+                for exclude_slug in exclude_model_slugs:
                     exclude_lower = exclude_slug.lower()
                     model_lower = model_slug.lower()
 
-                    # Case 1: Exact match (e.g., "openai/gpt-4o" == "openai/gpt-4o")
-                    if exclude_lower == model_lower:
+                    # Case 1: Full model ID match (e.g., "openai/gpt-4o:openai")
+                    if ':' in exclude_slug and exclude_lower == model_id.lower():
                         should_exclude = True
                         break
 
-                    # Case 2: Vendor-only exclusion (e.g., "anthropic" matches "anthropic/*")
-                    if '/' not in exclude_slug and model_lower.startswith(exclude_lower + '/'):
+                    # Case 2: Exact model slug match (e.g., "openai/gpt-4o")
+                    elif exclude_lower == model_lower:
                         should_exclude = True
                         break
 
-                    # Case 3: Model name only (e.g., "gpt-4o" matches "*/gpt-4o" but not "*/gpt-4o-*")
-                    if '/' not in exclude_slug and '/' in model_slug:
-                        model_name = model_slug.split('/')[-1].lower()
-                        if exclude_lower == model_name:
-                            should_exclude = True
-                            break
+                    # Case 3: Vendor-only exclusion (e.g., "anthropic" matches "anthropic/*")
+                    elif '/' not in exclude_slug and model_lower.startswith(exclude_lower + '/'):
+                        should_exclude = True
+                        break
 
                 if not should_exclude:
                     filtered_pairs.append((model_id, model, endpoint))
@@ -229,13 +229,37 @@ class HLERunner:
             model_endpoint_pairs = filtered_pairs
 
             if excluded_count > 0:
-                self.logger.info(f"🚫 Excluded {excluded_count} model endpoints based on exclude patterns")
+                self.logger.info(f"🚫 Excluded {excluded_count} model endpoints based on model patterns")
+                self.logger.info(f"📉 Remaining models: {len(model_endpoint_pairs)} (was {original_count})")
+
+        # Apply provider exclusions if specified
+        if exclude_providers:
+            excluded_count = 0
+            original_count = len(model_endpoint_pairs)
+
+            exclude_provider_slugs = set(p.lower() for p in exclude_providers)
+            filtered_pairs = []
+
+            for model_id, model, endpoint in model_endpoint_pairs:
+                # Extract provider from model_id (format: "vendor/model:provider")
+                parts = model_id.split(':')
+                provider = parts[1].lower() if len(parts) > 1 else ""
+
+                if provider not in exclude_provider_slugs:
+                    filtered_pairs.append((model_id, model, endpoint))
+                else:
+                    excluded_count += 1
+
+            model_endpoint_pairs = filtered_pairs
+
+            if excluded_count > 0:
+                self.logger.info(f"🚫 Excluded {excluded_count} model endpoints based on provider patterns")
                 self.logger.info(f"📉 Remaining models: {len(model_endpoint_pairs)} (was {original_count})")
 
         self.logger.info(f"🎯 Total model endpoints to evaluate: {len(model_endpoint_pairs)}")
 
         # Save available models list to file
-        self.save_available_models(model_endpoint_pairs, text_only=text_only, model_filter=model_filter, exclude_models=exclude_models)
+        self.save_available_models(model_endpoint_pairs, text_only=text_only, model_filter=model_filter, exclude_models=exclude_models, exclude_providers=exclude_providers)
 
         # Outer layer: Model-level concurrency control
         async def bound_model_evaluation(model_data):

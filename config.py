@@ -37,8 +37,8 @@ class HLEConfig:
     max_completion_tokens: Optional[int] = None
     temperature: float = 0.0
     num_workers: int = 3  # Inner concurrency: requests per model (reduced to prevent file handle leaks)
-    max_concurrent_models: int = 8  # Outer concurrency: simultaneous models (reduced to prevent too many open files)
-    max_evaluation_retries: int = 0 # Maximum retries for incomplete evaluations
+    max_concurrent_models: int = 64  # Outer concurrency: simultaneous models (reduced to prevent too many open files)
+    max_evaluation_retries: int = 3 # Maximum retries for incomplete evaluations
 
 
 @dataclass

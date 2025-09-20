@@ -12,7 +12,7 @@ ZenMux Benchmark is a production-grade evaluation framework that enables compreh
 - 🧠 **HLE Integration**: Built-in support for Humanity's Last Exam, a frontier AI benchmark
 - 🔄 **Automatic Judging**: Intelligent scoring system using advanced judge models
 - 📊 **Text-Only Mode**: Filter multimodal questions for text-only model evaluation
-- 🚫 **Smart Model Exclusion**: Flexible exclusion system supporting exact matches, vendor filtering, and model name patterns
+- 🚫 **Smart Model Exclusion**: Dual exclusion system with `--exclude-model` (vendor/model filtering) and `--exclude-provider` (provider-based filtering)
 - ⚡ **Dual-Layer Concurrency**: Advanced parallel processing with model-level and request-level concurrency
 - 🔧 **Failure Recovery**: Intelligent fix system for recovering from evaluation and judge failures
 - ⚙️ **Production Ready**: Robust error handling, retry mechanisms, and resumable evaluations
@@ -60,7 +60,7 @@ uv run python benchmark.py --mode single \
 
 
 # Test all models except expensive ones
-uv run python benchmark.py --text-only --max-samples 5 --exclude openai/gpt-4o
+uv run python benchmark.py --text-only --max-samples 5 --exclude-model openai/gpt-4o
 ```
 
 ## Core Functionality
@@ -105,17 +105,23 @@ uv run python benchmark.py --mode filter --model-filter openai
 ### 4. Model Exclusion
 
 ```bash
-# Exclude specific models (all providers)
-uv run python benchmark.py --exclude openai/gpt-4o anthropic/claude-3-haiku
+# Exclude specific models (all providers for this model)
+uv run python benchmark.py --exclude-model openai/gpt-4o anthropic/claude-3-haiku
 
-# Exclude entire vendors
-uv run python benchmark.py --exclude anthropic openai
+# Exclude entire vendors (all models from vendor)
+uv run python benchmark.py --exclude-model anthropic openai
 
-# Exclude by model name only (affects all providers)
-uv run python benchmark.py --exclude gpt-4o
+# Exclude specific provider (all models using this provider)
+uv run python benchmark.py --exclude-provider theta --text-only --max-samples 3
+
+# Exclude specific model from specific provider only
+uv run python benchmark.py --exclude-model openai/gpt-4o:openai
+
+# Combine both exclusion types
+uv run python benchmark.py --exclude-model anthropic --exclude-provider theta
 
 # Combine with other options
-uv run python benchmark.py --mode filter --model-filter gpt --exclude openai/gpt-4o-mini
+uv run python benchmark.py --mode filter --model-filter gpt --exclude-model openai/gpt-4o-mini
 ```
 
 ### 5. Failure Recovery
@@ -160,14 +166,20 @@ uv run python benchmark.py --fix results/20250919_011623
 - Default is 2, adjust based on API rate limits and provider capabilities
 - Each model processes questions concurrently with this limit
 
-### `--exclude MODEL1 MODEL2 ...`
+### `--exclude-model MODEL1 MODEL2 ...`
 
 - Exclude specific models from evaluation
 - Supports three matching patterns:
-  - **Exact match**: `openai/gpt-4o` (excludes only this specific model)
-  - **Vendor exclusion**: `anthropic` (excludes all Anthropic models)
-  - **Model name**: `gpt-4o` (excludes gpt-4o from all providers)
+  - **Exact match**: `openai/gpt-4o` (excludes this model from all providers)
+  - **Specific provider**: `openai/gpt-4o:openai` (excludes only from OpenAI provider)
+  - **Vendor exclusion**: `anthropic` (excludes all models from Anthropic vendor)
 - Can combine multiple exclusion patterns
+
+### `--exclude-provider PROVIDER1 PROVIDER2 ...`
+
+- Exclude all models from specific providers
+- Examples: `theta`, `openai`, `anthropic`, `google-vertex`
+- Useful for excluding all models using a particular provider backend
 
 ### `--fix TIMESTAMP_DIR`
 
@@ -282,13 +294,13 @@ uv run python benchmark.py --mode single \
 uv run python benchmark.py --mode all --text-only
 
 # Evaluate all models except expensive ones
-uv run python benchmark.py --mode all --exclude openai/gpt-4o anthropic/claude-opus-4.1
+uv run python benchmark.py --mode all --exclude-model openai/gpt-4o anthropic/claude-opus-4.1
 
 # Evaluate all models from specific provider, excluding problematic models
-uv run python benchmark.py --mode filter --model-filter anthropic --exclude anthropic/claude-3-haiku
+uv run python benchmark.py --mode filter --model-filter anthropic --exclude-model anthropic/claude-3-haiku
 
-# Skip all OpenAI models (cost control)
-uv run python benchmark.py --mode all --exclude openai --text-only
+# Skip all models from OpenAI provider (cost control)
+uv run python benchmark.py --mode all --exclude-provider openai --text-only
 ```
 
 ### CI/CD Integration
@@ -297,14 +309,15 @@ uv run python benchmark.py --mode all --exclude openai --text-only
 # Commands suitable for CI/CD - focused evaluation
 uv run python benchmark.py --mode filter \
   --model-filter gpt \
-  --exclude openai/gpt-4o \
+  --exclude-model openai/gpt-4o \
   --text-only \
   --max-samples 50 \
   --num-workers 5
 
 # Cost-controlled evaluation for automated testing
 uv run python benchmark.py --mode all \
-  --exclude openai anthropic/claude-opus-4.1 \
+  --exclude-provider openai \
+  --exclude-model anthropic/claude-opus-4.1 \
   --text-only \
   --max-samples 20
 
@@ -316,8 +329,8 @@ uv run python benchmark.py --fix results/20250917_173456
 
 1. **Dual-Layer Concurrency**: The system runs multiple models simultaneously (outer layer) with concurrent requests per model (inner layer)
 2. **API Rate Limits**: Configure both `max_concurrent_models` and `num_workers` based on your ZenMux plan and provider limits
-3. **Cost Control**: Use `--max-samples` and `--exclude` to control evaluation scope and costs - exclude expensive models to save budget
-4. **Model Exclusion**: Use `--exclude` strategically to skip problematic, expensive, or irrelevant models for your use case
+3. **Cost Control**: Use `--max-samples`, `--exclude-model`, and `--exclude-provider` to control evaluation scope and costs - exclude expensive models to save budget
+4. **Model Exclusion**: Use `--exclude-model` and `--exclude-provider` strategically to skip problematic, expensive, or irrelevant models for your use case
 5. **Failure Recovery**: The system tracks failures using `has_answer` and `has_judgment` fields, use `--fix` to retry failed operations
 6. **Network Stability**: Higher concurrency requires stable network connections for optimal performance
 7. **Storage Space**: Full evaluations generate large amounts of data, timestamped directories help organize results by run
@@ -352,6 +365,7 @@ uv run python benchmark.py --fix results/20250917_173456
    - Use `--fix` to retry failed operations (both evaluation and judge)
    - Check prediction/judge files for questions with `has_answer=false` or `has_judgment=false`
    - Consider reducing concurrency if failures persist
+   - Use `--exclude-model` or `--exclude-provider` to skip consistently failing models
 
 6. **Too many open files error**
    - Reduce `max_concurrent_models` and `num_workers` values
