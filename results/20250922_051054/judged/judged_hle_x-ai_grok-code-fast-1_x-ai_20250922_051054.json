@@ -79,18 +79,17 @@
             "generation_id": "2539CCDNYZBE00740883",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The correct answer is D, while the extracted final answer from the response is E. Since E does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6299.572509765625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 40.478937198468294
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCFDLEKA00745908"
         },
         "668828540a642802bdfeadfc": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -121,18 +120,17 @@
             "generation_id": "2539CCRYFCFF00744578",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "atyh",
+                "reasoning": "The extracted answer 'atyh' does not match the correct answer 'yeyo'.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4410.764404296875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 41.035970958610605
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCNWUSHE00745903"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -163,18 +161,17 @@
             "generation_id": "2539CCNRGIPY00744572",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "0",
+                "reasoning": "The response concludes the reduced 12th Spin bordism group is 0, whereas the correct answer is Z+Z+Z+Z+Z (isomorphic to Z^5). These are not equivalent; 0 does not match Z^5.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6476.81005859375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 23.159549013016466
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCAAYWPG00745902"
         }
     }
 }

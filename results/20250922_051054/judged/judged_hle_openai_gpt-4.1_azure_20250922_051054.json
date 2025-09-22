@@ -76,18 +76,17 @@
             "generation_id": "2539CCHGNUNK00744559",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. These do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5705.818115234375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 20.505385491979368
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCPQOEKA00745904"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/gpt-4.1:azure",
@@ -153,18 +152,17 @@
             "generation_id": "2539CCANEHUT00742403",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "0",
+                "reasoning": "The response states the reduced Spin bordism group is 0, while the correct answer is Z+Z+Z+Z+Z (isomorphic to Z^5). These are not equivalent, so the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5985.284912109375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 45.44478733997976
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCMBTRTH00743953"
         }
     }
 }

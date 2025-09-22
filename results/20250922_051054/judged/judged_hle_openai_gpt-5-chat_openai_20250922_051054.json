@@ -76,18 +76,17 @@
             "generation_id": "2539CCJUSHEH00743444",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C. Non-Elitism",
+                "reasoning": "The extracted answer is C. Non-Elitism, while the correct answer is D. Weak Non-Sadism. Since C does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5414.260498046875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 49.31421384255833
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCEFRLGS00743950"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/gpt-5-chat:openai",

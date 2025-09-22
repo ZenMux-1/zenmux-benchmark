@@ -152,18 +152,17 @@
             "generation_id": "2539CCGCFCBO00744565",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "\u2124",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (i.e., \u2124^5), while the extracted answer is \u2124 (rank 1). These are not equivalent; the response omits four additional \u2124 summands.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 7759.188720703125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 35.699608550686044
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCNEEITI00745907"
         }
     }
 }

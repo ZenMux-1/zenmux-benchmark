@@ -76,18 +76,17 @@
             "generation_id": "2539CCOMERTP00743412",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "A. Egalitarian Dominance",
+                "reasoning": "The extracted answer is A, while the correct answer is D. These are different options, so the response does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 9865.080810546875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 32.741749023959024
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCBQOPSB00743952"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/gpt-4.1-nano:azure",
@@ -115,18 +114,17 @@
             "generation_id": "2539CCQNUKCW00742399",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "dota",
+                "reasoning": "The extracted answer 'dota' does not match the correct answer 'yeyo'. Therefore, it is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 80
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6750.397216796875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 27.553934091045786
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCAGVOPP00741394"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/gpt-4.1-nano:azure",
@@ -154,18 +152,17 @@
             "generation_id": "2539CCJUNEUY00740854",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "0",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (five copies of Z), while the response gives 0. These are not equivalent; the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6616.81005859375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 29.923784761335632
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCMXGEWZ00741401"
         }
     }
 }

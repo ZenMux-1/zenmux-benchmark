@@ -118,18 +118,17 @@
             "generation_id": "2539CCKSDXLV00740863",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "itfa",
+                "reasoning": "The extracted answer 'itfa' does not match the correct answer 'yeyo'. They are entirely different strings.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6539.374267578125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 28.44308834289823
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCUQABSO00745097"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "anthropic/claude-3.5-sonnet:google-vertex",

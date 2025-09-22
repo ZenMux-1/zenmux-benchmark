@@ -76,18 +76,17 @@
             "generation_id": "2539CCQLGZCA00740866",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C. Non-Elitism",
+                "reasoning": "The extracted answer is C, whereas the correct answer is D. These are different options, so the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6193.387939453125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 30.83934057856955
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCXHGPJV00745905"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/gpt-4.1:openai",

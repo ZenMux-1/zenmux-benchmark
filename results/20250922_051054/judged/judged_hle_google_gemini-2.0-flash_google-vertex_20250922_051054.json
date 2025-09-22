@@ -128,18 +128,17 @@
             "generation_id": "2539CCFVLXZM00744581",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "0",
+                "reasoning": "The response\u2019s final stated answer is 0, while the correct answer is Z+Z+Z+Z+Z (i.e., Z^5). These do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 10
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8386.77099609375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 38.98997601726631
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCLAMIOI00745909"
         }
     }
 }
