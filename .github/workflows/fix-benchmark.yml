@@ -12,6 +12,10 @@ on:
         description: 'Number of concurrent workers'
         required: false
         default: '3'
+      max_concurrent_models:
+        description: 'Maximum number of models to evaluate concurrently'
+        required: false
+        default: '100'
       print_streaming:
         description: 'Print streaming responses to console'
         type: boolean
@@ -89,13 +93,15 @@ jobs:
         fi
 
         NUM_WORKERS="${{ github.event.inputs.num_workers || '3' }}"
+        MAX_CONCURRENT_MODELS="${{ github.event.inputs.max_concurrent_models || '60' }}"
         TIMESTAMP_DIR="${{ github.event.inputs.timestamp_dir }}"
 
         # Run fix command
         uv run python benchmark.py \
           --fix "results/$TIMESTAMP_DIR" \
           $STREAMING_ARG \
-          --num-workers $NUM_WORKERS
+          --num-workers $NUM_WORKERS \
+          --max-concurrent-models $MAX_CONCURRENT_MODELS
 
     - name: Generate fix summary report
       run: |
@@ -106,6 +112,7 @@ jobs:
         echo "**Commit:** $GITHUB_SHA" >> artifacts/fix-summary.md
         echo "**Original Timestamp:** $TIMESTAMP_DIR" >> artifacts/fix-summary.md
         echo "**Workers:** ${{ github.event.inputs.num_workers }}" >> artifacts/fix-summary.md
+        echo "**Max Concurrent Models:** ${{ github.event.inputs.max_concurrent_models }}" >> artifacts/fix-summary.md
         echo "" >> artifacts/fix-summary.md
 
         RESULTS_DIR="results/$TIMESTAMP_DIR"
@@ -171,6 +178,7 @@ jobs:
 
           Original Timestamp: ${{ github.event.inputs.timestamp_dir }}
           Workers: ${{ github.event.inputs.num_workers }}
+          Max Concurrent Models: ${{ github.event.inputs.max_concurrent_models }}
           Fixed Run ID: ${{ github.run_id }}
           Commit: ${{ github.sha }}
 
@@ -183,7 +191,41 @@ jobs:
           echo "No changes to commit."
         fi
 
+    - name: Emergency commit on failure
+      if: failure() && github.event.inputs.commit_results == 'true'
+      run: |
+        # Setup Git if not already done
+        git config --global user.name "github-actions[bot]" || true
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com" || true
+
+        # Check if there are any changes to commit
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "Emergency commit: Changes detected after fix failure, saving partial results..."
+
+          # Add results and logs directories
+          git add results/ logs/ || true
+
+          # Create emergency commit message
+          git commit -m "Emergency commit: Partial fix results from failed GitHub Actions run
+
+          Original Timestamp: ${{ github.event.inputs.timestamp_dir }}
+          Workers: ${{ github.event.inputs.num_workers }}
+          Max Concurrent Models: ${{ github.event.inputs.max_concurrent_models }}
+          Fixed Run ID: ${{ github.run_id }}
+          Commit: ${{ github.sha }}
+          Status: FAILED - Partial fix results saved
+
+          🚨 Emergency commit to prevent data loss - Fixed by GitHub Actions"
+
+          # Push to repository
+          git push || echo "Failed to push emergency commit, but changes are staged locally"
+          echo "Emergency commit completed successfully!"
+        else
+          echo "No changes to commit in emergency situation."
+        fi
+
     - name: Upload fixed results
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: fixed-benchmark-results-${{ github.event.inputs.timestamp_dir }}-${{ github.run_number }}
@@ -194,6 +236,7 @@ jobs:
         retention-days: 30
 
     - name: Upload fix summary
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: fix-summary-${{ github.event.inputs.timestamp_dir }}-${{ github.run_number }}

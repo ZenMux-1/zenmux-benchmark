@@ -98,6 +98,13 @@ async def main():
     )
 
     parser.add_argument(
+        "--max-concurrent-models",
+        type=int,
+        default=None,
+        help="Maximum number of models to evaluate concurrently (default: from config file)"
+    )
+
+    parser.add_argument(
         "--print-streaming",
         action="store_true",
         help="Print streaming responses to console in real-time (bypasses logging)"
@@ -159,6 +166,9 @@ async def main():
     # Override config with command line arguments
     if args.num_workers:
         config.hle.num_workers = args.num_workers
+
+    if args.max_concurrent_models:
+        config.hle.max_concurrent_models = args.max_concurrent_models
 
     if args.print_streaming:
         config.hle.print_streaming_output = True
@@ -279,6 +289,7 @@ async def main():
                 "max_samples": args.max_samples,
                 "auto_judge": auto_judge,
                 "num_workers": config.hle.num_workers,
+                "max_concurrent_models": config.hle.max_concurrent_models,
                 "model_filter": getattr(args, 'model_filter', None),
                 "model_slug": getattr(args, 'model_slug', None),
                 "provider_slug": getattr(args, 'provider_slug', None)
