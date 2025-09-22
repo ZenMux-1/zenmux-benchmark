@@ -1,0 +1,144 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T09:40:53.954092",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_093840/predictions/hle_openai_gpt-5_azure_20250922_093840.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T09:40:38.521803",
+            "model_identifier": "openai/gpt-5:azure",
+            "endpoint": {
+                "provider_slug": "azure",
+                "provider": "Azure",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 31989.46,
+                "avg_generation_time_ms": 20657.6,
+                "avg_throughput_tokens_per_second": 134.56,
+                "samples_count": 2
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5:azure",
+            "response": "Explanation: Critical-level views (with a positive critical level) can prefer adding a single life with negative welfare over adding many lives with low but positive welfare (below the critical level). This is the \u201cSadistic Conclusion,\u201d which violates the Weak Non-Sadism condition in Arrhenius\u2019s framework.\nAnswer: D. Weak Non-Sadism\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 2001,
+                "prompt_tokens": 109,
+                "total_tokens": 2110,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1920,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 31976.46484375,
+                "generation_time_ms": 14572.403076171875,
+                "throughput_tokens_per_second": 137.31434613361355
+            },
+            "generation_id": "2539CCNLNSGP00736271",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5:azure",
+            "response": "Explanation: \n- c1: The inverse of \u201clogical depth\u201d in Bennett\u2019s framing is \u201cshallowness\u201d (shallow vs deep). The third letter of \u201cshallow(ness)\u201d is \u2018a\u2019.\n- c2: Gell-Mann joked \u201cthe two operations didn\u2019t commute\u201d; the third character of \u201coperations\u201d is \u2018e\u2019.\n- c3: The last author of the GELU paper is Kevin Gimpel; his last name ends with \u2018l\u2019. \n- c4: Rot13 of \u2018l\u2019 is \u2018y\u2019.\n- c5: Mars\u2019s mass (~0.107 Earths) is closer to the Moon (~0.0123 Earths) than to Earth (1 Earth), so \u201cmoon\u201d; second letter is \u2018o\u2019.\n- Concatenate c1+c2+c4+c5 = a + e + y + o = \u201caeyo\u201d.\n\nAnswer: aeyo\nConfidence: 70%",
+            "usage": {
+                "completion_tokens": 3525,
+                "prompt_tokens": 239,
+                "total_tokens": 3764,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3328,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 32002.451904296875,
+                "generation_time_ms": 26742.80615234375,
+                "throughput_tokens_per_second": 131.81114875975973
+            },
+            "generation_id": "2539CCWSTKEF00737396",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

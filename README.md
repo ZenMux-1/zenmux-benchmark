@@ -112,13 +112,13 @@ uv run python benchmark.py --exclude-model openai/gpt-4o anthropic/claude-3-haik
 uv run python benchmark.py --exclude-model anthropic openai
 
 # Exclude specific provider (all models using this provider)
-uv run python benchmark.py --exclude-provider theta --exclude-model google/gemini-2.5-flash-lite:google-vertex --text-only --max-samples 3
+uv run python benchmark.py --exclude-provider theta
 
 # Exclude specific model from specific provider only
 uv run python benchmark.py --exclude-model openai/gpt-4o:openai
 
 # Combine both exclusion types
-uv run python benchmark.py --exclude-model anthropic --exclude-provider theta
+uv run python benchmark.py --exclude-provider theta --exclude-model google/gemini-2.5-flash-lite:google-vertex anthropic/claude-opus-4.1 anthropic/claude-opus-4 --text-only --max-samples 3
 
 # Combine with other options
 uv run python benchmark.py --mode filter --model-filter gpt --exclude-model openai/gpt-4o-mini

