@@ -76,18 +76,17 @@
             "generation_id": "2539CCRVJIYB00739842",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
-                "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "model_answer": "D. Weak Non-Sadism",
+                "reasoning": "The extracted answer is option D, which matches the correct answer D. There is no discrepancy.",
+                "correct": "yes",
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 7454.6923828125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 50.84046135475965
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCTFDLNE00739887"
         },
         "668828540a642802bdfeadfc": {
             "model": "moonshotai/kimi-k2-0711:volcengine",

@@ -68,18 +68,17 @@
             "generation_id": "2539CCWDLNYG00737748",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
-                "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "model_answer": "D",
+                "reasoning": "The extracted final answer is \"D,\" which exactly matches the provided correct answer \"D.\"",
+                "correct": "yes",
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6060.7158203125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 19.30465038599472
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCOVRBFY00737783"
         },
         "668828540a642802bdfeadfc": {
             "model": "moonshotai/kimi-k2-0905:moonshotai",
@@ -99,18 +98,17 @@
             "generation_id": "2539CCOYQMHC00737742",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "rtfa",
+                "reasoning": "The extracted answer \"rtfa\" does not match the correct answer \"yeyo\". They are different strings.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5064.216796875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 36.72828543098232
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCQVPYRU00734680"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "moonshotai/kimi-k2-0905:moonshotai",
@@ -130,18 +128,17 @@
             "generation_id": "2539CCUEMIFL00737736",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "\u2124 \u2295 \u2124",
+                "reasoning": "The response gives two copies of \u2124, while the correct answer requires five copies of \u2124. Therefore, the answers do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 16691.239013671875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 15.57703414270401
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCYPGQQC00737785"
         }
     }
 }

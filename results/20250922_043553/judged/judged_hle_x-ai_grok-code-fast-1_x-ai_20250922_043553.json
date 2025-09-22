@@ -79,18 +79,17 @@
             "generation_id": "2539CCLHWLJM00737746",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C",
+                "reasoning": "The extracted final answer is C, while the correct answer is D. These do not match, so the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8727.661865234375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 21.426127969610366
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCKQKOHJ00737793"
         },
         "668828540a642802bdfeadfc": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -121,18 +120,17 @@
             "generation_id": "2539CCEIBACH00738701",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "atyh",
+                "reasoning": "The extracted answer \"atyh\" does not match the correct answer \"yeyo\". They differ in all characters and order, so the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5563.088623046875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 46.556871110593065
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCOWHDLB00739886"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -163,18 +161,17 @@
             "generation_id": "2539CCZBWWBS00737732",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "0",
+                "reasoning": "The provided answer '0' (trivial group) does not match the correct answer 'Z+Z+Z+Z+Z' (isomorphic to Z^5). They are fundamentally different groups.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 10631.983642578125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 19.18738843643786
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCEYCBTG00734675"
         }
     }
 }

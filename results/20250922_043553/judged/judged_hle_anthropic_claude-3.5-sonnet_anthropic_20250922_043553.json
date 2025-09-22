@@ -78,18 +78,17 @@
             "generation_id": "2539CCWFGCGH00737739",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. Since E does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4915.00439453125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 38.25022012374615
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCONMEBZ00734682"
         },
         "668828540a642802bdfeadfc": {
             "model": "anthropic/claude-3.5-sonnet:anthropic",
@@ -119,18 +118,17 @@
             "generation_id": "2539CCKTTCVU00734624",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "itfa",
+                "reasoning": "The extracted answer 'itfa' does not match the correct answer 'yeyo'.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5895.072998046875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 52.41665372123064
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCJQDFRN00737789"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "anthropic/claude-3.5-sonnet:anthropic",
@@ -160,18 +158,17 @@
             "generation_id": "2539CCBHDROU00739827",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z/3Z",
+                "reasoning": "The correct answer is a free abelian group of rank 5 (Z\u2295Z\u2295Z\u2295Z\u2295Z), whereas the extracted answer is a finite cyclic group Z/3Z. These groups are not equivalent in structure or order, so the response does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 75
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 7766.13671875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 37.470367898292416
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCXUCCCN00734678"
         }
     }
 }

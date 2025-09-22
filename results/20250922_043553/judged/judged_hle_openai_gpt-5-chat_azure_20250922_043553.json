@@ -152,18 +152,17 @@
             "generation_id": "2539CCSTWLKN00737752",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
-                "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "model_answer": "Z^5",
+                "reasoning": "The response\u2019s final answer is Z^5, which is equivalent to Z+Z+Z+Z+Z in the correct_answer. They match exactly in group structure.",
+                "correct": "yes",
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6799.872314453125,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 48.08913827763526
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCCGQRUV00737788"
         }
     }
 }
