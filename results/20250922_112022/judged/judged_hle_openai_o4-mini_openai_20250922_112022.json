@@ -76,18 +76,17 @@
             "generation_id": "2539CCKCQTHD00737569",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. Since E does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 85
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 3850.228271484375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 32.205882679313035
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCSXMCHP00739730"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/o4-mini:openai",
@@ -115,18 +114,17 @@
             "generation_id": "2539CCFEYAUT00738519",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "atya",
+                "reasoning": "The extracted final answer 'atya' does not match the correct answer 'yeyo'. They differ in all four characters.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 80
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 3654.478271484375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 33.93097202617481
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCLMCLDY00737638"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/o4-mini:openai",
@@ -154,18 +152,17 @@
             "generation_id": "2539CCJGGLOD00736436",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z^4 \u2295 Z/2",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (i.e., Z^5 with no torsion). The response gives Z^4 \u2295 Z/2, which has rank 4 and includes a Z/2 torsion summand. This does not match the required Z^5 and is therefore incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 80
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4282.43896484375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 55.57580667321518
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCDQEJJP00739733"
         }
     }
 }

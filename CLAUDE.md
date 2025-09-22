@@ -30,17 +30,13 @@ uv run python benchmark.py
 uv run python benchmark.py --mode single --model-slug openai/gpt-4o --provider-slug openai
 
 # Filter models and exclude certain ones
-uv run python benchmark.py --model-filter gpt --exclude anthropic openai/gpt-4o-mini
+uv run python benchmark.py --model-filter gpt --exclude-model anthropic openai/gpt-4o-mini
 
 # Test runs with different concurrency settings
 uv run python benchmark.py --num-workers 5 --max-samples 10
 
-# Fix evaluation or judge failures from previous runs
-uv run python benchmark.py --fix-evaluation results/20250919_011623
-uv run python benchmark.py --fix-judge results/20250919_011623
-
-# Calculate metrics only for complete models
-uv run python benchmark.py --metrics-only results/20250919_011623
+# Fix evaluation and judge failures from previous runs
+uv run python benchmark.py --fix results/20250919_011623
 ```
 
 ### Running Tests
@@ -50,9 +46,6 @@ uv run python benchmark.py --metrics-only results/20250919_011623
 uv run python -m pytest tests/
 
 # Run specific test file
-uv run python tests/test_exclude_functionality.py
-
-# Run exclude functionality tests specifically
 uv run python tests/test_exclude_functionality.py
 ```
 
@@ -82,6 +75,7 @@ The project implements a **dual-layer concurrent architecture** with timestamped
    - `evaluation.py`: Individual model evaluation logic with resumable execution
    - `judge.py`: Automated scoring using judge models with structured response parsing
    - `dataset.py`: HLE dataset loading and question formatting
+   - `statistics.py`: Comprehensive statistics generation with failure tracking
 
 3. **Configuration Management** (`config.py`)
    - Centralized configuration for concurrency, API settings, and output paths
@@ -101,15 +95,19 @@ The framework implements sophisticated concurrency control:
 Results are automatically organized with timestamps:
 ```
 results/
-├── 20250917_173456/          # Timestamped run directory
+├── 20250922_093840/          # Timestamped run directory
 │   ├── predictions/          # Model prediction files
 │   ├── judged/              # Scored results
 │   ├── question_ids_*.json  # Question IDs used in run
 │   ├── available_models_*.json # Available models list
-│   ├── evaluation_failures_*.json # Evaluation failure tracking
-│   ├── judge_failures_*.json # Judge failure tracking
 │   ├── metrics_summary_*.json # Aggregated metrics and results
-│   └── metrics_only_*.json  # Independent metrics calculation
+│   ├── evaluation_statistics_*.json # Evaluation completion statistics
+│   ├── judge_statistics_*.json # Judge completion statistics
+│   └── metrics_statistics_*.json # Metrics calculation statistics
+└── logs/
+    └── 20250922_093840/      # Timestamped logs directory
+        ├── zenmux_benchmark.log # Main benchmark log
+        └── errors.log        # Error-only log with generation IDs
 ```
 
 ### Key Data Flow
@@ -117,7 +115,7 @@ results/
 1. **Model Discovery**: ZenMux API provides available models across providers
 2. **Concurrent Evaluation**: Models evaluated with dual-layer concurrency
 3. **Automatic Judging**: Responses scored using structured judge models
-4. **Failure Tracking**: Comprehensive tracking of evaluation and judge failures
+4. **Statistics Generation**: Comprehensive tracking of evaluation, judging, and metrics failures
 5. **Result Aggregation**: Metrics compiled with confidence intervals and calibration
 6. **Quality Assurance**: Strict validation ensures metrics only include complete data
 
@@ -127,10 +125,10 @@ results/
 
 ```python
 class HLEConfig:
-    num_workers: int = 10              # Inner concurrency: requests per model
-    max_concurrent_models: int = 5     # Outer concurrency: simultaneous models
+    num_workers: int = 3               # Inner concurrency: requests per model
+    max_concurrent_models: int = 60    # Outer concurrency: simultaneous models
     judge_model: str = "openai/gpt-5:openai"  # Model used for scoring
-    timeout: float = 600.0             # Request timeout in seconds
+    timeout: float = 300.0             # Request timeout in seconds
 ```
 
 ### Environment Variables
@@ -158,9 +156,9 @@ export ZENMUX_API_KEY="your_api_key"  # Required for all operations
 
 ### Error Handling
 - Graceful degradation when models fail
-- Detailed error reporting in results
+- Detailed error reporting with generation IDs for debugging
 - Continuation of evaluation despite individual failures
-- Comprehensive failure tracking with separate fix operations
+- Comprehensive failure tracking with statistics and fix operations
 - Strict metrics validation excluding incomplete data
 
 ## Test Organization
@@ -168,3 +166,19 @@ export ZENMUX_API_KEY="your_api_key"  # Required for all operations
 All test scripts are located in `tests/` directory:
 - `test_exclude_functionality.py`: Tests for model exclusion logic
 - Test files should be placed in `tests/` directory, not in the root
+
+## GitHub Actions CI/CD
+
+The project includes GitHub Actions workflow for automated benchmarking:
+
+- **Workflow**: `.github/workflows/benchmark.yml`
+- **Triggers**: Manual dispatch with configurable parameters
+- **Features**: Model filtering, text-only mode, sample limits, artifact uploads
+- **Timeout**: 8 hours maximum runtime
+- **Outputs**: Benchmark results and summary reports as artifacts
+
+## Important Instruction Reminders
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.

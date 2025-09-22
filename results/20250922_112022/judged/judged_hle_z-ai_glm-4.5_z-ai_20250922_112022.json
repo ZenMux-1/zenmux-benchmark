@@ -71,18 +71,17 @@
             "generation_id": "2539CCMWYKDR00737583",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E. Weak Quality Addition",
+                "reasoning": "The extracted answer is option E, while the correct answer is option D. Since E does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 7815.897216796875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 32.88170159757093
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCCSPQVA00737656"
         },
         "668828540a642802bdfeadfc": {
             "model": "z-ai/glm-4.5:z-ai",

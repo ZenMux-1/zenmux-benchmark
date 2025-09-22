@@ -406,8 +406,8 @@ Additional Error Info: {additional_info}
             self.logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
             model_logger.warning(f"⚠️ Evaluation incomplete: {successful_predictions}/{len(questions)} successful predictions ({failed_predictions} failed)")
             if failed_predictions > 0:
-                self.logger.info(f"💡 Use --fix-evaluation to retry failed questions")
-                model_logger.info(f"💡 Use --fix-evaluation to retry failed questions")
+                self.logger.info(f"💡 Use --fix to retry failed questions")
+                model_logger.info(f"💡 Use --fix to retry failed questions")
 
 
         self.logger.info(f"✅ Completed evaluation for {model_identifier}")

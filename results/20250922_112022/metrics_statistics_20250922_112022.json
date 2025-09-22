@@ -1,43 +1,25 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-22T11:22:49.911679",
+        "timestamp": "2025-09-22T11:34:46.694781",
         "results_directory": "results/20250922_112022",
         "metrics_summary_file": "metrics_summary_20250922_112022.json"
     },
     "metrics_summary_statistics": {
         "total_models": 47,
-        "models_with_valid_metrics": 38,
-        "models_excluded_from_metrics": 9,
-        "models_with_errors": 7
+        "models_with_valid_metrics": 44,
+        "models_excluded_from_metrics": 3,
+        "models_with_errors": 0
     },
     "failure_lists": {
         "excluded_models": [
-            "openai/o4-mini:openai",
-            "openai/o4-mini:azure",
             "openai/gpt-5:openai",
-            "openai/gpt-5:azure",
-            "openai/gpt-4o:openai",
-            "deepseek/deepseek-r1-0528:volcengine",
-            "x-ai/grok-4:x-ai",
             "z-ai/glm-4.5-air:z-ai",
             "z-ai/glm-4.5:z-ai"
         ],
-        "models_with_errors": [
-            "openai/o4-mini:azure",
-            "openai/gpt-5:openai",
-            "openai/gpt-5:azure",
-            "deepseek/deepseek-r1-0528:volcengine",
-            "x-ai/grok-4:x-ai",
-            "z-ai/glm-4.5-air:z-ai",
-            "z-ai/glm-4.5:z-ai"
-        ]
+        "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_judgments": 4,
-        "general_error": 7,
-        "incomplete_evaluations": 7
+        "incomplete_evaluations": 3
     },
-    "error_summary": {
-        "evaluation_failure": 7
-    }
+    "error_summary": {}
 }

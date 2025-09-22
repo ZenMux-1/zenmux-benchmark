@@ -114,18 +114,17 @@
             "generation_id": "2539CCRSFKAE00736438",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "atfa",
+                "reasoning": "The extracted final answer \"atfa\" does not match the correct answer \"yeyo\"; therefore, it is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4337.8369140625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 43.33957309241785
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCEPYJEZ00738597"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/gpt-4o:openai",
@@ -153,18 +152,17 @@
             "generation_id": "2539CCQBWDWS00737567",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z/2",
+                "reasoning": "The correct answer is Z+Z+Z+Z+Z (i.e., Z^5), while the extracted answer is Z/2. These are not equivalent groups; Z/2 is finite cyclic of order 2, whereas Z^5 is a free abelian group of rank 5. Therefore, the response does not match the correct answer.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 90
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4858.89697265625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 35.60478869454702
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCDVAVED00739731"
         }
     }
 }
