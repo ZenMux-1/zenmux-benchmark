@@ -215,11 +215,21 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
             except:
                 pass
 
+            # Try to extract generation_id from the error context (if available)
+            generation_id = None
+            try:
+                if hasattr(e, 'response') and hasattr(e.response, 'json'):
+                    response_data = e.response.json()
+                    generation_id = response_data.get('id')
+            except:
+                pass
+
             # Create detailed error message with all available information
             detailed_error = f"""
 Exception Type: {error_type}
 Error Message: {error_msg if error_msg else 'No error message provided'}
 Judge Model: {self.hle_config.judge_model}
+Generation ID: {generation_id if generation_id else 'Not Available'}
 Question: {question[:100] if question else 'Unknown'}...
 Correct Answer: {correct_answer[:50] if correct_answer else 'Unknown'}...
 Response being judged: {response[:100] if response else 'Unknown'}...

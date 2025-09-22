@@ -1,0 +1,84 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T11:22:20.937927",
+        "model_identifier": "deepseek/deepseek-r1-0528:volcengine",
+        "endpoint": {
+            "provider_slug": "volcengine",
+            "provider": "Volcengine",
+            "context_length": 128000,
+            "max_completion_tokens": 32000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 2100.61,
+            "avg_generation_time_ms": 38553.99,
+            "avg_throughput_tokens_per_second": 17.9,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "deepseek/deepseek-r1-0528:volcengine",
+            "response": "Explanation: Critical-level views in population ethics violate the Non-Elitism condition of Arrhenius's sixth impossibility theorem. Non-Elitism requires that for any individual with high welfare, there exists a sufficient number of individuals with lower positive welfare such that adding the larger group is better than adding the single high-welfare individual. Critical-level views, however, prioritize individuals above a fixed \"critical level\" of welfare. This allows scenarios where adding one person *above* the critical level is deemed better than adding a vast number of people *below* the critical level (even if their welfare is still positive), directly contradicting Non-Elitism. The other conditions (Egalitarian Dominance, General Non-Extreme Priority, Weak Non-Sadism, Weak Quality Addition) are either compatible with critical-level views or not directly violated by them.\n\nAnswer: C  \nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 690,
+                "prompt_tokens": 107,
+                "total_tokens": 797,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 506,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2100.61083984375,
+                "generation_time_ms": 38553.9892578125,
+                "throughput_tokens_per_second": 17.89698065707117
+            },
+            "generation_id": "2539CCCPHKHE00737593"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "deepseek/deepseek-r1-0528:volcengine",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "deepseek/deepseek-r1-0528:volcengine",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

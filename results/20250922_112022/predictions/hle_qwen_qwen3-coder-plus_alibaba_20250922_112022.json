@@ -1,0 +1,95 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T11:21:13.678708",
+        "model_identifier": "qwen/qwen3-coder-plus:alibaba",
+        "endpoint": {
+            "provider_slug": "alibaba",
+            "provider": "Alibaba Cloud",
+            "context_length": 1000000,
+            "max_completion_tokens": 65536,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 4150.28,
+            "avg_generation_time_ms": 36088.36,
+            "avg_throughput_tokens_per_second": 17.73,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "qwen/qwen3-coder-plus:alibaba",
+            "response": "I need to analyze Arrhenius's sixth impossibility theorem and identify which condition critical-level views violate.\n\nFirst, let me recall what Arrhenius's sixth impossibility theorem states. This theorem shows that there's no population axiology that can satisfy all of the following five conditions simultaneously:\n1. Egalitarian Dominance\n2. General Non-Extreme Priority\n3. Non-Elitism\n4. Weak Non-Sadism\n5. Weak Quality Addition\n\nCritical-level views are population ethical theories that evaluate populations based on comparing welfare levels to a critical level (often zero or some positive level). People with welfare above the critical level count as adding value to the population, while those below may count as detracting from it.\n\nLet me examine each condition:\n\nA. Egalitarian Dominance: This requires that if population A is more equal than population B, and both have the same total welfare, then A is better than B. Critical-level views can typically accommodate this.\n\nB. General Non-Extreme Priority: This requires that tiny benefits to those with very bad lives can outweigh large benefits to those with good lives, but not extremely large benefits. Critical-level views can often satisfy this.\n\nC. Non-Elitism: This requires that there's some number of people with lives barely worth living whose existence can outweigh the existence of one person with a very good life. Critical-level views typically violate this because they allow that a sufficient number of people with welfare above the critical level can outweigh fewer people with extremely high welfare.\n\nD. Weak Non-Sadism: This requires that adding lives worth living to a population makes it better. Critical-level views generally satisfy this.\n\nE. Weak Quality Addition: This requires that there's some number of lives at a certain positive welfare level that can outweigh a smaller number of lives at a higher welfare level. Critical-level views can satisfy this under certain conditions.\n\nThe key issue with critical-level views is that they allow aggregation to override quality considerations in a way that violates Non-Elitism. They permit that many people with modest positive welfare can outweigh fewer people with extremely high welfare, which contradicts the Non-Elitism condition.\n\nAnswer: C. Non-Elitism\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 456,
+                "prompt_tokens": 117,
+                "total_tokens": 573,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4220.625,
+                "generation_time_ms": 36011.539306640625,
+                "throughput_tokens_per_second": 12.662607841256936
+            },
+            "generation_id": "2539CCIBIBDF00739687"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "qwen/qwen3-coder-plus:alibaba",
+            "response": "I'll work through each part of this step-by-step.\n\n**Part 1: Logical depth reciprocal concept**\nLogical depth (as discussed by Bennett) has a reciprocal concept of \"logical breadth\" or more precisely \"computational breadth\" - but the key inverse concept associated with Charles Bennett is \"logical **randomness**\" or \"algorithmic **randomness**\". However, the most direct inverse of logical depth in Bennett's work is **randomness**.\nThird letter of \"randomness\" = 'n'\nSo c1 = 'n'\n\n**Part 2: Gell-Mann's quote**\nThe quote refers to operations that \"didn't commute\" - in quantum mechanics, this relates to operators not commuting. The missing word is likely \"**operators**\" or \"**actions**\". Given the context of having two choices (try MIT or commit suicide) that don't commute, I believe the word is \"**options**\".\nThird letter of \"options\" = 't'\nSo c2 = 't'\n\n**Part 3: GELU's last author**\nGELU (Gaussian Error Linear Unit) was notably developed by researchers including **Hendrycks**. The last author's last name ending letter would be 's' from Hendrycks.\nSo c3 = 's'\n\n**Part 4: Rot13 of c3**\nRot13 of 's' = 'f'\nSo c4 = 'f'\n\n**Part 5: Mars mass comparison**\nMars mass: ~6.4 \u00d7 10\u00b2\u00b3 kg\nEarth mass: ~6.0 \u00d7 10\u00b2\u2074 kg  \nMoon mass: ~7.3 \u00d7 10\u00b2\u00b2 kg\n\nMars is much closer in mass to the Moon than to Earth.\nThe answer is \"Moon\"\nSecond letter of \"Moon\" = 'o'\nSo c5 = 'o'\n\n**Final concatenation: c1+c2+c4+c5**\nn + t + f + o = \"ntfo\"\n\nExplanation: I determined the inverse of logical depth is randomness (c1='n'), identified the missing word in Gell-Mann's quote as \"options\" (c2='t'), found the GELU last author's name ends in 's' (c3='s'), applied ROT13 to get 'f' (c4='f'), and determined Mars is closer in mass to the Moon with second letter 'o' (c5='o').\nAnswer: ntfo\nConfidence: 75%",
+            "usage": {
+                "completion_tokens": 521,
+                "prompt_tokens": 249,
+                "total_tokens": 770,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4011.7998046875,
+                "generation_time_ms": 36188.4619140625,
+                "throughput_tokens_per_second": 14.396853926459478
+            },
+            "generation_id": "2539CCRDBWYX00737582"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "qwen/qwen3-coder-plus:alibaba",
+            "response": "I need to compute the reduced 12th dimensional Spin bordism of the classifying space BG\u2082.\n\nLet me break this down step by step.\n\nFirst, let me understand what we're looking for:\n- We want \u03a9\u2081\u2082^Spin(BG\u2082) modulo the subgroup generated by manifolds with trivial G\u2082-bundles\n- This is equivalent to the kernel of the map \u03a9\u2081\u2082^Spin(BG\u2082) \u2192 \u03a9\u2081\u2082^Spin(pt)\n\nThe key insight is to use the Atiyah-Hirzebruch spectral sequence for Spin bordism:\nE\u2082^{p,q} = H^p(BG\u2082; \u03a9_q^Spin(pt)) \u21d2 \u03a9_{p+q}^Spin(BG\u2082)\n\nFor the reduced theory, we're interested in the kernel of the augmentation map to \u03a9\u2081\u2082^Spin(pt) \u2245 \u2124/2.\n\nThe relevant homotopy and cohomology groups of BG\u2082:\n- \u03c0\u2081(G\u2082) = 0, \u03c0\u2082(G\u2082) = \u2124, \u03c0\u2083(G\u2082) = \u2124\n- H\u00b2(BG\u2082; \u2124) = \u2124, generated by the second Chern class c\u2082\n- H\u00b3(BG\u2082; \u2124) = \u2124, generated by the third Chern class c\u2083\n- H\u2074(BG\u2082; \u2124) = \u2124 \u2295 \u2124, with generators related to characteristic classes\n\nFor the Atiyah-Hirzebruch spectral sequence, we need the low-dimensional Spin bordism groups:\n- \u03a9\u2080^Spin(pt) = \u2124\n- \u03a9\u2081^Spin(pt) = 0\n- \u03a9\u2082^Spin(pt) = 0\n- \u03a9\u2083^Spin(pt) = 0\n- \u03a9\u2084^Spin(pt) = \u2124\n- \u03a9\u2085^Spin(pt) = \u2124/2\n- \u03a9\u2086^Spin(pt) = 0\n- \u03a9\u2087^Spin(pt) = 0\n- \u03a9\u2088^Spin(pt) = \u2124 \u2295 \u2124\n- \u03a9\u2089^Spin(pt) = \u2124/2 \u2295 \u2124/2\n- \u03a9\u2081\u2080^Spin(pt) = \u2124/2\n- \u03a9\u2081\u2081^Spin(pt) = \u2124/2\n- \u03a9\u2081\u2082^Spin(pt) = \u2124\n\nThe E\u2082 page for the spectral sequence converging to \u03a9\u2081\u2082^Spin(BG\u2082) has:\n- E\u2082^{0,12} = H\u2070(BG\u2082; \u03a9\u2081\u2082^Spin) = \u2124\n- E\u2082^{2,10} = H\u00b2(BG\u2082; \u03a9\u2081\u2080^Spin) = H\u00b2(BG\u2082; \u2124/2) = \u2124/2\n- E\u2082^{3,9} = H\u00b3(BG\u2082; \u03a9\u2089^Spin) = H\u00b3(BG\u2082; (\u2124/2)\u00b2) = (\u2124/2)\u00b2\n- E\u2082^{4,8} = H\u2074(BG\u2082; \u03a9\u2088^Spin) = H\u2074(BG\u2082; \u2124\u00b2) = (\u2124 \u2295 \u2124)\u00b2\n- And so on...\n\nHowever, for the reduced bordism, we focus on elements that map to zero in \u03a9\u2081\u2082^Spin(pt) = \u2124.\n\nThe key observation is that for simply connected Lie groups like G\u2082, the reduced Spin bordism in dimension 12 is related to the kernel of the map induced by the trivial bundle.\n\nBy deep results in bordism theory and computations for exceptional Lie groups, particularly work of Hsieh and others on Spin bordism of classifying spaces:\n\nThe reduced 12th dimensional Spin bordism of BG\u2082 is \u2124/2.\n\nThis can be understood through the fact that there's a unique non-trivial 12-dimensional Spin manifold with G\u2082-structure that becomes trivial when the bundle is forgotten, and this generates a \u2124/2 summand in the reduced theory.\n\nExplanation: The computation uses the Atiyah-Hirzebruch spectral sequence and known results about Spin bordism of classifying spaces of exceptional Lie groups. The reduced theory captures the kernel of the map to ordinary Spin bordism, which for G\u2082 in dimension 12 gives \u2124/2.\nAnswer: \u2124/2\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 942,
+                "prompt_tokens": 111,
+                "total_tokens": 1053,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4218.417724609375,
+                "generation_time_ms": 36065.06494140625,
+                "throughput_tokens_per_second": 26.119459413990718
+            },
+            "generation_id": "2539CCQVKHUI00739685"
+        }
+    }
+}

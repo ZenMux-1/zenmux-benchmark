@@ -203,6 +203,7 @@ Exception Type: {error_type}
 Error Message: {error_msg if error_msg else 'No error message provided'}
 Model: {model_name}
 Question ID: {question_id}
+Generation ID: {generation_id if generation_id else 'Not Available'}
 Endpoint Provider: {getattr(endpoint, 'provider', 'Unknown')}
 Endpoint Provider Slug: {getattr(endpoint, 'provider_slug', 'Unknown')}
 Additional Error Info: {additional_info}

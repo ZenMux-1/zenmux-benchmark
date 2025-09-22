@@ -1,0 +1,110 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T11:21:35.106886",
+        "model_identifier": "openai/gpt-5-nano:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 7789.75,
+            "avg_generation_time_ms": 44000.2,
+            "avg_throughput_tokens_per_second": 100.15,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: Critical-level views assign social weight only to individuals above a fixed critical level, effectively privileging those above the threshold and introducing elitism. This directly violates the Non-Elitism condition in Arrhenius\u2019s sixth impossibility theorem.\n\nAnswer: C\n\nConfidence: 0.41",
+            "usage": {
+                "completion_tokens": 1600,
+                "prompt_tokens": 109,
+                "total_tokens": 1709,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1536,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9720.961181640625,
+                "generation_time_ms": 30812.27880859375,
+                "throughput_tokens_per_second": 51.92735045464243
+            },
+            "generation_id": "2539CCAIKPJY00737566"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: \n- c1: The reciprocal of Bennett\u2019s \u201clogical depth\u201d is often described as \u201cbreadth.\u201d The third letter of breadth is e.\n- c2: The quoted blank is likely \"options\" (the two options didn't commute). The third character of \"options\" is t.\n- c3: The GELU (Gell-Mann) is the last author; last name ends with n.\n- c4: ROT13 of n is a.\n- c5: Mars is closer in mass to Earth than to the Moon; the answer is \"Earth,\" whose second letter is a.\n\nOutput the concatenation of c1, c2, c4, c5: e + t + a + a = etaa.\n\nAnswer: etaa\nConfidence: 0.41",
+            "usage": {
+                "completion_tokens": 5609,
+                "prompt_tokens": 239,
+                "total_tokens": 5848,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 5440,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 3816.735107421875,
+                "generation_time_ms": 47224.866943359375,
+                "throughput_tokens_per_second": 118.77217159187194
+            },
+            "generation_id": "2539CCNWBICE00736435"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:azure",
+            "response": "Explanation: To compute the reduced Spin bordism group in degree 12 of the classifying space BG2, one should use the Atiyah\u2013Hirzebruch spectral sequence (AHSS) for MSpin, with E2-page\nE2_{p,q} = H_p(BG2; MSpin_q(pt)),\nconverging to MSpin_{p+q}(BG2). The reduced group \\widetilde{MSpin}_{12}(BG2) is the kernel of the projection MSpin_{12}(BG2) \u2192 MSpin_{12}(pt) (i.e., we mod out by the part coming from maps to a point).\n\nKey structural inputs:\n- BG2 is 3-connected (since G2 is simply connected and \u03c01(BG2)=0, \u03c02(BG2)=0, \u03c03(BG2)=0). Hence H_p(BG2; Z) can be nonzero only for p \u2265 4 (and in particular p \u2208 {4, 8, 12} can contribute to total degree 12).\n- The low-dimensional spin bordism groups MSpin_q(pt) are known, so the relevant p+q = 12 contributions on the E2-page are among:\n  \u2022 (p,q) = (4,8),\n  \u2022 (p,q) = (8,4),\n  \u2022 (p,q) = (12,0).\n- The groups H_p(BG2; Z) in degrees 4, 8, 12 contain torsion (BG2 has 2-torsion in these degrees), and the corresponding E2 groups are torsion. The AHSS differentials in these degrees, together with the map to the pt-pieces MSpin_q(pt), force all potential contributions to die or cancel when passing to the associated graded of MSpin_{12}(BG2).\n\nBecause of the torsion structure of H_p(BG2; Z) in these degrees and the way the differential maps act in the 12th-degree row, all potential contributions to the reduced group are annihilated in the AHSS, so the kernel of MSpin_{12}(BG2) \u2192 MSpin_{12}(pt) is trivial.\n\nAnswer: 0\n\nConfidence: 28%",
+            "usage": {
+                "completion_tokens": 7001,
+                "prompt_tokens": 102,
+                "total_tokens": 7103,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 6528,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9831.539306640625,
+                "generation_time_ms": 53963.458984375,
+                "throughput_tokens_per_second": 129.73593857330613
+            },
+            "generation_id": "2539CCVEQNKE00734465"
+        }
+    }
+}

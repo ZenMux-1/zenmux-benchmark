@@ -1,0 +1,84 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T11:22:37.191357",
+        "model_identifier": "openai/o4-mini:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 200000,
+            "max_completion_tokens": 100000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 51065.56,
+            "avg_generation_time_ms": 12865.38,
+            "avg_throughput_tokens_per_second": 209.01,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/o4-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": "Connection error."
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/o4-mini:azure",
+            "response": "Explanation: \n1. The inverse of Bennett\u2019s logical \u201cdepth\u201d is called \u201cshallowness\u201d (or \u201cshallow\u201d), whose third letter is A, so c1 = a.  \n2. Gell-Mann quipped \u201cthe two orders didn\u2019t commute,\u201d and \u201corders\u201d\u2019s third letter is D, so c2 = d.  \n3. The GELU paper is by Hendrycks and Gimpel; Gimpel ends with L, which in rot13 becomes Y, so c4 = y.  \n4. Mars\u2019s mass is much closer to the Moon\u2019s than the Earth\u2019s, and \u201cmoon\u201d\u2019s second letter is O, so c5 = o.  \nConcatenating c1,c2,c4,c5 gives \u201cadyo.\u201d  \n\nAnswer: adyo  \nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 2689,
+                "prompt_tokens": 239,
+                "total_tokens": 2928,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2496,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 51065.563232421875,
+                "generation_time_ms": 12865.3759765625,
+                "throughput_tokens_per_second": 209.01060372418854
+            },
+            "generation_id": "2539CCTNVZQP00738540"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/o4-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": "Connection error."
+        }
+    }
+}

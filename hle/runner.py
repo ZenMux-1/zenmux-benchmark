@@ -526,13 +526,73 @@ class HLERunner:
             eval_stats_file = generate_evaluation_statistics(self.config.run_dir)
             self.logger.info(f"📈 Evaluation statistics saved to: {eval_stats_file}")
 
+            # Log evaluation failure models
+            try:
+                with open(eval_stats_file, 'r') as f:
+                    eval_stats = json.load(f)
+                failure_lists = eval_stats.get('failure_lists', {})
+                incomplete_models = failure_lists.get('incomplete_evaluation_models', [])
+                no_response_models = failure_lists.get('models_without_responses', [])
+
+                if incomplete_models:
+                    self.logger.info("🚨 Evaluation failure models:")
+                    for model in incomplete_models:
+                        self.logger.info(f"     - {model}")
+
+                if no_response_models:
+                    self.logger.info("❌ Models without responses:")
+                    for model in no_response_models:
+                        self.logger.info(f"     - {model}")
+            except Exception as e:
+                self.logger.debug(f"Could not read evaluation failure lists: {e}")
+
             # Generate judge statistics
             judge_stats_file = generate_judge_statistics(self.config.run_dir)
             self.logger.info(f"⚖️ Judge statistics saved to: {judge_stats_file}")
 
+            # Log judge failure models
+            try:
+                with open(judge_stats_file, 'r') as f:
+                    judge_stats = json.load(f)
+                failure_lists = judge_stats.get('failure_lists', {})
+                incomplete_judging = failure_lists.get('incomplete_judging_models', [])
+                no_judgments = failure_lists.get('models_without_judgments', [])
+
+                if incomplete_judging:
+                    self.logger.info("⚖️ Judge failure models:")
+                    for model in incomplete_judging:
+                        self.logger.info(f"     - {model}")
+
+                if no_judgments:
+                    self.logger.info("❌ Models without judgments:")
+                    for model in no_judgments:
+                        self.logger.info(f"     - {model}")
+            except Exception as e:
+                self.logger.debug(f"Could not read judge failure lists: {e}")
+
             # Generate metrics statistics
             metrics_stats_file = generate_metrics_statistics(self.config.run_dir)
             self.logger.info(f"📋 Metrics statistics saved to: {metrics_stats_file}")
+
+            # Log metrics exclusion models
+            try:
+                with open(metrics_stats_file, 'r') as f:
+                    metrics_stats = json.load(f)
+                failure_lists = metrics_stats.get('failure_lists', {})
+                excluded_models = failure_lists.get('excluded_models', [])
+                error_models = failure_lists.get('models_with_errors', [])
+
+                if excluded_models:
+                    self.logger.info("📊 Models excluded from metrics:")
+                    for model in excluded_models:
+                        self.logger.info(f"     - {model}")
+
+                if error_models:
+                    self.logger.info("❌ Models with errors:")
+                    for model in error_models:
+                        self.logger.info(f"     - {model}")
+            except Exception as e:
+                self.logger.debug(f"Could not read metrics failure lists: {e}")
 
         except Exception as e:
             self.logger.warning(f"⚠️ Failed to generate statistics files: {e}")

