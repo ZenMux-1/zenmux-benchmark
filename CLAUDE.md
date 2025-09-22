@@ -169,13 +169,27 @@ All test scripts are located in `tests/` directory:
 
 ## GitHub Actions CI/CD
 
-The project includes GitHub Actions workflow for automated benchmarking:
+The project includes two GitHub Actions workflows for automated benchmarking:
 
-- **Workflow**: `.github/workflows/benchmark.yml`
-- **Triggers**: Manual dispatch with configurable parameters
-- **Features**: Model filtering, text-only mode, sample limits, artifact uploads
+### Main Benchmark Workflow (`.github/workflows/benchmark.yml`)
+- **Triggers**: Manual dispatch with comprehensive parameter options
+- **Features**:
+  - All evaluation modes (all/single/filter)
+  - Model exclusion support (exclude-model, exclude-provider)
+  - Text-only mode, sample limits, judging control
+  - Streaming output and concurrency settings
 - **Timeout**: 8 hours maximum runtime
-- **Outputs**: Benchmark results and summary reports as artifacts
+- **Outputs**: Benchmark results, statistics files, and detailed summary reports
+
+### Fix Benchmark Workflow (`.github/workflows/fix-benchmark.yml`)
+- **Purpose**: Fix evaluation and judge failures from previous runs
+- **Triggers**: Manual dispatch with timestamp directory input
+- **Features**:
+  - Downloads previous results from artifacts
+  - Fixes failed evaluations and judgments
+  - Generates comprehensive fix summary reports
+- **Timeout**: 8 hours maximum runtime
+- **Outputs**: Fixed results and detailed fix summary
 
 ## Important Instruction Reminders
 Do what has been asked; nothing more, nothing less.

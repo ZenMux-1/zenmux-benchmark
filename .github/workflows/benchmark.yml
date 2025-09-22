@@ -4,8 +4,33 @@ name: ZenMux HLE Benchmark
 on:
   workflow_dispatch:
     inputs:
+      mode:
+        description: 'Evaluation mode'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - single
+          - filter
+      model_slug:
+        description: 'Model slug for single mode (e.g., "openai/gpt-4o-mini")'
+        required: false
+        default: ''
+      provider_slug:
+        description: 'Provider slug for single mode (e.g., "openai")'
+        required: false
+        default: ''
       model_filter:
-        description: 'Filter models by substring (e.g., "gpt", "claude")'
+        description: 'Filter models by substring for filter mode (e.g., "gpt", "claude", "deepseek")'
+        required: false
+        default: ''
+      exclude_model:
+        description: 'Exclude specific models (space-separated, e.g., "anthropic openai/gpt-4o")'
+        required: false
+        default: ''
+      exclude_provider:
+        description: 'Exclude specific providers (space-separated, e.g., "theta openai")'
         required: false
         default: ''
       text_only:
@@ -15,7 +40,19 @@ on:
       max_samples:
         description: 'Maximum number of samples to evaluate'
         required: false
-        default: '50'
+        default: '10'
+      no_judge:
+        description: 'Skip automatic judging'
+        type: boolean
+        default: false
+      num_workers:
+        description: 'Number of concurrent workers'
+        required: false
+        default: '3'
+      print_streaming:
+        description: 'Print streaming responses to console'
+        type: boolean
+        default: false
 
 jobs:
   benchmark:
@@ -47,27 +84,70 @@ jobs:
       env:
         ZENMUX_API_KEY: ${{ secrets.ZENMUX_API_KEY }}
       run: |
-        if [ -n "${{ github.event.inputs.model_filter }}" ]; then
-          MODE="filter"
+        # Build command arguments
+        MODE="${{ github.event.inputs.mode }}"
+
+        # Single mode arguments
+        if [ "$MODE" = "single" ]; then
+          if [ -z "${{ github.event.inputs.model_slug }}" ] || [ -z "${{ github.event.inputs.provider_slug }}" ]; then
+            echo "Error: model_slug and provider_slug are required for single mode"
+            exit 1
+          fi
+          MODEL_ARGS="--model-slug ${{ github.event.inputs.model_slug }} --provider-slug ${{ github.event.inputs.provider_slug }}"
+        else
+          MODEL_ARGS=""
+        fi
+
+        # Filter mode arguments
+        if [ "$MODE" = "filter" ]; then
+          if [ -z "${{ github.event.inputs.model_filter }}" ]; then
+            echo "Error: model_filter is required for filter mode"
+            exit 1
+          fi
           FILTER_ARG="--model-filter ${{ github.event.inputs.model_filter }}"
         else
-          MODE="all"
           FILTER_ARG=""
         fi
 
+        # Exclusion arguments
+        EXCLUDE_ARGS=""
+        if [ -n "${{ github.event.inputs.exclude_model }}" ]; then
+          EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude-model ${{ github.event.inputs.exclude_model }}"
+        fi
+        if [ -n "${{ github.event.inputs.exclude_provider }}" ]; then
+          EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude-provider ${{ github.event.inputs.exclude_provider }}"
+        fi
+
+        # Optional arguments
         TEXT_ONLY_ARG=""
         if [ "${{ github.event.inputs.text_only }}" = "true" ]; then
           TEXT_ONLY_ARG="--text-only"
         fi
 
-        MAX_SAMPLES="${{ github.event.inputs.max_samples || '50' }}"
+        NO_JUDGE_ARG=""
+        if [ "${{ github.event.inputs.no_judge }}" = "true" ]; then
+          NO_JUDGE_ARG="--no-judge"
+        fi
 
+        STREAMING_ARG=""
+        if [ "${{ github.event.inputs.print_streaming }}" = "true" ]; then
+          STREAMING_ARG="--print-streaming"
+        fi
+
+        MAX_SAMPLES="${{ github.event.inputs.max_samples || '10' }}"
+        NUM_WORKERS="${{ github.event.inputs.num_workers || '3' }}"
+
+        # Run benchmark with all arguments
         uv run python benchmark.py \
           --mode $MODE \
+          $MODEL_ARGS \
           $FILTER_ARG \
+          $EXCLUDE_ARGS \
           $TEXT_ONLY_ARG \
+          $NO_JUDGE_ARG \
+          $STREAMING_ARG \
           --max-samples $MAX_SAMPLES \
-          --num-workers 5 \
+          --num-workers $NUM_WORKERS \
           --output-dir results
 
     - name: Generate summary report
@@ -75,19 +155,44 @@ jobs:
         echo "# ZenMux HLE Benchmark Results" > artifacts/summary.md
         echo "**Date:** $(date)" >> artifacts/summary.md
         echo "**Commit:** $GITHUB_SHA" >> artifacts/summary.md
+        echo "**Mode:** ${{ github.event.inputs.mode }}" >> artifacts/summary.md
+        echo "**Text Only:** ${{ github.event.inputs.text_only }}" >> artifacts/summary.md
+        echo "**Max Samples:** ${{ github.event.inputs.max_samples }}" >> artifacts/summary.md
+        echo "**Workers:** ${{ github.event.inputs.num_workers }}" >> artifacts/summary.md
         echo "" >> artifacts/summary.md
 
-        echo "## Files Generated" >> artifacts/summary.md
-        echo "### Predictions" >> artifacts/summary.md
-        ls -la results/predictions/ >> artifacts/summary.md || echo "No prediction files found" >> artifacts/summary.md
-        echo "" >> artifacts/summary.md
+        # Find the timestamped results directory
+        RESULTS_DIR=$(find results -name "2*" -type d | head -1)
+        if [ -n "$RESULTS_DIR" ]; then
+          echo "## Results Directory: $RESULTS_DIR" >> artifacts/summary.md
+          echo "" >> artifacts/summary.md
 
-        echo "### Judged Results" >> artifacts/summary.md
-        ls -la results/judged/ >> artifacts/summary.md || echo "No judged files found" >> artifacts/summary.md
-        echo "" >> artifacts/summary.md
+          echo "### Statistics Files" >> artifacts/summary.md
+          ls -la $RESULTS_DIR/*.json 2>/dev/null | grep -E "(evaluation|judge|metrics)_statistics" >> artifacts/summary.md || echo "No statistics files found" >> artifacts/summary.md
+          echo "" >> artifacts/summary.md
 
-        echo "## Total Size" >> artifacts/summary.md
-        du -sh results/ >> artifacts/summary.md || echo "No results directory" >> artifacts/summary.md
+          echo "### Predictions" >> artifacts/summary.md
+          ls -la $RESULTS_DIR/predictions/ 2>/dev/null >> artifacts/summary.md || echo "No prediction files found" >> artifacts/summary.md
+          echo "" >> artifacts/summary.md
+
+          echo "### Judged Results" >> artifacts/summary.md
+          ls -la $RESULTS_DIR/judged/ 2>/dev/null >> artifacts/summary.md || echo "No judged files found" >> artifacts/summary.md
+          echo "" >> artifacts/summary.md
+
+          echo "### Logs" >> artifacts/summary.md
+          LOG_DIR=$(find logs -name "2*" -type d | head -1)
+          if [ -n "$LOG_DIR" ]; then
+            ls -la $LOG_DIR/ 2>/dev/null >> artifacts/summary.md || echo "No log files found" >> artifacts/summary.md
+          else
+            echo "No log directory found" >> artifacts/summary.md
+          fi
+          echo "" >> artifacts/summary.md
+
+          echo "## Total Size" >> artifacts/summary.md
+          du -sh $RESULTS_DIR/ >> artifacts/summary.md || echo "Could not calculate directory size" >> artifacts/summary.md
+        else
+          echo "No timestamped results directory found" >> artifacts/summary.md
+        fi
 
     - name: Upload results
       uses: actions/upload-artifact@v4

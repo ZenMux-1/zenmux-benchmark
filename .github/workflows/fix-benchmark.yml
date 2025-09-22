@@ -1,0 +1,167 @@
+# ZenMux HLE Benchmark Fix GitHub Actions Workflow
+name: ZenMux HLE Benchmark Fix
+
+on:
+  workflow_dispatch:
+    inputs:
+      timestamp_dir:
+        description: 'Timestamp directory to fix (e.g., "20250922_093840")'
+        required: true
+        type: string
+      num_workers:
+        description: 'Number of concurrent workers'
+        required: false
+        default: '3'
+      print_streaming:
+        description: 'Print streaming responses to console'
+        type: boolean
+        default: false
+
+jobs:
+  fix-benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 480  # 8 hours max
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+
+    - name: Install dependencies
+      run: uv sync
+
+    - name: Download previous results
+      uses: actions/download-artifact@v4
+      with:
+        pattern: 'benchmark-results-*'
+        path: downloaded-artifacts
+        merge-multiple: true
+      continue-on-error: true
+
+    - name: Setup results directory
+      run: |
+        # Create results directory structure
+        mkdir -p results
+        mkdir -p artifacts
+
+        # Try to restore from artifacts if available
+        if [ -d "downloaded-artifacts/results" ]; then
+          cp -r downloaded-artifacts/results/* results/ || true
+        fi
+
+        # Validate timestamp directory exists
+        TIMESTAMP_DIR="${{ github.event.inputs.timestamp_dir }}"
+        if [ ! -d "results/$TIMESTAMP_DIR" ]; then
+          echo "Error: Timestamp directory results/$TIMESTAMP_DIR not found"
+          echo "Available directories:"
+          ls -la results/ || echo "No results directory found"
+          exit 1
+        fi
+
+    - name: Run fix benchmark
+      env:
+        ZENMUX_API_KEY: ${{ secrets.ZENMUX_API_KEY }}
+      run: |
+        # Optional arguments
+        STREAMING_ARG=""
+        if [ "${{ github.event.inputs.print_streaming }}" = "true" ]; then
+          STREAMING_ARG="--print-streaming"
+        fi
+
+        NUM_WORKERS="${{ github.event.inputs.num_workers || '3' }}"
+        TIMESTAMP_DIR="${{ github.event.inputs.timestamp_dir }}"
+
+        # Run fix command
+        uv run python benchmark.py \
+          --fix "results/$TIMESTAMP_DIR" \
+          $STREAMING_ARG \
+          --num-workers $NUM_WORKERS
+
+    - name: Generate fix summary report
+      run: |
+        TIMESTAMP_DIR="${{ github.event.inputs.timestamp_dir }}"
+
+        echo "# ZenMux HLE Benchmark Fix Results" > artifacts/fix-summary.md
+        echo "**Date:** $(date)" >> artifacts/fix-summary.md
+        echo "**Commit:** $GITHUB_SHA" >> artifacts/fix-summary.md
+        echo "**Original Timestamp:** $TIMESTAMP_DIR" >> artifacts/fix-summary.md
+        echo "**Workers:** ${{ github.event.inputs.num_workers }}" >> artifacts/fix-summary.md
+        echo "" >> artifacts/fix-summary.md
+
+        RESULTS_DIR="results/$TIMESTAMP_DIR"
+        if [ -d "$RESULTS_DIR" ]; then
+          echo "## Fixed Results Directory: $RESULTS_DIR" >> artifacts/fix-summary.md
+          echo "" >> artifacts/fix-summary.md
+
+          echo "### Updated Statistics Files" >> artifacts/fix-summary.md
+          ls -la $RESULTS_DIR/*.json 2>/dev/null | grep -E "(evaluation|judge|metrics)_statistics" >> artifacts/fix-summary.md || echo "No statistics files found" >> artifacts/fix-summary.md
+          echo "" >> artifacts/fix-summary.md
+
+          echo "### Updated Predictions" >> artifacts/fix-summary.md
+          echo "Count: $(ls $RESULTS_DIR/predictions/ 2>/dev/null | wc -l)" >> artifacts/fix-summary.md
+          ls -la $RESULTS_DIR/predictions/ 2>/dev/null | head -10 >> artifacts/fix-summary.md || echo "No prediction files found" >> artifacts/fix-summary.md
+          echo "" >> artifacts/fix-summary.md
+
+          echo "### Updated Judged Results" >> artifacts/fix-summary.md
+          echo "Count: $(ls $RESULTS_DIR/judged/ 2>/dev/null | wc -l)" >> artifacts/fix-summary.md
+          ls -la $RESULTS_DIR/judged/ 2>/dev/null | head -10 >> artifacts/fix-summary.md || echo "No judged files found" >> artifacts/fix-summary.md
+          echo "" >> artifacts/fix-summary.md
+
+          echo "### Fix Logs" >> artifacts/fix-summary.md
+          LOG_DIR=$(find logs -name "2*" -type d | tail -1)
+          if [ -n "$LOG_DIR" ]; then
+            echo "Latest log directory: $LOG_DIR" >> artifacts/fix-summary.md
+            ls -la $LOG_DIR/ 2>/dev/null >> artifacts/fix-summary.md || echo "No log files found" >> artifacts/fix-summary.md
+            echo "" >> artifacts/fix-summary.md
+
+            # Show recent errors if any
+            if [ -f "$LOG_DIR/errors.log" ]; then
+              echo "### Recent Errors (last 20 lines)" >> artifacts/fix-summary.md
+              tail -20 "$LOG_DIR/errors.log" >> artifacts/fix-summary.md || echo "Could not read errors.log" >> artifacts/fix-summary.md
+            fi
+          else
+            echo "No log directory found" >> artifacts/fix-summary.md
+          fi
+          echo "" >> artifacts/fix-summary.md
+
+          echo "## Directory Size After Fix" >> artifacts/fix-summary.md
+          du -sh $RESULTS_DIR/ >> artifacts/fix-summary.md || echo "Could not calculate directory size" >> artifacts/fix-summary.md
+        else
+          echo "Results directory not found after fix" >> artifacts/fix-summary.md
+        fi
+
+    - name: Upload fixed results
+      uses: actions/upload-artifact@v4
+      with:
+        name: fixed-benchmark-results-${{ github.event.inputs.timestamp_dir }}-${{ github.run_number }}
+        path: |
+          results/
+          logs/
+          artifacts/
+        retention-days: 30
+
+    - name: Upload fix summary
+      uses: actions/upload-artifact@v4
+      with:
+        name: fix-summary-${{ github.event.inputs.timestamp_dir }}-${{ github.run_number }}
+        path: artifacts/fix-summary.md
+        retention-days: 90
+
+  # Optional: Send notification on completion
+  notify:
+    needs: fix-benchmark
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+    - name: Notify fix completion
+      run: |
+        echo "Benchmark fix completed with status: ${{ needs.fix-benchmark.result }}"
+        echo "Fixed timestamp directory: ${{ github.event.inputs.timestamp_dir }}"
+        # Add your notification logic here (Slack, Discord, etc.)
