@@ -16,15 +16,24 @@ on:
         description: 'Print streaming responses to console'
         type: boolean
         default: false
+      commit_results:
+        description: 'Commit and push fixed results to repository'
+        type: boolean
+        default: true
 
 jobs:
   fix-benchmark:
     runs-on: ubuntu-latest
     timeout-minutes: 480  # 8 hours max
+    permissions:
+      contents: write  # Required for git push
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -68,6 +77,8 @@ jobs:
     - name: Run fix benchmark
       env:
         ZENMUX_API_KEY: ${{ secrets.ZENMUX_API_KEY }}
+        ZENMUX_BASE_URL: ${{ secrets.ZENMUX_BASE_URL }}
+        ZENMUX_API_BASE_URL: ${{ secrets.ZENMUX_API_BASE_URL }}
       run: |
         # Optional arguments
         STREAMING_ARG=""
@@ -135,6 +146,39 @@ jobs:
           du -sh $RESULTS_DIR/ >> artifacts/fix-summary.md || echo "Could not calculate directory size" >> artifacts/fix-summary.md
         else
           echo "Results directory not found after fix" >> artifacts/fix-summary.md
+        fi
+
+    - name: Setup Git for commits
+      if: github.event.inputs.commit_results == 'true'
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    - name: Commit and push fixed results
+      if: github.event.inputs.commit_results == 'true'
+      run: |
+        # Check if there are any changes to commit
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "Changes detected, committing fixed results..."
+
+          # Add results and logs directories
+          git add results/ logs/ || true
+
+          # Create commit message with fix details
+          git commit -m "Fix benchmark results for ${{ github.event.inputs.timestamp_dir }}
+
+          Original Timestamp: ${{ github.event.inputs.timestamp_dir }}
+          Workers: ${{ github.event.inputs.num_workers }}
+          Fixed Run ID: ${{ github.run_id }}
+          Commit: ${{ github.sha }}
+
+          🔧 Fixed by GitHub Actions"
+
+          # Push to repository
+          git push
+          echo "Fixed results committed and pushed successfully!"
+        else
+          echo "No changes to commit."
         fi
 
     - name: Upload fixed results

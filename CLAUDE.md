@@ -93,7 +93,8 @@ The framework implements sophisticated concurrency control:
 ### File Organization System
 
 Results are automatically organized with timestamps:
-```
+
+```text
 results/
 ├── 20250922_093840/          # Timestamped run directory
 │   ├── predictions/          # Model prediction files
@@ -140,21 +141,25 @@ export ZENMUX_API_KEY="your_api_key"  # Required for all operations
 ## Important Implementation Details
 
 ### Connection Management
+
 - HTTP client reuses connections via connection pooling
 - Automatic retry mechanisms with exponential backoff
 - Resource cleanup and proper connection closing
 
 ### Resumable Execution
+
 - Evaluations can be resumed if interrupted
 - Existing predictions and judgments are preserved
 - File-based state management with JSON metadata
 
 ### Model Exclusion System
+
 - Supports exact model matching (`openai/gpt-4o`)
 - Vendor-level exclusion (`anthropic` excludes all Anthropic models)
 - Model-name only matching (`gpt-4o` matches across providers)
 
 ### Error Handling
+
 - Graceful degradation when models fail
 - Detailed error reporting with generation IDs for debugging
 - Continuation of evaluation despite individual failures
@@ -164,6 +169,7 @@ export ZENMUX_API_KEY="your_api_key"  # Required for all operations
 ## Test Organization
 
 All test scripts are located in `tests/` directory:
+
 - `test_exclude_functionality.py`: Tests for model exclusion logic
 - Test files should be placed in `tests/` directory, not in the root
 
@@ -172,24 +178,39 @@ All test scripts are located in `tests/` directory:
 The project includes two GitHub Actions workflows for automated benchmarking:
 
 ### Main Benchmark Workflow (`.github/workflows/benchmark.yml`)
+
 - **Triggers**: Manual dispatch with comprehensive parameter options
 - **Features**:
   - All evaluation modes (all/single/filter)
   - Model exclusion support (exclude-model, exclude-provider)
   - Text-only mode, sample limits, judging control
   - Streaming output and concurrency settings
+  - Automatic commit and push to repository (optional)
+- **Environment Variables**: ZENMUX_API_KEY (required), ZENMUX_BASE_URL, ZENMUX_API_BASE_URL (optional)
 - **Timeout**: 8 hours maximum runtime
-- **Outputs**: Benchmark results, statistics files, and detailed summary reports
+- **Outputs**: Benchmark results, statistics files, detailed summary reports, and Git commits
 
 ### Fix Benchmark Workflow (`.github/workflows/fix-benchmark.yml`)
+
 - **Purpose**: Fix evaluation and judge failures from previous runs
 - **Triggers**: Manual dispatch with timestamp directory input
 - **Features**:
   - Downloads previous results from artifacts
   - Fixes failed evaluations and judgments
   - Generates comprehensive fix summary reports
+  - Automatic commit and push of fixed results (optional)
+- **Environment Variables**: ZENMUX_API_KEY (required), ZENMUX_BASE_URL, ZENMUX_API_BASE_URL (optional)
 - **Timeout**: 8 hours maximum runtime
-- **Outputs**: Fixed results and detailed fix summary
+- **Outputs**: Fixed results, detailed fix summary, and Git commits
+
+### GitHub Secrets Setup
+
+Required secrets for GitHub Actions:
+- `ZENMUX_API_KEY`: Your ZenMux API key (required)
+- `ZENMUX_BASE_URL`: Custom base URL (optional)
+- `ZENMUX_API_BASE_URL`: Alternative API base URL (optional)
+
+See `.github/README.md` for detailed setup instructions.
 
 ## Important Instruction Reminders
 Do what has been asked; nothing more, nothing less.

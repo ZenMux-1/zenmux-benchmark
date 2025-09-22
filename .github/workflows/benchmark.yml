@@ -13,24 +13,16 @@ on:
           - all
           - single
           - filter
-      model_slug:
-        description: 'Model slug for single mode (e.g., "openai/gpt-4o-mini")'
+      model_config:
+        description: 'Model config: For single mode use "model_slug:provider_slug", for filter mode use filter string'
         required: false
         default: ''
-      provider_slug:
-        description: 'Provider slug for single mode (e.g., "openai")'
+      exclude_models:
+        description: 'Exclude models (comma-separated, e.g., "anthropic,openai/gpt-4o")'
         required: false
         default: ''
-      model_filter:
-        description: 'Filter models by substring for filter mode (e.g., "gpt", "claude", "deepseek")'
-        required: false
-        default: ''
-      exclude_model:
-        description: 'Exclude specific models (space-separated, e.g., "anthropic openai/gpt-4o")'
-        required: false
-        default: ''
-      exclude_provider:
-        description: 'Exclude specific providers (space-separated, e.g., "theta openai")'
+      exclude_providers:
+        description: 'Exclude providers (comma-separated, e.g., "theta,openai")'
         required: false
         default: ''
       text_only:
@@ -49,19 +41,24 @@ on:
         description: 'Number of concurrent workers'
         required: false
         default: '3'
-      print_streaming:
-        description: 'Print streaming responses to console'
-        type: boolean
-        default: false
+      advanced_options:
+        description: 'Advanced options (comma-separated, e.g., "print_streaming,commit_results")'
+        required: false
+        default: 'commit_results'
 
 jobs:
   benchmark:
     runs-on: ubuntu-latest
     timeout-minutes: 480  # 8 hours max
+    permissions:
+      contents: write  # Required for git push
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -83,39 +80,51 @@ jobs:
     - name: Run benchmark
       env:
         ZENMUX_API_KEY: ${{ secrets.ZENMUX_API_KEY }}
+        ZENMUX_BASE_URL: ${{ secrets.ZENMUX_BASE_URL }}
+        ZENMUX_API_BASE_URL: ${{ secrets.ZENMUX_API_BASE_URL }}
       run: |
         # Build command arguments
         MODE="${{ github.event.inputs.mode }}"
 
-        # Single mode arguments
+        # Parse model config for single and filter modes
+        MODEL_CONFIG="${{ github.event.inputs.model_config }}"
+        MODEL_ARGS=""
+        FILTER_ARG=""
+
         if [ "$MODE" = "single" ]; then
-          if [ -z "${{ github.event.inputs.model_slug }}" ] || [ -z "${{ github.event.inputs.provider_slug }}" ]; then
-            echo "Error: model_slug and provider_slug are required for single mode"
+          if [ -z "$MODEL_CONFIG" ]; then
+            echo "Error: model_config is required for single mode (format: model_slug:provider_slug)"
             exit 1
           fi
-          MODEL_ARGS="--model-slug ${{ github.event.inputs.model_slug }} --provider-slug ${{ github.event.inputs.provider_slug }}"
-        else
-          MODEL_ARGS=""
-        fi
-
-        # Filter mode arguments
-        if [ "$MODE" = "filter" ]; then
-          if [ -z "${{ github.event.inputs.model_filter }}" ]; then
-            echo "Error: model_filter is required for filter mode"
+          if [[ "$MODEL_CONFIG" != *":"* ]]; then
+            echo "Error: model_config for single mode must be in format 'model_slug:provider_slug'"
             exit 1
           fi
-          FILTER_ARG="--model-filter ${{ github.event.inputs.model_filter }}"
-        else
-          FILTER_ARG=""
+          MODEL_SLUG=$(echo "$MODEL_CONFIG" | cut -d':' -f1)
+          PROVIDER_SLUG=$(echo "$MODEL_CONFIG" | cut -d':' -f2)
+          MODEL_ARGS="--model-slug $MODEL_SLUG --provider-slug $PROVIDER_SLUG"
+        elif [ "$MODE" = "filter" ]; then
+          if [ -z "$MODEL_CONFIG" ]; then
+            echo "Error: model_config is required for filter mode"
+            exit 1
+          fi
+          FILTER_ARG="--model-filter $MODEL_CONFIG"
         fi
 
-        # Exclusion arguments
+        # Parse exclusion arguments (comma-separated)
         EXCLUDE_ARGS=""
-        if [ -n "${{ github.event.inputs.exclude_model }}" ]; then
-          EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude-model ${{ github.event.inputs.exclude_model }}"
+        EXCLUDE_MODELS="${{ github.event.inputs.exclude_models }}"
+        if [ -n "$EXCLUDE_MODELS" ]; then
+          # Convert comma-separated to space-separated
+          EXCLUDE_MODELS_SPACE=$(echo "$EXCLUDE_MODELS" | tr ',' ' ')
+          EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude-model $EXCLUDE_MODELS_SPACE"
         fi
-        if [ -n "${{ github.event.inputs.exclude_provider }}" ]; then
-          EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude-provider ${{ github.event.inputs.exclude_provider }}"
+
+        EXCLUDE_PROVIDERS="${{ github.event.inputs.exclude_providers }}"
+        if [ -n "$EXCLUDE_PROVIDERS" ]; then
+          # Convert comma-separated to space-separated
+          EXCLUDE_PROVIDERS_SPACE=$(echo "$EXCLUDE_PROVIDERS" | tr ',' ' ')
+          EXCLUDE_ARGS="$EXCLUDE_ARGS --exclude-provider $EXCLUDE_PROVIDERS_SPACE"
         fi
 
         # Optional arguments
@@ -129,9 +138,11 @@ jobs:
           NO_JUDGE_ARG="--no-judge"
         fi
 
-        STREAMING_ARG=""
-        if [ "${{ github.event.inputs.print_streaming }}" = "true" ]; then
-          STREAMING_ARG="--print-streaming"
+        # Parse advanced options (comma-separated)
+        ADVANCED_ARGS=""
+        ADVANCED_OPTIONS="${{ github.event.inputs.advanced_options }}"
+        if [[ "$ADVANCED_OPTIONS" == *"print_streaming"* ]]; then
+          ADVANCED_ARGS="$ADVANCED_ARGS --print-streaming"
         fi
 
         MAX_SAMPLES="${{ github.event.inputs.max_samples || '10' }}"
@@ -145,7 +156,7 @@ jobs:
           $EXCLUDE_ARGS \
           $TEXT_ONLY_ARG \
           $NO_JUDGE_ARG \
-          $STREAMING_ARG \
+          $ADVANCED_ARGS \
           --max-samples $MAX_SAMPLES \
           --num-workers $NUM_WORKERS \
           --output-dir results
@@ -156,9 +167,13 @@ jobs:
         echo "**Date:** $(date)" >> artifacts/summary.md
         echo "**Commit:** $GITHUB_SHA" >> artifacts/summary.md
         echo "**Mode:** ${{ github.event.inputs.mode }}" >> artifacts/summary.md
+        echo "**Model Config:** ${{ github.event.inputs.model_config }}" >> artifacts/summary.md
         echo "**Text Only:** ${{ github.event.inputs.text_only }}" >> artifacts/summary.md
         echo "**Max Samples:** ${{ github.event.inputs.max_samples }}" >> artifacts/summary.md
         echo "**Workers:** ${{ github.event.inputs.num_workers }}" >> artifacts/summary.md
+        echo "**Exclude Models:** ${{ github.event.inputs.exclude_models }}" >> artifacts/summary.md
+        echo "**Exclude Providers:** ${{ github.event.inputs.exclude_providers }}" >> artifacts/summary.md
+        echo "**Advanced Options:** ${{ github.event.inputs.advanced_options }}" >> artifacts/summary.md
         echo "" >> artifacts/summary.md
 
         # Find the timestamped results directory
@@ -192,6 +207,42 @@ jobs:
           du -sh $RESULTS_DIR/ >> artifacts/summary.md || echo "Could not calculate directory size" >> artifacts/summary.md
         else
           echo "No timestamped results directory found" >> artifacts/summary.md
+        fi
+
+    - name: Setup Git for commits
+      if: contains(github.event.inputs.advanced_options, 'commit_results')
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    - name: Commit and push results
+      if: contains(github.event.inputs.advanced_options, 'commit_results')
+      run: |
+        # Check if there are any changes to commit
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "Changes detected, committing results..."
+
+          # Add results and logs directories
+          git add results/ logs/ || true
+
+          # Create commit message with run details
+          git commit -m "Add benchmark results from GitHub Actions
+
+          Mode: ${{ github.event.inputs.mode }}
+          Model Config: ${{ github.event.inputs.model_config }}
+          Text Only: ${{ github.event.inputs.text_only }}
+          Max Samples: ${{ github.event.inputs.max_samples }}
+          Workers: ${{ github.event.inputs.num_workers }}
+          Run ID: ${{ github.run_id }}
+          Commit: ${{ github.sha }}
+
+          🤖 Generated by GitHub Actions"
+
+          # Push to repository
+          git push
+          echo "Results committed and pushed successfully!"
+        else
+          echo "No changes to commit."
         fi
 
     - name: Upload results
