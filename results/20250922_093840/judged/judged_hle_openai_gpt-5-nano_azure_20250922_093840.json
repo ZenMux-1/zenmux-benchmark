@@ -76,18 +76,17 @@
             "generation_id": "2539CCYTBWLP00738380",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C",
+                "reasoning": "The extracted answer is C, while the correct answer is D. These are different options, so the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 59
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 10838.951416015625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 46.68348261551711
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCKBYRAF00737453"
         },
         "668828540a642802bdfeadfc": {
             "model": "openai/gpt-5-nano:azure",
@@ -115,18 +114,17 @@
             "generation_id": "2539CCBNNWSW00734314",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "etco",
+                "reasoning": "The extracted final answer 'etco' does not match the correct answer 'yeyo'. They are different strings with no partial credit applicable.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 66
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 6132.6748046875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 20.708745212273076
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCZAEJKJ00736330"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "openai/gpt-5-nano:azure",
@@ -154,18 +152,17 @@
             "generation_id": "2539CCMZAOCU00738364",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
-                "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "model_answer": "Z^5",
+                "reasoning": "The response\u2019s final answer Z^5 is equivalent to the correct answer Z+Z+Z+Z+Z; both denote a free abelian group of rank 5.",
+                "correct": "yes",
+                "confidence": 45
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 12603.365966796875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 46.33682791871056
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCDZNHVA00736328"
         }
     }
 }

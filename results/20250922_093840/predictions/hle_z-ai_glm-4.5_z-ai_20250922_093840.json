@@ -52,7 +52,7 @@
             "generation_id": "2539CCZLTMQS00734311"
         },
         "668828540a642802bdfeadfc": {
-            "model": "z-ai/glm-4.5:z-ai",
+            "model": "z-ai/glm-4.5",
             "response": "",
             "usage": {},
             "performance": {
@@ -61,10 +61,10 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "669402b41dcb3d5a1ef9e951": {
-            "model": "z-ai/glm-4.5:z-ai",
+            "model": "z-ai/glm-4.5",
             "response": "",
             "usage": {},
             "performance": {
@@ -73,7 +73,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         }
     }
 }

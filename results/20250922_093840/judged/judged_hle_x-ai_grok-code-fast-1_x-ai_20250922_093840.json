@@ -79,18 +79,17 @@
             "generation_id": "2539CCMZQQRW00737404",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "E",
+                "reasoning": "The correct answer is D, while the extracted final answer is E. Since E does not match D, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5437.207763671875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 46.347318504860375
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCVVEENF00734359"
         },
         "668828540a642802bdfeadfc": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -121,18 +120,17 @@
             "generation_id": "2539CCJQQTXL00734322",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "atyh",
+                "reasoning": "The extracted answer 'atyh' does not match the correct answer 'yeyo'. They are different strings with no matching sequence.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 5968.93701171875,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 20.941752234039132
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCAURBUT00734369"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -163,18 +161,17 @@
             "generation_id": "2539CCBSJWXG00734324",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "Z/2",
+                "reasoning": "The response concludes the reduced 12-dimensional Spin bordism group is Z/2, while the correct answer is Z+Z+Z+Z+Z (i.e., Z^5). These are not equivalent; Z/2 is a finite cyclic group of order 2, whereas Z^5 is a free abelian group of rank 5.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4409.909912109375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 39.00306433192598
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCHHNVQX00734370"
         }
     }
 }

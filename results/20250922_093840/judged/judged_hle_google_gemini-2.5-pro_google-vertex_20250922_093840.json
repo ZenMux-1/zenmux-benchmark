@@ -68,18 +68,17 @@
             "generation_id": "2539CCRQJWRK00737421",
             "judge_response": {
                 "correct_answer": "D",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "C",
+                "reasoning": "The extracted answer is C (Non-Elitism), which does not match the correct answer D (Weak Non-Sadism). Therefore, the response is incorrect.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 4598.672119140625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 56.32060588142138
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCUBCRON00738414"
         },
         "668828540a642802bdfeadfc": {
             "model": "google/gemini-2.5-pro:google-vertex",
@@ -99,18 +98,17 @@
             "generation_id": "2539CCNUBFDS00734325",
             "judge_response": {
                 "correct_answer": "yeyo",
-                "model_answer": "",
-                "reasoning": "",
+                "model_answer": "geyo",
+                "reasoning": "The extracted answer is 'geyo' while the correct answer is 'yeyo'. They differ in the first letter ('g' vs 'y'), so they do not match.",
                 "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "confidence": 100
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8303.277099609375,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 23.966440913956962
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCQJWKCE00736327"
         },
         "669402b41dcb3d5a1ef9e951": {
             "model": "google/gemini-2.5-pro:google-vertex",
@@ -130,18 +128,17 @@
             "generation_id": "2539CCUGBXJL00736292",
             "judge_response": {
                 "correct_answer": "Z+Z+Z+Z+Z",
-                "model_answer": "",
-                "reasoning": "",
-                "correct": "no",
-                "confidence": 0,
-                "error": "Connection error."
+                "model_answer": "Z^5",
+                "reasoning": "The response\u2019s final answer \"Z^5\" is equivalent to the correct answer \"Z+Z+Z+Z+Z\" (a direct sum of five copies of Z).",
+                "correct": "yes",
+                "confidence": 95
             },
             "judge_performance": {
-                "first_token_latency_ms": 0.0,
+                "first_token_latency_ms": 8120.98681640625,
                 "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+                "throughput_tokens_per_second": 24.873824396797914
             },
-            "judge_generation_id": null
+            "judge_generation_id": "2539CCDZVCFQ00734366"
         }
     }
 }
