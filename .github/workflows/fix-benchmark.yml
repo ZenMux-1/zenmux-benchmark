@@ -79,6 +79,8 @@ jobs:
         ZENMUX_API_KEY: ${{ secrets.ZENMUX_API_KEY }}
         ZENMUX_BASE_URL: ${{ secrets.ZENMUX_BASE_URL }}
         ZENMUX_API_BASE_URL: ${{ secrets.ZENMUX_API_BASE_URL }}
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        HUGGING_FACE_HUB_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
         # Optional arguments
         STREAMING_ARG=""

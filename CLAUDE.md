@@ -207,6 +207,7 @@ The project includes two GitHub Actions workflows for automated benchmarking:
 
 Required secrets for GitHub Actions:
 - `ZENMUX_API_KEY`: Your ZenMux API key (required)
+- `HF_TOKEN`: Your Hugging Face access token for gated datasets (required)
 - `ZENMUX_BASE_URL`: Custom base URL (optional)
 - `ZENMUX_API_BASE_URL`: Alternative API base URL (optional)
 

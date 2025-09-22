@@ -12,13 +12,18 @@ To use the GitHub Actions workflows, you need to configure the following secrets
    - Your ZenMux API key for accessing the unified API
    - Get this from your ZenMux account dashboard
 
+2. **HF_TOKEN** (Required for gated datasets)
+   - Your Hugging Face access token for accessing gated datasets like 'cais/hle'
+   - Get this from [Hugging Face Settings > Access Tokens](https://huggingface.co/settings/tokens)
+   - **Important**: You must also request access to the dataset through the Hugging Face website first
+
 ### Optional Environment Secrets
 
-2. **ZENMUX_BASE_URL** (Optional)
+3. **ZENMUX_BASE_URL** (Optional)
    - Custom ZenMux base URL if different from default
    - Default: `https://zenmux.ai/api/v1`
 
-3. **ZENMUX_API_BASE_URL** (Optional)
+4. **ZENMUX_API_BASE_URL** (Optional)
    - Alternative API base URL configuration
    - Only needed if using a custom endpoint
 
@@ -92,6 +97,23 @@ If you get authentication errors:
 1. Verify `ZENMUX_API_KEY` is correctly set in repository secrets
 2. Check that the API key is valid and not expired
 3. Ensure the API key has appropriate permissions for model access
+
+### Hugging Face Dataset Access Issues
+
+If you get "Dataset 'cais/hle' is a gated dataset" errors:
+
+1. **Create HF Token**: Go to [Hugging Face Settings > Access Tokens](https://huggingface.co/settings/tokens)
+2. **Create New Token**: Click "New token" and select "Read" permissions (or "Write" if needed)
+3. **Copy Token**: Copy the generated token value
+4. **Add to GitHub Secrets**: Add as `HF_TOKEN` in repository secrets
+5. **Request Dataset Access**: Visit the [cais/hle dataset page](https://huggingface.co/datasets/cais/hle) and request access
+6. **Wait for Approval**: Wait for the dataset owners to approve your access request
+
+**Important Notes**:
+
+- You need BOTH the token AND approval from dataset owners
+- Access requests can only be made through the Hugging Face website while logged in
+- Some gated datasets may require "Write" permissions even for read operations
 
 ### Environment Issues
 
