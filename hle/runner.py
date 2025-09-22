@@ -150,7 +150,7 @@ class HLERunner:
             )
             results["judged_file"] = judged_file
 
-            # Extract metrics from judged file only if evaluation was complete
+            # Calculate metrics in real-time from judged file (REFACTORED: no longer cached)
             if evaluation_complete:
                 results["metrics"] = self.extract_metrics_from_judged_file(judged_file)
             else:
@@ -383,13 +383,35 @@ class HLERunner:
             return False
 
     def extract_metrics_from_judged_file(self, judged_file: str) -> Optional[Dict[str, Any]]:
-        """Extract metrics from a judged file."""
+        """REFACTORED: Calculate metrics in real-time from judged file instead of reading cached values."""
         try:
             with open(judged_file, "r") as f:
                 data = json.load(f)
-                return data.get("metrics")
+
+            # Get judged predictions (original data)
+            judged_predictions = data.get("judged_predictions", data)
+            if not judged_predictions:
+                self.logger.warning(f"⚠️ No judged_predictions found in {judged_file}")
+                return None
+
+            # Get total questions count - first try from question_ids file
+            total_questions = len(judged_predictions)  # fallback
+            try:
+                question_ids_file = os.path.join(self.config.run_dir, f"question_ids_{self.batch_timestamp}.json")
+                if os.path.exists(question_ids_file):
+                    with open(question_ids_file, "r") as f:
+                        question_ids_data = json.load(f)
+                        total_questions = len(question_ids_data.get("question_ids", []))
+            except Exception as e:
+                self.logger.debug(f"Could not load question IDs for metrics calculation: {e}")
+
+            # Calculate metrics in real-time using judge's calculate_metrics method
+            metrics = self.judge.calculate_metrics(judged_predictions, total_questions)
+
+            return metrics
+
         except Exception as e:
-            self.logger.warning(f"⚠️ Warning: Could not extract metrics from {judged_file}: {e}")
+            self.logger.warning(f"⚠️ Warning: Could not calculate metrics from {judged_file}: {e}")
             return None
 
     def save_metrics_summary(self, results: List[Dict[str, Any]], run_metadata: Dict[str, Any] = None) -> str:
@@ -890,7 +912,7 @@ class HLERunner:
                 judged_file = os.path.join(judged_dir, f"judged_{filename}")
                 if os.path.exists(judged_file):
                     result["judged_file"] = judged_file
-                    # Extract metrics if available
+                    # Calculate metrics in real-time (REFACTORED: no longer cached)
                     result["metrics"] = self.extract_metrics_from_judged_file(judged_file)
 
                 results.append(result)
@@ -1185,16 +1207,11 @@ class HLERunner:
 
                 self.logger.info(f"✅ Fixed {judge_fixed_count}/{len(failed_judge_questions)} judge failures")
 
-                # Save updated judged data, preserving original metrics
+                # Save updated judged data (REFACTOR: no metrics, they will be calculated in metrics_summary)
                 final_judged_data = {
                     "judging_metadata": judging_metadata,
                     "judged_predictions": judged_predictions
                 }
-
-                # Preserve original metrics if they exist
-                original_metrics = judged_data.get("metrics")
-                if original_metrics is not None:
-                    final_judged_data["metrics"] = original_metrics
 
                 # Handle old format fallback
                 if not judging_metadata:

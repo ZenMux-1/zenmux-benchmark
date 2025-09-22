@@ -436,10 +436,7 @@ Additional Error Info: {additional_info}
                 if performance_metrics is not None:
                     judge_performance_data.append(performance_metrics)
 
-        # Calculate metrics
-        metrics = self.calculate_metrics(judged_predictions, total_questions)
-
-        # Add metadata to the judged file
+        # Add metadata to the judged file (REFACTOR: metrics removed, will be calculated in metrics_summary)
         # Get the actual judge endpoint information
         judge_endpoint = await self._get_judge_endpoint()
         judge_endpoint_info = {
@@ -464,36 +461,19 @@ Additional Error Info: {additional_info}
                     "max_retries": self.zenmux_config.max_retries
                 },
                 "evaluation_metadata": evaluation_metadata  # Include original evaluation metadata for the evaluated model
-            },
-            "metrics": metrics
+            }
         }
 
-        # Calculate and add judge performance averages if we have performance data
-        if judge_performance_data:
-            avg_first_token_latency = sum(p.get('first_token_latency_ms', 0) for p in judge_performance_data) / len(judge_performance_data)
-            avg_generation_time = sum(p.get('generation_time_ms', 0) for p in judge_performance_data) / len(judge_performance_data)
-            avg_throughput = sum(p.get('throughput_tokens_per_second', 0) for p in judge_performance_data) / len(judge_performance_data)
-
-            metadata["judging_metadata"]["judge_performance_averages"] = {
-                "avg_first_token_latency_ms": round(avg_first_token_latency, 2),
-                "avg_generation_time_ms": round(avg_generation_time, 2),
-                "avg_throughput_tokens_per_second": round(avg_throughput, 2),
-                "samples_count": len(judge_performance_data)
-            }
-
-        # Save judged results with metadata
+        # Save judged results with metadata only (REFACTOR: no metrics, no performance averages)
         final_output = {
             **metadata,
-            "metrics": metrics,
             "judged_predictions": judged_predictions
         }
 
         with open(output_filepath, "w") as f:
             json.dump(final_output, f, indent=4)
 
-        self.logger.info("🎯 *** Metrics ***")
-        self.logger.info(f"📊 Accuracy: {metrics['accuracy']}% +/- {metrics['confidence_interval']}%")
-        self.logger.info(f"📏 Calibration Error: {metrics['calibration_error']}")
-        self.logger.info(f"💾 Saved to: {output_filepath}")
+        self.logger.info(f"💾 Judged results saved to: {output_filepath}")
+        self.logger.info("📊 Metrics will be calculated in metrics_summary")
 
         return output_filepath
