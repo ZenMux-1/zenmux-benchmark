@@ -1,0 +1,76 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T04:36:37.069757",
+        "model_identifier": "google/gemini-2.5-pro:google-vertex",
+        "endpoint": {
+            "provider_slug": "google-vertex",
+            "provider": "Google Vertex",
+            "context_length": 1048576,
+            "max_completion_tokens": 65535,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 7832.34,
+            "avg_generation_time_ms": 16060.03,
+            "avg_throughput_tokens_per_second": 136.43,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "google/gemini-2.5-pro:google-vertex",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "google/gemini-2.5-pro:google-vertex",
+            "response": "Explanation:\nc1: The concept of logical \"depth\" was introduced by Charles Bennett. It measures the time complexity of generating an object from its minimal description. The reciprocal concept, also heavily associated with Bennett, is the length of that minimal description, known as algorithmic **complexity** or Kolmogorov complexity. The third letter of \"complexity\" is 'm'.\n\nc2: In his book _The Quark and the Jaguar_, Murray Gell-Mann recounts his dilemma after high school: \"I had the choice of going to MIT or committing suicide. The two **operators** didn't commute.\" The third character of the missing word \"operators\" is 'e'.\n\nc3/c4: The paper that introduced the Gaussian Error Linear Unit (GELU) is \"Gaussian Error Linear Units (GELUs)\" by Dan Hendrycks and Kevin Gimpel. The last author's last name is Gimpel. The last letter of \"Gimpel\" is 'l' (c3). Applying the Rot13 cipher to 'l' gives 'y' (c4).\n\nc5: To determine if Mars is closer in mass to the Earth or the Moon, we compare their masses:\n- Mass of Earth: ~5.97 x 10^24 kg\n- Mass of Mars: ~0.64 x 10^24 kg\n- Mass of the Moon: ~0.073 x 10^24 kg\nThe absolute difference in mass between Mars and Earth is approximately 5.33 x 10^24 kg. The absolute difference in mass between Mars and the Moon is approximately 0.567 x 10^24 kg. Since the difference is smaller, Mars is closer in mass to the **Moon**. The second letter of \"Moon\" is 'o'.\n\nConcatenating c1, c2, c4, and c5 gives \"meyo\".\n\nAnswer: meyo\nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 2191,
+                "prompt_tokens": 243,
+                "total_tokens": 2434,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 7832.3408203125,
+                "generation_time_ms": 16060.033447265625,
+                "throughput_tokens_per_second": 136.42561873823738
+            },
+            "generation_id": "2539CCHXGWJE00738699"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "google/gemini-2.5-pro:google-vertex",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

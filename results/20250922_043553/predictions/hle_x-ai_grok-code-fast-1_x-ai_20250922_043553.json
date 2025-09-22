@@ -1,0 +1,119 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T04:36:34.680518",
+        "model_identifier": "x-ai/grok-code-fast-1:x-ai",
+        "endpoint": {
+            "provider_slug": "x-ai",
+            "provider": "xAI",
+            "context_length": 256000,
+            "max_completion_tokens": 10000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 3480.15,
+            "avg_generation_time_ms": 22722.3,
+            "avg_throughput_tokens_per_second": 6.43,
+            "samples_count": 3
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "x-ai/grok-code-fast-1:x-ai",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem identifies five conditions that are jointly inconsistent in population ethics. Critical-level views, which posit a threshold level of well-being where adding lives above it is positive, at it is neutral, and below it is negative, violate the Non-Elitism condition. This is because they imply a lexical (absolute) priority to improving the well-being of the worst-off individuals (those below the critical level) over adding new lives at higher levels, which contradicts Non-Elitism's requirement of no such lexical priority.\n\nAnswer: C\n\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 117,
+                "prompt_tokens": 302,
+                "total_tokens": 2508,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2089,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 302,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 4108.32861328125,
+                "generation_time_ms": 20056.147705078125,
+                "throughput_tokens_per_second": 5.833622773448968
+            },
+            "generation_id": "2539CCLHWLJM00737746"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "x-ai/grok-code-fast-1:x-ai",
+            "response": "Explanation: I solved the puzzle step by step. c1 is the third letter of \"shallowness\" (the inverse concept of logical depth, associated with Charles Bennett). c2 is the third letter of \"options\" (the missing word in Gell-Mann's joke about non-commuting options). c3 is 'l' (the last letter of the last author's last name in the GELU paper, Kevin Gimpel). c4 is the Rot13 of c3, which is 'y'. c5 is the second letter of \"the Moon\" (Mars is closer in mass to the Moon than to Earth). Concatenating c1, c2, c4, and c5 gives \"athy\".\nAnswer: atyh\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 155,
+                "prompt_tokens": 431,
+                "total_tokens": 2211,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 1625,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 431,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 2302.208740234375,
+                "generation_time_ms": 17084.0654296875,
+                "throughput_tokens_per_second": 9.072781922893586
+            },
+            "generation_id": "2539CCEIBACH00738701"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "x-ai/grok-code-fast-1:x-ai",
+            "response": "Explanation: The problem asks for the reduced 12-th dimensional Spin bordism of BG2, where \"reduced\" means ignoring bordism classes represented by manifolds with trivial principal G2 bundles. Interpreting this as the quotient \u03a9_12^{Spin}(BG2) / \u03a9_12^{Spin}, where \u03a9_12^{Spin} \u2245 \u2124 \u2295 \u2124 is the Spin bordism group of a point, and given that the induced map \u03a9_12^{Spin} \u2192 \u03a9_12^{Spin}(BG2) is an isomorphism for G2 (a 14-dimensional Lie group), the reduced group is trivial.\n\nAnswer: 0\n\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 136,
+                "prompt_tokens": 294,
+                "total_tokens": 5944,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 5514,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 294,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
+            },
+            "performance": {
+                "first_token_latency_ms": 4029.91845703125,
+                "generation_time_ms": 31026.68017578125,
+                "throughput_tokens_per_second": 4.383324262521604
+            },
+            "generation_id": "2539CCZBWWBS00737732"
+        }
+    }
+}

