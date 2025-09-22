@@ -1,0 +1,97 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T05:11:27.878412",
+        "model_identifier": "openai/gpt-5-mini:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 14060.56,
+            "avg_generation_time_ms": 8927.5,
+            "avg_throughput_tokens_per_second": 228.82,
+            "samples_count": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: Critical-level views (critical-level utilitarianism) evaluate populations by sum(u_i \u2212 c) for a fixed critical level c. If c > 0, adding an individual with positive welfare u where 0 < u < c reduces the total value, so such views judge adding some positive-quality lives as bad. That directly violates the axiom that adding a person of positive quality should never decrease value (Weak Quality Addition).\n\nAnswer: E. Weak Quality Addition\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 1578,
+                "prompt_tokens": 109,
+                "total_tokens": 1687,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1472,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 9518.28662109375,
+                "generation_time_ms": 10813.25634765625,
+                "throughput_tokens_per_second": 145.93198840995092
+            },
+            "generation_id": "2539CCTFDBVC00744574"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "Explanation: \n- I took the inverse/reciprocal of Bennett's \"logical depth\" as \"shallowness\" (third letter = a \u2192 c1 = a).\n- Gell-Mann's quote uses \"alternatives\" (\"the two alternatives didn't commute\"), third character = t \u2192 c2 = t.\n- GELU's last author is Kevin Gimpel; his last name ends with 'l', Rot13('l') = 'y' \u2192 c4 = y.\n- Mars is much closer in mass to the Moon than to the Earth, so answer = \"moon\", second letter = o \u2192 c5 = o.\n\nAnswer: atyo\nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 2195,
+                "prompt_tokens": 239,
+                "total_tokens": 2434,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 2048,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 18602.8408203125,
+                "generation_time_ms": 7041.739013671875,
+                "throughput_tokens_per_second": 311.71277375351485
+            },
+            "generation_id": "2539CCHAAXRX00743451"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

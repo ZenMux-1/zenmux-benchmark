@@ -1,0 +1,97 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T05:11:20.959110",
+        "model_identifier": "openai/gpt-4.1-mini:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 1047576,
+            "max_completion_tokens": 32768,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 1491.12,
+            "avg_generation_time_ms": 9199.45,
+            "avg_throughput_tokens_per_second": 39.68,
+            "samples_count": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-4.1-mini:openai",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem in population ethics outlines conditions that a critical-level utilitarian view cannot satisfy simultaneously. Critical-level views typically violate the condition known as \"Non-Elitism,\" which states that the welfare of any individual should not be disregarded or considered irrelevant simply because they belong to a particular group or population segment. Critical-level views assign a baseline or \"critical level\" of welfare, below which adding lives can be seen as negative, which conflicts with the Non-Elitism condition.\n\nAnswer: C. Non-Elitism  \nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 117,
+                "prompt_tokens": 110,
+                "total_tokens": 227,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1766.187744140625,
+                "generation_time_ms": 3856.2041015625,
+                "throughput_tokens_per_second": 30.3407176898631
+            },
+            "generation_id": "2539CCBVPVPX00743410"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-4.1-mini:openai",
+            "response": "Step 1: The concept of logical \"depth\" mentioned in _The Quark and the Jaguar_ has a reciprocal/inverse concept associated with Charles Bennett.\n\n- Logical depth is a concept introduced by Charles Bennett.\n- The reciprocal or inverse concept is \"logical **width**\" or more commonly \"logical **shallowness**\" or \"logical **simplicity**\".\n- However, the well-known reciprocal concept to logical depth is **\"logical width\"** or more precisely **\"logical shallowness\"**.\n- But Charles Bennett is known for \"logical depth\" and \"logical **width**\" is not a standard term.\n- Another known concept is **\"logical depth\"** vs **\"logical **shallowness**\"**.\n- The best-known reciprocal concept is **\"logical shallowness\"**.\n- The question says \"associated with Charles Bennett\" and \"reciprocal/inverse concept\".\n- The inverse of logical depth is **\"logical shallowness\"**.\n- So the word is likely **\"shallowness\"**.\n- Take the third letter of \"shallowness\":\n  - s (1), h (2), a (3)\n- So c1 = 'a'\n\nStep 2: Murray Gell-Mann joked \"the two _ didn't commute.\"\n\n- The quote is: \"the two _ didn't commute.\"\n- The missing word is likely \"operations\" or \"operators\".\n- The phrase \"the two operators didn't commute\" is a common phrase in physics and math.\n- So the missing word is \"operators\".\n- The third character of \"operators\":\n  - o (1), p (2), e (3)\n- So c2 = 'e'\n\nStep 3: The GELU's last author's last name ends with this letter; call it c3.\n\n- GELU = Gaussian Error Linear Unit.\n- The original GELU paper is by Dan Hendrycks and Kevin Gimpel.\n- The last author is Kevin Gimpel.\n- Last name: Gimpel\n- Last letter of \"Gimpel\" is 'l'\n- So c3 = 'l'\n\nStep 4: Now take that letter and Rot13 it; call that letter c4.\n\n- c3 = 'l'\n- Rot13 of 'l':\n  - 'a'->'n', 'b'->'o', ..., 'l'->'y'\n- So c4 = 'y'\n\nStep 5: Is Mars closer in mass to the Earth or to the Moon?\n\n- Mass of Earth \u2248 5.97 \u00d7 10^24 kg\n- Mass of Moon \u2248 7.35 \u00d7 10^22 kg\n- Mass of Mars \u2248 6.42 \u00d7 10^23 kg\n- Mars is closer in mass to the Moon than to the Earth.\n- So answer is \"Moon\"\n- Take the second letter of \"Moon\":\n  - M (1), o (2)\n- So c5 = 'o'\n\nFinal step: Output the concatenation of c1, c2, c4, and c5 (all lowercase):\n\n- c1 = 'a'\n- c2 = 'e'\n- c4 = 'y'\n- c5 = 'o'\n\nConcatenate: \"aeyo\"\n\nAnswer: aeyo\n\nConfidence: 95% (high confidence in the logic and answers, slight uncertainty about the exact reciprocal term but \"shallowness\" fits well)",
+            "usage": {
+                "completion_tokens": 713,
+                "prompt_tokens": 240,
+                "total_tokens": 953,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1216.050537109375,
+                "generation_time_ms": 14542.697021484375,
+                "throughput_tokens_per_second": 49.02804472558722
+            },
+            "generation_id": "2539CCAYZNJL00743411"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-4.1-mini:openai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

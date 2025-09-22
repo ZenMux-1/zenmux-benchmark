@@ -1,0 +1,83 @@
+{
+    "generation_metadata": {
+        "timestamp": "2025-09-22T05:11:37.664158",
+        "results_directory": "results/20250922_051054",
+        "metrics_summary_file": "metrics_summary_20250922_051054.json"
+    },
+    "metrics_summary_statistics": {
+        "total_models": 50,
+        "models_with_valid_metrics": 17,
+        "models_excluded_from_metrics": 33,
+        "models_with_errors": 23
+    },
+    "failure_lists": {
+        "excluded_models": [
+            "openai/gpt-4.1-mini:openai",
+            "openai/gpt-4.1-mini:azure",
+            "anthropic/claude-opus-4:google-vertex",
+            "anthropic/claude-opus-4:amazon-bedrock",
+            "openai/gpt-4.1-nano:azure",
+            "openai/o4-mini:openai",
+            "openai/o4-mini:azure",
+            "openai/gpt-5:openai",
+            "openai/gpt-5:azure",
+            "openai/gpt-5-nano:openai",
+            "openai/gpt-5-nano:azure",
+            "openai/gpt-4.1:openai",
+            "openai/gpt-4.1:azure",
+            "anthropic/claude-3.5-sonnet:google-vertex",
+            "anthropic/claude-3.7-sonnet:anthropic",
+            "anthropic/claude-3.7-sonnet:google-vertex",
+            "deepseek/deepseek-r1-0528:volcengine",
+            "openai/gpt-5-mini:openai",
+            "openai/gpt-5-mini:azure",
+            "openai/gpt-5-chat:openai",
+            "openai/gpt-5-chat:azure",
+            "google/gemini-2.5-flash:google-vertex",
+            "deepseek/deepseek-chat-v3.1:volcengine",
+            "google/gemini-2.5-pro:google-vertex",
+            "moonshotai/kimi-k2:volcengine",
+            "google/gemini-2.0-flash:google-vertex",
+            "x-ai/grok-4:x-ai",
+            "openai/gpt-4o-mini:azure",
+            "z-ai/glm-4.5-air:z-ai",
+            "deepseek/deepseek-chat:deepseek",
+            "moonshotai/kimi-k2-0905:moonshotai",
+            "z-ai/glm-4.5:z-ai",
+            "x-ai/grok-code-fast-1:x-ai"
+        ],
+        "models_with_errors": [
+            "openai/gpt-4.1-mini:openai",
+            "openai/gpt-4.1-mini:azure",
+            "anthropic/claude-opus-4:google-vertex",
+            "anthropic/claude-opus-4:amazon-bedrock",
+            "openai/o4-mini:openai",
+            "openai/o4-mini:azure",
+            "openai/gpt-5:openai",
+            "openai/gpt-5:azure",
+            "openai/gpt-5-nano:openai",
+            "openai/gpt-5-nano:azure",
+            "deepseek/deepseek-r1-0528:volcengine",
+            "openai/gpt-5-mini:openai",
+            "openai/gpt-5-mini:azure",
+            "openai/gpt-5-chat:azure",
+            "google/gemini-2.5-flash:google-vertex",
+            "deepseek/deepseek-chat-v3.1:volcengine",
+            "google/gemini-2.5-pro:google-vertex",
+            "moonshotai/kimi-k2:volcengine",
+            "x-ai/grok-4:x-ai",
+            "z-ai/glm-4.5-air:z-ai",
+            "deepseek/deepseek-chat:deepseek",
+            "moonshotai/kimi-k2-0905:moonshotai",
+            "z-ai/glm-4.5:z-ai"
+        ]
+    },
+    "exclusion_reasons": {
+        "general_error": 23,
+        "incomplete_evaluations": 23,
+        "incomplete_judgments": 22
+    },
+    "error_summary": {
+        "evaluation_failure": 23
+    }
+}

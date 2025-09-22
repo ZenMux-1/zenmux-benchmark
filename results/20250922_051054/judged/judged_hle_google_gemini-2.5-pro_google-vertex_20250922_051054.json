@@ -1,0 +1,109 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T05:11:32.863778",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_051054/predictions/hle_google_gemini-2.5-pro_google-vertex_20250922_051054.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T05:11:30.423606",
+            "model_identifier": "google/gemini-2.5-pro:google-vertex",
+            "endpoint": {
+                "provider_slug": "google-vertex",
+                "provider": "Google Vertex",
+                "context_length": 1048576,
+                "max_completion_tokens": 65535,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 6086.46,
+                "avg_generation_time_ms": 16256.09,
+                "avg_throughput_tokens_per_second": 152.25,
+                "samples_count": 1
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "google/gemini-2.5-pro:google-vertex",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "google/gemini-2.5-pro:google-vertex",
+            "response": "Explanation:\nc1: The concept of logical \"depth\" was developed by Murray Gell-Mann and Seth Lloyd, building on work by Gregory Chaitin. The reciprocal concept, associated with Charles Bennett, is \"crypticity,\" which refers to the time required to decrypt a message. The third letter of \"crypticity\" is 'y'.\n\nc2: The famous quote from Murray Gell-Mann regarding his choice between attending MIT and suicide is, \"the two options didn't commute.\" He was making a pun based on the mathematical/physical concept of commuting operators (where the order of operations matters). The third character of the word \"options\" is 't'.\n\nc3/c4: The paper that introduced the Gaussian Error Linear Unit (GELU) is \"Gaussian Error Linear Units (GELUs)\" by Dan Hendrycks and Kevin Gimpel. The last author's last name is Gimpel. The last letter of \"Gimpel\" is 'l' (c3). Applying the Rot13 cipher to 'l' gives 'y' (c4).\n\nc5: To determine if Mars is closer in mass to the Earth or the Moon, we compare their masses:\n- Earth Mass: ~5.97 x 10^24 kg\n- Mars Mass: ~0.642 x 10^24 kg\n- Moon Mass: ~0.073 x 10^24 kg\nThe difference in mass between Mars and the Moon is approximately 0.569 x 10^24 kg. The difference in mass between Mars and the Earth is approximately 5.33 x 10^24 kg. Therefore, Mars is significantly closer in mass to the Moon. The second letter of \"Moon\" is 'o'.\n\nConcatenation:\nc1 = y\nc2 = t\nc4 = y\nc5 = o\nThe final concatenated string is \"ytyo\".\n\nAnswer: ytyo\nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 2475,
+                "prompt_tokens": 243,
+                "total_tokens": 2718,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": null
+            },
+            "performance": {
+                "first_token_latency_ms": 6086.463623046875,
+                "generation_time_ms": 16256.093017578125,
+                "throughput_tokens_per_second": 152.25060519300177
+            },
+            "generation_id": "2539CCQKLDKB00742418",
+            "judge_response": {
+                "correct_answer": "yeyo",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "google/gemini-2.5-pro:google-vertex",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

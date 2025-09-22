@@ -1,0 +1,84 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T05:11:21.312643",
+        "model_identifier": "openai/gpt-4.1-mini:azure",
+        "endpoint": {
+            "provider_slug": "azure",
+            "provider": "Azure",
+            "context_length": 1047576,
+            "max_completion_tokens": 32768,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 2248.98,
+            "avg_generation_time_ms": 2985.89,
+            "avg_throughput_tokens_per_second": 40.86,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-4.1-mini:azure",
+            "response": "Explanation: Arrhenius's sixth impossibility theorem in population ethics outlines conditions that a social welfare function cannot satisfy simultaneously. Critical-level views are a type of population axiology that introduce a \"critical level\" of welfare, below which adding individuals can reduce overall value. These views violate the condition of Non-Elitism, which states that the social welfare function should not give absolute priority to a small elite group over others. Critical-level views can prioritize populations above or below the critical level in a way that conflicts with Non-Elitism.\n\nAnswer: C. Non-Elitism  \nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 122,
+                "prompt_tokens": 110,
+                "total_tokens": 232,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 2248.98291015625,
+                "generation_time_ms": 2985.886474609375,
+                "throughput_tokens_per_second": 40.858887649424275
+            },
+            "generation_id": "2539CCHEXEGP00743414"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-4.1-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-4.1-mini:azure",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

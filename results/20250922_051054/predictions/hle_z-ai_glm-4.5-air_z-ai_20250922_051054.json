@@ -1,0 +1,79 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T05:11:31.732655",
+        "model_identifier": "z-ai/glm-4.5-air:z-ai",
+        "endpoint": {
+            "provider_slug": "z-ai",
+            "provider": "Z.AI",
+            "context_length": 128000,
+            "max_completion_tokens": 96000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 4904.42,
+            "avg_generation_time_ms": 22810.11,
+            "avg_throughput_tokens_per_second": 49.58,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "z-ai/glm-4.5-air:z-ai",
+            "response": "\nExplanation: Arrhenius's sixth impossibility theorem in population ethics identifies several conditions that any reasonable theory should satisfy, but which are mutually incompatible. Critical-level views violate the Weak Quality Addition condition. This condition states that adding a person with positive well-being should always make a population better, all else being equal. However, critical-level views hold that creating a new person is morally good, bad, or neutral depending on whether the population's average well-being is below, at, or above a certain critical level. If the current average is below the critical level, adding a person with positive but below-critical well-being can lower the average further, making the population worse off according to the critical-level view. This violates Weak Quality Addition because it allows for a scenario where adding a person with positive well-being decreases the overall value of the population.\n\nAnswer: E\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 1131,
+                "prompt_tokens": 109,
+                "total_tokens": 1240,
+                "completion_tokens_details": null,
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 5
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4904.421875,
+                "generation_time_ms": 22810.107666015625,
+                "throughput_tokens_per_second": 49.58328196254228
+            },
+            "generation_id": "2539CCJQANVM00744570"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "z-ai/glm-4.5-air:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "z-ai/glm-4.5-air:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

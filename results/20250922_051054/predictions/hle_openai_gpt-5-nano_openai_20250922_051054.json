@@ -1,0 +1,84 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T05:11:23.409677",
+        "model_identifier": "openai/gpt-5-nano:openai",
+        "endpoint": {
+            "provider_slug": "openai",
+            "provider": "OpenAI",
+            "context_length": 400000,
+            "max_completion_tokens": 128000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        },
+        "performance_averages": {
+            "avg_first_token_latency_ms": 4895.25,
+            "avg_generation_time_ms": 14261.83,
+            "avg_throughput_tokens_per_second": 112.12,
+            "samples_count": 1
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "Explanation: Critical-level views involve a cutoff or threshold below which individuals\u2019 welfare isn\u2019t given equal consideration, which undermines egalitarian dominance (the idea that equality in consideration or outcome should prevail). Thus they violate Egalitarian Dominance.\n\nAnswer: A\n\nConfidence: 0.42",
+            "usage": {
+                "completion_tokens": 1599,
+                "prompt_tokens": 109,
+                "total_tokens": 1708,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": null,
+                    "audio_tokens": null,
+                    "reasoning_tokens": 1536,
+                    "rejected_prediction_tokens": null
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": null,
+                    "cached_tokens": 0
+                }
+            },
+            "performance": {
+                "first_token_latency_ms": 4895.2529296875,
+                "generation_time_ms": 14261.834228515625,
+                "throughput_tokens_per_second": 112.11741592136177
+            },
+            "generation_id": "2539CCVIRSQW00744560"
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "openai/gpt-5-nano:openai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}

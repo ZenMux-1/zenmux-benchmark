@@ -1,0 +1,65 @@
+{
+    "evaluation_metadata": {
+        "timestamp": "2025-09-22T05:11:30.978042",
+        "model_identifier": "z-ai/glm-4.5:z-ai",
+        "endpoint": {
+            "provider_slug": "z-ai",
+            "provider": "Z.AI",
+            "context_length": 128000,
+            "max_completion_tokens": 96000,
+            "supports_streaming": true,
+            "suitable_api": "chat.completions"
+        },
+        "dataset_config": {
+            "dataset_name": "cais/hle",
+            "dataset_split": "test",
+            "text_only": true,
+            "max_samples": 3
+        },
+        "evaluation_config": {
+            "max_completion_tokens": null,
+            "temperature": 0.0,
+            "num_workers": 3,
+            "timeout": 300.0,
+            "max_retries": 2
+        }
+    },
+    "predictions": {
+        "668825f80a642802bdfeadfa": {
+            "model": "z-ai/glm-4.5:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "668828540a642802bdfeadfc": {
+            "model": "z-ai/glm-4.5:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        },
+        "669402b41dcb3d5a1ef9e951": {
+            "model": "z-ai/glm-4.5:z-ai",
+            "response": "",
+            "usage": {},
+            "performance": {
+                "first_token_latency_ms": 0.0,
+                "generation_time_ms": 0.0,
+                "throughput_tokens_per_second": 0.0
+            },
+            "generation_id": null,
+            "error": ""
+        }
+    }
+}
