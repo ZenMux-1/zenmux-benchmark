@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T16:53:58.889579",
+        "timestamp": "2025-09-23T17:06:42.068059",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 48
     },
@@ -8,17 +8,17 @@
         "openai/gpt-5-chat:azure": {
             "prediction_file": "hle_openai_gpt-5-chat_azure_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2156,
-            "responses_without_content": 2,
-            "completion_rate": 99.91,
-            "is_complete": false
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
         },
         "openai/o4-mini:azure": {
             "prediction_file": "hle_openai_o4-mini_azure_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2119,
-            "responses_without_content": 39,
-            "completion_rate": 98.19,
+            "responses_with_content": 2150,
+            "responses_without_content": 8,
+            "completion_rate": 99.63,
             "is_complete": false
         },
         "openai/gpt-5-nano:azure": {
@@ -32,9 +32,9 @@
         "anthropic/claude-opus-4:google-vertex": {
             "prediction_file": "hle_anthropic_claude-opus-4_google-vertex_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2139,
-            "responses_without_content": 19,
-            "completion_rate": 99.12,
+            "responses_with_content": 2140,
+            "responses_without_content": 18,
+            "completion_rate": 99.17,
             "is_complete": false
         },
         "anthropic/claude-sonnet-4:google-vertex": {
@@ -48,9 +48,9 @@
         "x-ai/grok-4-fast-non-reasoning:x-ai": {
             "prediction_file": "hle_x-ai_grok-4-fast-non-reasoning_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1896,
-            "responses_without_content": 262,
-            "completion_rate": 87.86,
+            "responses_with_content": 2026,
+            "responses_without_content": 132,
+            "completion_rate": 93.88,
             "is_complete": false
         },
         "qwen/qwen3-coder-plus:alibaba": {
@@ -392,7 +392,6 @@
     },
     "failure_lists": {
         "incomplete_evaluation_models": [
-            "openai/gpt-5-chat:azure",
             "openai/o4-mini:azure",
             "anthropic/claude-opus-4:google-vertex",
             "x-ai/grok-4-fast-non-reasoning:x-ai",
@@ -427,8 +426,8 @@
     "summary": {
         "total_models": 48,
         "models_with_responses": 48,
-        "models_with_complete_evaluation": 19,
+        "models_with_complete_evaluation": 20,
         "total_questions_across_all_models": 103584,
-        "total_responses_across_all_models": 97987
+        "total_responses_across_all_models": 98151
     }
 }

