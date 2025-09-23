@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T19:23:08.384202",
+        "timestamp": "2025-09-23T22:18:15.273319",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 48
     },
@@ -16,9 +16,9 @@
         "openai/o4-mini:azure": {
             "prediction_file": "hle_openai_o4-mini_azure_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2155,
-            "responses_without_content": 3,
-            "completion_rate": 99.86,
+            "responses_with_content": 2156,
+            "responses_without_content": 2,
+            "completion_rate": 99.91,
             "is_complete": false
         },
         "openai/gpt-5-nano:azure": {
@@ -96,9 +96,9 @@
         "anthropic/claude-opus-4.1:amazon-bedrock": {
             "prediction_file": "hle_anthropic_claude-opus-4.1_amazon-bedrock_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2144,
-            "responses_without_content": 14,
-            "completion_rate": 99.35,
+            "responses_with_content": 2145,
+            "responses_without_content": 13,
+            "completion_rate": 99.4,
             "is_complete": false
         },
         "google/gemini-2.0-flash:google-vertex": {
@@ -144,10 +144,10 @@
         "anthropic/claude-3.7-sonnet:amazon-bedrock": {
             "prediction_file": "hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2156,
-            "responses_without_content": 2,
-            "completion_rate": 99.91,
-            "is_complete": false
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
         },
         "anthropic/claude-sonnet-4:anthropic": {
             "prediction_file": "hle_anthropic_claude-sonnet-4_anthropic_20250922_122904.json",
@@ -328,9 +328,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "prediction_file": "hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1765,
-            "responses_without_content": 393,
-            "completion_rate": 81.79,
+            "responses_with_content": 2088,
+            "responses_without_content": 70,
+            "completion_rate": 96.76,
             "is_complete": false
         },
         "google/gemini-2.5-flash:google-vertex": {
@@ -344,17 +344,17 @@
         "openai/o4-mini:openai": {
             "prediction_file": "hle_openai_o4-mini_openai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2153,
-            "responses_without_content": 5,
-            "completion_rate": 99.77,
+            "responses_with_content": 2156,
+            "responses_without_content": 2,
+            "completion_rate": 99.91,
             "is_complete": false
         },
         "x-ai/grok-4:x-ai": {
             "prediction_file": "hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 452,
-            "responses_without_content": 1706,
-            "completion_rate": 20.95,
+            "responses_with_content": 1436,
+            "responses_without_content": 722,
+            "completion_rate": 66.54,
             "is_complete": false
         },
         "anthropic/claude-opus-4:amazon-bedrock": {
@@ -376,9 +376,9 @@
         "x-ai/grok-4-fast:x-ai": {
             "prediction_file": "hle_x-ai_grok-4-fast_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1054,
-            "responses_without_content": 1104,
-            "completion_rate": 48.84,
+            "responses_with_content": 1097,
+            "responses_without_content": 1061,
+            "completion_rate": 50.83,
             "is_complete": false
         },
         "openai/gpt-4.1-nano:openai": {
@@ -396,7 +396,6 @@
             "anthropic/claude-opus-4:google-vertex",
             "anthropic/claude-opus-4.1:google-vertex",
             "anthropic/claude-opus-4.1:amazon-bedrock",
-            "anthropic/claude-3.7-sonnet:amazon-bedrock",
             "anthropic/claude-opus-4.1:anthropic",
             "anthropic/claude-opus-4:anthropic",
             "x-ai/grok-code-fast-1:x-ai",
@@ -410,8 +409,8 @@
     "summary": {
         "total_models": 48,
         "models_with_responses": 48,
-        "models_with_complete_evaluation": 36,
+        "models_with_complete_evaluation": 37,
         "total_questions_across_all_models": 103584,
-        "total_responses_across_all_models": 100269
+        "total_responses_across_all_models": 101626
     }
 }
