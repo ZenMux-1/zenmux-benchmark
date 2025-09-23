@@ -1,13 +1,13 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T16:06:07.472550",
+        "timestamp": "2025-09-23T16:54:00.681215",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 48,
-        "models_with_valid_metrics": 1,
-        "models_excluded_from_metrics": 47,
+        "models_with_valid_metrics": 7,
+        "models_excluded_from_metrics": 40,
         "models_with_errors": 0
     },
     "failure_lists": {
@@ -25,22 +25,16 @@
             "anthropic/claude-opus-4.1:amazon-bedrock",
             "google/gemini-2.0-flash:google-vertex",
             "anthropic/claude-3.5-sonnet:amazon-bedrock",
-            "deepseek/deepseek-chat:deepseek",
             "openai/gpt-5-mini:openai",
             "openai/gpt-5-chat:openai",
             "anthropic/claude-3.7-sonnet:amazon-bedrock",
-            "anthropic/claude-sonnet-4:anthropic",
             "openai/gpt-5-nano:openai",
-            "openai/gpt-4.1-mini:azure",
-            "openai/gpt-4.1:azure",
             "anthropic/claude-opus-4.1:anthropic",
             "anthropic/claude-3.5-haiku:amazon-bedrock",
             "anthropic/claude-opus-4:anthropic",
             "anthropic/claude-3.5-sonnet:anthropic",
             "anthropic/claude-3.7-sonnet:anthropic",
             "anthropic/claude-sonnet-4:amazon-bedrock",
-            "openai/gpt-4o-mini:azure",
-            "openai/gpt-4o:azure",
             "anthropic/claude-3.5-haiku:google-vertex",
             "anthropic/claude-3.5-sonnet:google-vertex",
             "openai/gpt-4o-mini:openai",
@@ -49,7 +43,6 @@
             "moonshotai/kimi-k2-0711:volcengine",
             "openai/gpt-5-mini:azure",
             "openai/gpt-4o:openai",
-            "openai/gpt-4.1:openai",
             "deepseek/deepseek-chat-v3.1:volcengine",
             "x-ai/grok-code-fast-1:x-ai",
             "google/gemini-2.5-flash:google-vertex",
@@ -63,8 +56,8 @@
         "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 47,
-        "incomplete_judgments": 34
+        "incomplete_evaluations": 29,
+        "incomplete_judgments": 20
     },
     "error_summary": {}
 }

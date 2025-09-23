@@ -1,12 +1,12 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-23T16:06:04.038122",
+        "timestamp": "2025-09-23T16:53:57.327561",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
             "auto_judge": true,
-            "num_workers": 100,
-            "max_concurrent_models": 10,
+            "num_workers": 250,
+            "max_concurrent_models": 5,
             "model_filter": null,
             "model_slug": null,
             "provider_slug": null
@@ -60,7 +60,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "x-ai/grok-4-fast-non-reasoning:x-ai",
@@ -69,7 +69,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
         },
         {
             "model_identifier": "qwen/qwen3-coder-plus:alibaba",
@@ -78,7 +78,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "moonshotai/kimi-k2-0905:moonshotai",
@@ -87,7 +87,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-3.7-sonnet:google-vertex",
@@ -96,7 +96,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-opus-4.1:google-vertex",
@@ -114,7 +114,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-opus-4.1:amazon-bedrock",
@@ -123,7 +123,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "google/gemini-2.0-flash:google-vertex",
@@ -132,7 +132,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-3.5-sonnet:amazon-bedrock",
@@ -141,7 +141,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "deepseek/deepseek-chat:deepseek",
@@ -149,8 +149,8 @@
             "judged_file": null,
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-5-mini:openai",
@@ -177,16 +177,20 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-sonnet-4:anthropic",
             "predictions_file": "results/20250922_122904/predictions/hle_anthropic_claude-sonnet-4_anthropic_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_anthropic_claude-sonnet-4_anthropic_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 5.1,
+                "confidence_interval": 0.93,
+                "calibration_error": 75.86
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-5-nano:openai",
@@ -201,19 +205,27 @@
             "model_identifier": "openai/gpt-4.1-mini:azure",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_gpt-4.1-mini_azure_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_gpt-4.1-mini_azure_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 4.73,
+                "confidence_interval": 0.9,
+                "calibration_error": 83.32
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-4.1:azure",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_gpt-4.1_azure_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_gpt-4.1_azure_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 3.89,
+                "confidence_interval": 0.82,
+                "calibration_error": 87.02
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-opus-4.1:anthropic",
@@ -222,7 +234,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-3.5-haiku:amazon-bedrock",
@@ -231,7 +243,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-opus-4:anthropic",
@@ -240,7 +252,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-3.5-sonnet:anthropic",
@@ -249,7 +261,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-3.7-sonnet:anthropic",
@@ -258,7 +270,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-sonnet-4:amazon-bedrock",
@@ -267,25 +279,33 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "openai/gpt-4o-mini:azure",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_gpt-4o-mini_azure_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_gpt-4o-mini_azure_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 4.08,
+                "confidence_interval": 0.83,
+                "calibration_error": 80.71
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-4o:azure",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_gpt-4o_azure_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_gpt-4o_azure_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 2.09,
+                "confidence_interval": 0.6,
+                "calibration_error": 87.37
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-3.5-haiku:google-vertex",
@@ -303,7 +323,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "openai/gpt-4o-mini:openai",
@@ -321,7 +341,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "openai/gpt-4.1-nano:azure",
@@ -339,7 +359,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
         },
         {
             "model_identifier": "openai/gpt-5-mini:azure",
@@ -363,10 +383,14 @@
             "model_identifier": "openai/gpt-4.1:openai",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_gpt-4.1_openai_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_gpt-4.1_openai_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 4.12,
+                "confidence_interval": 0.84,
+                "calibration_error": 87.59
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "deepseek/deepseek-chat-v3.1:volcengine",
@@ -375,7 +399,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "x-ai/grok-code-fast-1:x-ai",
@@ -402,7 +426,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "x-ai/grok-4:x-ai",
@@ -411,7 +435,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-opus-4:amazon-bedrock",
@@ -420,7 +444,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "openai/gpt-4.1-mini:openai",
@@ -429,7 +453,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "x-ai/grok-4-fast:x-ai",
@@ -438,7 +462,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "openai/gpt-4.1-nano:openai",
@@ -447,7 +471,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         }
     ]
 }
