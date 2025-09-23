@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-23T17:56:42.308107",
+        "timestamp": "2025-09-23T18:16:12.448201",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -194,8 +194,8 @@
             "judged_file": null,
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-5-chat:openai",
@@ -496,7 +496,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
         },
         {
             "model_identifier": "google/gemini-2.5-flash:google-vertex",

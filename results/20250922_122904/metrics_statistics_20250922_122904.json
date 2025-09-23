@@ -1,13 +1,13 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T17:56:44.727449",
+        "timestamp": "2025-09-23T18:16:14.820057",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 48,
         "models_with_valid_metrics": 31,
-        "models_excluded_from_metrics": 16,
+        "models_excluded_from_metrics": 15,
         "models_with_errors": 0
     },
     "failure_lists": {
@@ -16,7 +16,6 @@
             "anthropic/claude-opus-4:google-vertex",
             "anthropic/claude-opus-4.1:google-vertex",
             "anthropic/claude-opus-4.1:amazon-bedrock",
-            "openai/gpt-5-mini:openai",
             "anthropic/claude-3.7-sonnet:amazon-bedrock",
             "anthropic/claude-opus-4.1:anthropic",
             "anthropic/claude-opus-4:anthropic",
@@ -32,8 +31,8 @@
         "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 15,
-        "incomplete_judgments": 1
+        "incomplete_evaluations": 14,
+        "incomplete_judgments": 2
     },
     "error_summary": {}
 }
