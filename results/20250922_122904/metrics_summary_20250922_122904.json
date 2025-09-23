@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-23T17:33:33.972675",
+        "timestamp": "2025-09-23T17:56:42.308107",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -284,10 +284,14 @@
             "model_identifier": "anthropic/claude-3.5-haiku:amazon-bedrock",
             "predictions_file": "results/20250922_122904/predictions/hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 3.38,
+                "confidence_interval": 0.76,
+                "calibration_error": 80.04
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_judgments"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-opus-4:anthropic",
@@ -367,19 +371,27 @@
             "model_identifier": "anthropic/claude-3.5-haiku:google-vertex",
             "predictions_file": "results/20250922_122904/predictions/hle_anthropic_claude-3.5-haiku_google-vertex_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_anthropic_claude-3.5-haiku_google-vertex_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 3.66,
+                "confidence_interval": 0.79,
+                "calibration_error": 79.72
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_judgments"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-3.5-sonnet:google-vertex",
             "predictions_file": "results/20250922_122904/predictions/hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 3.34,
+                "confidence_interval": 0.76,
+                "calibration_error": 84.27
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_judgments"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-4o-mini:openai",
@@ -484,7 +496,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "google/gemini-2.5-flash:google-vertex",
@@ -548,10 +560,14 @@
             "model_identifier": "openai/gpt-4.1-nano:openai",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_gpt-4.1-nano_openai_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_gpt-4.1-nano_openai_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 4.03,
+                "confidence_interval": 0.83,
+                "calibration_error": 78.81
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         }
     ]
 }

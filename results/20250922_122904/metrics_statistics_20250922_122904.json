@@ -1,13 +1,13 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T17:33:36.478834",
+        "timestamp": "2025-09-23T17:56:44.727449",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 48,
-        "models_with_valid_metrics": 27,
-        "models_excluded_from_metrics": 20,
+        "models_with_valid_metrics": 31,
+        "models_excluded_from_metrics": 16,
         "models_with_errors": 0
     },
     "failure_lists": {
@@ -19,10 +19,7 @@
             "openai/gpt-5-mini:openai",
             "anthropic/claude-3.7-sonnet:amazon-bedrock",
             "anthropic/claude-opus-4.1:anthropic",
-            "anthropic/claude-3.5-haiku:amazon-bedrock",
             "anthropic/claude-opus-4:anthropic",
-            "anthropic/claude-3.5-haiku:google-vertex",
-            "anthropic/claude-3.5-sonnet:google-vertex",
             "moonshotai/kimi-k2-0711:volcengine",
             "openai/gpt-5-mini:azure",
             "x-ai/grok-code-fast-1:x-ai",
@@ -30,14 +27,13 @@
             "openai/o4-mini:openai",
             "x-ai/grok-4:x-ai",
             "anthropic/claude-opus-4:amazon-bedrock",
-            "x-ai/grok-4-fast:x-ai",
-            "openai/gpt-4.1-nano:openai"
+            "x-ai/grok-4-fast:x-ai"
         ],
         "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 16,
-        "incomplete_judgments": 5
+        "incomplete_evaluations": 15,
+        "incomplete_judgments": 1
     },
     "error_summary": {}
 }
