@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-23T19:07:24.876304",
+        "timestamp": "2025-09-23T19:23:07.887750",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -217,7 +217,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-sonnet-4:anthropic",

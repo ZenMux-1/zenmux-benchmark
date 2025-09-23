@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T19:07:25.398330",
+        "timestamp": "2025-09-23T19:23:08.384202",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 48
     },
@@ -144,9 +144,9 @@
         "anthropic/claude-3.7-sonnet:amazon-bedrock": {
             "prediction_file": "hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2040,
-            "responses_without_content": 118,
-            "completion_rate": 94.53,
+            "responses_with_content": 2156,
+            "responses_without_content": 2,
+            "completion_rate": 99.91,
             "is_complete": false
         },
         "anthropic/claude-sonnet-4:anthropic": {
@@ -328,9 +328,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "prediction_file": "hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1631,
-            "responses_without_content": 527,
-            "completion_rate": 75.58,
+            "responses_with_content": 1765,
+            "responses_without_content": 393,
+            "completion_rate": 81.79,
             "is_complete": false
         },
         "google/gemini-2.5-flash:google-vertex": {
@@ -344,17 +344,17 @@
         "openai/o4-mini:openai": {
             "prediction_file": "hle_openai_o4-mini_openai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2150,
-            "responses_without_content": 8,
-            "completion_rate": 99.63,
+            "responses_with_content": 2153,
+            "responses_without_content": 5,
+            "completion_rate": 99.77,
             "is_complete": false
         },
         "x-ai/grok-4:x-ai": {
             "prediction_file": "hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 397,
-            "responses_without_content": 1761,
-            "completion_rate": 18.4,
+            "responses_with_content": 452,
+            "responses_without_content": 1706,
+            "completion_rate": 20.95,
             "is_complete": false
         },
         "anthropic/claude-opus-4:amazon-bedrock": {
@@ -412,6 +412,6 @@
         "models_with_responses": 48,
         "models_with_complete_evaluation": 36,
         "total_questions_across_all_models": 103584,
-        "total_responses_across_all_models": 99961
+        "total_responses_across_all_models": 100269
     }
 }

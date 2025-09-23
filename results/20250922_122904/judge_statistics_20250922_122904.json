@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T19:07:26.225842",
+        "timestamp": "2025-09-23T19:23:09.251537",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 46
     },
@@ -112,9 +112,9 @@
         "anthropic/claude-opus-4:anthropic": {
             "judged_file": "judged_hle_anthropic_claude-opus-4_anthropic_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2137,
-            "judgments_without_content": 21,
-            "completion_rate": 99.03,
+            "judgments_with_content": 2139,
+            "judgments_without_content": 19,
+            "completion_rate": 99.12,
             "is_complete": false
         },
         "anthropic/claude-3.5-sonnet:google-vertex": {
@@ -184,9 +184,9 @@
         "anthropic/claude-3.7-sonnet:amazon-bedrock": {
             "judged_file": "judged_hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2040,
-            "judgments_without_content": 118,
-            "completion_rate": 94.53,
+            "judgments_with_content": 2131,
+            "judgments_without_content": 27,
+            "completion_rate": 98.75,
             "is_complete": false
         },
         "anthropic/claude-opus-4.1:anthropic": {
@@ -216,9 +216,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 1631,
-            "judgments_without_content": 527,
-            "completion_rate": 75.58,
+            "judgments_with_content": 1765,
+            "judgments_without_content": 393,
+            "completion_rate": 81.79,
             "is_complete": false
         },
         "anthropic/claude-opus-4:google-vertex": {
@@ -256,9 +256,9 @@
         "openai/o4-mini:openai": {
             "judged_file": "judged_hle_openai_o4-mini_openai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2150,
-            "judgments_without_content": 8,
-            "completion_rate": 99.63,
+            "judgments_with_content": 2153,
+            "judgments_without_content": 5,
+            "completion_rate": 99.77,
             "is_complete": false
         },
         "openai/gpt-5-mini:azure": {
@@ -352,9 +352,9 @@
         "x-ai/grok-4:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 397,
-            "judgments_without_content": 1761,
-            "completion_rate": 18.4,
+            "judgments_with_content": 452,
+            "judgments_without_content": 1706,
+            "completion_rate": 20.95,
             "is_complete": false
         },
         "openai/gpt-4o-mini:azure": {
@@ -397,6 +397,6 @@
         "models_with_judgments": 46,
         "models_with_complete_judging": 33,
         "total_questions_across_all_models": 99268,
-        "total_judgments_across_all_models": 95642
+        "total_judgments_across_all_models": 95927
     }
 }
