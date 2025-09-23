@@ -1,57 +1,43 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T17:06:43.901711",
+        "timestamp": "2025-09-23T17:33:36.478834",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 48,
-        "models_with_valid_metrics": 13,
-        "models_excluded_from_metrics": 34,
+        "models_with_valid_metrics": 27,
+        "models_excluded_from_metrics": 20,
         "models_with_errors": 0
     },
     "failure_lists": {
         "excluded_models": [
             "openai/o4-mini:azure",
             "anthropic/claude-opus-4:google-vertex",
-            "x-ai/grok-4-fast-non-reasoning:x-ai",
             "anthropic/claude-opus-4.1:google-vertex",
             "anthropic/claude-opus-4.1:amazon-bedrock",
-            "google/gemini-2.0-flash:google-vertex",
-            "anthropic/claude-3.5-sonnet:amazon-bedrock",
             "openai/gpt-5-mini:openai",
-            "openai/gpt-5-chat:openai",
             "anthropic/claude-3.7-sonnet:amazon-bedrock",
-            "openai/gpt-5-nano:openai",
             "anthropic/claude-opus-4.1:anthropic",
             "anthropic/claude-3.5-haiku:amazon-bedrock",
             "anthropic/claude-opus-4:anthropic",
-            "anthropic/claude-3.5-sonnet:anthropic",
-            "anthropic/claude-3.7-sonnet:anthropic",
-            "anthropic/claude-sonnet-4:amazon-bedrock",
             "anthropic/claude-3.5-haiku:google-vertex",
             "anthropic/claude-3.5-sonnet:google-vertex",
-            "openai/gpt-4o-mini:openai",
-            "google/gemini-2.0-flash-lite-001:google-vertex",
-            "openai/gpt-4.1-nano:azure",
             "moonshotai/kimi-k2-0711:volcengine",
             "openai/gpt-5-mini:azure",
-            "openai/gpt-4o:openai",
-            "deepseek/deepseek-chat-v3.1:volcengine",
             "x-ai/grok-code-fast-1:x-ai",
             "google/gemini-2.5-flash:google-vertex",
             "openai/o4-mini:openai",
             "x-ai/grok-4:x-ai",
             "anthropic/claude-opus-4:amazon-bedrock",
-            "openai/gpt-4.1-mini:openai",
             "x-ai/grok-4-fast:x-ai",
             "openai/gpt-4.1-nano:openai"
         ],
         "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 28,
-        "incomplete_judgments": 16
+        "incomplete_evaluations": 16,
+        "incomplete_judgments": 5
     },
     "error_summary": {}
 }
