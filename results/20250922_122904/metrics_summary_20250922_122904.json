@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-23T18:54:37.767842",
+        "timestamp": "2025-09-23T19:07:24.876304",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -436,19 +436,27 @@
             "model_identifier": "moonshotai/kimi-k2-0711:volcengine",
             "predictions_file": "results/20250922_122904/predictions/hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 6.26,
+                "confidence_interval": 1.02,
+                "calibration_error": 85.03
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-5-mini:azure",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_gpt-5-mini_azure_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_gpt-5-mini_azure_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 14.69,
+                "confidence_interval": 1.49,
+                "calibration_error": 64.11
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-4o:openai",

@@ -1,13 +1,13 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T18:54:40.163121",
+        "timestamp": "2025-09-23T19:07:27.229904",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 48,
-        "models_with_valid_metrics": 31,
-        "models_excluded_from_metrics": 15,
+        "models_with_valid_metrics": 33,
+        "models_excluded_from_metrics": 13,
         "models_with_errors": 0
     },
     "failure_lists": {
@@ -19,8 +19,6 @@
             "anthropic/claude-3.7-sonnet:amazon-bedrock",
             "anthropic/claude-opus-4.1:anthropic",
             "anthropic/claude-opus-4:anthropic",
-            "moonshotai/kimi-k2-0711:volcengine",
-            "openai/gpt-5-mini:azure",
             "x-ai/grok-code-fast-1:x-ai",
             "google/gemini-2.5-flash:google-vertex",
             "openai/o4-mini:openai",
@@ -31,7 +29,7 @@
         "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 14,
+        "incomplete_evaluations": 12,
         "incomplete_judgments": 1
     },
     "error_summary": {}

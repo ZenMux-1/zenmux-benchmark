@@ -137,7 +137,7 @@
             "supports_reasoning": true
         },
         "anthropic/claude-3.7-sonnet:amazon-bedrock": {
-            "max_completion_tokens": 128000,
+            "max_completion_tokens": 64000,
             "context_length": 200000,
             "supports_reasoning": true
         },
