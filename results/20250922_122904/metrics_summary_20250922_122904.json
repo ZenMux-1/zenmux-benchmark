@@ -1,11 +1,11 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-23T18:16:12.448201",
+        "timestamp": "2025-09-23T18:54:37.767842",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
             "auto_judge": true,
-            "num_workers": 300,
+            "num_workers": 500,
             "max_concurrent_models": 5,
             "model_filter": null,
             "model_slug": null,
@@ -496,7 +496,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "google/gemini-2.5-flash:google-vertex",

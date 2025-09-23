@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T18:16:13.033514",
+        "timestamp": "2025-09-23T18:54:38.354668",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 48
     },
@@ -184,9 +184,9 @@
         "anthropic/claude-opus-4.1:anthropic": {
             "prediction_file": "hle_anthropic_claude-opus-4.1_anthropic_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2137,
-            "responses_without_content": 21,
-            "completion_rate": 99.03,
+            "responses_with_content": 2138,
+            "responses_without_content": 20,
+            "completion_rate": 99.07,
             "is_complete": false
         },
         "anthropic/claude-3.5-haiku:amazon-bedrock": {
@@ -200,9 +200,9 @@
         "anthropic/claude-opus-4:anthropic": {
             "prediction_file": "hle_anthropic_claude-opus-4_anthropic_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2137,
-            "responses_without_content": 21,
-            "completion_rate": 99.03,
+            "responses_with_content": 2138,
+            "responses_without_content": 20,
+            "completion_rate": 99.07,
             "is_complete": false
         },
         "anthropic/claude-3.5-sonnet:anthropic": {
@@ -288,9 +288,9 @@
         "moonshotai/kimi-k2-0711:volcengine": {
             "prediction_file": "hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2154,
-            "responses_without_content": 4,
-            "completion_rate": 99.81,
+            "responses_with_content": 2155,
+            "responses_without_content": 3,
+            "completion_rate": 99.86,
             "is_complete": false
         },
         "openai/gpt-5-mini:azure": {
@@ -328,9 +328,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "prediction_file": "hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1299,
-            "responses_without_content": 859,
-            "completion_rate": 60.19,
+            "responses_with_content": 1463,
+            "responses_without_content": 695,
+            "completion_rate": 67.79,
             "is_complete": false
         },
         "google/gemini-2.5-flash:google-vertex": {
@@ -414,6 +414,6 @@
         "models_with_responses": 48,
         "models_with_complete_evaluation": 34,
         "total_questions_across_all_models": 103584,
-        "total_responses_across_all_models": 99618
+        "total_responses_across_all_models": 99785
     }
 }
