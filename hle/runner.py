@@ -284,11 +284,8 @@ class HLERunner:
                     else:
                         self.logger.error(f"❌ Error evaluating {model_identifier}: {e}")
 
-                    # Clean up any connections for this model to free resources
-                    try:
-                        await self.evaluator.zenmux_client.close()
-                    except:
-                        pass
+                    # NOTE: Do NOT close shared HTTP clients in error handling
+                    # They are used by other concurrent models
 
                     return {
                         "model_identifier": model_identifier,
@@ -299,14 +296,9 @@ class HLERunner:
                     }
 
                 finally:
-                    # Always try to clean up connections after each model
-                    try:
-                        await self.evaluator.zenmux_client.close()
-                        # Also clean up judge client connections
-                        await self.judge.zenmux_client.close()
-                    except Exception as cleanup_error:
-                        self.logger.warning(f"⚠️ Warning: Failed to cleanup connections for {model_identifier}: {cleanup_error}")
-                        pass
+                    # NOTE: Do NOT close shared HTTP clients here as they are used by other concurrent models
+                    # HTTP clients will be properly closed when the runner is destroyed
+                    pass
 
         # Create semaphore for outer layer concurrency
         models_semaphore = asyncio.Semaphore(self.config.hle.max_concurrent_models)
@@ -316,6 +308,10 @@ class HLERunner:
         results = await asyncio.gather(*tasks)
 
         self.logger.info(f"\n✅ Completed evaluation of {len(results)} model endpoints")
+
+        # Clean up shared HTTP clients ONLY after all models are done
+        await self._cleanup_resources()
+
         return results
 
     async def run_specific_model_evaluation(
@@ -347,13 +343,18 @@ class HLERunner:
 
         # Run the evaluation
         model_identifier, model, endpoint = target_model_pair
-        return await self.run_single_model_evaluation(
-            model_identifier=model_identifier,
-            endpoint=endpoint,
-            text_only=text_only,
-            max_samples=max_samples,
-            auto_judge=auto_judge
-        )
+        try:
+            result = await self.run_single_model_evaluation(
+                model_identifier=model_identifier,
+                endpoint=endpoint,
+                text_only=text_only,
+                max_samples=max_samples,
+                auto_judge=auto_judge
+            )
+            return result
+        finally:
+            # Clean up resources after single model evaluation
+            await self._cleanup_resources()
 
     def validate_evaluation_completeness(self, predictions_file: str) -> bool:
         """Validate that evaluation is complete by checking if all responses are non-empty."""
@@ -930,6 +931,24 @@ class HLERunner:
             "metrics_summary_file": metrics_summary_file
         }
 
+        # Clean up resources after fix operations
+        await self._cleanup_resources()
+
+        return {
+            "fixed_models": fixed_models,
+            "models_with_no_failures": models_with_no_failures,
+            "still_failed_evaluation_models": still_failed_evaluation_models,
+            "still_failed_judge_models": still_failed_judge_models,
+            "processing_error_models": processing_error_models,
+            "fixed_count": len(fixed_models),
+            "no_failures_count": len(models_with_no_failures),
+            "still_eval_failures_count": len(still_failed_evaluation_models),
+            "still_judge_failures_count": len(still_failed_judge_models),
+            "processing_errors_count": len(processing_error_models),
+            "remaining_failures": len(unique_still_failed_models),
+            "metrics_summary_file": metrics_summary_file
+        }
+
     def _build_results_from_timestamp_dir(self, timestamp_dir: str) -> List[Dict[str, Any]]:
         """Build results structure from existing files in timestamp directory."""
         results = []
@@ -1486,3 +1505,43 @@ class HLERunner:
         self.logger.info(f"📁 Run directory: {self.config.run_dir}")
         self.logger.info(f"📁 Prediction files: {self.config.get_predictions_dir()}")
         self.logger.info(f"📁 Judged files: {self.config.get_judged_dir()}")
+
+    async def _cleanup_resources(self):
+        """Clean up shared HTTP client resources after all evaluations are complete."""
+        self.logger.info("🧹 Cleaning up HTTP client resources...")
+
+        cleanup_tasks = []
+
+        # Clean up evaluator HTTP client
+        if self.evaluator and self.evaluator.zenmux_client:
+            cleanup_tasks.append(self._safe_close_client(self.evaluator.zenmux_client, "evaluator"))
+
+        # Clean up judge HTTP client
+        if self.judge and self.judge.zenmux_client:
+            cleanup_tasks.append(self._safe_close_client(self.judge.zenmux_client, "judge"))
+
+        # Clean up API client
+        if hasattr(self.zenmux_api, 'client') and self.zenmux_api.client:
+            cleanup_tasks.append(self._safe_close_client(self.zenmux_api.client, "zenmux_api"))
+
+        # Execute all cleanups concurrently
+        if cleanup_tasks:
+            await asyncio.gather(*cleanup_tasks, return_exceptions=True)
+
+        self.logger.info("✅ Resource cleanup completed")
+
+    async def _safe_close_client(self, client, client_name: str):
+        """Safely close an HTTP client with error handling."""
+        try:
+            await client.close()
+            self.logger.debug(f"✅ Closed {client_name} HTTP client")
+        except Exception as e:
+            self.logger.warning(f"⚠️ Warning: Failed to close {client_name} HTTP client: {e}")
+
+    async def __aenter__(self):
+        """Async context manager entry."""
+        return self
+
+    async def __aexit__(self, exc_type=None, exc_val=None, exc_tb=None):
+        """Async context manager exit with resource cleanup."""
+        await self._cleanup_resources()

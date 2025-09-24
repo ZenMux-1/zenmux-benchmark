@@ -74,7 +74,15 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
                 # Get available models from ZenMux API
                 from zenmux.api import ZenMuxAPI
                 api_client = ZenMuxAPI(self.zenmux_config)
-                available_models = api_client.get_available_models()
+                try:
+                    available_models = api_client.get_available_models()
+                finally:
+                    # Clean up API client resources immediately after use
+                    if hasattr(api_client, 'client') and api_client.client:
+                        try:
+                            await api_client.client.close()
+                        except:
+                            pass
 
                 # Find the matching endpoint
                 target_identifier = f"{model_slug}:{provider_slug}"
