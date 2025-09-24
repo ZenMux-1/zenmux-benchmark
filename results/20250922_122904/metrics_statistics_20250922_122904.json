@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T11:46:38.141255",
+        "timestamp": "2025-09-24T04:23:46.650511",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
@@ -12,24 +12,24 @@
     },
     "failure_lists": {
         "excluded_models": [
-            "openai/o4-mini:azure",
-            "anthropic/claude-opus-4:google-vertex",
+            "x-ai/grok-4-fast:x-ai",
+            "anthropic/claude-opus-4:amazon-bedrock",
             "anthropic/claude-opus-4.1:google-vertex",
-            "anthropic/claude-opus-4.1:amazon-bedrock",
-            "anthropic/claude-opus-4.1:anthropic",
-            "anthropic/claude-opus-4:anthropic",
-            "x-ai/grok-code-fast-1:x-ai",
-            "google/gemini-2.5-flash:google-vertex",
             "openai/o4-mini:openai",
             "x-ai/grok-4:x-ai",
-            "anthropic/claude-opus-4:amazon-bedrock",
-            "x-ai/grok-4-fast:x-ai"
+            "anthropic/claude-opus-4.1:amazon-bedrock",
+            "anthropic/claude-opus-4.1:anthropic",
+            "openai/o4-mini:azure",
+            "x-ai/grok-code-fast-1:x-ai",
+            "anthropic/claude-opus-4:anthropic",
+            "google/gemini-2.5-flash:google-vertex",
+            "anthropic/claude-opus-4:google-vertex"
         ],
         "models_with_errors": []
     },
     "exclusion_reasons": {
         "incomplete_evaluations": 11,
-        "incomplete_judgments": 1
+        "incomplete_judgments": 2
     },
     "error_summary": {}
 }
