@@ -47491,15 +47491,31 @@
         },
         "6736e1afac05181e46df9caf": {
             "model": "x-ai/grok-code-fast-1",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "The problem defines S(n) as the set of sums of n distinct positive integers whose reciprocals sum to exactly 1. For n=4, the possible sets are {2,3,7,42} (sum 54), {2,3,8,24} (sum 37), {2,3,9,18} (sum 32), {2,3,10,15} (sum 30), {2,4,5,20} (sum 31), and {2,4,6,12} (sum 24). The sum of these sums is 208.\n\nThe answer is: 208",
+            "usage": {
+                "completion_tokens": 134,
+                "prompt_tokens": 331,
+                "total_tokens": 50397,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 49932,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 331,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 3913.34716796875,
+                "generation_time_ms": 271991.72607421875,
+                "throughput_tokens_per_second": 0.4926620450338082
+            },
+            "generation_id": "2539CCPMVQMY01068374"
         },
         "6736e54a4c96e49df1036fc6": {
             "model": "x-ai/grok-code-fast-1",
