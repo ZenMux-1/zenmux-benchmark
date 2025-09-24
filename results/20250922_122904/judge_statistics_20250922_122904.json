@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T11:10:39.337479",
+        "timestamp": "2025-09-24T11:46:37.154880",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 46
     },
@@ -40,9 +40,9 @@
         "anthropic/claude-opus-4.1:amazon-bedrock": {
             "judged_file": "judged_hle_anthropic_claude-opus-4.1_amazon-bedrock_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2144,
-            "judgments_without_content": 14,
-            "completion_rate": 99.35,
+            "judgments_with_content": 2145,
+            "judgments_without_content": 13,
+            "completion_rate": 99.4,
             "is_complete": false
         },
         "qwen/qwen3-coder-plus:alibaba": {
@@ -232,9 +232,9 @@
         "x-ai/grok-4-fast:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-4-fast_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 1835,
-            "judgments_without_content": 323,
-            "completion_rate": 85.03,
+            "judgments_with_content": 1954,
+            "judgments_without_content": 204,
+            "completion_rate": 90.55,
             "is_complete": false
         },
         "openai/gpt-4o:openai": {
@@ -352,9 +352,9 @@
         "x-ai/grok-4:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 1746,
-            "judgments_without_content": 412,
-            "completion_rate": 80.91,
+            "judgments_with_content": 1797,
+            "judgments_without_content": 361,
+            "completion_rate": 83.27,
             "is_complete": false
         },
         "openai/gpt-4o-mini:azure": {
@@ -396,6 +396,6 @@
         "models_with_judgments": 46,
         "models_with_complete_judging": 34,
         "total_questions_across_all_models": 99268,
-        "total_judgments_across_all_models": 98402
+        "total_judgments_across_all_models": 98573
     }
 }

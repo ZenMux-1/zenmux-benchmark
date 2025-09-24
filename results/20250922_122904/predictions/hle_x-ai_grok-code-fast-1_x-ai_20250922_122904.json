@@ -55729,7 +55729,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": ""
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "6755d8a01c505b5224374708": {
             "model": "x-ai/grok-code-fast-1",

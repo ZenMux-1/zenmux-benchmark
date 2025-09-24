@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T11:10:38.515877",
+        "timestamp": "2025-09-24T11:46:36.300970",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 48
     },
@@ -352,9 +352,9 @@
         "x-ai/grok-4:x-ai": {
             "prediction_file": "hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1746,
-            "responses_without_content": 412,
-            "completion_rate": 80.91,
+            "responses_with_content": 1797,
+            "responses_without_content": 361,
+            "completion_rate": 83.27,
             "is_complete": false
         },
         "anthropic/claude-opus-4:amazon-bedrock": {
@@ -376,9 +376,9 @@
         "x-ai/grok-4-fast:x-ai": {
             "prediction_file": "hle_x-ai_grok-4-fast_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1835,
-            "responses_without_content": 323,
-            "completion_rate": 85.03,
+            "responses_with_content": 1954,
+            "responses_without_content": 204,
+            "completion_rate": 90.55,
             "is_complete": false
         },
         "openai/gpt-4.1-nano:openai": {
@@ -411,6 +411,6 @@
         "models_with_responses": 48,
         "models_with_complete_evaluation": 37,
         "total_questions_across_all_models": 103584,
-        "total_responses_across_all_models": 102720
+        "total_responses_across_all_models": 102890
     }
 }
