@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-23T22:18:16.098973",
+        "timestamp": "2025-09-24T11:10:39.337479",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 46
     },
@@ -144,9 +144,9 @@
         "openai/o4-mini:azure": {
             "judged_file": "judged_hle_openai_o4-mini_azure_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2156,
-            "judgments_without_content": 2,
-            "completion_rate": 99.91,
+            "judgments_with_content": 2157,
+            "judgments_without_content": 1,
+            "completion_rate": 99.95,
             "is_complete": false
         },
         "openai/gpt-4.1-nano:openai": {
@@ -216,9 +216,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2088,
-            "judgments_without_content": 70,
-            "completion_rate": 96.76,
+            "judgments_with_content": 2133,
+            "judgments_without_content": 25,
+            "completion_rate": 98.84,
             "is_complete": false
         },
         "anthropic/claude-opus-4:google-vertex": {
@@ -232,9 +232,9 @@
         "x-ai/grok-4-fast:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-4-fast_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 1097,
-            "judgments_without_content": 1061,
-            "completion_rate": 50.83,
+            "judgments_with_content": 1835,
+            "judgments_without_content": 323,
+            "completion_rate": 85.03,
             "is_complete": false
         },
         "openai/gpt-4o:openai": {
@@ -352,9 +352,9 @@
         "x-ai/grok-4:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 1436,
-            "judgments_without_content": 722,
-            "completion_rate": 66.54,
+            "judgments_with_content": 1746,
+            "judgments_without_content": 412,
+            "completion_rate": 80.91,
             "is_complete": false
         },
         "openai/gpt-4o-mini:azure": {
@@ -396,6 +396,6 @@
         "models_with_judgments": 46,
         "models_with_complete_judging": 34,
         "total_questions_across_all_models": 99268,
-        "total_judgments_across_all_models": 97308
+        "total_judgments_across_all_models": 98402
     }
 }
