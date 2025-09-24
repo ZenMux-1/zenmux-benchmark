@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T15:51:14.752858",
+        "timestamp": "2025-09-24T16:49:58.661283",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 46
     },
@@ -352,9 +352,9 @@
         "x-ai/grok-4:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 1931,
-            "judgments_without_content": 227,
-            "completion_rate": 89.48,
+            "judgments_with_content": 1944,
+            "judgments_without_content": 214,
+            "completion_rate": 90.08,
             "is_complete": false
         },
         "openai/gpt-4o-mini:azure": {
@@ -396,6 +396,6 @@
         "models_with_judgments": 46,
         "models_with_complete_judging": 34,
         "total_questions_across_all_models": 99268,
-        "total_judgments_across_all_models": 98918
+        "total_judgments_across_all_models": 98931
     }
 }

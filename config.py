@@ -13,7 +13,7 @@ class ZenMuxConfig:
     api_base_url: str = "https://zenmux.ai/api/v1"
     api_key: Optional[str] = None
     model_list_endpoint: str = "https://zenmux.ai/api/frontend/model/available/list"
-    timeout: float = 300.0  # API request timeout - increased to handle slow responses
+    timeout: float = 1200.0  # API request timeout - increased to handle slow responses
     max_retries: int = 2  # Increased retries for network issues
     enable_streaming: bool = True  # Enable streaming responses (default: True for faster TTFB)
 

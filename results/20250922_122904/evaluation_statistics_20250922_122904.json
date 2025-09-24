@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T15:51:13.860018",
+        "timestamp": "2025-09-24T16:49:57.829118",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 48
     },
@@ -352,9 +352,9 @@
         "x-ai/grok-4:x-ai": {
             "prediction_file": "hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1931,
-            "responses_without_content": 227,
-            "completion_rate": 89.48,
+            "responses_with_content": 1944,
+            "responses_without_content": 214,
+            "completion_rate": 90.08,
             "is_complete": false
         },
         "anthropic/claude-opus-4:amazon-bedrock": {
@@ -411,6 +411,6 @@
         "models_with_responses": 48,
         "models_with_complete_evaluation": 37,
         "total_questions_across_all_models": 103584,
-        "total_responses_across_all_models": 103235
+        "total_responses_across_all_models": 103248
     }
 }
