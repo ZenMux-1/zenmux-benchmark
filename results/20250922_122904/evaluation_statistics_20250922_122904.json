@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T06:02:10.314236",
+        "timestamp": "2025-09-24T07:13:17.407819",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 48
     },
@@ -16,9 +16,9 @@
         "x-ai/grok-4-fast:x-ai": {
             "prediction_file": "hle_x-ai_grok-4-fast_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2154,
-            "responses_without_content": 4,
-            "completion_rate": 99.81,
+            "responses_with_content": 2155,
+            "responses_without_content": 3,
+            "completion_rate": 99.86,
             "is_complete": false
         },
         "anthropic/claude-sonnet-4:amazon-bedrock": {
@@ -104,17 +104,17 @@
         "openai/o4-mini:openai": {
             "prediction_file": "hle_openai_o4-mini_openai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2156,
-            "responses_without_content": 2,
-            "completion_rate": 99.91,
+            "responses_with_content": 2157,
+            "responses_without_content": 1,
+            "completion_rate": 99.95,
             "is_complete": false
         },
         "x-ai/grok-4:x-ai": {
             "prediction_file": "hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1883,
-            "responses_without_content": 275,
-            "completion_rate": 87.26,
+            "responses_with_content": 1900,
+            "responses_without_content": 258,
+            "completion_rate": 88.04,
             "is_complete": false
         },
         "anthropic/claude-opus-4.1:amazon-bedrock": {
@@ -312,9 +312,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "prediction_file": "hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2139,
-            "responses_without_content": 19,
-            "completion_rate": 99.12,
+            "responses_with_content": 2140,
+            "responses_without_content": 18,
+            "completion_rate": 99.17,
             "is_complete": false
         },
         "anthropic/claude-3.7-sonnet:google-vertex": {
@@ -411,6 +411,6 @@
         "models_with_responses": 48,
         "models_with_complete_evaluation": 37,
         "total_questions_across_all_models": 103584,
-        "total_responses_across_all_models": 103183
+        "total_responses_across_all_models": 103203
     }
 }

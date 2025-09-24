@@ -43602,3 +43602,47 @@ Correct Answer: 320...
 Response being judged: ----------------------------------------------------------------------------------------------------...
 Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
 
+2025-09-24 06:45:18 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Which antioxidants are initially activated in Microcystis aeruginosa CAAT 2005-3 to counteract oxida...
+Correct Answer: A...
+Response being judged: I need to consider which antioxidants would be the...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-24 06:45:18 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: You are walking on a 2-D grid from point A(0,0) to B(4,8). For each step, you can can only walk 1 un...
+Correct Answer: 320...
+Response being judged: ----------------------------------------------------------------------------------------------------...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-24 06:48:43 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Here is a minimal Sonic-like game simulation.
+``` 
+delta_t, time_steps = 0.05, 1000
+g, jump_power, x...
+Correct Answer: 24 8...
+Response being judged: Explanation:  
+Sonic’s jump arc reaches a bottom‐y max of about 20.73, so his 2‐unit height covers c...
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+
+2025-09-24 07:01:31 | ERROR    | zenmux.judge    | extract_answer       | Error in judge:
+Exception Type: APIConnectionError
+Error Message: Connection error.
+Judge Model: openai/gpt-5:openai
+Generation ID: Not Available
+Question: Integrate $\max(|2*\sin(x)|, |2*\cos(2*x) - 1|)^{50} * \min(|\sin(2*x)|, |\cos(3*x)|)^{50}$ from $x ...
+Correct Answer: 289026722411805831750717\pi/2199023255552...
+Response being judged: Explanation: The integrand simplifies to \left[2 \sin x \, |\cos x| \, |1 - 4 \sin^2 x|\right]^{50}....
+Additional Error Info: {'response_body': 'None', 'request_url': URL('https://zenmux.ai/api/v1/chat/completions'), 'request_method': 'POST'}
+

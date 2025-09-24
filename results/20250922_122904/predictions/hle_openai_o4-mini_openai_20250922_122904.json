@@ -32370,15 +32370,28 @@
         },
         "67253a0b13c1aec29d1f1841": {
             "model": "openai/o4-mini",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation:  \nSonic\u2019s jump arc reaches a bottom\u2010y max of about 20.73, so his 2\u2010unit height covers coin rows y=11,13,15,17,19,21 (but not y=23).  There are 16 coins in each of those 6 rows, so 6\u00d716=96 total.  \nAt the peak (when Sonic\u2019s bottom y is \u224820.7) he just spans the row\u201021 coins while his x moves from about 14.16 to 28.53, which lets him pick up the columns at x=15,17,\u2026,29 \u2013 that\u2019s 8 coins at y=21.  \n\nAnswer: 96 8  \nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 7469,
+                "prompt_tokens": 339,
+                "total_tokens": 7808,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 7296,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 0
+                }
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 90616.36767578125,
+                "generation_time_ms": 2888.978759765625,
+                "throughput_tokens_per_second": 2585.3426491117366
+            },
+            "generation_id": "2539CCWHBCMK01070234"
         },
         "67253a6aab5670ae51f28912": {
             "model": "openai/o4-mini:openai",
