@@ -185,7 +185,7 @@
             "judged_file": null,
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": false,
+            "excluded_from_metrics": true,
             "exclusion_reason": null
         },
         {
@@ -194,7 +194,7 @@
             "judged_file": null,
             "metrics": null,
             "error": null,
-            "excluded_from_metrics": false,
+            "excluded_from_metrics": true,
             "exclusion_reason": null
         },
         {
