@@ -1,8 +1,8 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T16:49:58.661283",
+        "timestamp": "2025-09-26T17:17:20.295106",
         "results_directory": "results/20250922_122904",
-        "total_files_processed": 46
+        "total_files_processed": 55
     },
     "model_statistics": {
         "openai/gpt-4o:azure": {
@@ -12,6 +12,14 @@
             "judgments_without_content": 0,
             "completion_rate": 100.0,
             "is_complete": true
+        },
+        "z-ai/glm-4.5-air:z-ai": {
+            "judged_file": "judged_hle_z-ai_glm-4.5-air_z-ai_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 92,
+            "judgments_without_content": 2066,
+            "completion_rate": 4.26,
+            "is_complete": false
         },
         "openai/gpt-5-nano:openai": {
             "judged_file": "judged_hle_openai_gpt-5-nano_openai_20250922_122904.json",
@@ -68,6 +76,22 @@
             "judgments_without_content": 0,
             "completion_rate": 100.0,
             "is_complete": true
+        },
+        "google/gemini-2.5-pro:skyrouter": {
+            "judged_file": "judged_hle_google_gemini-2.5-pro_skyrouter_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 35,
+            "judgments_without_content": 2123,
+            "completion_rate": 1.62,
+            "is_complete": false
+        },
+        "google/gemini-2.5-flash-lite:google-vertex": {
+            "judged_file": "judged_hle_google_gemini-2.5-flash-lite_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 18,
+            "judgments_without_content": 2140,
+            "completion_rate": 0.83,
+            "is_complete": false
         },
         "anthropic/claude-opus-4:amazon-bedrock": {
             "judged_file": "judged_hle_anthropic_claude-opus-4_amazon-bedrock_20250922_122904.json",
@@ -132,6 +156,14 @@
             "judgments_without_content": 0,
             "completion_rate": 100.0,
             "is_complete": true
+        },
+        "google/gemini-2.5-flash:skyrouter": {
+            "judged_file": "judged_hle_google_gemini-2.5-flash_skyrouter_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 27,
+            "judgments_without_content": 2131,
+            "completion_rate": 1.25,
+            "is_complete": false
         },
         "anthropic/claude-3.5-sonnet:amazon-bedrock": {
             "judged_file": "judged_hle_anthropic_claude-3.5-sonnet_amazon-bedrock_20250922_122904.json",
@@ -216,9 +248,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2141,
-            "judgments_without_content": 17,
-            "completion_rate": 99.21,
+            "judgments_with_content": 2142,
+            "judgments_without_content": 16,
+            "completion_rate": 99.26,
             "is_complete": false
         },
         "anthropic/claude-opus-4:google-vertex": {
@@ -269,6 +301,14 @@
             "completion_rate": 100.0,
             "is_complete": true
         },
+        "deepseek/deepseek-r1-0528:volcengine": {
+            "judged_file": "judged_hle_deepseek_deepseek-r1-0528_volcengine_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 17,
+            "judgments_without_content": 2141,
+            "completion_rate": 0.79,
+            "is_complete": false
+        },
         "moonshotai/kimi-k2-0711:volcengine": {
             "judged_file": "judged_hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json",
             "total_questions": 2158,
@@ -292,6 +332,14 @@
             "judgments_without_content": 0,
             "completion_rate": 100.0,
             "is_complete": true
+        },
+        "openai/gpt-5:openai": {
+            "judged_file": "judged_hle_openai_gpt-5_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 16,
+            "judgments_without_content": 2142,
+            "completion_rate": 0.74,
+            "is_complete": false
         },
         "openai/gpt-4.1:openai": {
             "judged_file": "judged_hle_openai_gpt-4.1_openai_20250922_122904.json",
@@ -341,6 +389,14 @@
             "completion_rate": 100.0,
             "is_complete": true
         },
+        "qwen/qwen3-vl-plus:alibaba": {
+            "judged_file": "judged_hle_qwen_qwen3-vl-plus_alibaba_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 214,
+            "judgments_without_content": 1944,
+            "completion_rate": 9.92,
+            "is_complete": false
+        },
         "anthropic/claude-3.7-sonnet:anthropic": {
             "judged_file": "judged_hle_anthropic_claude-3.7-sonnet_anthropic_20250922_122904.json",
             "total_questions": 2158,
@@ -365,6 +421,14 @@
             "completion_rate": 100.0,
             "is_complete": true
         },
+        "qwen/qwen3-max:alibaba": {
+            "judged_file": "judged_hle_qwen_qwen3-max_alibaba_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 34,
+            "judgments_without_content": 2124,
+            "completion_rate": 1.58,
+            "is_complete": false
+        },
         "anthropic/claude-3.5-sonnet:anthropic": {
             "judged_file": "judged_hle_anthropic_claude-3.5-sonnet_anthropic_20250922_122904.json",
             "total_questions": 2158,
@@ -372,13 +436,25 @@
             "judgments_without_content": 0,
             "completion_rate": 100.0,
             "is_complete": true
+        },
+        "z-ai/glm-4.5:z-ai": {
+            "judged_file": "judged_hle_z-ai_glm-4.5_z-ai_20250922_122904.json",
+            "total_questions": 2158,
+            "judgments_with_content": 6,
+            "judgments_without_content": 2152,
+            "completion_rate": 0.28,
+            "is_complete": false
         }
     },
     "failure_lists": {
         "incomplete_judging_models": [
+            "z-ai/glm-4.5-air:z-ai",
             "anthropic/claude-opus-4.1:amazon-bedrock",
+            "google/gemini-2.5-pro:skyrouter",
+            "google/gemini-2.5-flash-lite:google-vertex",
             "anthropic/claude-opus-4:amazon-bedrock",
             "anthropic/claude-opus-4:anthropic",
+            "google/gemini-2.5-flash:skyrouter",
             "openai/o4-mini:azure",
             "anthropic/claude-opus-4.1:google-vertex",
             "anthropic/claude-opus-4.1:anthropic",
@@ -387,15 +463,20 @@
             "x-ai/grok-4-fast:x-ai",
             "google/gemini-2.5-flash:google-vertex",
             "openai/o4-mini:openai",
-            "x-ai/grok-4:x-ai"
+            "deepseek/deepseek-r1-0528:volcengine",
+            "openai/gpt-5:openai",
+            "qwen/qwen3-vl-plus:alibaba",
+            "x-ai/grok-4:x-ai",
+            "qwen/qwen3-max:alibaba",
+            "z-ai/glm-4.5:z-ai"
         ],
         "models_without_judgments": []
     },
     "summary": {
-        "total_models": 46,
-        "models_with_judgments": 46,
+        "total_models": 55,
+        "models_with_judgments": 55,
         "models_with_complete_judging": 34,
-        "total_questions_across_all_models": 99268,
-        "total_judgments_across_all_models": 98931
+        "total_questions_across_all_models": 118690,
+        "total_judgments_across_all_models": 99391
     }
 }

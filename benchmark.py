@@ -34,6 +34,13 @@ async def main():
         help="Fix evaluation and judge failures from a specific timestamp directory (e.g., 'results/20250919_011623')"
     )
 
+    # Resume mode
+    parser.add_argument(
+        "--resume",
+        type=str,
+        help="Resume evaluation from a specific timestamp directory (e.g., 'results/20250922_122904')"
+    )
+
     # Model specification (for single mode)
     parser.add_argument(
         "--model-slug",
@@ -153,6 +160,18 @@ async def main():
             print(f"❌ Error: Timestamp directory not found: {args.fix}")
             sys.exit(1)
 
+    # Check for resume mode
+    resume_mode = bool(args.resume)
+    if resume_mode:
+        if not os.path.exists(args.resume):
+            print(f"❌ Error: Resume timestamp directory not found: {args.resume}")
+            sys.exit(1)
+
+    # Ensure fix and resume are mutually exclusive
+    if fix_mode and resume_mode:
+        print("❌ Error: --fix and --resume cannot be used together")
+        sys.exit(1)
+
     # Check required environment variables
     if not os.getenv("ZENMUX_API_KEY"):
         print("❌ Error: ZENMUX_API_KEY environment variable is required")
@@ -180,13 +199,20 @@ async def main():
     # Ensure base output directory exists
     os.makedirs(config.output_dir, exist_ok=True)
 
-    # Handle fix mode differently than regular evaluation
+    # Handle fix and resume modes differently than regular evaluation
     if fix_mode:
         # For fix mode, use the existing timestamp from the directory path
         timestamp_dir = args.fix
         batch_timestamp = os.path.basename(timestamp_dir)
 
         # Create runner with existing batch timestamp
+        runner = HLERunner(config, batch_timestamp=batch_timestamp)
+    elif resume_mode:
+        # For resume mode, use the existing timestamp from the directory path
+        timestamp_dir = args.resume
+        batch_timestamp = os.path.basename(timestamp_dir)
+
+        # Create runner with existing batch timestamp (will reuse existing directories)
         runner = HLERunner(config, batch_timestamp=batch_timestamp)
     else:
         # Generate batch timestamp for this evaluation run
@@ -205,6 +231,17 @@ async def main():
     if fix_mode:
         logger.info(f"🔧 Mode: fix")
         logger.info(f"📁 Target directory: {timestamp_dir}")
+    elif resume_mode:
+        logger.info(f"▶️ Mode: resume")
+        logger.info(f"📁 Resume directory: {timestamp_dir}")
+        logger.info(f"🔧 Evaluation mode: {args.mode}")
+        logger.info(f"📝 Text only: {args.text_only}")
+        logger.info(f"📊 Max samples: {args.max_samples}")
+        logger.info(f"🏛️ Auto judge: {auto_judge}")
+        if args.exclude_model:
+            logger.info(f"🚫 Excluded models: {', '.join(args.exclude_model)}")
+        if args.exclude_provider:
+            logger.info(f"🚫 Excluded providers: {', '.join(args.exclude_provider)}")
     else:
         logger.info(f"🔧 Mode: {args.mode}")
         logger.info(f"📝 Text only: {args.text_only}")
@@ -226,8 +263,8 @@ async def main():
     logger.info(f"📁 Run directory: {config.run_dir}")
     logger.info(f"🕒 Batch timestamp: {batch_timestamp}")
 
-    # Save question IDs for regular evaluation runs (skip for fix mode)
-    if not fix_mode:
+    # Save question IDs for new evaluation runs (skip for fix and resume modes)
+    if not fix_mode and not resume_mode:
         runner.save_question_ids(text_only=args.text_only, max_samples=args.max_samples)
 
     # Run evaluation or fix based on mode
@@ -249,7 +286,10 @@ async def main():
             logger.info(f"📁 Results saved to: {fix_result['metrics_summary_file']}")
 
         else:
-            # Regular evaluation modes
+            # Regular evaluation modes (including resume mode)
+            if resume_mode:
+                logger.info(f"▶️ Resuming evaluation in: {timestamp_dir}")
+
             if args.mode == "single":
                 logger.info(f"🎯 Evaluating single model: {args.model_slug}:{args.provider_slug}")
                 result = await runner.run_specific_model_evaluation(

@@ -62,6 +62,9 @@ uv run python benchmark.py --mode single \
 
 # Test all models except expensive ones
 uv run python benchmark.py --text-only --max-samples 5 --exclude-model openai/gpt-4o
+
+# Resume interrupted evaluation
+uv run python benchmark.py --mode all --resume results/20250922_122904
 ```
 
 ## Core Functionality
@@ -127,7 +130,34 @@ uv run python benchmark.py --exclude-provider theta \
 uv run python benchmark.py --mode filter --model-filter gpt --exclude-model openai/gpt-4o-mini
 ```
 
-### 5. Failure Recovery
+### 5. Resume Interrupted Evaluations
+
+If your evaluation was interrupted (e.g., network issues, system restart), you can resume from where it left off:
+
+```bash
+# Resume evaluation from a specific timestamp directory
+uv run python benchmark.py --mode all --exclude-provider theta --text-only --resume results/20250922_122904
+
+# Resume with specific parameters (same as original run)
+uv run python benchmark.py --mode all --text-only --resume results/20250922_122904
+
+# Resume filtered evaluation
+uv run python benchmark.py --mode filter --model-filter gpt --resume results/20250922_122904
+
+# Resume single model evaluation
+uv run python benchmark.py --mode single \
+  --model-slug openai/gpt-4o --provider-slug openai \
+  --resume results/20250922_122904
+
+# The system will:
+# - Use the existing timestamped directory
+# - Skip models that are already completed
+# - Continue evaluating incomplete models
+# - Skip questions already answered within each model
+# - Continue with judging and metrics calculation
+```
+
+### 6. Failure Recovery (Advanced)
 
 When evaluations encounter failures, you can automatically retry and fix them using concurrent processing:
 
@@ -190,6 +220,15 @@ uv run python benchmark.py --fix results/20250922_093840 --num-workers 5
 - Exclude all models from specific providers
 - Examples: `theta`, `openai`, `anthropic`, `google-vertex`
 - Useful for excluding all models using a particular provider backend
+
+### `--resume TIMESTAMP_DIR`
+
+- Resume evaluation from a specific timestamp directory (e.g., `results/20250922_122904`)
+- Automatically skips completed models and continues with incomplete ones
+- For partially completed models, resumes from failed/missing questions
+- Uses existing directory structure and configuration
+- Perfect for recovering from interruptions (network issues, system restarts)
+- Must be used with the same evaluation mode as the original run
 
 ### `--fix TIMESTAMP_DIR`
 

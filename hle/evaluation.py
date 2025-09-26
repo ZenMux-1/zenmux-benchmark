@@ -303,7 +303,8 @@ Additional Error Info: {additional_info}
         if not remaining_questions:
             self.logger.info(f"✅ All questions already evaluated for {model_identifier}")
             model_logger.info(f"✅ All questions already evaluated")
-            return
+            model_logger.info(f"📁 Using existing file: {output_filepath}")
+            return output_filepath
 
         self.logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
         model_logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
