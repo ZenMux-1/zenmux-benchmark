@@ -764,7 +764,19 @@ class HLERunner:
         except Exception:
             return False
 
-    async def fix_models(self, timestamp_dir: str) -> Dict[str, Any]:
+    async def fix_models(
+        self,
+        timestamp_dir: str,
+        mode: str = "all",
+        model_slug: Optional[str] = None,
+        provider_slug: Optional[str] = None,
+        model_filter: Optional[str] = None,
+        exclude_models: Optional[List[str]] = None,
+        exclude_providers: Optional[List[str]] = None,
+        text_only: bool = False,
+        max_samples: Optional[int] = None,
+        auto_judge: bool = True
+    ) -> Dict[str, Any]:
         """Fix evaluation and judge failures by re-processing questions with empty responses using concurrent processing."""
         self.logger.info(f"\n{'='*60}")
         self.logger.info("🔧 FIXING EVALUATION AND JUDGE FAILURES (CONCURRENT)")
@@ -788,13 +800,99 @@ class HLERunner:
                 "remaining_failures": 0
             }
 
-        self.logger.info(f"🔍 Found {len(prediction_files)} prediction files to check for failures")
+        self.logger.info(f"🔍 Found {len(prediction_files)} total prediction files")
+
+        # Apply model filtering based on mode and parameters
+        filtered_prediction_files = []
+
+        for prediction_file in prediction_files:
+            # Extract model identifier from filename: hle_MODEL_PROVIDER_TIMESTAMP.json
+            filename = os.path.basename(prediction_file)
+            filename_parts = filename.replace("hle_", "").replace(f"_{batch_timestamp}.json", "")
+            parts = filename_parts.split("_")
+
+            if len(parts) >= 2:
+                model_identifier = "_".join(parts[:-1]).replace("_", "/") + ":" + parts[-1]
+            else:
+                self.logger.warning(f"⚠️ Could not parse model identifier from {filename}, skipping")
+                continue
+
+            # Apply filtering logic
+            should_include = True
+
+            # Single mode: only include specific model
+            if mode == "single":
+                if model_slug and provider_slug:
+                    target_identifier = f"{model_slug}:{provider_slug}"
+                    if model_identifier != target_identifier:
+                        should_include = False
+                else:
+                    self.logger.warning(f"⚠️ Single mode requires model_slug and provider_slug, skipping single mode filtering")
+
+            # Apply model filter
+            if should_include and model_filter:
+                if model_filter.lower() not in model_identifier.lower():
+                    should_include = False
+
+            # Apply model exclusions
+            if should_include and exclude_models:
+                # Extract model slug and provider from model_identifier (format: "vendor/model:provider")
+                parts = model_identifier.split(':')
+                model_slug_part = parts[0]  # Get "vendor/model" part
+                provider = parts[1] if len(parts) > 1 else ""  # Get provider part
+
+                for exclude_slug in exclude_models:
+                    exclude_lower = exclude_slug.lower()
+                    model_lower = model_slug_part.lower()
+
+                    # Case 1: Full model ID match (e.g., "openai/gpt-4o:openai")
+                    if ':' in exclude_slug and exclude_lower == model_identifier.lower():
+                        should_include = False
+                        break
+
+                    # Case 2: Exact model slug match (e.g., "openai/gpt-4o")
+                    elif exclude_lower == model_lower:
+                        should_include = False
+                        break
+
+                    # Case 3: Vendor-only exclusion (e.g., "anthropic" matches "anthropic/*")
+                    elif '/' not in exclude_slug and model_lower.startswith(exclude_lower + '/'):
+                        should_include = False
+                        break
+
+            # Apply provider exclusions
+            if should_include and exclude_providers:
+                # Extract provider from model_identifier (format: "vendor/model:provider")
+                parts = model_identifier.split(':')
+                provider = parts[1].lower() if len(parts) > 1 else ""
+
+                exclude_provider_slugs = set(p.lower() for p in exclude_providers)
+                if provider in exclude_provider_slugs:
+                    should_include = False
+
+            if should_include:
+                filtered_prediction_files.append(prediction_file)
+            else:
+                self.logger.debug(f"🚫 Filtered out: {model_identifier}")
+
+        prediction_files = filtered_prediction_files
+
+        if not prediction_files:
+            self.logger.info("✅ No prediction files match the specified filters")
+            return {
+                "fixed_models": [],
+                "still_failed_models": [],
+                "fixed_count": 0,
+                "remaining_failures": 0
+            }
+
+        self.logger.info(f"🎯 Filtered to {len(prediction_files)} prediction files matching filters")
         self.logger.info(f"🔄 Using concurrent processing: max_concurrent_models={self.config.hle.max_concurrent_models}, num_workers={self.config.hle.num_workers}")
 
-        # Load dataset questions
+        # Load dataset questions with filtering parameters
         from .dataset import HLEDataset
         dataset = HLEDataset(self.config.hle.dataset_name, self.config.hle.dataset_split)
-        all_questions = dataset.get_questions()
+        all_questions = dataset.get_questions(text_only=text_only, max_samples=max_samples)
         question_map = {q["id"]: q for q in all_questions}
 
         # Concurrent processing semaphore for outer level (models)

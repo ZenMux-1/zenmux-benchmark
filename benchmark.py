@@ -231,6 +231,19 @@ async def main():
     if fix_mode:
         logger.info(f"🔧 Mode: fix")
         logger.info(f"📁 Target directory: {timestamp_dir}")
+        if args.mode != "all":
+            logger.info(f"🔧 Evaluation mode: {args.mode}")
+        logger.info(f"📝 Text only: {args.text_only}")
+        logger.info(f"📊 Max samples: {args.max_samples}")
+        logger.info(f"🏛️ Auto judge: {auto_judge}")
+        if args.exclude_model:
+            logger.info(f"🚫 Excluded models: {', '.join(args.exclude_model)}")
+        if args.exclude_provider:
+            logger.info(f"🚫 Excluded providers: {', '.join(args.exclude_provider)}")
+        if args.model_filter:
+            logger.info(f"🔍 Model filter: {args.model_filter}")
+        if args.mode == "single" and args.model_slug and args.provider_slug:
+            logger.info(f"🎯 Target model: {args.model_slug}:{args.provider_slug}")
     elif resume_mode:
         logger.info(f"▶️ Mode: resume")
         logger.info(f"📁 Resume directory: {timestamp_dir}")
@@ -271,7 +284,22 @@ async def main():
     try:
         if fix_mode:
             logger.info(f"🔧 Fixing evaluation and judge failures in: {timestamp_dir}")
-            fix_result = await runner.fix_models(timestamp_dir)
+
+            # Build filtering parameters for fix mode
+            fix_params = {
+                "timestamp_dir": timestamp_dir,
+                "mode": args.mode,
+                "model_slug": args.model_slug,
+                "provider_slug": args.provider_slug,
+                "model_filter": args.model_filter,
+                "exclude_models": args.exclude_model,
+                "exclude_providers": args.exclude_provider,
+                "text_only": args.text_only,
+                "max_samples": args.max_samples,
+                "auto_judge": auto_judge
+            }
+
+            fix_result = await runner.fix_models(**fix_params)
 
             if "error" in fix_result:
                 logger.error(f"❌ Fix failed: {fix_result['error']}")

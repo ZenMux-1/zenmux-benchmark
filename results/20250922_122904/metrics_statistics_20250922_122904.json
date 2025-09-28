@@ -1,13 +1,13 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-28T16:18:30.841992",
+        "timestamp": "2025-09-28T18:36:57.654256",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 60,
-        "models_with_valid_metrics": 35,
-        "models_excluded_from_metrics": 25,
+        "models_with_valid_metrics": 36,
+        "models_excluded_from_metrics": 24,
         "models_with_errors": 0
     },
     "failure_lists": {
@@ -33,7 +33,6 @@
             "x-ai/grok-code-fast-1:x-ai",
             "google/gemini-2.5-flash:google-vertex",
             "openai/o4-mini:openai",
-            "google/gemini-2.5-pro:google-vertex",
             "x-ai/grok-4:x-ai",
             "anthropic/claude-opus-4:amazon-bedrock",
             "x-ai/grok-4-fast:x-ai"
@@ -41,8 +40,8 @@
         "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 23,
-        "incomplete_judgments": 6
+        "incomplete_evaluations": 21,
+        "incomplete_judgments": 9
     },
     "error_summary": {}
 }

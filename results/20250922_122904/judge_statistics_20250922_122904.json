@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-28T16:18:29.556725",
+        "timestamp": "2025-09-28T18:36:55.999874",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 60
     },
@@ -192,9 +192,9 @@
         "google/gemini-2.5-flash:skyrouter": {
             "judged_file": "judged_hle_google_gemini-2.5-flash_skyrouter_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2101,
-            "judgments_without_content": 57,
-            "completion_rate": 97.36,
+            "judgments_with_content": 2157,
+            "judgments_without_content": 1,
+            "completion_rate": 99.95,
             "is_complete": false
         },
         "anthropic/claude-3.5-sonnet:amazon-bedrock": {
@@ -296,9 +296,9 @@
         "x-ai/grok-4-fast:x-ai": {
             "judged_file": "judged_hle_x-ai_grok-4-fast_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 2155,
-            "judgments_without_content": 3,
-            "completion_rate": 99.86,
+            "judgments_with_content": 2156,
+            "judgments_without_content": 2,
+            "completion_rate": 99.91,
             "is_complete": false
         },
         "openai/gpt-4o:openai": {
@@ -480,10 +480,10 @@
         "google/gemini-2.5-pro:google-vertex": {
             "judged_file": "judged_hle_google_gemini-2.5-pro_google-vertex_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 22,
-            "judgments_without_content": 2136,
-            "completion_rate": 1.02,
-            "is_complete": false
+            "judgments_with_content": 2158,
+            "judgments_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
         }
     },
     "failure_lists": {
@@ -511,16 +511,15 @@
             "qwen/qwen3-vl-plus:alibaba",
             "x-ai/grok-4:x-ai",
             "qwen/qwen3-max:alibaba",
-            "z-ai/glm-4.5:z-ai",
-            "google/gemini-2.5-pro:google-vertex"
+            "z-ai/glm-4.5:z-ai"
         ],
         "models_without_judgments": []
     },
     "summary": {
         "total_models": 60,
         "models_with_judgments": 60,
-        "models_with_complete_judging": 35,
+        "models_with_complete_judging": 36,
         "total_questions_across_all_models": 129480,
-        "total_judgments_across_all_models": 106886
+        "total_judgments_across_all_models": 109079
     }
 }

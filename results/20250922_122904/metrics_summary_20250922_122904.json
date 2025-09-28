@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-28T16:18:27.508179",
+        "timestamp": "2025-09-28T18:36:53.593279",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -178,7 +178,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
         },
         {
             "model_identifier": "qwen/qwen3-vl-plus:alibaba",
@@ -279,7 +279,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-sonnet-4:anthropic",
@@ -340,7 +340,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-opus-4.1:anthropic",
@@ -367,7 +367,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
         },
         {
             "model_identifier": "anthropic/claude-3.5-haiku:amazon-bedrock",
@@ -635,10 +635,14 @@
             "model_identifier": "google/gemini-2.5-pro:google-vertex",
             "predictions_file": "results/20250922_122904/predictions/hle_google_gemini-2.5-pro_google-vertex_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_google_gemini-2.5-pro_google-vertex_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 20.02,
+                "confidence_interval": 1.69,
+                "calibration_error": 72.96
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "x-ai/grok-4:x-ai",
