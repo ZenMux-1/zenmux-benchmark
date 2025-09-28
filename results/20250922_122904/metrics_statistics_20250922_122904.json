@@ -1,35 +1,81 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-24T16:49:59.656100",
+        "timestamp": "2025-09-28T13:24:37.169334",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
-        "total_models": 48,
-        "models_with_valid_metrics": 34,
-        "models_excluded_from_metrics": 12,
-        "models_with_errors": 0
+        "total_models": 61,
+        "models_with_valid_metrics": 33,
+        "models_excluded_from_metrics": 28,
+        "models_with_errors": 26
     },
     "failure_lists": {
         "excluded_models": [
-            "openai/o4-mini:azure",
-            "anthropic/claude-opus-4:google-vertex",
-            "anthropic/claude-opus-4.1:google-vertex",
-            "anthropic/claude-opus-4.1:amazon-bedrock",
-            "anthropic/claude-opus-4.1:anthropic",
             "anthropic/claude-opus-4:anthropic",
-            "x-ai/grok-code-fast-1:x-ai",
-            "google/gemini-2.5-flash:google-vertex",
-            "openai/o4-mini:openai",
-            "x-ai/grok-4:x-ai",
+            "anthropic/claude-opus-4:google-vertex",
             "anthropic/claude-opus-4:amazon-bedrock",
-            "x-ai/grok-4-fast:x-ai"
+            "openai/o4-mini:openai",
+            "openai/o4-mini:azure",
+            "openai/gpt-5:openai",
+            "openai/gpt-5:azure",
+            "google/gemini-2.5-flash-lite:google-vertex",
+            "google/gemini-2.5-flash-lite:skyrouter",
+            "deepseek/deepseek-r1-0528:volcengine",
+            "anthropic/claude-opus-4.1:anthropic",
+            "anthropic/claude-opus-4.1:amazon-bedrock",
+            "anthropic/claude-opus-4.1:google-vertex",
+            "openai/gpt-5-mini:openai",
+            "google/gemini-2.5-flash:google-vertex",
+            "google/gemini-2.5-flash:skyrouter",
+            "google/gemini-2.5-pro:google-vertex",
+            "google/gemini-2.5-pro:skyrouter",
+            "x-ai/grok-4:x-ai",
+            "z-ai/glm-4.5-air:z-ai",
+            "qwen/qwen3-coder-plus:alibaba",
+            "deepseek/deepseek-chat:deepseek",
+            "moonshotai/kimi-k2-0905:moonshotai",
+            "z-ai/glm-4.5:z-ai",
+            "x-ai/grok-code-fast-1:x-ai",
+            "x-ai/grok-4-fast:x-ai",
+            "qwen/qwen3-vl-plus:alibaba",
+            "qwen/qwen3-max:alibaba"
         ],
-        "models_with_errors": []
+        "models_with_errors": [
+            "anthropic/claude-opus-4:anthropic",
+            "anthropic/claude-opus-4:google-vertex",
+            "anthropic/claude-opus-4:amazon-bedrock",
+            "openai/o4-mini:openai",
+            "openai/o4-mini:azure",
+            "openai/gpt-5:openai",
+            "openai/gpt-5:azure",
+            "google/gemini-2.5-flash-lite:google-vertex",
+            "google/gemini-2.5-flash-lite:skyrouter",
+            "deepseek/deepseek-r1-0528:volcengine",
+            "anthropic/claude-opus-4.1:anthropic",
+            "anthropic/claude-opus-4.1:amazon-bedrock",
+            "anthropic/claude-opus-4.1:google-vertex",
+            "google/gemini-2.5-flash:skyrouter",
+            "google/gemini-2.5-pro:google-vertex",
+            "google/gemini-2.5-pro:skyrouter",
+            "x-ai/grok-4:x-ai",
+            "z-ai/glm-4.5-air:z-ai",
+            "qwen/qwen3-coder-plus:alibaba",
+            "deepseek/deepseek-chat:deepseek",
+            "moonshotai/kimi-k2-0905:moonshotai",
+            "z-ai/glm-4.5:z-ai",
+            "x-ai/grok-code-fast-1:x-ai",
+            "x-ai/grok-4-fast:x-ai",
+            "qwen/qwen3-vl-plus:alibaba",
+            "qwen/qwen3-max:alibaba"
+        ]
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 11,
-        "incomplete_judgments": 1
+        "general_error": 26,
+        "incomplete_evaluations": 19,
+        "incomplete_judgments": 3
     },
-    "error_summary": {}
+    "error_summary": {
+        "evaluation_failure": 26
+    }
 }
