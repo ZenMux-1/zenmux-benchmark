@@ -1,11 +1,11 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-28T19:09:51.481646",
+        "timestamp": "2025-09-28T23:08:37.758912",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
             "auto_judge": true,
-            "num_workers": 100,
+            "num_workers": 50,
             "max_concurrent_models": 5,
             "model_filter": null,
             "model_slug": null,
@@ -135,10 +135,14 @@
             "model_identifier": "google/gemini-2.5-flash-lite:google-vertex",
             "predictions_file": "results/20250922_122904/predictions/hle_google_gemini-2.5-flash-lite_google-vertex_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_google_gemini-2.5-flash-lite_google-vertex_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 5.79,
+                "confidence_interval": 0.99,
+                "calibration_error": 87.55
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "anthropic/claude-opus-4.1:google-vertex",
@@ -219,10 +223,14 @@
             "model_identifier": "google/gemini-2.5-pro:skyrouter",
             "predictions_file": "results/20250922_122904/predictions/hle_google_gemini-2.5-pro_skyrouter_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_google_gemini-2.5-pro_skyrouter_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 19.28,
+                "confidence_interval": 1.66,
+                "calibration_error": 73.49
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "deepseek/deepseek-chat:deepseek",
@@ -528,16 +536,20 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "google/gemini-2.5-flash-lite:skyrouter",
             "predictions_file": "results/20250922_122904/predictions/hle_google_gemini-2.5-flash-lite_skyrouter_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_google_gemini-2.5-flash-lite_skyrouter_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 5.89,
+                "confidence_interval": 0.99,
+                "calibration_error": 87.47
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "moonshotai/kimi-k2-0711:volcengine",
