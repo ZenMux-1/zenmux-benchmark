@@ -345,16 +345,15 @@ Additional Error Info: {additional_info}
 
         # Create or update metadata
         if existing_metadata:
-            # If we have existing metadata, preserve it but only update predictions
-            # This ensures we don't overwrite timestamp and other original metadata
+            # If we have existing metadata, preserve it COMPLETELY - including performance_averages
+            # Only update the predictions section, never touch any other data
             final_output = existing_metadata.copy()
             final_output["predictions"] = existing_predictions
 
-            # Only add performance metrics for new evaluations if there were successful ones
-            # but don't recalculate averages - preserve existing ones
-            if performance_data and "evaluation_metadata" in existing_metadata:
-                # Log that we're preserving original metadata
-                model_logger.info(f"📁 Preserving original metadata and timestamp")
+            # CRITICAL: We completely preserve existing performance_averages and all other metadata
+            # Never recalculate or modify any existing statistics in resume mode
+            model_logger.info(f"📁 Preserving ALL original metadata including performance_averages")
+            model_logger.info(f"📁 Original performance_averages preserved: {existing_metadata.get('evaluation_metadata', {}).get('performance_averages', 'None')}")
         else:
             # Create new metadata for new files
             metadata = {
