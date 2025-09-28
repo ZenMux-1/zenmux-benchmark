@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-28T18:36:54.725794",
+        "timestamp": "2025-09-28T19:09:52.523155",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 60
     },
@@ -80,25 +80,25 @@
         "qwen/qwen3-max:alibaba": {
             "prediction_file": "hle_qwen_qwen3-max_alibaba_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1783,
-            "responses_without_content": 375,
-            "completion_rate": 82.62,
+            "responses_with_content": 1918,
+            "responses_without_content": 240,
+            "completion_rate": 88.88,
             "is_complete": false
         },
         "google/gemini-2.5-flash-lite:google-vertex": {
             "prediction_file": "hle_google_gemini-2.5-flash-lite_google-vertex_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1008,
-            "responses_without_content": 1150,
-            "completion_rate": 46.71,
+            "responses_with_content": 1188,
+            "responses_without_content": 970,
+            "completion_rate": 55.05,
             "is_complete": false
         },
         "anthropic/claude-opus-4.1:google-vertex": {
             "prediction_file": "hle_anthropic_claude-opus-4.1_google-vertex_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2140,
-            "responses_without_content": 18,
-            "completion_rate": 99.17,
+            "responses_with_content": 2141,
+            "responses_without_content": 17,
+            "completion_rate": 99.21,
             "is_complete": false
         },
         "anthropic/claude-3.5-haiku:anthropic": {
@@ -120,9 +120,9 @@
         "openai/gpt-5:openai": {
             "prediction_file": "hle_openai_gpt-5_openai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 455,
-            "responses_without_content": 1703,
-            "completion_rate": 21.08,
+            "responses_with_content": 818,
+            "responses_without_content": 1340,
+            "completion_rate": 37.91,
             "is_complete": false
         },
         "qwen/qwen3-vl-plus:alibaba": {
@@ -517,6 +517,6 @@
         "models_with_responses": 60,
         "models_with_complete_evaluation": 39,
         "total_questions_across_all_models": 129480,
-        "total_responses_across_all_models": 111845
+        "total_responses_across_all_models": 112524
     }
 }

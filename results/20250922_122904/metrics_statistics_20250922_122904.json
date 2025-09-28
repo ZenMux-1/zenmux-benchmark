@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-28T18:36:57.654256",
+        "timestamp": "2025-09-28T19:09:55.060395",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
@@ -41,7 +41,7 @@
     },
     "exclusion_reasons": {
         "incomplete_evaluations": 21,
-        "incomplete_judgments": 9
+        "incomplete_judgments": 7
     },
     "error_summary": {}
 }
