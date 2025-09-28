@@ -299,13 +299,32 @@ Additional Error Info: {additional_info}
     async def judge_all_responses(
         self,
         questions: List[Dict[str, Any]],
-        predictions: Dict[str, Any]
+        predictions: Dict[str, Any],
+        total_questions: int = None,
+        already_judged: int = 0
     ) -> List[Tuple[str, Dict[str, Any], Optional[Dict[str, float]]]]:
         """Judge all responses asynchronously."""
+        # Progress tracking
+        completed_count = 0
+        total_remaining = len(questions)
+        if total_questions is None:
+            total_questions = total_remaining + already_judged
+
         async def bound_func(question):
+            nonlocal completed_count
             async with semaphore:
                 with PerformanceTimer(self.logger, f"judging question {question['id']}", level=logging.DEBUG):
-                    return await self.judge_single_response(question, predictions)
+                    result = await self.judge_single_response(question, predictions)
+
+                    # Update progress counter
+                    completed_count += 1
+
+                    # Log progress every 100 judgments or at the end
+                    if completed_count % 100 == 0 or completed_count == total_remaining:
+                        current_total = already_judged + completed_count
+                        self.logger.info(f"⚖️ Judge Progress: {completed_count}/{total_remaining} remaining judgments completed (Total: {current_total}/{total_questions})")
+
+                    return result
 
         semaphore = asyncio.Semaphore(self.hle_config.num_workers)
         tasks = [bound_func(q) for q in questions]
@@ -450,7 +469,13 @@ Additional Error Info: {additional_info}
             self.logger.info(f"🔄 Judging {len(questions_to_judge)} predictions")
 
             # Judge remaining questions
-            results = await self.judge_all_responses(questions_to_judge, predictions)
+            already_judged_count = len(judged_predictions)
+            results = await self.judge_all_responses(
+                questions_to_judge,
+                predictions,
+                total_questions=total_questions,
+                already_judged=already_judged_count
+            )
 
             # Process results and collect performance metrics
             for unique_id, prediction, performance_metrics in results:

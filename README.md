@@ -146,7 +146,8 @@ uv run python benchmark.py --mode filter --model-filter gpt --resume results/202
 
 # Resume single model evaluation
 uv run python benchmark.py --mode single \
-  --model-slug openai/gpt-4o --provider-slug openai \
+  --model-slug google/gemini-2.5-flash --provider-slug skyrouter \
+  --text-only \
   --resume results/20250922_122904
 
 # The system will:

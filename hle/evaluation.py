@@ -314,12 +314,30 @@ Additional Error Info: {additional_info}
         self.logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
         model_logger.info(f"🔄 Evaluating {len(remaining_questions)} remaining questions")
 
+        # Progress tracking
+        completed_count = 0
+        total_remaining = len(remaining_questions)
+        total_questions = len(questions)
+        already_completed = total_questions - total_remaining
+
         async def bound_evaluate(question):
+            nonlocal completed_count
             async with semaphore:
                 with PerformanceTimer(model_logger, f"question {question['id']}", level=logging.DEBUG):
-                    return await self.evaluate_single_question(
+                    result = await self.evaluate_single_question(
                         question, model_identifier, endpoint
                     )
+
+                    # Update progress counter
+                    completed_count += 1
+
+                    # Log progress every 100 questions or at the end
+                    if completed_count % 100 == 0 or completed_count == total_remaining:
+                        current_total = already_completed + completed_count
+                        self.logger.info(f"📊 [{model_identifier}] Progress: {completed_count}/{total_remaining} remaining questions completed (Total: {current_total}/{total_questions})")
+                        model_logger.info(f"📊 Progress: {completed_count}/{total_remaining} remaining questions completed (Total: {current_total}/{total_questions})")
+
+                    return result
 
         # Create semaphore for rate limiting
         semaphore = asyncio.Semaphore(self.hle_config.num_workers)

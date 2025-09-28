@@ -1,8 +1,8 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-28T13:24:35.182040",
+        "timestamp": "2025-09-28T14:04:40.007559",
         "results_directory": "results/20250922_122904",
-        "total_files_processed": 59
+        "total_files_processed": 60
     },
     "model_statistics": {
         "openai/gpt-5-chat:azure": {
@@ -228,6 +228,14 @@
             "responses_without_content": 0,
             "completion_rate": 100.0,
             "is_complete": true
+        },
+        "google/gemini-2.5-flash:skyrouter": {
+            "prediction_file": "hle_google_gemini-2.5-flash_skyrouter_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2102,
+            "responses_without_content": 56,
+            "completion_rate": 97.41,
+            "is_complete": false
         },
         "anthropic/claude-opus-4.1:anthropic": {
             "prediction_file": "hle_anthropic_claude-opus-4.1_anthropic_20250922_122904.json",
@@ -490,6 +498,7 @@
             "qwen/qwen3-vl-plus:alibaba",
             "google/gemini-2.5-pro:skyrouter",
             "z-ai/glm-4.5-air:z-ai",
+            "google/gemini-2.5-flash:skyrouter",
             "anthropic/claude-opus-4.1:anthropic",
             "z-ai/glm-4.5:z-ai",
             "deepseek/deepseek-r1-0528:volcengine",
@@ -506,10 +515,10 @@
         "models_without_responses": []
     },
     "summary": {
-        "total_models": 59,
-        "models_with_responses": 59,
+        "total_models": 60,
+        "models_with_responses": 60,
         "models_with_complete_evaluation": 37,
-        "total_questions_across_all_models": 127322,
-        "total_responses_across_all_models": 104003
+        "total_questions_across_all_models": 129480,
+        "total_responses_across_all_models": 106105
     }
 }
