@@ -63,7 +63,7 @@ def fix_model_identifier_in_file(file_path: Path) -> bool:
         # Write back the file if changes were made
         if changes_made:
             with open(file_path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=4)
+                json.dump(data, f, ensure_ascii=True, indent=4)
             print(f"Successfully updated {file_path}")
             return True
         else:
