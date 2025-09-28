@@ -1082,7 +1082,7 @@ class HLERunner:
                             question = question_map[question_id]
                             try:
                                 question_id_result, result = await self.evaluator.evaluate_single_question(
-                                    question, model_name, endpoint
+                                    question, model_identifier, endpoint
                                 )
                                 # Update progress
                                 completed_count += 1

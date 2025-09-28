@@ -4197,7 +4197,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "66ed458ed841eb51a985ca8d": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -17677,7 +17677,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "670faed07ddb2771c2d214ea": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -18781,7 +18781,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "6713a2ac0223609143188d23": {
             "model": "x-ai/grok-code-fast-1:x-ai",
@@ -27087,7 +27087,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "671fcbe9f0bea11129a5ed0a": {
             "model": "x-ai/grok-code-fast-1",
@@ -31932,7 +31932,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "672333955d82e15ca8e37afb": {
             "model": "x-ai/grok-code-fast-1",
@@ -35640,7 +35640,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "6725255ee6807ea2c8372c3c": {
             "model": "x-ai/grok-code-fast-1",
@@ -37041,7 +37041,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "6725840f6681c277a5f9e487": {
             "model": "x-ai/grok-code-fast-1",
@@ -43572,7 +43572,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "673029b26ad714f5469388f5": {
             "model": "x-ai/grok-code-fast-1",
@@ -53273,7 +53273,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "673b631505be2302d4445ece": {
             "model": "x-ai/grok-code-fast-1",
@@ -53789,7 +53789,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "673cf4fe0a06bbe311425068": {
             "model": "x-ai/grok-code-fast-1",
@@ -54529,7 +54529,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "67415d78b7835cb0473d6cad": {
             "model": "x-ai/grok-code-fast-1",
@@ -55857,7 +55857,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "6755d8a01c505b5224374708": {
             "model": "x-ai/grok-code-fast-1",
@@ -58669,7 +58669,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "6750df74ca6713770c0671be": {
             "model": "x-ai/grok-code-fast-1",
@@ -59577,7 +59577,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "6771d50cff6d0a6c35d7ca99": {
             "model": "x-ai/grok-code-fast-1",
@@ -59701,7 +59701,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "67099385b2f0355476ec30de": {
             "model": "x-ai/grok-code-fast-1",
@@ -59797,7 +59797,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "error": "Connection error."
         },
         "6748caf048c0b3fae07216a3": {
             "model": "x-ai/grok-code-fast-1",

@@ -45,8 +45,11 @@ class HLEEvaluator:
         question_id = question.get('id', 'unknown')
 
         try:
+            # Extract model slug from model_identifier for API call
+            model_slug = model_name.split(':')[0] if ':' in model_name else model_name
+
             # Check if model is o1-based (for system prompt handling)
-            is_o1_model = "o1" in model_name.lower()
+            is_o1_model = "o1" in model_slug.lower()
             messages = self.dataset.format_message(question, for_o1=is_o1_model)
 
             client = self.zenmux_client.get_client(endpoint)
@@ -58,7 +61,7 @@ class HLEEvaluator:
 
             # Prepare request parameters
             request_params = {
-                "model": model_name,
+                "model": model_slug,  # Use model slug for API call
                 "messages": messages,
                 "max_completion_tokens": max_completion_tokens,
                 "stream": self.zenmux_config.enable_streaming,
@@ -167,9 +170,9 @@ class HLEEvaluator:
                 performance_metrics['generation_time_ms'] = 0.0
                 performance_metrics['throughput_tokens_per_second'] = 0.0
 
-            # Return success result
+            # Return success result (save full model_identifier)
             result = {
-                "model": model_name,
+                "model": model_name,  # Keep full model_identifier in result
                 "response": content,
                 "usage": usage,
                 "performance": performance_metrics,
@@ -221,9 +224,9 @@ Additional Error Info: {additional_info}
             else:
                 self.logger.error(f"Unexpected error evaluating question {question_id} [{model_name}]:{detailed_error}")
 
-            # Return failure result
+            # Return failure result (save full model_identifier)
             result = {
-                "model": model_name,
+                "model": model_name,  # Keep full model_identifier in result
                 "response": "",
                 "usage": {},
                 "performance": {
