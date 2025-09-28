@@ -410,8 +410,9 @@ Additional Error Info: {additional_info}
             output_filename = f"judged_{predictions_basename}"
         output_filepath = os.path.join(output_dir, output_filename)
 
-        # Load existing judged results if available
+        # Load existing judged results and metadata if available
         judged_predictions = {}
+        existing_judged_metadata = None
         if os.path.exists(output_filepath):
             try:
                 with open(output_filepath, "r") as f:
@@ -419,22 +420,26 @@ Additional Error Info: {additional_info}
                     # Handle both old format (direct predictions) and new format (with metadata)
                     if "judged_predictions" in existing_data:
                         judged_predictions = existing_data["judged_predictions"]
+                        existing_judged_metadata = existing_data  # Keep full existing data structure
                     else:
                         judged_predictions = existing_data
                 self.logger.info(f"📂 Loaded {len(judged_predictions)} existing judgments")
             except Exception as e:
                 self.logger.warning(f"⚠️ Warning: Could not load existing judgments: {e}")
+                existing_judged_metadata = None
 
-        # Filter questions that need judging (including retries for failed judgments)
+        # Filter questions that need judging
+        # In resume mode, only process truly missing judgments - NEVER touch existing data
         questions_to_judge = []
         for q in questions:
             question_id = q["id"]
             if question_id in predictions:
                 if question_id not in judged_predictions:
+                    # Only add questions that don't have any judgment at all in the file
                     questions_to_judge.append(q)
-                elif not judged_predictions[question_id].get("judge_response", {}).get("reasoning", "").strip():
-                    # Re-judge questions that previously failed (empty judge response)
-                    questions_to_judge.append(q)
+                # CRITICAL: In resume mode, we NEVER retry failed judgments or empty judge responses
+                # This preserves ALL existing data, including failures and empty judge responses
+                # Use --fix mode specifically for retrying failed judgments
 
         # Initialize performance data list
         judge_performance_data = []
@@ -454,39 +459,48 @@ Additional Error Info: {additional_info}
                 if performance_metrics is not None:
                     judge_performance_data.append(performance_metrics)
 
-        # Add metadata to the judged file (REFACTOR: metrics removed, will be calculated in metrics_summary)
-        # Get the actual judge endpoint information
-        judge_endpoint = await self._get_judge_endpoint()
-        judge_endpoint_info = {
-            "provider_slug": judge_endpoint.provider_slug,
-            "provider": judge_endpoint.provider,
-            "context_length": judge_endpoint.context_length,
-            "max_completion_tokens": judge_endpoint.max_completion_tokens,
-            "supports_streaming": judge_endpoint.supports_streaming,
-            "suitable_api": judge_endpoint.suitable_api
-        }
-
-        metadata = {
-            "judging_metadata": {
-                "timestamp": datetime.now().isoformat(),
-                "judge_model": self.hle_config.judge_model,
-                "dataset_name": dataset_name,
-                "original_predictions_file": predictions_file,
-                "endpoint": judge_endpoint_info,  # Judge model's endpoint information
-                "judge_config": {
-                    "num_workers": self.hle_config.num_workers,
-                    "timeout": self.zenmux_config.timeout,
-                    "max_retries": self.zenmux_config.max_retries
-                },
-                "evaluation_metadata": evaluation_metadata  # Include original evaluation metadata for the evaluated model
+        # Create or update metadata
+        if existing_judged_metadata:
+            # If we have existing metadata, preserve it but only update judged_predictions
+            # This ensures we don't overwrite timestamp and other original metadata
+            final_output = existing_judged_metadata.copy()
+            final_output["judged_predictions"] = judged_predictions
+            self.logger.info(f"📁 Preserving original judging metadata and timestamp")
+        else:
+            # Create new metadata for new files
+            # Add metadata to the judged file (REFACTOR: metrics removed, will be calculated in metrics_summary)
+            # Get the actual judge endpoint information
+            judge_endpoint = await self._get_judge_endpoint()
+            judge_endpoint_info = {
+                "provider_slug": judge_endpoint.provider_slug,
+                "provider": judge_endpoint.provider,
+                "context_length": judge_endpoint.context_length,
+                "max_completion_tokens": judge_endpoint.max_completion_tokens,
+                "supports_streaming": judge_endpoint.supports_streaming,
+                "suitable_api": judge_endpoint.suitable_api
             }
-        }
 
-        # Save judged results with metadata only (REFACTOR: no metrics, no performance averages)
-        final_output = {
-            **metadata,
-            "judged_predictions": judged_predictions
-        }
+            metadata = {
+                "judging_metadata": {
+                    "timestamp": datetime.now().isoformat(),
+                    "judge_model": self.hle_config.judge_model,
+                    "dataset_name": dataset_name,
+                    "original_predictions_file": predictions_file,
+                    "endpoint": judge_endpoint_info,  # Judge model's endpoint information
+                    "judge_config": {
+                        "num_workers": self.hle_config.num_workers,
+                        "timeout": self.zenmux_config.timeout,
+                        "max_retries": self.zenmux_config.max_retries
+                    },
+                    "evaluation_metadata": evaluation_metadata  # Include original evaluation metadata for the evaluated model
+                }
+            }
+
+            # Save judged results with new metadata
+            final_output = {
+                **metadata,
+                "judged_predictions": judged_predictions
+            }
 
         with open(output_filepath, "w") as f:
             json.dump(final_output, f, indent=4)

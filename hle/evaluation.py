@@ -272,8 +272,9 @@ Additional Error Info: {additional_info}
 
         # Single evaluation attempt (retries are handled by fix mode)
 
-        # Load existing predictions if file exists
+        # Load existing predictions and metadata if file exists
         existing_predictions = {}
+        existing_metadata = None
         if os.path.exists(output_filepath):
             try:
                 with open(output_filepath, "r") as f:
@@ -281,6 +282,7 @@ Additional Error Info: {additional_info}
                     # Handle both old format (direct predictions) and new format (with metadata)
                     if "predictions" in data:
                         existing_predictions = data["predictions"]
+                        existing_metadata = data  # Keep full existing data structure
                     else:
                         existing_predictions = data
                 self.logger.info(f"📂 Found existing file: {os.path.basename(output_filepath)}")
@@ -289,16 +291,19 @@ Additional Error Info: {additional_info}
             except Exception as e:
                 self.logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
                 model_logger.warning(f"⚠️ Warning: Could not load existing predictions: {e}")
+                existing_metadata = None
 
-        # Filter out questions that already have predictions (or need retry for failed ones)
+        # Filter out questions that already have predictions
+        # In resume mode, only process truly missing questions - NEVER touch existing data
         remaining_questions = []
         for q in questions:
             question_id = q["id"]
             if question_id not in existing_predictions:
+                # Only add questions that don't exist at all in the file
                 remaining_questions.append(q)
-            elif not existing_predictions[question_id].get("response", "").strip():
-                # Re-evaluate questions that previously failed (empty response)
-                remaining_questions.append(q)
+            # CRITICAL: In resume mode, we NEVER retry failed questions or empty responses
+            # This preserves ALL existing data, including failures and empty responses
+            # Use --fix mode specifically for retrying failed evaluations
 
         if not remaining_questions:
             self.logger.info(f"✅ All questions already evaluated for {model_identifier}")
@@ -328,7 +333,8 @@ Additional Error Info: {additional_info}
         performance_data = []
         successful_count = 0
         for question_id, result in results:
-            # Always record the result, regardless of success or failure
+            # Only record the result if it was actually processed (was in remaining_questions)
+            # This prevents overwriting existing successful responses
             existing_predictions[question_id] = result
 
             # Collect performance data only for successful evaluations (non-empty response)
@@ -337,9 +343,21 @@ Additional Error Info: {additional_info}
                 successful_count += 1
 
 
-        # Add metadata to the predictions file
+        # Create or update metadata
+        if existing_metadata:
+            # If we have existing metadata, preserve it but only update predictions
+            # This ensures we don't overwrite timestamp and other original metadata
+            final_output = existing_metadata.copy()
+            final_output["predictions"] = existing_predictions
 
-        metadata = {
+            # Only add performance metrics for new evaluations if there were successful ones
+            # but don't recalculate averages - preserve existing ones
+            if performance_data and "evaluation_metadata" in existing_metadata:
+                # Log that we're preserving original metadata
+                model_logger.info(f"📁 Preserving original metadata and timestamp")
+        else:
+            # Create new metadata for new files
+            metadata = {
                 "evaluation_metadata": {
                     "timestamp": datetime.now().isoformat(),
                     "model_identifier": model_identifier,
@@ -367,24 +385,24 @@ Additional Error Info: {additional_info}
                 }
             }
 
-        # Calculate and add average performance metrics
-        if performance_data:
-            avg_first_token_latency = sum(p.get('first_token_latency_ms', 0) for p in performance_data) / len(performance_data)
-            avg_generation_time = sum(p.get('generation_time_ms', 0) for p in performance_data) / len(performance_data)
-            avg_throughput = sum(p.get('throughput_tokens_per_second', 0) for p in performance_data) / len(performance_data)
+            # Calculate and add average performance metrics for new files
+            if performance_data:
+                avg_first_token_latency = sum(p.get('first_token_latency_ms', 0) for p in performance_data) / len(performance_data)
+                avg_generation_time = sum(p.get('generation_time_ms', 0) for p in performance_data) / len(performance_data)
+                avg_throughput = sum(p.get('throughput_tokens_per_second', 0) for p in performance_data) / len(performance_data)
 
-            metadata["evaluation_metadata"]["performance_averages"] = {
-                "avg_first_token_latency_ms": round(avg_first_token_latency, 2),
-                "avg_generation_time_ms": round(avg_generation_time, 2),
-                "avg_throughput_tokens_per_second": round(avg_throughput, 2),
-                "samples_count": len(performance_data)
+                metadata["evaluation_metadata"]["performance_averages"] = {
+                    "avg_first_token_latency_ms": round(avg_first_token_latency, 2),
+                    "avg_generation_time_ms": round(avg_generation_time, 2),
+                    "avg_throughput_tokens_per_second": round(avg_throughput, 2),
+                    "samples_count": len(performance_data)
+                }
+
+            # Save predictions with new metadata
+            final_output = {
+                **metadata,
+                "predictions": existing_predictions
             }
-
-        # Save updated predictions with metadata
-        final_output = {
-            **metadata,
-            "predictions": existing_predictions
-        }
 
         try:
             with open(output_filepath, "w") as f:
