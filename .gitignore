@@ -219,3 +219,5 @@ __marimo__/
 # *.json
 .local-command.md
 logs/
+
+.local-command.mdlogs/
