@@ -217,4 +217,4 @@ __marimo__/
 # predictions/
 # judged/
 # *.json
-.local-command.md
+.local-command.mdlogs/

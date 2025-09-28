@@ -39,7 +39,7 @@ class HLEConfig:
     judge_max_completion_tokens: Optional[int] = None  # Max completion tokens for judge model
     temperature: float = 0.0
     num_workers: int = 100  # Inner concurrency: requests per model (restored to high concurrency)
-    max_concurrent_models: int = 1  # Outer concurrency: simultaneous models (restored to high concurrency)
+    max_concurrent_models: int = 5  # Outer concurrency: simultaneous models (restored to high concurrency)
     print_streaming_output: bool = True  # If True, print streaming responses to console in real-time
 
 
