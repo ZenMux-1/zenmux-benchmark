@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-29T14:44:02.877747",
+        "timestamp": "2025-09-29T16:26:24.413027",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -30,10 +30,14 @@
             "model_identifier": "openai/o4-mini:azure",
             "predictions_file": "results/20250922_122904/predictions/hle_openai_o4-mini_azure_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_openai_o4-mini_azure_20250922_122904.json",
-            "metrics": null,
+            "metrics": {
+                "accuracy": 13.39,
+                "confidence_interval": 1.44,
+                "calibration_error": 58.79
+            },
             "error": null,
-            "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations"
+            "excluded_from_metrics": false,
+            "exclusion_reason": null
         },
         {
             "model_identifier": "openai/gpt-5-nano:azure",
@@ -365,7 +369,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "z-ai/glm-4.5:z-ai",
@@ -702,7 +706,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "openai/gpt-4.1-nano:openai",

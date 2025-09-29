@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-29T14:44:03.825767",
+        "timestamp": "2025-09-29T16:26:25.236612",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 60
     },
@@ -16,10 +16,10 @@
         "openai/o4-mini:azure": {
             "prediction_file": "hle_openai_o4-mini_azure_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2157,
-            "responses_without_content": 1,
-            "completion_rate": 99.95,
-            "is_complete": false
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
         },
         "openai/gpt-5-nano:azure": {
             "prediction_file": "hle_openai_gpt-5-nano_azure_20250922_122904.json",
@@ -120,17 +120,17 @@
         "openai/gpt-5:openai": {
             "prediction_file": "hle_openai_gpt-5_openai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2097,
-            "responses_without_content": 61,
-            "completion_rate": 97.17,
+            "responses_with_content": 2155,
+            "responses_without_content": 3,
+            "completion_rate": 99.86,
             "is_complete": false
         },
         "qwen/qwen3-vl-plus:alibaba": {
             "prediction_file": "hle_qwen_qwen3-vl-plus_alibaba_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2093,
-            "responses_without_content": 65,
-            "completion_rate": 96.99,
+            "responses_with_content": 2157,
+            "responses_without_content": 1,
+            "completion_rate": 99.95,
             "is_complete": false
         },
         "google/gemini-2.0-flash:google-vertex": {
@@ -360,9 +360,9 @@
         "openai/gpt-5:azure": {
             "prediction_file": "hle_openai_gpt-5_azure_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2054,
-            "responses_without_content": 104,
-            "completion_rate": 95.18,
+            "responses_with_content": 2153,
+            "responses_without_content": 5,
+            "completion_rate": 99.77,
             "is_complete": false
         },
         "google/gemini-2.5-flash-lite:skyrouter": {
@@ -488,7 +488,6 @@
     },
     "failure_lists": {
         "incomplete_evaluation_models": [
-            "openai/o4-mini:azure",
             "anthropic/claude-opus-4:google-vertex",
             "qwen/qwen3-max:alibaba",
             "anthropic/claude-opus-4.1:google-vertex",
@@ -512,8 +511,8 @@
     "summary": {
         "total_models": 60,
         "models_with_responses": 60,
-        "models_with_complete_evaluation": 42,
+        "models_with_complete_evaluation": 43,
         "total_questions_across_all_models": 129480,
-        "total_responses_across_all_models": 125854
+        "total_responses_across_all_models": 126076
     }
 }

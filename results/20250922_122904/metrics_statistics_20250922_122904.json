@@ -1,18 +1,17 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-29T14:44:07.249504",
+        "timestamp": "2025-09-29T16:26:28.245827",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 60,
-        "models_with_valid_metrics": 41,
-        "models_excluded_from_metrics": 19,
+        "models_with_valid_metrics": 42,
+        "models_excluded_from_metrics": 18,
         "models_with_errors": 0
     },
     "failure_lists": {
         "excluded_models": [
-            "openai/o4-mini:azure",
             "anthropic/claude-opus-4:google-vertex",
             "qwen/qwen3-max:alibaba",
             "anthropic/claude-opus-4.1:google-vertex",
@@ -35,8 +34,8 @@
         "models_with_errors": []
     },
     "exclusion_reasons": {
-        "incomplete_evaluations": 18,
-        "incomplete_judgments": 4
+        "incomplete_evaluations": 17,
+        "incomplete_judgments": 2
     },
     "error_summary": {}
 }
