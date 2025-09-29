@@ -178,7 +178,7 @@ confidence: The extracted confidence score between 0|%| and 100|%| from [respons
 
             # Get parsed content, usage information, and generation ID
             final_parsed_content = response_obj.choices[0].message.parsed
-            usage = json.loads(response_obj.usage.json()) if response_obj.usage else {}
+            usage = json.loads(response_obj.usage.model_dump_json()) if response_obj.usage else {}
             generation_id = response_obj.id if hasattr(response_obj, 'id') else None
 
             # Calculate performance metrics for non-streaming judge requests
@@ -357,8 +357,15 @@ Additional Error Info: {additional_info}
 
         return np.sqrt(cerr)
 
-    def calculate_metrics(self, predictions: Dict[str, Any], total_questions: int) -> Dict[str, float]:
-        """Calculate accuracy and calibration metrics based on successful judgments only."""
+    def calculate_metrics(self, predictions: Dict[str, Any], total_questions: int, moderate_calculate: bool = False) -> Dict[str, float]:
+        """Calculate accuracy and calibration metrics.
+
+        Args:
+            predictions: Dictionary of predictions with judge responses
+            total_questions: Total number of questions in the dataset
+            moderate_calculate: If True, use successful judgments as denominator (relaxed mode).
+                               If False, use total_questions as denominator (strict mode).
+        """
         correct = []
         confidence = []
 
@@ -379,10 +386,17 @@ Additional Error Info: {additional_info}
         correct = np.array(correct)
         confidence = np.array(confidence) / 100
 
-        # Follow official HLE calculation: use total_questions as denominator (failed judgments count as incorrect)
-        accuracy = 100 * sum(correct) / total_questions
-        # Wald estimator, 95% confidence interval - use total_questions for variance calculation
-        confidence_half_width = 1.96 * math.sqrt(accuracy * (100 - accuracy) / total_questions)
+        # Choose denominator based on calculation mode
+        if moderate_calculate:
+            # Relaxed mode: use number of successful judgments as denominator
+            denominator = len(correct)
+        else:
+            # Strict mode: use total_questions as denominator (failed judgments count as incorrect)
+            denominator = total_questions
+
+        accuracy = 100 * sum(correct) / denominator
+        # Wald estimator, 95% confidence interval - use same denominator for variance calculation
+        confidence_half_width = 1.96 * math.sqrt(accuracy * (100 - accuracy) / denominator)
         calibration_error = 100 * self.calculate_calibration_error(confidence, correct, beta=100)
 
         return {

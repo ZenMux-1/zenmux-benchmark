@@ -98,6 +98,12 @@ async def main():
     )
 
     parser.add_argument(
+        "--moderate-calculate",
+        action="store_true",
+        help="Enable moderate calculation mode: calculate metrics based on successful judgments only (relaxed mode)"
+    )
+
+    parser.add_argument(
         "--num-workers",
         type=int,
         default=None,
@@ -192,6 +198,9 @@ async def main():
     if args.print_streaming:
         config.hle.print_streaming_output = True
 
+    if args.moderate_calculate:
+        config.hle.moderate_calculate = True
+
 
     # Setup base output directory
     config.output_dir = args.output_dir
@@ -236,6 +245,7 @@ async def main():
         logger.info(f"📝 Text only: {args.text_only}")
         logger.info(f"📊 Max samples: {args.max_samples}")
         logger.info(f"🏛️ Auto judge: {auto_judge}")
+        logger.info(f"🧮 Calculation mode: {'moderate' if config.hle.moderate_calculate else 'strict'}")
         if args.exclude_model:
             logger.info(f"🚫 Excluded models: {', '.join(args.exclude_model)}")
         if args.exclude_provider:
@@ -251,6 +261,7 @@ async def main():
         logger.info(f"📝 Text only: {args.text_only}")
         logger.info(f"📊 Max samples: {args.max_samples}")
         logger.info(f"🏛️ Auto judge: {auto_judge}")
+        logger.info(f"🧮 Calculation mode: {'moderate' if config.hle.moderate_calculate else 'strict'}")
         if args.exclude_model:
             logger.info(f"🚫 Excluded models: {', '.join(args.exclude_model)}")
         if args.exclude_provider:
@@ -260,6 +271,7 @@ async def main():
         logger.info(f"📝 Text only: {args.text_only}")
         logger.info(f"📊 Max samples: {args.max_samples}")
         logger.info(f"🏛️ Auto judge: {auto_judge}")
+        logger.info(f"🧮 Calculation mode: {'moderate' if config.hle.moderate_calculate else 'strict'}")
         if args.exclude_model:
             logger.info(f"🚫 Excluded models: {', '.join(args.exclude_model)}")
         if args.exclude_provider:

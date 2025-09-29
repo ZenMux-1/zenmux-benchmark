@@ -407,7 +407,7 @@ class HLERunner:
                 self.logger.debug(f"Could not load question IDs for metrics calculation: {e}")
 
             # Calculate metrics in real-time using judge's calculate_metrics method
-            metrics = self.judge.calculate_metrics(judged_predictions, total_questions)
+            metrics = self.judge.calculate_metrics(judged_predictions, total_questions, self.config.hle.moderate_calculate)
 
             return metrics
 
@@ -438,47 +438,64 @@ class HLERunner:
         # Identify models with failures (should be excluded from metrics calculation)
         models_with_failures = set()
 
-        for result in results:
-            model_identifier = result["model_identifier"]
+        # In moderate_calculate mode, be more lenient about exclusions
+        if self.config.hle.moderate_calculate:
+            self.logger.info("🔄 Using moderate calculation mode - calculating metrics for all models with judged files")
+            # Only exclude models with general errors or missing judged files
+            for result in results:
+                model_identifier = result["model_identifier"]
 
-            # Check for evaluation failures (empty responses)
-            if result.get("predictions_file"):
-                if not self._has_complete_evaluations(result["predictions_file"]):
+                # Always exclude models with general errors
+                if result.get("error"):
                     models_with_failures.add(model_identifier)
 
-            # Check for judge failures (empty judge responses)
-            if result.get("judged_file"):
-                if not self._has_complete_judgments(result["judged_file"]):
+                # Exclude models without judged files (can't calculate anything)
+                if not result.get("judged_file") or not os.path.exists(result["judged_file"]):
                     models_with_failures.add(model_identifier)
 
-                # ENHANCED: Validate judge completeness against expected question count
-                if expected_question_count > 0 and result.get("judged_file"):
-                    try:
-                        with open(result["judged_file"], "r") as f:
-                            judged_data = json.load(f)
+        else:
+            # Strict mode: original logic - exclude models with any incompleteness
+            for result in results:
+                model_identifier = result["model_identifier"]
 
-                        if "judged_predictions" in judged_data:
-                            judged_predictions = judged_data["judged_predictions"]
-                        else:
-                            judged_predictions = judged_data
-
-                        # Count successful judgments (non-empty judge responses)
-                        successful_judgments = sum(1 for pred in judged_predictions.values()
-                                                 if pred.get("judge_response", {}).get("reasoning", "").strip())
-
-                        if successful_judgments != expected_question_count:
-                            models_with_failures.add(model_identifier)
-                            self.logger.warning(f"⚠️ {model_identifier}: Only {successful_judgments}/{expected_question_count} judgments - excluded from metrics")
-                        else:
-                            self.logger.info(f"✅ {model_identifier}: {successful_judgments}/{expected_question_count} judgments - valid for metrics")
-
-                    except Exception as e:
-                        self.logger.error(f"❌ Error validating judge completeness for {model_identifier}: {e}")
+                # Check for evaluation failures (empty responses)
+                if result.get("predictions_file"):
+                    if not self._has_complete_evaluations(result["predictions_file"]):
                         models_with_failures.add(model_identifier)
 
-            # Check for general errors
-            if result.get("error"):
-                models_with_failures.add(model_identifier)
+                # Check for judge failures (empty judge responses)
+                if result.get("judged_file"):
+                    if not self._has_complete_judgments(result["judged_file"]):
+                        models_with_failures.add(model_identifier)
+
+                    # ENHANCED: Validate judge completeness against expected question count
+                    if expected_question_count > 0 and result.get("judged_file"):
+                        try:
+                            with open(result["judged_file"], "r") as f:
+                                judged_data = json.load(f)
+
+                            if "judged_predictions" in judged_data:
+                                judged_predictions = judged_data["judged_predictions"]
+                            else:
+                                judged_predictions = judged_data
+
+                            # Count successful judgments (non-empty judge responses)
+                            successful_judgments = sum(1 for pred in judged_predictions.values()
+                                                     if pred.get("judge_response", {}).get("reasoning", "").strip())
+
+                            if successful_judgments != expected_question_count:
+                                models_with_failures.add(model_identifier)
+                                self.logger.warning(f"⚠️ {model_identifier}: Only {successful_judgments}/{expected_question_count} judgments - excluded from metrics")
+                            else:
+                                self.logger.info(f"✅ {model_identifier}: {successful_judgments}/{expected_question_count} judgments - valid for metrics")
+
+                        except Exception as e:
+                            self.logger.error(f"❌ Error validating judge completeness for {model_identifier}: {e}")
+                            models_with_failures.add(model_identifier)
+
+                # Check for general errors
+                if result.get("error"):
+                    models_with_failures.add(model_identifier)
 
         # Filter results to only include models without failures for metrics calculation
         clean_results = [r for r in results if r["model_identifier"] not in models_with_failures]
@@ -517,7 +534,8 @@ class HLERunner:
             json.dump(summary, f, indent=4)
 
         self.logger.info(f"📊 Enhanced metrics summary saved to: {summary_file}")
-        self.logger.info(f"🔍 Models excluded from metrics: {len(models_with_failures)}/{len(results)}")
+        calculation_mode = "moderate" if self.config.hle.moderate_calculate else "strict"
+        self.logger.info(f"🔍 Calculation mode: {calculation_mode} - Models excluded from metrics: {len(models_with_failures)}/{len(results)}")
 
         # Generate comprehensive statistics files
         try:

@@ -41,6 +41,7 @@ class HLEConfig:
     num_workers: int = 100  # Inner concurrency: requests per model (restored to high concurrency)
     max_concurrent_models: int = 5  # Outer concurrency: simultaneous models (restored to high concurrency)
     print_streaming_output: bool = False  # If True, print streaming responses to console in real-time
+    moderate_calculate: bool = False  # If True, calculate metrics based on successful judgments only (relaxed mode)
 
 
 @dataclass

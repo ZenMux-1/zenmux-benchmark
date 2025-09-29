@@ -124,7 +124,7 @@ class HLEEvaluator:
 
                     # Capture usage information from the final chunk
                     if chunk.usage:
-                        usage = json.loads(chunk.usage.json())
+                        usage = json.loads(chunk.usage.model_dump_json())
 
                 # Combine all content chunks
                 content = "".join(content_chunks)
@@ -142,7 +142,7 @@ class HLEEvaluator:
                     content = response.choices[0].message.content or ""
 
                 if response.usage:
-                    usage = json.loads(response.usage.json())
+                    usage = json.loads(response.usage.model_dump_json())
 
             # Record generation end time
             generation_end_time = time.time() * 1000
