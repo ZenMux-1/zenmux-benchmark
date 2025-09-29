@@ -1,11 +1,11 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-28T23:08:37.758912",
+        "timestamp": "2025-09-29T01:35:57.245925",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
             "auto_judge": true,
-            "num_workers": 50,
+            "num_workers": 100,
             "max_concurrent_models": 5,
             "model_filter": null,
             "model_slug": null,
@@ -287,7 +287,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-sonnet-4:anthropic",
@@ -375,7 +375,7 @@
             "metrics": null,
             "error": null,
             "excluded_from_metrics": true,
-            "exclusion_reason": "incomplete_evaluations, incomplete_judgments"
+            "exclusion_reason": "incomplete_evaluations"
         },
         {
             "model_identifier": "anthropic/claude-3.5-haiku:amazon-bedrock",

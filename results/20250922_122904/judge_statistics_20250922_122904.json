@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-28T23:08:40.315012",
+        "timestamp": "2025-09-29T01:35:59.684727",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 60
     },
@@ -16,9 +16,9 @@
         "z-ai/glm-4.5-air:z-ai": {
             "judged_file": "judged_hle_z-ai_glm-4.5-air_z-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 7,
-            "judgments_without_content": 2151,
-            "completion_rate": 0.32,
+            "judgments_with_content": 879,
+            "judgments_without_content": 1279,
+            "completion_rate": 40.73,
             "is_complete": false
         },
         "openai/gpt-5-nano:openai": {
@@ -336,9 +336,9 @@
         "deepseek/deepseek-r1-0528:volcengine": {
             "judged_file": "judged_hle_deepseek_deepseek-r1-0528_volcengine_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 9,
-            "judgments_without_content": 2149,
-            "completion_rate": 0.42,
+            "judgments_with_content": 1430,
+            "judgments_without_content": 728,
+            "completion_rate": 66.27,
             "is_complete": false
         },
         "moonshotai/kimi-k2-0711:volcengine": {
@@ -472,9 +472,9 @@
         "z-ai/glm-4.5:z-ai": {
             "judged_file": "judged_hle_z-ai_glm-4.5_z-ai_20250922_122904.json",
             "total_questions": 2158,
-            "judgments_with_content": 42,
-            "judgments_without_content": 2116,
-            "completion_rate": 1.95,
+            "judgments_with_content": 939,
+            "judgments_without_content": 1219,
+            "completion_rate": 43.51,
             "is_complete": false
         },
         "google/gemini-2.5-pro:google-vertex": {
@@ -517,6 +517,6 @@
         "models_with_judgments": 60,
         "models_with_complete_judging": 39,
         "total_questions_across_all_models": 129480,
-        "total_judgments_across_all_models": 120840
+        "total_judgments_across_all_models": 124030
     }
 }
