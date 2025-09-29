@@ -63,6 +63,9 @@ uv run python benchmark.py --mode single \
 # Test all models except expensive ones
 uv run python benchmark.py --text-only --max-samples 5 --exclude-model openai/gpt-4o
 
+# Use moderate calculation to include models with partial judgment failures
+uv run python benchmark.py --text-only --max-samples 10 --moderate-calculate
+
 # Resume interrupted evaluation
 uv run python benchmark.py --mode all --resume results/20250922_122904
 ```
@@ -128,9 +131,29 @@ uv run python benchmark.py --exclude-provider theta \
 
 # Combine with other options
 uv run python benchmark.py --mode filter --model-filter gpt --exclude-model openai/gpt-4o-mini
+
+# Use moderate calculation for research and analysis
+uv run python benchmark.py --mode all --moderate-calculate --text-only
 ```
 
-### 5. Resume Interrupted Evaluations
+### 5. Moderate Calculation Mode
+
+For research purposes or when you want to maximize data utilization from partially successful runs:
+
+```bash
+# Enable moderate calculation - includes models with partial judgment failures
+uv run python benchmark.py --moderate-calculate --text-only
+
+# Compare strict vs moderate results
+uv run python benchmark.py --text-only  # strict mode (default)
+uv run python benchmark.py --text-only --moderate-calculate  # moderate mode
+
+# Fix failed judgments, then use moderate calculation
+uv run python benchmark.py --fix results/20250922_122904
+uv run python benchmark.py --moderate-calculate --resume results/20250922_122904
+```
+
+### 6. Resume Interrupted Evaluations
 
 If your evaluation was interrupted (e.g., network issues, system restart), you can resume from where it left off:
 
@@ -158,7 +181,7 @@ uv run python benchmark.py --mode single \
 # - Continue with judging and metrics calculation
 ```
 
-### 6. Failure Recovery (Advanced)
+### 7. Failure Recovery (Advanced)
 
 When evaluations encounter failures, you can automatically retry and fix them using concurrent processing:
 
@@ -241,6 +264,14 @@ uv run python benchmark.py --fix results/20250922_093840 --num-workers 5
 - Retries judgments with empty judge responses in judge files
 - Updates files with successful results and recalculates metrics
 - Follows the same evaluation → judge → metrics workflow as normal runs
+
+### `--moderate-calculate`
+
+- Enable moderate calculation mode for metrics computation
+- **Strict mode** (default): Uses total questions as denominator, excludes models with any incomplete judgments
+- **Moderate mode**: Uses successful judgments as denominator, includes models with partial judgment failures
+- Useful for maximizing data utilization when some models have minor judgment failures
+- Example: Model with 2157/2158 successful judgments gets included instead of excluded
 
 ### `--print-streaming`
 

@@ -1,41 +1,19 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-29T16:26:28.245827",
+        "timestamp": "2025-09-29T17:01:32.245574",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 60,
-        "models_with_valid_metrics": 42,
-        "models_excluded_from_metrics": 18,
+        "models_with_valid_metrics": 60,
+        "models_excluded_from_metrics": 0,
         "models_with_errors": 0
     },
     "failure_lists": {
-        "excluded_models": [
-            "anthropic/claude-opus-4:google-vertex",
-            "qwen/qwen3-max:alibaba",
-            "anthropic/claude-opus-4.1:google-vertex",
-            "anthropic/claude-opus-4.1:amazon-bedrock",
-            "openai/gpt-5:openai",
-            "qwen/qwen3-vl-plus:alibaba",
-            "z-ai/glm-4.5-air:z-ai",
-            "anthropic/claude-opus-4.1:anthropic",
-            "z-ai/glm-4.5:z-ai",
-            "deepseek/deepseek-r1-0528:volcengine",
-            "anthropic/claude-opus-4:anthropic",
-            "openai/gpt-5:azure",
-            "x-ai/grok-code-fast-1:x-ai",
-            "google/gemini-2.5-flash:google-vertex",
-            "openai/o4-mini:openai",
-            "x-ai/grok-4:x-ai",
-            "anthropic/claude-opus-4:amazon-bedrock",
-            "x-ai/grok-4-fast:x-ai"
-        ],
+        "excluded_models": [],
         "models_with_errors": []
     },
-    "exclusion_reasons": {
-        "incomplete_evaluations": 17,
-        "incomplete_judgments": 2
-    },
+    "exclusion_reasons": {},
     "error_summary": {}
 }
