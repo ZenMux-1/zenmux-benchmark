@@ -1,13 +1,13 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-29T01:36:01.410237",
+        "timestamp": "2025-09-29T14:44:07.249504",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 60,
-        "models_with_valid_metrics": 39,
-        "models_excluded_from_metrics": 21,
+        "models_with_valid_metrics": 41,
+        "models_excluded_from_metrics": 19,
         "models_with_errors": 0
     },
     "failure_lists": {
@@ -19,9 +19,7 @@
             "anthropic/claude-opus-4.1:amazon-bedrock",
             "openai/gpt-5:openai",
             "qwen/qwen3-vl-plus:alibaba",
-            "openai/gpt-5-mini:openai",
             "z-ai/glm-4.5-air:z-ai",
-            "google/gemini-2.5-flash:skyrouter",
             "anthropic/claude-opus-4.1:anthropic",
             "z-ai/glm-4.5:z-ai",
             "deepseek/deepseek-r1-0528:volcengine",
@@ -38,7 +36,7 @@
     },
     "exclusion_reasons": {
         "incomplete_evaluations": 18,
-        "incomplete_judgments": 3
+        "incomplete_judgments": 4
     },
     "error_summary": {}
 }

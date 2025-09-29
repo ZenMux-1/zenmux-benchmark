@@ -1,6 +1,6 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-29T01:35:58.295365",
+        "timestamp": "2025-09-29T14:44:03.825767",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 60
     },
@@ -120,9 +120,9 @@
         "openai/gpt-5:openai": {
             "prediction_file": "hle_openai_gpt-5_openai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2042,
-            "responses_without_content": 116,
-            "completion_rate": 94.62,
+            "responses_with_content": 2097,
+            "responses_without_content": 61,
+            "completion_rate": 97.17,
             "is_complete": false
         },
         "qwen/qwen3-vl-plus:alibaba": {
@@ -240,9 +240,9 @@
         "anthropic/claude-opus-4.1:anthropic": {
             "prediction_file": "hle_anthropic_claude-opus-4.1_anthropic_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2139,
-            "responses_without_content": 19,
-            "completion_rate": 99.12,
+            "responses_with_content": 2140,
+            "responses_without_content": 18,
+            "completion_rate": 99.17,
             "is_complete": false
         },
         "z-ai/glm-4.5:z-ai": {
@@ -256,9 +256,9 @@
         "deepseek/deepseek-r1-0528:volcengine": {
             "prediction_file": "hle_deepseek_deepseek-r1-0528_volcengine_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1430,
-            "responses_without_content": 728,
-            "completion_rate": 66.27,
+            "responses_with_content": 1569,
+            "responses_without_content": 589,
+            "completion_rate": 72.71,
             "is_complete": false
         },
         "anthropic/claude-3.5-haiku:amazon-bedrock": {
@@ -360,9 +360,9 @@
         "openai/gpt-5:azure": {
             "prediction_file": "hle_openai_gpt-5_azure_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2029,
-            "responses_without_content": 129,
-            "completion_rate": 94.02,
+            "responses_with_content": 2054,
+            "responses_without_content": 104,
+            "completion_rate": 95.18,
             "is_complete": false
         },
         "google/gemini-2.5-flash-lite:skyrouter": {
@@ -416,9 +416,9 @@
         "x-ai/grok-code-fast-1:x-ai": {
             "prediction_file": "hle_x-ai_grok-code-fast-1_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2141,
-            "responses_without_content": 17,
-            "completion_rate": 99.21,
+            "responses_with_content": 2142,
+            "responses_without_content": 16,
+            "completion_rate": 99.26,
             "is_complete": false
         },
         "google/gemini-2.5-flash:google-vertex": {
@@ -448,9 +448,9 @@
         "x-ai/grok-4:x-ai": {
             "prediction_file": "hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1959,
-            "responses_without_content": 199,
-            "completion_rate": 90.78,
+            "responses_with_content": 1966,
+            "responses_without_content": 192,
+            "completion_rate": 91.1,
             "is_complete": false
         },
         "anthropic/claude-opus-4:amazon-bedrock": {
@@ -472,9 +472,9 @@
         "x-ai/grok-4-fast:x-ai": {
             "prediction_file": "hle_x-ai_grok-4-fast_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2156,
-            "responses_without_content": 2,
-            "completion_rate": 99.91,
+            "responses_with_content": 2157,
+            "responses_without_content": 1,
+            "completion_rate": 99.95,
             "is_complete": false
         },
         "openai/gpt-4.1-nano:openai": {
@@ -514,6 +514,6 @@
         "models_with_responses": 60,
         "models_with_complete_evaluation": 42,
         "total_questions_across_all_models": 129480,
-        "total_responses_across_all_models": 125625
+        "total_responses_across_all_models": 125854
     }
 }

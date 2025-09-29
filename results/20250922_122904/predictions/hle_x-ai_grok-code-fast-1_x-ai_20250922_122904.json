@@ -53265,15 +53265,31 @@
         },
         "673b5fdff0294e2cbdb5bebb": {
             "model": "x-ai/grok-code-fast-1:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The pattern is a * b + a - b, which uses multiplication, addition, and subtraction. For 6 and 12: 6*12 + 6 - 12 = 72 + 6 - 12 = 66.\n\nAnswer: 66  \nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 62,
+                "prompt_tokens": 333,
+                "total_tokens": 933,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 538,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 192,
+                    "text_tokens": 333,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 5159.040771484375,
+                "generation_time_ms": 6276.314453125,
+                "throughput_tokens_per_second": 9.87840881189915
+            },
+            "generation_id": "2540CCVGUQFS01368281"
         },
         "673b631505be2302d4445ece": {
             "model": "x-ai/grok-code-fast-1:x-ai",
