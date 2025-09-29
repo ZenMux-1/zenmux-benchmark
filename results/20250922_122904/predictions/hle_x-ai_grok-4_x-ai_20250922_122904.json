@@ -209,7 +209,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66b91693d86bff9a12fc1f99": {
             "model": "x-ai/grok-4:x-ai",
@@ -613,7 +613,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66e8add1650a03361a14c6f8": {
             "model": "x-ai/grok-4:x-ai",
@@ -653,7 +653,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66e8b0a9e5eaa390aa9fdde5": {
             "model": "x-ai/grok-4:x-ai",
@@ -1393,7 +1393,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66e93893a3326adf2da92ef0": {
             "model": "x-ai/grok-4:x-ai",
@@ -2049,7 +2049,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66e9fc11c19c8c61add294f0": {
             "model": "x-ai/grok-4:x-ai",
@@ -2369,7 +2369,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ea3ba5444b8f31ef575799": {
             "model": "x-ai/grok-4:x-ai",
@@ -2969,7 +2969,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66eaf0ba5e31c19691fe73b1": {
             "model": "x-ai/grok-4:x-ai",
@@ -3009,7 +3009,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66eaf456afe364e4f477b78f": {
             "model": "x-ai/grok-4:x-ai",
@@ -3133,7 +3133,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66eb105d5f6e64fbae56b0fe": {
             "model": "x-ai/grok-4:x-ai",
@@ -3201,7 +3201,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66eb206f99363a31f68414bc": {
             "model": "x-ai/grok-4:x-ai",
@@ -3409,7 +3409,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66eb968f69502893cf210115": {
             "model": "x-ai/grok-4:x-ai",
@@ -3673,7 +3673,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ec5e266f83e1764787e118": {
             "model": "x-ai/grok-4:x-ai",
@@ -3685,7 +3685,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ec6ad7b64b08f801db4fde": {
             "model": "x-ai/grok-4:x-ai",
@@ -3781,7 +3781,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ecddac93c4bf17acb6c106": {
             "model": "x-ai/grok-4:x-ai",
@@ -3961,7 +3961,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ed3e7cd841eb51a985ca7f": {
             "model": "x-ai/grok-4:x-ai",
@@ -4169,7 +4169,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ed97d1c2becb9452e4d7b4": {
             "model": "x-ai/grok-4:x-ai",
@@ -4433,7 +4433,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ee01a4126fac9cef29cb8b": {
             "model": "x-ai/grok-4:x-ai",
@@ -4577,15 +4577,31 @@
         },
         "66ee3918d7b2b78925bd20b6": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The graph is a multigraph version of C_100 with multiplicity 1234 on each edge. The correspondence chromatic number for even cycles with multiplicity m is m+2, based on the analysis that for k=m+1, a blocking assignment exists using the derangement construction with \u03b4=1, but for k=m+2, with \u03b4\u22652, every assignment admits a proper coloring, consistent with known results for even cycles.\nAnswer: 1236\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 100,
+                "prompt_tokens": 757,
+                "total_tokens": 29085,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 28228,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 724,
+                    "text_tokens": 757,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 507522.3918457031,
+                "generation_time_ms": 1860.485107421875,
+                "throughput_tokens_per_second": 53.74942244959581
+            },
+            "generation_id": "2540CCVLRUIU01414069"
         },
         "66ee60c50e499ab807af71f2": {
             "model": "x-ai/grok-4:x-ai",
@@ -4877,7 +4893,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66eee811093c534ea2673f87": {
             "model": "x-ai/grok-4:x-ai",
@@ -5309,7 +5325,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66ef98088171e6ed71be1454": {
             "model": "x-ai/grok-4:x-ai",
@@ -5573,7 +5589,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66f03563a291f119cd841967": {
             "model": "x-ai/grok-4:x-ai",
@@ -5697,7 +5713,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66f0bc36c6a29a8fa8010813": {
             "model": "x-ai/grok-4:x-ai",
@@ -6045,7 +6061,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66f1ce25cd6a2b9d36fe8ea2": {
             "model": "x-ai/grok-4:x-ai",
@@ -6113,7 +6129,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66f1db990130ee934e5b9810": {
             "model": "x-ai/grok-4:x-ai",
@@ -6181,7 +6197,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66f20ebbe54b6b68fc3062d3": {
             "model": "x-ai/grok-4:x-ai",
@@ -6921,7 +6937,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66f42e3287046c01dba2115b": {
             "model": "x-ai/grok-4:x-ai",
@@ -8137,19 +8153,35 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66f7fa54fa61639b844aa420": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: Based on known enumerations for the number of commutative semigroups on a set of 3 elements, the total is 34. This counts all associative and commutative binary operations on the set.\nAnswer: 34\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 51,
+                "prompt_tokens": 747,
+                "total_tokens": 30406,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 29608,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 724,
+                    "text_tokens": 747,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "Connection error."
+            "performance": {
+                "first_token_latency_ms": 595626.0778808594,
+                "generation_time_ms": 1159.172119140625,
+                "throughput_tokens_per_second": 43.99691741879528
+            },
+            "generation_id": "2540CCTSUNPO01414073"
         },
         "66f820bb7ea359a842b73398": {
             "model": "x-ai/grok-4:x-ai",
@@ -8973,7 +9005,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66fb75ded83ed7a299fdd136": {
             "model": "x-ai/grok-4:x-ai",
@@ -9097,7 +9129,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66fbcca4a177ae967e470415": {
             "model": "x-ai/grok-4:x-ai",
@@ -9882,7 +9914,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66fc6a20d90ebe461bfd0cc7": {
             "model": "x-ai/grok-4:x-ai",
@@ -10566,7 +10598,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66fd166eda2dbed1f5cc240b": {
             "model": "x-ai/grok-4:x-ai",
@@ -10634,7 +10666,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66fd469e7a33ca69ccc69729": {
             "model": "x-ai/grok-4:x-ai",
@@ -11346,7 +11378,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "66fea0c4cb66b0e85c55ee52": {
             "model": "x-ai/grok-4:x-ai",
@@ -12125,7 +12157,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670079cb5587080e1cf67dce": {
             "model": "x-ai/grok-4:x-ai",
@@ -12333,7 +12365,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "6700a5f67899925724a8fa81": {
             "model": "x-ai/grok-4:x-ai",
@@ -12961,7 +12993,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "6701d869aee3881b852d40a0": {
             "model": "x-ai/grok-4:x-ai",
@@ -13309,7 +13341,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "67036eec810cc41df802051d": {
             "model": "x-ai/grok-4:x-ai",
@@ -13517,7 +13549,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "6704465caf0a436d92c65160": {
             "model": "x-ai/grok-4:x-ai",
@@ -13697,7 +13729,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "6704c05a8e878e59e57c7167": {
             "model": "x-ai/grok-4:x-ai",
@@ -13765,7 +13797,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "67050ddbf6e4beb1922a29b2": {
             "model": "x-ai/grok-4:x-ai",
@@ -13777,7 +13809,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670524fec62c9a55b8503379": {
             "model": "x-ai/grok-4:x-ai",
@@ -13817,7 +13849,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "67055b15222ba55ab0b88431": {
             "model": "x-ai/grok-4:x-ai",
@@ -14025,7 +14057,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "6706295df10a8c2ca9a9c288": {
             "model": "x-ai/grok-4:x-ai",
@@ -15297,7 +15329,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670c064227c257620553cc04": {
             "model": "x-ai/grok-4:x-ai",
@@ -15421,7 +15453,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670c47e5a1a7d61748daa200": {
             "model": "x-ai/grok-4:x-ai",
@@ -15433,7 +15465,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670c48975b505e10c0277cee": {
             "model": "x-ai/grok-4:x-ai",
@@ -15585,7 +15617,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670cfd37787b413636ae1e57": {
             "model": "x-ai/grok-4:x-ai",
@@ -15849,7 +15881,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670db60f6f63b774df6f4daa": {
             "model": "x-ai/grok-4:x-ai",
@@ -15889,7 +15921,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "670dc30acfd3fc87a109a91e": {
             "model": "x-ai/grok-4:x-ai",
@@ -20542,15 +20574,31 @@
         },
         "6718d2c20bcda71f53b0fe55": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: Based on the construction using a lower half for B with infinitely many accumulating vertical lines including the limit, union with the upper half A forms the unit square, both are closed connected, and the intersection has infinitely many connected components (countably infinite in that example, but can be extended to uncountable using a Cantor set). There is no finite upper bound.\nAnswer: infinity\nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 83,
+                "prompt_tokens": 760,
+                "total_tokens": 27889,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 27046,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 725,
+                    "text_tokens": 760,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 554854.3530273438,
+                "generation_time_ms": 1933.860107421875,
+                "throughput_tokens_per_second": 42.91934027774709
+            },
+            "generation_id": "2540CCBMJUSK01331778"
         },
         "671901f58b9cbfc7b2fd9723": {
             "model": "x-ai/grok-4:x-ai",
@@ -28307,7 +28355,7 @@
                 "throughput_tokens_per_second": 0.0
             },
             "generation_id": null,
-            "error": "Connection error."
+            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
         },
         "6721ac0547bc48850f17f779": {
             "model": "x-ai/grok-4:x-ai",
@@ -30547,15 +30595,31 @@
         },
         "6723a06c2ed591ecf750d591": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The map T(x) = {1/sqrt(x)} on [0,1) does not admit an absolutely continuous invariant measure with respect to Lebesgue measure. Attempts to find a density \u03c1 satisfying the Perron-Frobenius equation lead to contradictions regarding the behavior near x=0 and the normalization condition \u222b\u03c1 dx =1. Specifically, any candidate density either fails to satisfy the equation for all y, has non-integrable singularities, or results in finite right-hand side while left-hand side diverges (or vice versa).\nAnswer: No normalised density exists.\nConfidence: 90%",
+            "usage": {
+                "completion_tokens": 122,
+                "prompt_tokens": 794,
+                "total_tokens": 35184,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 34268,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 725,
+                    "text_tokens": 794,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 563242.0139160156,
+                "generation_time_ms": 2285.19287109375,
+                "throughput_tokens_per_second": 53.387178624274185
+            },
+            "generation_id": "2540CCKREGER01324718"
         },
         "6723a1419293b01661360a94": {
             "model": "x-ai/grok-4:x-ai",
@@ -30727,15 +30791,31 @@
         },
         "6723bf036e47cec0509b5caf": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The analysis shows that the stars are positioned such that they graze the celestial equator, with the configuration leading to an angular distance of 180\u00b0 - 2 \u00d7 23.5\u00b0 = 133\u00b0 between them. This fits all given conditions, including the precession period, the times to equator positions, and the swapping of coordinates after 13000 years.\nAnswer: 133\nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 85,
+                "prompt_tokens": 879,
+                "total_tokens": 21303,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 20339,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 724,
+                    "text_tokens": 879,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 386740.6291503906,
+                "generation_time_ms": 1916.038818359375,
+                "throughput_tokens_per_second": 44.36235799897937
+            },
+            "generation_id": "2540CCUKSEUH01323437"
         },
         "6723bf0d71d8a82752075279": {
             "model": "x-ai/grok-4:x-ai",
@@ -31307,15 +31387,31 @@
         },
         "6723f98e95122aa6e1c63506": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: Based on the analysis, the space B(1,0) splits into equivalence classes corresponding to congruences modulo \u03c0^4 O_K in both coordinates, leading to the count of p^{42} (p^6 - 1) classes, where p=43.\nAnswer: 43^{42} (43^6 - 1)\nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 78,
+                "prompt_tokens": 1043,
+                "total_tokens": 26634,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 25513,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 726,
+                    "text_tokens": 1043,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 511518.6291503906,
+                "generation_time_ms": 1681.06689453125,
+                "throughput_tokens_per_second": 46.399105385838666
+            },
+            "generation_id": "2540CCVAORHX01377324"
         },
         "6723fc382a5a297be25c2d79": {
             "model": "x-ai/grok-4:x-ai",
@@ -32363,15 +32459,31 @@
         },
         "6724970787a3fb903b6a4663": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The position requires the black king to be immobilized but not in check, with white able to force checkmate in 6 moves but not fewer. To maximize white material points (excluding kings), fill the board with 56 white queens (9 points each) and 6 empty squares. The setup involves a queen attacking through a line blocked by 6 white queens, requiring 6 moves to clear by moving each blocker to one of the 6 dedicated empty squares, resulting in checkmate on the 6th move. Fewer empties cannot accommodate removing 6 blockers.\nAnswer: 504\nConfidence: 85%",
+            "usage": {
+                "completion_tokens": 126,
+                "prompt_tokens": 774,
+                "total_tokens": 27369,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 26469,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 676,
+                    "text_tokens": 774,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 587660.3520507812,
+                "generation_time_ms": 3156.878662109375,
+                "throughput_tokens_per_second": 39.912842236327464
+            },
+            "generation_id": "2540CCQMVOFK01412890"
         },
         "67249b8ef14c6dca507d5e0d": {
             "model": "x-ai/grok-4:x-ai",
@@ -39163,15 +39275,31 @@
         },
         "672c91122372b4061411e111": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The calculation is possible using the Titan architecture by approximating constants like \u03c0 with fractions within the 6-bit constraints (e.g., 22/7 for \u03c0, yielding ~0.04% relative error). More advanced approximations can reduce the error further to ~0.00035%. The black hole's event horizon adds negligible error due to its tiny size. The smallest achievable relative error rounds to 0.0% when rounded to 0.1%.\nAnswer: Y0.0\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 105,
+                "prompt_tokens": 1759,
+                "total_tokens": 29416,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 27552,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 724,
+                    "text_tokens": 1759,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 568487.9663085938,
+                "generation_time_ms": 2593.64990234375,
+                "throughput_tokens_per_second": 40.48349004432588
+            },
+            "generation_id": "2540CCLTIUBL01376119"
         },
         "672c973499e1076f34973bfc": {
             "model": "x-ai/grok-4:x-ai",
@@ -40958,8 +41086,7 @@
                 "generation_time_ms": 0.0,
                 "throughput_tokens_per_second": 0.0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "generation_id": "2540CCUJOARZ01379011"
         },
         "672f7b5d47d2f4c7ca9ff600": {
             "model": "x-ai/grok-4:x-ai",
@@ -43543,15 +43670,31 @@
         },
         "67352c39a52dd47230de9a2b": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: Based on standard chemical proteomics workflows for cysteine labeling using alkyne probes, followed by click chemistry with a biotin-azide, enrichment, digestion, and cleavage of a linker, the variable modification mass for the remnant tag in LC-MS/MS analysis is commonly 295 Da. Although the problem specifies cleavage with formic acid, which typically aligns with acid-cleavable linkers, 295 is a standard value associated with azo-linkers cleaved by dithionite in similar experiments. This may indicate a mismatch or typo in the cleavage method, but 295 fits the context and choices best.\nAnswer: K\nConfidence: 80%",
+            "usage": {
+                "completion_tokens": 130,
+                "prompt_tokens": 956,
+                "total_tokens": 22285,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 21199,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 677,
+                    "text_tokens": 956,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 501043.1950683594,
+                "generation_time_ms": 3166.07177734375,
+                "throughput_tokens_per_second": 41.06034516661102
+            },
+            "generation_id": "2540CCBWZWIX01390797"
         },
         "67352e9911e5510fc618f619": {
             "model": "x-ai/grok-4:x-ai",
@@ -44487,15 +44630,31 @@
         },
         "67367cbd06a61a42cae30293": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The configuration with 3 red, 3 green, and 3 yellow points, arranged in a nested manner where each set's triangle contains a point of the next color inside it, satisfies the conditions. Adding more points leads to violations of the conditions or collinearity, making 9 the maximum.\nAnswer: 9\nConfidence: 70%",
+            "usage": {
+                "completion_tokens": 72,
+                "prompt_tokens": 826,
+                "total_tokens": 32261,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 31363,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 676,
+                    "text_tokens": 826,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 590589.0568847656,
+                "generation_time_ms": 1560.45703125,
+                "throughput_tokens_per_second": 46.14032847948693
+            },
+            "generation_id": "2540CCFFCPCL01383951"
         },
         "673681def5487e4de6e78e1e": {
             "model": "x-ai/grok-4:x-ai",
@@ -48438,8 +48597,7 @@
                 "generation_time_ms": 0.0,
                 "throughput_tokens_per_second": 0.0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "generation_id": "2540CCEIRLMJ01388852"
         },
         "6738da53028ebe6f5c2ae07a": {
             "model": "x-ai/grok-4:x-ai",
@@ -48919,15 +49077,31 @@
         },
         "67392014a87cc4cf423a73e2": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: Based on the analysis of forcing posets with minimal dense subset size \u03ba, the properties of semidistributivity, and the trade-offs between density and the thinness of added sets, the largest \u03bc such that any such \\mathbb{P} is necessarily (\u03bc, \u03ba^+)-semidistributive is \u03ba.\nAnswer: \\kappa\nConfidence: 60%",
+            "usage": {
+                "completion_tokens": 76,
+                "prompt_tokens": 864,
+                "total_tokens": 26555,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 25615,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 724,
+                    "text_tokens": 864,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 516788.89404296875,
+                "generation_time_ms": 1535.86962890625,
+                "throughput_tokens_per_second": 49.48336666707996
+            },
+            "generation_id": "2540CCEQBDEE01323445"
         },
         "6739374caf97ceab210adc21": {
             "model": "x-ai/grok-4:x-ai",
@@ -50463,15 +50637,31 @@
         },
         "673ab3fac0726c7f6713bf35": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The infinite product \\(\\prod_{n=0}^{\\infty} (1 - e^{-(2n+1)\\pi})\\) evaluates to \\(2^{1/8} e^{-\\pi/24}\\) based on the relation to Dedekind eta functions at \\(\\tau = i/2\\) and \\(\\tau = i\\), with numerical verification confirming the expression.\nAnswer: 2^{1/8} \\exp\\left( -\\frac{\\pi}{24} \\right)\nConfidence: 100%",
+            "usage": {
+                "completion_tokens": 102,
+                "prompt_tokens": 757,
+                "total_tokens": 26006,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 25147,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 724,
+                    "text_tokens": 757,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 460981.7600097656,
+                "generation_time_ms": 1739.412109375,
+                "throughput_tokens_per_second": 58.64050241472121
+            },
+            "generation_id": "2540CCDFAVPA01377327"
         },
         "673ab9f26b5c65098f208d90": {
             "model": "x-ai/grok-4:x-ai",
@@ -52031,15 +52221,31 @@
         },
         "6741218b9b244ee15c8f6db4": {
             "model": "x-ai/grok-4:x-ai",
-            "response": "",
-            "usage": {},
-            "performance": {
-                "first_token_latency_ms": 0.0,
-                "generation_time_ms": 0.0,
-                "throughput_tokens_per_second": 0.0
+            "response": "Explanation: The set S is the entire R^{15} because the condition that A, B, C, D lie on a double cone with apex at X is always true, as there always exists a non-trivial quadratic form Q such that Q(A-X) = Q(B-X) = Q(C-X) = Q(D-X) = 0. The coplanar condition is subsumed. To have det F = 0 always (i.e., F always singular) with positive m and minimal 1000m + n, use m=1, n=2, e.g., a 2x2 matrix with rows [y1, y2] and [2 y1, 2 y2], where y1, y2 are coordinates; det is identically 0, entries degree 1. n=1 not possible for m=1 since a linear polynomial can't be identically 0 without being constant.\nAnswer: 1002\nConfidence: 70%",
+            "usage": {
+                "completion_tokens": 199,
+                "prompt_tokens": 878,
+                "total_tokens": 22327,
+                "completion_tokens_details": {
+                    "accepted_prediction_tokens": 0,
+                    "audio_tokens": 0,
+                    "reasoning_tokens": 21250,
+                    "rejected_prediction_tokens": 0
+                },
+                "prompt_tokens_details": {
+                    "audio_tokens": 0,
+                    "cached_tokens": 726,
+                    "text_tokens": 878,
+                    "image_tokens": 0
+                },
+                "num_sources_used": 0
             },
-            "generation_id": null,
-            "error": "peer closed connection without sending complete message body (incomplete chunked read)"
+            "performance": {
+                "first_token_latency_ms": 474377.5559082031,
+                "generation_time_ms": 3414.356201171875,
+                "throughput_tokens_per_second": 58.283315587195986
+            },
+            "generation_id": "2540CCNLECJE01331791"
         },
         "67414401f5fbbfac5c273a0d": {
             "model": "x-ai/grok-4:x-ai",
@@ -54874,8 +55080,7 @@
                 "generation_time_ms": 0.0,
                 "throughput_tokens_per_second": 0.0
             },
-            "generation_id": null,
-            "error": ""
+            "generation_id": "2540CCNGRQGS01393344"
         },
         "67770f6d9a59b3d9ca3a5f82": {
             "model": "x-ai/grok-4:x-ai",
