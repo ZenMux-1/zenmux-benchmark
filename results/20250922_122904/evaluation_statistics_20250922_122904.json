@@ -1,74 +1,10 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-29T18:19:26.488142",
+        "timestamp": "2025-09-29T16:03:04.756869",
         "results_directory": "results/20250922_122904",
         "total_files_processed": 60
     },
     "model_statistics": {
-        "openai/gpt-5-chat:azure": {
-            "prediction_file": "hle_openai_gpt-5-chat_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/o4-mini:azure": {
-            "prediction_file": "hle_openai_o4-mini_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-5-nano:azure": {
-            "prediction_file": "hle_openai_gpt-5-nano_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-opus-4:google-vertex": {
-            "prediction_file": "hle_anthropic_claude-opus-4_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2141,
-            "responses_without_content": 17,
-            "completion_rate": 99.21,
-            "is_complete": false
-        },
-        "anthropic/claude-sonnet-4:google-vertex": {
-            "prediction_file": "hle_anthropic_claude-sonnet-4_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "x-ai/grok-4-fast-non-reasoning:x-ai": {
-            "prediction_file": "hle_x-ai_grok-4-fast-non-reasoning_x-ai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "qwen/qwen3-coder-plus:alibaba": {
-            "prediction_file": "hle_qwen_qwen3-coder-plus_alibaba_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "moonshotai/kimi-k2-0905:moonshotai": {
-            "prediction_file": "hle_moonshotai_kimi-k2-0905_moonshotai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
         "anthropic/claude-3.7-sonnet:google-vertex": {
             "prediction_file": "hle_anthropic_claude-3.7-sonnet_google-vertex_20250922_122904.json",
             "total_questions": 2158,
@@ -77,32 +13,8 @@
             "completion_rate": 100.0,
             "is_complete": true
         },
-        "qwen/qwen3-max:alibaba": {
-            "prediction_file": "hle_qwen_qwen3-max_alibaba_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2157,
-            "responses_without_content": 1,
-            "completion_rate": 99.95,
-            "is_complete": false
-        },
-        "google/gemini-2.5-flash-lite:google-vertex": {
-            "prediction_file": "hle_google_gemini-2.5-flash-lite_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-opus-4.1:google-vertex": {
-            "prediction_file": "hle_anthropic_claude-opus-4.1_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2141,
-            "responses_without_content": 17,
-            "completion_rate": 99.21,
-            "is_complete": false
-        },
-        "anthropic/claude-3.5-haiku:anthropic": {
-            "prediction_file": "hle_anthropic_claude-3.5-haiku_anthropic_20250922_122904.json",
+        "google/gemini-2.5-pro:google-vertex": {
+            "prediction_file": "hle_google_gemini-2.5-pro_google-vertex_20250922_122904.json",
             "total_questions": 2158,
             "responses_with_content": 2158,
             "responses_without_content": 0,
@@ -117,37 +29,13 @@
             "completion_rate": 99.44,
             "is_complete": false
         },
-        "openai/gpt-5:openai": {
-            "prediction_file": "hle_openai_gpt-5_openai_20250922_122904.json",
+        "deepseek/deepseek-r1-0528:volcengine": {
+            "prediction_file": "hle_deepseek_deepseek-r1-0528_volcengine_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2155,
-            "responses_without_content": 3,
-            "completion_rate": 99.86,
+            "responses_with_content": 1615,
+            "responses_without_content": 543,
+            "completion_rate": 74.84,
             "is_complete": false
-        },
-        "qwen/qwen3-vl-plus:alibaba": {
-            "prediction_file": "hle_qwen_qwen3-vl-plus_alibaba_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2157,
-            "responses_without_content": 1,
-            "completion_rate": 99.95,
-            "is_complete": false
-        },
-        "google/gemini-2.0-flash:google-vertex": {
-            "prediction_file": "hle_google_gemini-2.0-flash_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-3.5-sonnet:amazon-bedrock": {
-            "prediction_file": "hle_anthropic_claude-3.5-sonnet_amazon-bedrock_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
         },
         "google/gemini-2.5-pro:skyrouter": {
             "prediction_file": "hle_google_gemini-2.5-pro_skyrouter_20250922_122904.json",
@@ -157,133 +45,21 @@
             "completion_rate": 100.0,
             "is_complete": true
         },
-        "deepseek/deepseek-chat:deepseek": {
-            "prediction_file": "hle_deepseek_deepseek-chat_deepseek_20250922_122904.json",
+        "google/gemini-2.0-flash:google-vertex": {
+            "prediction_file": "hle_google_gemini-2.0-flash_google-vertex_20250922_122904.json",
             "total_questions": 2158,
             "responses_with_content": 2158,
             "responses_without_content": 0,
             "completion_rate": 100.0,
             "is_complete": true
         },
-        "openai/gpt-5-mini:openai": {
-            "prediction_file": "hle_openai_gpt-5-mini_openai_20250922_122904.json",
+        "anthropic/claude-opus-4:amazon-bedrock": {
+            "prediction_file": "hle_anthropic_claude-opus-4_amazon-bedrock_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-5-chat:openai": {
-            "prediction_file": "hle_openai_gpt-5-chat_openai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-3.7-sonnet:amazon-bedrock": {
-            "prediction_file": "hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "z-ai/glm-4.5-air:z-ai": {
-            "prediction_file": "hle_z-ai_glm-4.5-air_z-ai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 879,
-            "responses_without_content": 1279,
-            "completion_rate": 40.73,
+            "responses_with_content": 2144,
+            "responses_without_content": 14,
+            "completion_rate": 99.35,
             "is_complete": false
-        },
-        "anthropic/claude-sonnet-4:anthropic": {
-            "prediction_file": "hle_anthropic_claude-sonnet-4_anthropic_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-5-nano:openai": {
-            "prediction_file": "hle_openai_gpt-5-nano_openai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4.1-mini:azure": {
-            "prediction_file": "hle_openai_gpt-4.1-mini_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4.1:azure": {
-            "prediction_file": "hle_openai_gpt-4.1_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "google/gemini-2.5-flash:skyrouter": {
-            "prediction_file": "hle_google_gemini-2.5-flash_skyrouter_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-opus-4.1:anthropic": {
-            "prediction_file": "hle_anthropic_claude-opus-4.1_anthropic_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2140,
-            "responses_without_content": 18,
-            "completion_rate": 99.17,
-            "is_complete": false
-        },
-        "z-ai/glm-4.5:z-ai": {
-            "prediction_file": "hle_z-ai_glm-4.5_z-ai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 939,
-            "responses_without_content": 1219,
-            "completion_rate": 43.51,
-            "is_complete": false
-        },
-        "deepseek/deepseek-r1-0528:volcengine": {
-            "prediction_file": "hle_deepseek_deepseek-r1-0528_volcengine_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 1569,
-            "responses_without_content": 589,
-            "completion_rate": 72.71,
-            "is_complete": false
-        },
-        "anthropic/claude-3.5-haiku:amazon-bedrock": {
-            "prediction_file": "hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-opus-4:anthropic": {
-            "prediction_file": "hle_anthropic_claude-opus-4_anthropic_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2139,
-            "responses_without_content": 19,
-            "completion_rate": 99.12,
-            "is_complete": false
-        },
-        "anthropic/claude-3.5-sonnet:anthropic": {
-            "prediction_file": "hle_anthropic_claude-3.5-sonnet_anthropic_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
         },
         "anthropic/claude-3.7-sonnet:anthropic": {
             "prediction_file": "hle_anthropic_claude-3.7-sonnet_anthropic_20250922_122904.json",
@@ -293,120 +69,8 @@
             "completion_rate": 100.0,
             "is_complete": true
         },
-        "anthropic/claude-sonnet-4:amazon-bedrock": {
-            "prediction_file": "hle_anthropic_claude-sonnet-4_amazon-bedrock_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4o-mini:azure": {
-            "prediction_file": "hle_openai_gpt-4o-mini_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4o:azure": {
-            "prediction_file": "hle_openai_gpt-4o_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-3.5-haiku:google-vertex": {
-            "prediction_file": "hle_anthropic_claude-3.5-haiku_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "anthropic/claude-3.5-sonnet:google-vertex": {
-            "prediction_file": "hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4o-mini:openai": {
-            "prediction_file": "hle_openai_gpt-4o-mini_openai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "google/gemini-2.0-flash-lite-001:google-vertex": {
-            "prediction_file": "hle_google_gemini-2.0-flash-lite-001_google-vertex_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4.1-nano:azure": {
-            "prediction_file": "hle_openai_gpt-4.1-nano_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-5:azure": {
-            "prediction_file": "hle_openai_gpt-5_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2153,
-            "responses_without_content": 5,
-            "completion_rate": 99.77,
-            "is_complete": false
-        },
-        "google/gemini-2.5-flash-lite:skyrouter": {
-            "prediction_file": "hle_google_gemini-2.5-flash-lite_skyrouter_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "moonshotai/kimi-k2-0711:volcengine": {
-            "prediction_file": "hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-5-mini:azure": {
-            "prediction_file": "hle_openai_gpt-5-mini_azure_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4o:openai": {
-            "prediction_file": "hle_openai_gpt-4o_openai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "openai/gpt-4.1:openai": {
-            "prediction_file": "hle_openai_gpt-4.1_openai_20250922_122904.json",
-            "total_questions": 2158,
-            "responses_with_content": 2158,
-            "responses_without_content": 0,
-            "completion_rate": 100.0,
-            "is_complete": true
-        },
-        "deepseek/deepseek-chat-v3.1:volcengine": {
-            "prediction_file": "hle_deepseek_deepseek-chat-v3.1_volcengine_20250922_122904.json",
+        "openai/o4-mini:azure": {
+            "prediction_file": "hle_openai_o4-mini_azure_20250922_122904.json",
             "total_questions": 2158,
             "responses_with_content": 2158,
             "responses_without_content": 0,
@@ -421,8 +85,64 @@
             "completion_rate": 99.26,
             "is_complete": false
         },
-        "google/gemini-2.5-flash:google-vertex": {
-            "prediction_file": "hle_google_gemini-2.5-flash_google-vertex_20250922_122904.json",
+        "openai/gpt-4.1-mini:azure": {
+            "prediction_file": "hle_openai_gpt-4.1-mini_azure_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-opus-4:google-vertex": {
+            "prediction_file": "hle_anthropic_claude-opus-4_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2141,
+            "responses_without_content": 17,
+            "completion_rate": 99.21,
+            "is_complete": false
+        },
+        "moonshotai/kimi-k2-0905:moonshotai": {
+            "prediction_file": "hle_moonshotai_kimi-k2-0905_moonshotai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "google/gemini-2.5-flash:skyrouter": {
+            "prediction_file": "hle_google_gemini-2.5-flash_skyrouter_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-sonnet-4:anthropic": {
+            "prediction_file": "hle_anthropic_claude-sonnet-4_anthropic_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-4o-mini:openai": {
+            "prediction_file": "hle_openai_gpt-4o-mini_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-3.5-sonnet:anthropic": {
+            "prediction_file": "hle_anthropic_claude-3.5-sonnet_anthropic_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-4o-mini:azure": {
+            "prediction_file": "hle_openai_gpt-4o-mini_azure_20250922_122904.json",
             "total_questions": 2158,
             "responses_with_content": 2158,
             "responses_without_content": 0,
@@ -437,8 +157,96 @@
             "completion_rate": 99.95,
             "is_complete": false
         },
-        "google/gemini-2.5-pro:google-vertex": {
-            "prediction_file": "hle_google_gemini-2.5-pro_google-vertex_20250922_122904.json",
+        "openai/gpt-5-chat:openai": {
+            "prediction_file": "hle_openai_gpt-5-chat_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "z-ai/glm-4.5:z-ai": {
+            "prediction_file": "hle_z-ai_glm-4.5_z-ai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 1177,
+            "responses_without_content": 981,
+            "completion_rate": 54.54,
+            "is_complete": false
+        },
+        "openai/gpt-4o:openai": {
+            "prediction_file": "hle_openai_gpt-4o_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-3.5-haiku:amazon-bedrock": {
+            "prediction_file": "hle_anthropic_claude-3.5-haiku_amazon-bedrock_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-4.1-nano:openai": {
+            "prediction_file": "hle_openai_gpt-4.1-nano_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "deepseek/deepseek-chat-v3.1:volcengine": {
+            "prediction_file": "hle_deepseek_deepseek-chat-v3.1_volcengine_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "qwen/qwen3-vl-plus:alibaba": {
+            "prediction_file": "hle_qwen_qwen3-vl-plus_alibaba_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2157,
+            "responses_without_content": 1,
+            "completion_rate": 99.95,
+            "is_complete": false
+        },
+        "openai/gpt-4o:azure": {
+            "prediction_file": "hle_openai_gpt-4o_azure_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-4.1-mini:openai": {
+            "prediction_file": "hle_openai_gpt-4.1-mini_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "moonshotai/kimi-k2-0711:volcengine": {
+            "prediction_file": "hle_moonshotai_kimi-k2-0711_volcengine_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-5-chat:azure": {
+            "prediction_file": "hle_openai_gpt-5-chat_azure_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "google/gemini-2.0-flash-lite-001:google-vertex": {
+            "prediction_file": "hle_google_gemini-2.0-flash-lite-001_google-vertex_20250922_122904.json",
             "total_questions": 2158,
             "responses_with_content": 2158,
             "responses_without_content": 0,
@@ -448,21 +256,197 @@
         "x-ai/grok-4:x-ai": {
             "prediction_file": "hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 1993,
-            "responses_without_content": 165,
-            "completion_rate": 92.35,
+            "responses_with_content": 1995,
+            "responses_without_content": 163,
+            "completion_rate": 92.45,
             "is_complete": false
         },
-        "anthropic/claude-opus-4:amazon-bedrock": {
-            "prediction_file": "hle_anthropic_claude-opus-4_amazon-bedrock_20250922_122904.json",
+        "x-ai/grok-4-fast-non-reasoning:x-ai": {
+            "prediction_file": "hle_x-ai_grok-4-fast-non-reasoning_x-ai_20250922_122904.json",
             "total_questions": 2158,
-            "responses_with_content": 2144,
-            "responses_without_content": 14,
-            "completion_rate": 99.35,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "google/gemini-2.5-flash:google-vertex": {
+            "prediction_file": "hle_google_gemini-2.5-flash_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-4.1-nano:azure": {
+            "prediction_file": "hle_openai_gpt-4.1-nano_azure_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-4.1:openai": {
+            "prediction_file": "hle_openai_gpt-4.1_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-5:openai": {
+            "prediction_file": "hle_openai_gpt-5_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2155,
+            "responses_without_content": 3,
+            "completion_rate": 99.86,
             "is_complete": false
         },
-        "openai/gpt-4.1-mini:openai": {
-            "prediction_file": "hle_openai_gpt-4.1-mini_openai_20250922_122904.json",
+        "deepseek/deepseek-chat:deepseek": {
+            "prediction_file": "hle_deepseek_deepseek-chat_deepseek_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-sonnet-4:amazon-bedrock": {
+            "prediction_file": "hle_anthropic_claude-sonnet-4_amazon-bedrock_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "z-ai/glm-4.5-air:z-ai": {
+            "prediction_file": "hle_z-ai_glm-4.5-air_z-ai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 1106,
+            "responses_without_content": 1052,
+            "completion_rate": 51.25,
+            "is_complete": false
+        },
+        "openai/gpt-5-nano:azure": {
+            "prediction_file": "hle_openai_gpt-5-nano_azure_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-opus-4:anthropic": {
+            "prediction_file": "hle_anthropic_claude-opus-4_anthropic_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2139,
+            "responses_without_content": 19,
+            "completion_rate": 99.12,
+            "is_complete": false
+        },
+        "openai/gpt-5:azure": {
+            "prediction_file": "hle_openai_gpt-5_azure_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2153,
+            "responses_without_content": 5,
+            "completion_rate": 99.77,
+            "is_complete": false
+        },
+        "anthropic/claude-3.5-sonnet:google-vertex": {
+            "prediction_file": "hle_anthropic_claude-3.5-sonnet_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-3.5-haiku:anthropic": {
+            "prediction_file": "hle_anthropic_claude-3.5-haiku_anthropic_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "google/gemini-2.5-flash-lite:skyrouter": {
+            "prediction_file": "hle_google_gemini-2.5-flash-lite_skyrouter_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-opus-4.1:google-vertex": {
+            "prediction_file": "hle_anthropic_claude-opus-4.1_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2141,
+            "responses_without_content": 17,
+            "completion_rate": 99.21,
+            "is_complete": false
+        },
+        "openai/gpt-5-nano:openai": {
+            "prediction_file": "hle_openai_gpt-5-nano_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-3.5-haiku:google-vertex": {
+            "prediction_file": "hle_anthropic_claude-3.5-haiku_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-sonnet-4:google-vertex": {
+            "prediction_file": "hle_anthropic_claude-sonnet-4_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "google/gemini-2.5-flash-lite:google-vertex": {
+            "prediction_file": "hle_google_gemini-2.5-flash-lite_google-vertex_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-3.5-sonnet:amazon-bedrock": {
+            "prediction_file": "hle_anthropic_claude-3.5-sonnet_amazon-bedrock_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-5-mini:azure": {
+            "prediction_file": "hle_openai_gpt-5-mini_azure_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "anthropic/claude-opus-4.1:anthropic": {
+            "prediction_file": "hle_anthropic_claude-opus-4.1_anthropic_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2140,
+            "responses_without_content": 18,
+            "completion_rate": 99.17,
+            "is_complete": false
+        },
+        "qwen/qwen3-max:alibaba": {
+            "prediction_file": "hle_qwen_qwen3-max_alibaba_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2157,
+            "responses_without_content": 1,
+            "completion_rate": 99.95,
+            "is_complete": false
+        },
+        "qwen/qwen3-coder-plus:alibaba": {
+            "prediction_file": "hle_qwen_qwen3-coder-plus_alibaba_20250922_122904.json",
             "total_questions": 2158,
             "responses_with_content": 2158,
             "responses_without_content": 0,
@@ -477,8 +461,24 @@
             "completion_rate": 99.95,
             "is_complete": false
         },
-        "openai/gpt-4.1-nano:openai": {
-            "prediction_file": "hle_openai_gpt-4.1-nano_openai_20250922_122904.json",
+        "anthropic/claude-3.7-sonnet:amazon-bedrock": {
+            "prediction_file": "hle_anthropic_claude-3.7-sonnet_amazon-bedrock_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-5-mini:openai": {
+            "prediction_file": "hle_openai_gpt-5-mini_openai_20250922_122904.json",
+            "total_questions": 2158,
+            "responses_with_content": 2158,
+            "responses_without_content": 0,
+            "completion_rate": 100.0,
+            "is_complete": true
+        },
+        "openai/gpt-4.1:azure": {
+            "prediction_file": "hle_openai_gpt-4.1_azure_20250922_122904.json",
             "total_questions": 2158,
             "responses_with_content": 2158,
             "responses_without_content": 0,
@@ -488,22 +488,22 @@
     },
     "failure_lists": {
         "incomplete_evaluation_models": [
-            "anthropic/claude-opus-4:google-vertex",
-            "qwen/qwen3-max:alibaba",
-            "anthropic/claude-opus-4.1:google-vertex",
             "anthropic/claude-opus-4.1:amazon-bedrock",
-            "openai/gpt-5:openai",
-            "qwen/qwen3-vl-plus:alibaba",
-            "z-ai/glm-4.5-air:z-ai",
-            "anthropic/claude-opus-4.1:anthropic",
-            "z-ai/glm-4.5:z-ai",
             "deepseek/deepseek-r1-0528:volcengine",
+            "anthropic/claude-opus-4:amazon-bedrock",
+            "x-ai/grok-code-fast-1:x-ai",
+            "anthropic/claude-opus-4:google-vertex",
+            "openai/o4-mini:openai",
+            "z-ai/glm-4.5:z-ai",
+            "qwen/qwen3-vl-plus:alibaba",
+            "x-ai/grok-4:x-ai",
+            "openai/gpt-5:openai",
+            "z-ai/glm-4.5-air:z-ai",
             "anthropic/claude-opus-4:anthropic",
             "openai/gpt-5:azure",
-            "x-ai/grok-code-fast-1:x-ai",
-            "openai/o4-mini:openai",
-            "x-ai/grok-4:x-ai",
-            "anthropic/claude-opus-4:amazon-bedrock",
+            "anthropic/claude-opus-4.1:google-vertex",
+            "anthropic/claude-opus-4.1:anthropic",
+            "qwen/qwen3-max:alibaba",
             "x-ai/grok-4-fast:x-ai"
         ],
         "models_without_responses": []
@@ -513,6 +513,6 @@
         "models_with_responses": 60,
         "models_with_complete_evaluation": 43,
         "total_questions_across_all_models": 129480,
-        "total_responses_across_all_models": 126103
+        "total_responses_across_all_models": 126616
     }
 }

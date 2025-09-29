@@ -1,19 +1,41 @@
 {
     "generation_metadata": {
-        "timestamp": "2025-09-29T18:19:29.632832",
+        "timestamp": "2025-09-29T16:03:10.319445",
         "results_directory": "results/20250922_122904",
         "metrics_summary_file": "metrics_summary_20250922_122904.json"
     },
     "metrics_summary_statistics": {
         "total_models": 60,
-        "models_with_valid_metrics": 60,
-        "models_excluded_from_metrics": 0,
+        "models_with_valid_metrics": 42,
+        "models_excluded_from_metrics": 18,
         "models_with_errors": 0
     },
     "failure_lists": {
-        "excluded_models": [],
+        "excluded_models": [
+            "anthropic/claude-opus-4.1:amazon-bedrock",
+            "deepseek/deepseek-r1-0528:volcengine",
+            "anthropic/claude-opus-4:amazon-bedrock",
+            "x-ai/grok-code-fast-1:x-ai",
+            "anthropic/claude-opus-4:google-vertex",
+            "openai/o4-mini:openai",
+            "z-ai/glm-4.5:z-ai",
+            "qwen/qwen3-vl-plus:alibaba",
+            "x-ai/grok-4:x-ai",
+            "google/gemini-2.5-flash:google-vertex",
+            "openai/gpt-5:openai",
+            "z-ai/glm-4.5-air:z-ai",
+            "anthropic/claude-opus-4:anthropic",
+            "openai/gpt-5:azure",
+            "anthropic/claude-opus-4.1:google-vertex",
+            "anthropic/claude-opus-4.1:anthropic",
+            "qwen/qwen3-max:alibaba",
+            "x-ai/grok-4-fast:x-ai"
+        ],
         "models_with_errors": []
     },
-    "exclusion_reasons": {},
+    "exclusion_reasons": {
+        "incomplete_evaluations": 17,
+        "incomplete_judgments": 4
+    },
     "error_summary": {}
 }
