@@ -1,6 +1,6 @@
 {
     "summary_metadata": {
-        "timestamp": "2025-09-29T17:01:28.895379",
+        "timestamp": "2025-09-29T18:19:26.486684",
         "run_metadata": {
             "mode": "fix",
             "text_only": true,
@@ -733,9 +733,9 @@
             "predictions_file": "results/20250922_122904/predictions/hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "judged_file": "results/20250922_122904/judged/judged_hle_x-ai_grok-4_x-ai_20250922_122904.json",
             "metrics": {
-                "accuracy": 26.7,
-                "confidence_interval": 1.96,
-                "calibration_error": 54.87
+                "accuracy": 26.64,
+                "confidence_interval": 1.94,
+                "calibration_error": 54.8
             },
             "error": null,
             "excluded_from_metrics": false,
